@@ -4,6 +4,9 @@
 /dist
 /tmp
 /out-tsc
+*.js
+*.m3u
+groups.txt
 
 # dependencies
 /node_modules
