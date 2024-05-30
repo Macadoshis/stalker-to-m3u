@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2020",
+    "typeRoots": [
+      "node_modules/@types",
+      "typings.d.ts"
+    ]
+  }
+}
