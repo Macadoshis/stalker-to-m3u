@@ -5,7 +5,8 @@
     "pregroups": "tsc types.ts common.ts",
     "groups": "ts-node --project ./tsconfig.ts-node.json generate-groups.ts",
     "prem3u": "npm run pregroups",
-    "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts"
+    "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
+    "m3u-all": "npm run groups && npm run m3u"
   },
   "private": false,
   "devDependencies": {

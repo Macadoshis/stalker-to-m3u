@@ -1,6 +1,8 @@
 import { fetchData, getConfig } from "./common.js";
 import { ArrayData, Channel, Channels, Config, Data, Genre } from "./types.js";
 
+type Tvg = Readonly<Record<string, string[]>>;
+
 const http = require('http');
 const fs = require('fs');
 
@@ -11,15 +13,30 @@ if (!fs.existsSync(GROUP_FILE)) {
   process.exit(1);
 }
 
+const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
+  { encoding: 'utf8', flag: 'r' })) as Tvg;
+
 function splitLines(lines: string): string[] {
   return lines.split(/\r\n|\r|\n/);
+}
+
+function getTvgId(channel: Channel): string {
+  let tvgId: string = '';
+
+  for (const iterator of Object.entries(tvgData)) {
+    if (!!iterator[1].find(term => channel.name.toLocaleLowerCase()
+      .includes(term.toLocaleLowerCase()))) {
+      tvgId = iterator[0];
+    }
+  }
+
+  return tvgId;
 }
 
 function channelToM3u(channel: Channel, group: string): string[] {
   const lines: string[] = [];
 
-  // TODO: fetc tvgId
-  const tvgId: string = '';
+  const tvgId: string = getTvgId(channel);
 
   lines.push(`#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${channel.logo}" group-title="${group}",${channel.name}`);
   lines.push(`${channel.cmd.match(/[^http](http.*)/g)![0].trim()}`);
@@ -35,7 +52,6 @@ fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres')
   .then(genres => {
     fetchData<Data<Channels>>('/server/load.php?type=itv&action=get_all_channels')
       .then(allChannels => {
-        //console.info(allChannels.js.data[0]);
 
         const m3u: string[] = ['#EXTM3U'];
 

@@ -3,7 +3,7 @@ import { Config } from "./types.js";
 const http = require('http');
 const fs = require('fs');
 
-export function getConfig(): Config {
+export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json',
         { encoding: 'utf8', flag: 'r' });
     const config: Config = JSON.parse(configData) as Config;
