@@ -20,6 +20,7 @@ export function fetchData<T>(path: string): Promise<T> {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
+                'User-Agent': 'stalker-to-m3u/1.0.0',
                 'Authorization': `Bearer ${config.deviceId}`,
                 'Cookie': `mac=${config.mac}; stb_lang=en; timezone=Europe/Kiev`
             }
@@ -38,7 +39,14 @@ export function fetchData<T>(path: string): Promise<T> {
 
             res.on('close', () => {
                 console.debug('Retrieved data');
-                resp(JSON.parse(data));
+                try {
+                    resp(JSON.parse(data));
+                } catch (e) {
+                    console.error(e);
+                    console.debug(data);
+                    err(e);
+                }
+                
             });
         });
     });

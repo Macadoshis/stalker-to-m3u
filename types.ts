@@ -3,6 +3,7 @@ export interface Config {
     port: number;
     deviceId: string;
     mac: string;
+    tvgIdPreFill?: boolean;
 }
 
 export interface Data<T> {

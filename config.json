@@ -1,6 +1,7 @@
 {
-    "hostname": "tr.redatvgold.com",
-    "port": 80,
-    "mac": "00:1A:79:3A:72:78",
-    "deviceId": "B0BF76B0A24074E9DAC7870C09A5D496"
+    "hostname": "tango.123tv.to",
+    "port": 8080,
+    "mac": "00:1A:79:AD:5F:2B",
+    "deviceId": "743B397C45EC59C7E1550091EAA82549",
+    "tvgIdPreFill": true
 }

@@ -13,6 +13,8 @@ if (!fs.existsSync(GROUP_FILE)) {
   process.exit(1);
 }
 
+const config: Config = getConfig();
+
 const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
   { encoding: 'utf8', flag: 'r' })) as Tvg;
 
@@ -36,7 +38,7 @@ function getTvgId(channel: Channel): string {
 function channelToM3u(channel: Channel, group: string): string[] {
   const lines: string[] = [];
 
-  const tvgId: string = getTvgId(channel);
+  const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
   lines.push(`#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${channel.logo}" group-title="${group}",${channel.name}`);
   lines.push(`${channel.cmd.match(/[^http](http.*)/g)![0].trim()}`);
@@ -58,13 +60,12 @@ fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres')
         for (var channel of allChannels.js.data) {
           const genre: Genre = genres.js.find(r => r.id === channel.tv_genre_id)!;
 
-          if (groups.includes(genre.title)) {
+          if (!!genre && !!genre.title && groups.includes(genre.title)) {
             m3u.push(...channelToM3u(channel, genre.title));
           }
         }
 
         // Outputs m3u
-        const config: Config = getConfig();
         fs.writeFileSync(`${config.hostname}.m3u`, m3u
           .join('\r\n'));
       });
