@@ -1,4 +1,4 @@
-import { Config } from "./types.js";
+import { Config, GenerationKind, generationKindNames } from "./types.js";
 
 const http = require('http');
 const fs = require('fs');
@@ -8,6 +8,14 @@ export function getConfig(): Readonly<Config> {
         { encoding: 'utf8', flag: 'r' });
     const config: Config = JSON.parse(configData) as Config;
     return config;
+}
+
+export function getGenerationKind(): GenerationKind {
+    const arg: unknown = process.argv[2] as unknown;
+    if (typeof arg !== 'string' || !generationKindNames.includes(arg)) {
+        throw new Error('Invalid generation type provided');
+    }
+    return (arg as GenerationKind);
 }
 
 export function fetchData<T>(path: string): Promise<T> {
@@ -46,7 +54,7 @@ export function fetchData<T>(path: string): Promise<T> {
                     console.debug(data);
                     err(e);
                 }
-                
+
             });
         });
     });

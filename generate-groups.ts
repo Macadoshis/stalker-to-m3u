@@ -1,10 +1,13 @@
-import { fetchData } from "./common.js";
-import { ArrayData, Genre } from "./types.js";
+import { fetchData, getGenerationKind } from "./common.js";
+import { ArrayData, GenerationKind, Genre } from "./types.js";
 
 const http = require('http');
 const fs = require('fs');
 
-fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres')
+const generationKind: GenerationKind = getGenerationKind();
+
+fetchData<ArrayData<Genre>>('/server/load.php?'
+  + (generationKind === 'iptv' ? 'type=itv&action=get_genres' : 'type=vod&action=get_categories'))
   .then(r => {
     fs.writeFileSync("groups.txt", r.js
       .map(t => t.title)

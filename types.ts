@@ -6,6 +6,10 @@ export interface Config {
     tvgIdPreFill?: boolean;
 }
 
+export type GenerationKind = 'iptv' | 'vod';
+export const generationKindNames = ['iptv', 'vod'] as string[];
+export type GenerationKindType = typeof generationKindNames[number];
+
 export interface Data<T> {
     js: T;
 }
