@@ -1,5 +1,5 @@
-import { fetchData, getConfig } from "./common.js";
-import { ArrayData, Channel, Channels, Config, Data, Genre } from "./types.js";
+import { fetchData, getConfig, getGenerationKind } from "./common.js";
+import { ArrayData, Channel, Config, Data, GenerationKind, Genre, Program, Programs, Video } from "./types.js";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -40,8 +40,17 @@ function channelToM3u(channel: Channel, group: string): string[] {
 
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
-  lines.push(`#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${channel.logo}" group-title="${group}",${channel.name}`);
+  lines.push(`#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="${group}",${channel.name}`);
   lines.push(`${channel.cmd.match(/[^http](http.*)/g)![0].trim()}`);
+
+  return lines;
+}
+
+function videoToM3u(video: Video, group: string): string[] {
+  const lines: string[] = [];
+
+  lines.push(`#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="${group}",${video.name}`);
+  lines.push(`${video.cmd.match(/[^http](http.*)/g)![0].trim()}`);
 
   return lines;
 }
@@ -50,24 +59,53 @@ function channelToM3u(channel: Channel, group: string): string[] {
 const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE,
   { encoding: 'utf8', flag: 'r' }));
 
-fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres')
+const generationKind: GenerationKind = getGenerationKind();
+
+fetchData<ArrayData<Genre>>('/server/load.php?' +
+  (generationKind === 'iptv' ? 'type=itv&action=get_genres' : 'type=vod&action=get_categories')
+)
   .then(genres => {
-    fetchData<Data<Channels>>('/server/load.php?type=itv&action=get_all_channels')
-      .then(allChannels => {
 
-        const m3u: string[] = ['#EXTM3U'];
+    const m3u: string[] = ['#EXTM3U'];
 
-        for (var channel of allChannels.js.data) {
-          const genre: Genre = genres.js.find(r => r.id === channel.tv_genre_id)!;
+    var next = new Promise<any>((res, err) => {
+      if (generationKind === "iptv") {
+        fetchData<Data<Programs<Program>>>('/server/load.php?type=itv&action=get_all_channels')
+          .then(allPrograms => {
 
-          if (!!genre && !!genre.title && groups.includes(genre.title)) {
-            m3u.push(...channelToM3u(channel, genre.title));
-          }
-        }
+            for (var program of allPrograms.js.data) {
+              const channel: Channel = program as Channel;
+              const genre: Genre = genres.js.find(r => r.id === channel.tv_genre_id)!;
 
-        // Outputs m3u
-        fs.writeFileSync(`${config.hostname}.m3u`, m3u
-          .join('\r\n'));
-      });
+              if (!!genre && !!genre.title && groups.includes(genre.title)) {
+                m3u.push(...channelToM3u(channel, genre.title));
+              }
+
+            }
+
+            res(null);
+          });
+      } else if (generationKind === "vod") {
+        fetchData<Data<Programs<Program>>>('/server/load.php?type=vod&action=get_ordered_list')
+          .then(allPrograms => {
+
+            for (var program of allPrograms.js.data) {
+              const video: Video = program as Video;
+              const genreVod = genres.js.find(r => r.id === video.category_id)!;
+
+              if (!!genreVod && !!genreVod.title && groups.includes(genreVod.title)) {
+                m3u.push(...videoToM3u(video, genreVod.title));
+              }
+            }
+          });
+      }
+    });
+
+    next.then(() => {
+      // Outputs m3u
+      fs.writeFileSync(`${config.hostname}.m3u`, m3u
+        .join('\r\n'));
+    });
+
   });
 

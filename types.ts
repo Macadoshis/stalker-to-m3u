@@ -25,15 +25,23 @@ export interface Genre {
     alias: string
 }
 
-export interface Channel {
+export interface Program {
     id: string;
     name: string;
     cmd: string;
-    logo: string;
-    tv_genre_id: string
 }
 
-export interface Channels {
+export interface Channel extends Program {
+    logo: string;
+    tv_genre_id: string;
+}
+
+export interface Video extends Program {
+    screenshot_uri: string;
+    category_id: string;
+}
+
+export interface Programs<T> {
     total_items: number;
-    data: Channel[];
+    data: T[];
 }

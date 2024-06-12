@@ -46,7 +46,7 @@ export function fetchData<T>(path: string): Promise<T> {
             });
 
             res.on('close', () => {
-                console.debug('Retrieved data');
+                console.debug(`Retrieved data (${data.length} bytes)`);
                 try {
                     resp(JSON.parse(data));
                 } catch (e) {
