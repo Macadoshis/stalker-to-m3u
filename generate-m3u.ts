@@ -50,7 +50,8 @@ function videoToM3u(video: Video, group: string): string[] {
   const lines: string[] = [];
 
   lines.push(`#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="${group}",${video.name}`);
-  lines.push(`${video.cmd.match(/[^http](http.*)/g)![0].trim()}`);
+  //lines.push(`${video.cmd.match(/[^http](http.*)/g)![0].trim()}`);
+  lines.push(video.cmd);
 
   return lines;
 }
@@ -86,17 +87,17 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             res(null);
           });
       } else if (generationKind === "vod") {
-        fetchData<Data<Programs<Program>>>('/server/load.php?type=vod&action=get_ordered_list')
-          .then(allPrograms => {
 
-            for (var program of allPrograms.js.data) {
-              const video: Video = program as Video;
-              const genreVod = genres.js.find(r => r.id === video.category_id)!;
-
-              if (!!genreVod && !!genreVod.title && groups.includes(genreVod.title)) {
-                m3u.push(...videoToM3u(video, genreVod.title));
-              }
-            }
+        groups.map(group => {
+          const genreVod: Genre = genres.js.find(r => r.title === group)!;
+          return genreVod;
+        }).reduce((accPrograms, nextGenre, i) => {
+          return accPrograms.then(val => {
+            return fetchVodItems(nextGenre, 1, m3u);
+          });
+        }, Promise.resolve(true))
+          .then(() => {
+            res(null);
           });
       }
     });
@@ -109,3 +110,17 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
   });
 
+function fetchVodItems(genre: Genre, page: number, m3u: string[]): Promise<boolean> {
+  return new Promise<boolean>((res, err) => {
+    fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
+      .then(allPrograms => {
+
+        for (var program of allPrograms.js.data) {
+          const video: Video = program as Video;
+          m3u.push(...videoToM3u(video, genre.title));
+        }
+        
+        res(allPrograms.js.data.length > 0);
+      });
+  });
+}
