@@ -6,7 +6,7 @@ const fs = require('fs');
 
 const generationKind: GenerationKind = getGenerationKind();
 
-fetchData<ArrayData<Genre>>('/server/load.php?'
+fetchData<ArrayData<Genre>>('/portal.php?'
   + (generationKind === 'iptv' ? 'type=itv&action=get_genres' : 'type=vod&action=get_categories'))
   .then(r => {
     fs.writeFileSync("groups.txt", r.js

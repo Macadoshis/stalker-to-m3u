@@ -4,6 +4,7 @@ export interface Config {
     deviceId: string;
     mac: string;
     tvgIdPreFill?: boolean;
+    computeUrlLink?: boolean;
 }
 
 export type GenerationKind = 'iptv' | 'vod';
@@ -45,4 +46,26 @@ export interface Programs<T> {
     total_items: number;
     max_page_items: number;
     data: T[];
+}
+
+export interface M3ULine {
+    header: string;
+    command?: string;
+    url?: string;
+}
+
+export class M3U {
+    private readonly _m3uLines: M3ULine[];
+
+    constructor(m3uLines: M3ULine[] = []) {
+        this._m3uLines = m3uLines;
+    }
+
+    print(): string {
+        const ret: string[] = ['#EXTM3U'];
+        this._m3uLines.forEach(m3uLine => {
+            ret.push(...[m3uLine.header, (m3uLine.url ?? m3uLine.command)!]);
+        });
+        return ret.join('\r\n');
+    }
 }

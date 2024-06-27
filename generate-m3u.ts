@@ -1,5 +1,5 @@
 import { fetchData, getConfig, getGenerationKind } from "./common.js";
-import { ArrayData, Channel, Config, Data, GenerationKind, Genre, Program, Programs, Video } from "./types.js";
+import { ArrayData, Channel, Config, Data, GenerationKind, Genre, M3U, M3ULine, Program, Programs, Video } from "./types.js";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -35,23 +35,22 @@ function getTvgId(channel: Channel): string {
   return tvgId;
 }
 
-function channelToM3u(channel: Channel, group: string): string[] {
-  const lines: string[] = [];
+function channelToM3u(channel: Channel, group: string): M3ULine {
+  const lines: M3ULine = <M3ULine>{};
 
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
-  lines.push(`#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="${group}",${channel.name}`);
-  lines.push(`${channel.cmd.match(/[^http](http.*)/g)![0].trim()}`);
+  lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="${group}",${channel.name}`;
+  lines.command = channel.cmd;
 
   return lines;
 }
 
-function videoToM3u(video: Video, group: string): string[] {
-  const lines: string[] = [];
+function videoToM3u(video: Video, group: string): M3ULine {
+  const lines: M3ULine = <M3ULine>{};
 
-  lines.push(`#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="${group}",${video.name}`);
-  //lines.push(`${video.cmd.match(/[^http](http.*)/g)![0].trim()}`);
-  lines.push(video.cmd);
+  lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="${group}",${video.name}`;
+  lines.command = video.cmd;
 
   return lines;
 }
@@ -62,16 +61,16 @@ const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE,
 
 const generationKind: GenerationKind = getGenerationKind();
 
-fetchData<ArrayData<Genre>>('/server/load.php?' +
+fetchData<ArrayData<Genre>>('/portal.php?' +
   (generationKind === 'iptv' ? 'type=itv&action=get_genres' : 'type=vod&action=get_categories')
 )
   .then(genres => {
 
-    const m3u: string[] = ['#EXTM3U'];
+    const m3u: M3ULine[] = [];
 
     var next = new Promise<any>((res, err) => {
       if (generationKind === "iptv") {
-        fetchData<Data<Programs<Program>>>('/server/load.php?type=itv&action=get_all_channels')
+        fetchData<Data<Programs<Program>>>('/portal.php?type=itv&action=get_all_channels')
           .then(allPrograms => {
 
             for (var program of allPrograms.js.data) {
@@ -79,7 +78,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
               const genre: Genre = genres.js.find(r => r.id === channel.tv_genre_id)!;
 
               if (!!genre && !!genre.title && groups.includes(genre.title)) {
-                m3u.push(...channelToM3u(channel, genre.title));
+                m3u.push(channelToM3u(channel, genre.title));
               }
 
             }
@@ -103,27 +102,58 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
     });
 
     next.then(() => {
+      if (!config.computeUrlLink) {
+        return Promise.resolve();
+      }
+
+      console.info('Generating url links');
+      return new Promise<void>((res, err) => {
+
+        res(m3u.reduce((acc, next, idx) => {
+          return acc.then(() => {
+            return resolveUrlLink(next).then(() => {
+              if ((idx / m3u.length * 100) % 5 === 0) {
+                console.info(`Progress: ${idx * 100 / m3u.length}% (${idx}/${m3u.length})`);
+              }
+            });
+          });
+        }, Promise.resolve()));
+      });
+
+    }).then(() => {
       // Outputs m3u
-      fs.writeFileSync(`${config.hostname}.m3u`, m3u
-        .join('\r\n'));
+      fs.writeFileSync(`${config.hostname}.m3u`, new M3U(m3u).print());
     });
 
   });
 
-function fetchVodItems(genre: Genre, page: number, m3u: string[]): Promise<boolean> {
+function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
+  return new Promise<void>((res, err) => {
+
+    fetchData<Data<{ cmd: string }>>(`/portal.php?type=vod&action=create_link&cmd=${encodeURIComponent(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
+      .then(urlLink => {
+        if (urlLink.js.cmd) {
+          m3uLine.url = decodeURIComponent(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+        }
+        res();
+      });
+  });
+}
+
+function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<boolean> {
   return new Promise<boolean>((res, err) => {
 
-    fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
+    fetchData<Data<Programs<Program>>>(`/portal.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
       .then(allPrograms => {
 
         console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
 
         for (var program of allPrograms.js.data) {
           const video: Video = program as Video;
-          m3u.push(...videoToM3u(video, genre.title));
+          m3u.push(videoToM3u(video, genre.title));
         }
 
-        if (allPrograms.js.data.length > 0 && page < 5) {
+        if (allPrograms.js.data.length > 0 && page < 2) {
           res(fetchVodItems(genre, page + 1, m3u))
         } else {
           res(true);

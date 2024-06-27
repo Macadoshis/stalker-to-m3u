@@ -21,6 +21,7 @@ export function getGenerationKind(): GenerationKind {
 export function fetchData<T>(path: string): Promise<T> {
     return new Promise<T>((resp, err) => {
         const config: Config = getConfig();
+        //console.debug(path);
         http.get({
             hostname: config.hostname,
             port: config.port,
@@ -46,7 +47,7 @@ export function fetchData<T>(path: string): Promise<T> {
             });
 
             res.on('close', () => {
-                console.debug(`Retrieved data (${data.length} bytes)`);
+                //console.debug(`Retrieved data (${data.length} bytes)`);
                 try {
                     resp(JSON.parse(data));
                 } catch (e) {
