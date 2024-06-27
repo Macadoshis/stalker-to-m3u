@@ -112,15 +112,22 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
 function fetchVodItems(genre: Genre, page: number, m3u: string[]): Promise<boolean> {
   return new Promise<boolean>((res, err) => {
+
     fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
       .then(allPrograms => {
+
+        console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
 
         for (var program of allPrograms.js.data) {
           const video: Video = program as Video;
           m3u.push(...videoToM3u(video, genre.title));
         }
-        
-        res(allPrograms.js.data.length > 0);
+
+        if (allPrograms.js.data.length > 0 && page < 5) {
+          res(fetchVodItems(genre, page + 1, m3u))
+        } else {
+          res(true);
+        }
       });
   });
 }

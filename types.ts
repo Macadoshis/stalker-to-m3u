@@ -43,5 +43,6 @@ export interface Video extends Program {
 
 export interface Programs<T> {
     total_items: number;
+    max_page_items: number;
     data: T[];
 }
