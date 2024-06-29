@@ -112,15 +112,16 @@ fetchData<ArrayData<Genre>>('/portal.php?' +
         res(m3u.reduce((acc, next, idx) => {
           return acc.then(() => {
             return resolveUrlLink(next).then(() => {
-              if ((idx / m3u.length * 100) % 5 === 0) {
-                console.info(`Progress: ${idx * 100 / m3u.length}% (${idx}/${m3u.length})`);
-              }
+              printProgress(idx, m3u.length);
             });
           });
         }, Promise.resolve()));
       });
 
     }).then(() => {
+      process.stdout.clearLine(0);
+      process.stdout.cursorTo(0);
+      console.info(`Creating file ${config.hostname}.m3u`);
       // Outputs m3u
       fs.writeFileSync(`${config.hostname}.m3u`, new M3U(m3u).print());
     });
@@ -153,11 +154,19 @@ function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<bool
           m3u.push(videoToM3u(video, genre.title));
         }
 
-        if (allPrograms.js.data.length > 0 && page < 2) {
+        if (allPrograms.js.data.length > 0 && page < (config.vodMaxPagePerGenre ?? 2)) {
           res(fetchVodItems(genre, page + 1, m3u))
         } else {
           res(true);
         }
       });
   });
+}
+
+function printProgress(idx: number, total: number): void {
+  if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
+    process.stdout.clearLine(0);
+    process.stdout.cursorTo(0);
+    process.stdout.write(`...progress: ${Math.ceil(idx * 100 / total)}%`);
+  }
 }

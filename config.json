@@ -4,5 +4,6 @@
     "mac": "00:1A:79:AD:5F:2B",
     "deviceId": "743B397C45EC59C7E1550091EAA82549",
     "tvgIdPreFill": true,
-    "computeUrlLink": true
+    "computeUrlLink": true,
+    "vodMaxPagePerGenre": 2
 }

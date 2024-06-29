@@ -5,6 +5,7 @@ export interface Config {
     mac: string;
     tvgIdPreFill?: boolean;
     computeUrlLink?: boolean;
+    vodMaxPagePerGenre?: number;
 }
 
 export type GenerationKind = 'iptv' | 'vod';
