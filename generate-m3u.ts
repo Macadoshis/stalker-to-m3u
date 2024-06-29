@@ -49,7 +49,7 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 function videoToM3u(video: Video, group: string): M3ULine {
   const lines: M3ULine = <M3ULine>{};
 
-  lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="${group}",${video.name}`;
+  lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
   lines.command = video.cmd;
 
   return lines;
