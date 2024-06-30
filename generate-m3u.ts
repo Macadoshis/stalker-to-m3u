@@ -40,7 +40,7 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
-  lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="${group}",${channel.name}`;
+  lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="TV - ${group}",${channel.name}`;
   lines.command = channel.cmd;
 
   return lines;
@@ -49,7 +49,7 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 function videoToM3u(video: Video, group: string): M3ULine {
   const lines: M3ULine = <M3ULine>{};
 
-  lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
+  lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
   lines.command = video.cmd;
 
   return lines;
@@ -123,7 +123,7 @@ fetchData<ArrayData<Genre>>('/portal.php?' +
       process.stdout.cursorTo(0);
       console.info(`Creating file ${config.hostname}.m3u`);
       // Outputs m3u
-      fs.writeFileSync(`${config.hostname}.m3u`, new M3U(m3u).print());
+      fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
     });
 
   });
@@ -137,6 +137,9 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
           m3uLine.url = decodeURIComponent(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
         }
         res();
+      }, err => {
+        console.error(`Error generating stream url for entry '${m3uLine.header}'`);
+        m3uLine.url = undefined;
       });
   });
 }

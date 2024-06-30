@@ -41,6 +41,7 @@ export interface Channel extends Program {
 export interface Video extends Program {
     screenshot_uri: string;
     category_id: string;
+    time: number;
 }
 
 export interface Programs<T> {
@@ -62,10 +63,12 @@ export class M3U {
         this._m3uLines = m3uLines;
     }
 
-    print(): string {
+    print(config: Config): string {
         const ret: string[] = ['#EXTM3U'];
         this._m3uLines.forEach(m3uLine => {
-            ret.push(...[m3uLine.header, (m3uLine.url ?? m3uLine.command)!]);
+            if (!config.computeUrlLink || !!m3uLine.url) {
+                ret.push(...[m3uLine.header, (m3uLine.url ?? m3uLine.command)!]);
+            }
         });
         return ret.join('\r\n');
     }
