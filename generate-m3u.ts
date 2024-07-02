@@ -41,7 +41,7 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
   lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="TV - ${group}",${channel.name}`;
-  lines.command = channel.cmd;
+  lines.command = decodeURIComponent(channel.cmd);
 
   return lines;
 }
@@ -50,7 +50,7 @@ function videoToM3u(video: Video, group: string): M3ULine {
   const lines: M3ULine = <M3ULine>{};
 
   lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
-  lines.command = video.cmd;
+  lines.command = decodeURIComponent(video.cmd);
 
   return lines;
 }
@@ -121,17 +121,29 @@ fetchData<ArrayData<Genre>>('/portal.php?' +
     }).then(() => {
       process.stdout.clearLine(0);
       process.stdout.cursorTo(0);
-      console.info(`Creating file ${config.hostname}.m3u`);
+
       // Outputs m3u
+      const filename: string = `${generationKind}-${config.hostname}.m3u`;
+      console.info(`Creating file ${filename}`);
       fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
     });
 
   });
 
 function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
+
+  let type: string;
+  if (generationKind === 'iptv') {
+    type = 'itv';
+  } else if (generationKind === 'vod') {
+    type = 'vod';
+  } else {
+    type = '';
+  }
+
   return new Promise<void>((res, err) => {
 
-    fetchData<Data<{ cmd: string }>>(`/portal.php?type=vod&action=create_link&cmd=${encodeURIComponent(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
+    fetchData<Data<{ cmd: string }>>(`/portal.php?type=${type}&action=create_link&cmd=${encodeURIComponent(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
       .then(urlLink => {
         if (urlLink.js.cmd) {
           m3uLine.url = decodeURIComponent(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
@@ -140,6 +152,7 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
       }, err => {
         console.error(`Error generating stream url for entry '${m3uLine.header}'`);
         m3uLine.url = undefined;
+        res();
       });
   });
 }
