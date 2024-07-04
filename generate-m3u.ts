@@ -40,8 +40,8 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
-  lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURIComponent(channel.logo)}" group-title="TV - ${group}",${channel.name}`;
-  lines.command = decodeURIComponent(channel.cmd);
+  lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURI(channel.logo)}" group-title="TV - ${group}",${channel.name}`;
+  lines.command = decodeURI(channel.cmd);
 
   return lines;
 }
@@ -49,8 +49,8 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 function videoToM3u(video: Video, group: string): M3ULine {
   const lines: M3ULine = <M3ULine>{};
 
-  lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURIComponent(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
-  lines.command = decodeURIComponent(video.cmd);
+  lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
+  lines.command = decodeURI(video.cmd);
 
   return lines;
 }
@@ -143,10 +143,10 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 
   return new Promise<void>((res, err) => {
 
-    fetchData<Data<{ cmd: string }>>(`/portal.php?type=${type}&action=create_link&cmd=${encodeURIComponent(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
+    fetchData<Data<{ cmd: string }>>(`/portal.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
       .then(urlLink => {
         if (urlLink.js.cmd) {
-          m3uLine.url = decodeURIComponent(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+          m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
         }
         res();
       }, err => {

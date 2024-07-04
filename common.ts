@@ -1,5 +1,7 @@
 import { Config, GenerationKind, generationKindNames } from "./types.js";
 
+const version: string = require('./package.json').version;
+
 const http = require('http');
 const fs = require('fs');
 
@@ -29,7 +31,7 @@ export function fetchData<T>(path: string): Promise<T> {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
-                'User-Agent': 'stalker-to-m3u/1.0.0',
+                'User-Agent': `stalker-to-m3u/${version}`,
                 'Authorization': `Bearer ${config.deviceId}`,
                 'Cookie': `mac=${config.mac}; stb_lang=en; timezone=Europe/Kiev`
             }
