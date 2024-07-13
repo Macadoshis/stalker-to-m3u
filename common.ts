@@ -20,9 +20,10 @@ export function getGenerationKind(): GenerationKind {
     return (arg as GenerationKind);
 }
 
+const config: Config = getConfig();
+
 export function fetchData<T>(path: string): Promise<T> {
     return new Promise<T>((resp, err) => {
-        const config: Config = getConfig();
         //console.debug(path);
         http.get({
             hostname: config.hostname,

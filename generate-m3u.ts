@@ -29,6 +29,7 @@ function getTvgId(channel: Channel): string {
     if (!!iterator[1].find(term => channel.name.toLocaleLowerCase()
       .includes(term.toLocaleLowerCase()))) {
       tvgId = iterator[0];
+      break;
     }
   }
 
