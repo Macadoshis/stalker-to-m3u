@@ -1,9 +1,10 @@
 {
-    "hostname": "cbrlig.com",
-    "port": 8080,
-    "mac": "00:1A:79:A6:76:F0",
+    "hostname": "kocaeli41.xyz",
+    "port": 8000,
+    "contextPath": "",
+    "mac": "00:1A:79:BD:1C:50",
     "deviceId": "743B397C45EC59C7E1550091EAA82549",
     "tvgIdPreFill": true,
     "computeUrlLink": true,
-    "vodMaxPagePerGenre": 1
+    "vodMaxPagePerGenre": 50
 }

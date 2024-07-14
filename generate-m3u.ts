@@ -62,7 +62,7 @@ const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE,
 
 const generationKind: GenerationKind = getGenerationKind();
 
-fetchData<ArrayData<Genre>>('/portal.php?' +
+fetchData<ArrayData<Genre>>('/server/load.php?' +
   (generationKind === 'iptv' ? 'type=itv&action=get_genres' : 'type=vod&action=get_categories')
 )
   .then(genres => {
@@ -71,7 +71,7 @@ fetchData<ArrayData<Genre>>('/portal.php?' +
 
     var next = new Promise<any>((res, err) => {
       if (generationKind === "iptv") {
-        fetchData<Data<Programs<Program>>>('/portal.php?type=itv&action=get_all_channels')
+        fetchData<Data<Programs<Program>>>('/server/load.php?type=itv&action=get_all_channels')
           .then(allPrograms => {
 
             for (var program of allPrograms.js.data) {
@@ -144,7 +144,7 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 
   return new Promise<void>((res, err) => {
 
-    fetchData<Data<{ cmd: string }>>(`/portal.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
+    fetchData<Data<{ cmd: string }>>(`/server/load.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
       .then(urlLink => {
         if (urlLink.js.cmd) {
           m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
@@ -161,7 +161,7 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<boolean> {
   return new Promise<boolean>((res, err) => {
 
-    fetchData<Data<Programs<Program>>>(`/portal.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
+    fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
       .then(allPrograms => {
 
         console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);

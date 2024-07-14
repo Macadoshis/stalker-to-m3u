@@ -1,5 +1,6 @@
 export interface Config {
     hostname: string;
+    contextPath?: string;
     port: number;
     deviceId: string;
     mac: string;

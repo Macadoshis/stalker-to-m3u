@@ -24,11 +24,11 @@ const config: Config = getConfig();
 
 export function fetchData<T>(path: string): Promise<T> {
     return new Promise<T>((resp, err) => {
-        //console.debug(path);
+        //console.debug((!!config.contextPath ? '/' + config.contextPath : '') + path);
         http.get({
             hostname: config.hostname,
             port: config.port,
-            path: path,
+            path: (!!config.contextPath ? '/' + config.contextPath : '') + path,
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
