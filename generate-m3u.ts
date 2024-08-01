@@ -144,14 +144,17 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 
   return new Promise<void>((res, err) => {
 
-    fetchData<Data<{ cmd: string }>>(`/server/load.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`)
+    fetchData<Data<{ cmd: string }>>(`/server/load.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true)
       .then(urlLink => {
-        if (urlLink.js.cmd) {
+        if (urlLink?.js?.cmd) {
           m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+        } else {
+          console.error(`Error fetching media URL for '${m3uLine.header}'`);
+          m3uLine.url = undefined;
         }
         res();
       }, err => {
-        console.error(`Error generating stream url for entry '${m3uLine.header}'`);
+        console.error(`Error generating stream url for entry '${m3uLine.header}'`, err);
         m3uLine.url = undefined;
         res();
       });
@@ -161,8 +164,13 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<boolean> {
   return new Promise<boolean>((res, err) => {
 
-    fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`)
+    fetchData<Data<Programs<Program>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`, true)
       .then(allPrograms => {
+
+        if (!allPrograms?.js) {
+          console.error(`Error fetching page ${page} of genre '${genre.title}'`);
+          res(fetchVodItems(genre, page + 1, m3u));
+        }
 
         console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
 
@@ -172,7 +180,7 @@ function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<bool
         }
 
         if (allPrograms.js.data.length > 0 && page < (config.vodMaxPagePerGenre ?? 2)) {
-          res(fetchVodItems(genre, page + 1, m3u))
+          res(fetchVodItems(genre, page + 1, m3u));
         } else {
           res(true);
         }

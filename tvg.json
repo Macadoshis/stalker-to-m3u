@@ -3507,9 +3507,6 @@
     "SuperChannelVault(English).ca": [
         "Super Channel Vault (English)"
     ],
-    "SuperEcran(src01).ca": [
-        "Super Ecran"
-    ],
     "SuperEcran2(src01).ca": [
         "Super Ecran 2"
     ],
@@ -3521,6 +3518,9 @@
     ],
     "SuperEcranSurDemande(French).ca": [
         "Super Ecran Sur Demande (French)"
+    ],
+    "SuperEcran(src01).ca": [
+        "Super Ecran"
     ],
     "SurSagarTV(English).ca": [
         "Sur Sagar TV (English)"

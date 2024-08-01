@@ -2,7 +2,7 @@ export interface Config {
     hostname: string;
     contextPath?: string;
     port: number;
-    deviceId: string;
+    deviceId?: string;
     mac: string;
     tvgIdPreFill?: boolean;
     computeUrlLink?: boolean;
