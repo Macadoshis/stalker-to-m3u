@@ -5,17 +5,25 @@ const version: string = require('./package.json').version;
 const http = require('http');
 const fs = require('fs');
 
-const randomDeviceId: string = Array.from({ length: 32 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+const yargsParser = require('yargs-parser');
 
+const randomDeviceId: string = Array.from({ length: 32 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
 
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json',
         { encoding: 'utf8', flag: 'r' });
-    const config: Config = JSON.parse(configData) as Config;
+    let config: Config = JSON.parse(configData) as Config;
     if (!config.deviceId) {
         // console.log(`Using generated devideId: ${randomDeviceId}`);
         config.deviceId = randomDeviceId;
     }
+
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(3));
+    config = { ...config, ...args };
+
+    console.info(config);
+
     return config;
 }
 
