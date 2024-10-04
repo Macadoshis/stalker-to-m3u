@@ -1,9 +1,9 @@
 {
-    "hostname": "rajtv.online",
+    "hostname": "tr.redatvgold.com",
     "port": 80,
     "contextPath": "",
-    "mac": "00:1a:79:b6:a2:10",
+    "mac": "00:1A:79:76:0F:9E",
     "tvgIdPreFill": true,
     "computeUrlLink": true,
-    "vodMaxPagePerGenre": 2
+    "vodMaxPagePerGenre": 15
 }

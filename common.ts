@@ -22,7 +22,7 @@ export function getConfig(): Readonly<Config> {
     const args = yargsParser(process.argv.slice(3));
     config = { ...config, ...args };
 
-    console.info(config);
+    // console.info(config);
 
     return config;
 }
