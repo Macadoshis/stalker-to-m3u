@@ -1,9 +1,7 @@
 {
     "13emeRue.fr": [
-        "13eme Rue"
-    ],
-    "13emeRUE(src01).fr": [
-        "13eme RUE"
+        "13eme Rue",
+        "13 eme Rue"
     ],
     "2MMonde.fr": [
         "2M"
@@ -50,22 +48,28 @@
         "BBlack"
     ],
     "BeINSports1(src01).fr": [
-        "BeIN Sports 1"
+        "BeIN Sports 1",
+        "BeIN Sport 1"
     ],
     "BeINSPORTS1.fr": [
-        "BeIN SPORTS 1"
+        "BeIN SPORTS 1",
+        "BeIN SPORT 1"
     ],
     "BeINSPORTS2.fr": [
-        "BeIN SPORTS 2"
+        "BeIN SPORTS 2",
+        "BeIN SPORT 2"
     ],
     "BeINSports2(src01).fr": [
-        "BeIN Sports 2"
+        "BeIN Sports 2",
+        "BeIN Sport 2"
     ],
     "BeINSPORTS3.fr": [
-        "BeIN SPORTS 3"
+        "BeIN SPORTS 3",
+        "BeIN SPORT 3"
     ],
     "BeINSports3(src01).fr": [
-        "BeIN Sports 3"
+        "BeIN Sports 3",
+        "BeIN Sport 3"
     ],
     "BeINSPORTSMax10.fr": [
         "BeIN SPORTS Max 10"
@@ -185,16 +189,20 @@
     ],
     "CanalplusSport.fr": [
         "Canalplus Sport",
-        "Canal+ Sport"
+        "Canal+ Sport",
+        "Canal + Sport"
     ],
     "CANALplusFOOT(src01).fr": [
         "CANALplusFOOT",
         "CANAL+FOOT",
-        "CANAL+ FOOT"
+        "CANAL+ FOOT",
+        "CANAL + FOOT"
     ],
     "Canalplus.fr": [
         "Canalplus",
-        "Canal+"
+        "Canal plus",
+        "Canal+",
+        "Canal +"
     ],
     "CartoonNetwork.fr": [
         "Cartoon Network"
@@ -239,27 +247,38 @@
     ],
     "CineplusClassic.fr": [
         "Cineplus Classic",
-        "Cine+ Classic"
+        "Cine+ Classic",
+        "Cine + Classic",
+        "CINE Classic"
     ],
     "CineplusClub.fr": [
         "Cineplus Club",
-        "Cine+ Club"
+        "Cine+ Club",
+        "Cine + Club",
+        "CINE CLUB"
     ],
     "CineplusEmotion.fr": [
         "Cineplus Emotion",
-        "Cine+ Emotion"
+        "Cine+ Emotion",
+        "Cine + Emotion"
     ],
     "CineplusFamiz.fr": [
         "Cineplus Famiz",
-        "Cine+ Famiz"
+        "Cine+ Famiz",
+        "Cine + Famiz",
+        "CINE FAMIZ"
     ],
     "CineplusFrisson.fr": [
         "Cineplus Frisson",
-        "Cine+ Frisson"
+        "Cine+ Frisson",
+        "Cine + Frisson",
+        "CINE FRISSON"
     ],
     "CineplusPremier.fr": [
         "Cineplus Premier",
-        "Cine+ Premier"
+        "Cine+ Premier",
+        "Cine + Premier",
+        "CINE PREMIER"
     ],
     "Classica.fr": [
         "Classica"
@@ -320,9 +339,6 @@
         "Disney Channel +1",
         "Disney Channel+1"
     ],
-    "DisneyJunior.fr": [
-        "Disney Junior"
-    ],
     "DisneyJuniorFrance.fr": [
         "Disney Junior France"
     ],
@@ -339,14 +355,16 @@
         "Dreamworks"
     ],
     "EEntertainment(src01).fr": [
-        "EEntertainment"
+        "EEntertainment",
+        "E!"
     ],
     "Equidia.fr": [
         "Equidia"
     ],
     "Equipe21(src01).fr": [
         "Equipe 21",
-        "Equipe21"
+        "Equipe21",
+        "LEquipe"
     ],
     "ES1(src01).fr": [
         "ES1"
@@ -481,7 +499,8 @@
     ],
     "JOne.fr": [
         "JOne",
-        "J-One"
+        "J-One",
+        "J One"
     ],
     "KTO.fr": [
         "KTO"
@@ -744,10 +763,12 @@
         "Saisons"
     ],
     "ScienceetVie(src01).fr": [
-        "Science et Vie"
+        "Science et Vie",
+        "Science & Vie"
     ],
     "Seasons(src01).fr": [
-        "Seasons"
+        "Seasons",
+        "Season"
     ],
     "SerieClub.fr": [
         "Serie Club",

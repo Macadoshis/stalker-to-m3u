@@ -22,12 +22,16 @@ function splitLines(lines: string): string[] {
   return lines.split(/\r\n|\r|\n/);
 }
 
+function removeAccent(str: string): string {
+  return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
+
 function getTvgId(channel: Channel): string {
   let tvgId: string = '';
 
   for (const iterator of Object.entries(tvgData)) {
-    if (!!iterator[1].find(term => channel.name.toLocaleLowerCase()
-      .includes(term.toLocaleLowerCase()))) {
+    if (!!iterator[1].find(term => removeAccent(channel.name.toLocaleLowerCase())
+      .includes(removeAccent(term.toLocaleLowerCase())))) {
       tvgId = iterator[0];
       break;
     }
