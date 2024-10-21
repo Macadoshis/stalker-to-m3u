@@ -34,8 +34,5 @@ select opt in "${optionsGenerate[@]}"; do
     esac
 done
 
-echo $doWhat
-echo $media
-
 echo "Running script..."
 npm run $doWhat $media -- "$@"
