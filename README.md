@@ -25,7 +25,7 @@ The main entrypoint to run the script is from file :
 
 ## Stalker provider
 
-Stalker portal provider info needs to be set into `config.json` file.
+Stalker portal provider info needs to be set into [config.json](./config.json) file.
 
 ## Commands
 
