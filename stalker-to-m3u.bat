@@ -42,4 +42,4 @@ goto :whileChooseTarget
 echo "Running script..."
 
 @REM run script
-npm run %doWhat% %media%
+npm run %doWhat% %media% -- %*

@@ -38,4 +38,4 @@ echo $doWhat
 echo $media
 
 echo "Running script..."
-npm run $doWhat $media
+npm run $doWhat $media -- "$@"
