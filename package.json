@@ -6,13 +6,15 @@
     "groups": "ts-node --project ./tsconfig.ts-node.json generate-groups.ts",
     "prem3u": "npm run pregroups",
     "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
-    "m3u-all": "npm run groups && npm run m3u"
+    "m3u-iptv": "npm run groups iptv && npm run m3u iptv",
+    "m3u-vod": "npm run groups vod && npm run m3u vod"
   },
   "private": false,
   "devDependencies": {
     "@types/node": "^12.11.1",
     "chalk": "latest",
     "fs": "latest",
+    "follow-redirects": "latest",
     "ts-node": "10.1.0",
     "typescript": "~4.3.2",
     "yargs-parser": "latest"

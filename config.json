@@ -1,9 +1,10 @@
 {
-    "hostname": "tr.redatvgold.com",
-    "port": 80,
-    "contextPath": "",
-    "mac": "00:1A:79:76:0F:9E",
+    "hostname": "my.dns.com",
+    "port": 8080,
+    "contextPath": "stalker_portal",
+    "mac": "00:1A:79:12:34:56",
     "tvgIdPreFill": true,
     "computeUrlLink": true,
-    "vodMaxPagePerGenre": 15
+    "vodMaxPagePerGenre": 2,
+    "maxNumberOfChannelsToTest": 5
 }

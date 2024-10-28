@@ -3,7 +3,7 @@ import { ArrayData, Channel, Config, Data, GenerationKind, Genre, M3U, M3ULine, 
 
 type Tvg = Readonly<Record<string, string[]>>;
 
-const http = require('http');
+const http = require('follow-redirects').http;
 const fs = require('fs');
 
 const GROUP_FILE: string = './groups.txt';
@@ -41,7 +41,8 @@ function getTvgId(channel: Channel): string {
 }
 
 function channelToM3u(channel: Channel, group: string): M3ULine {
-  const lines: M3ULine = <M3ULine>{};
+  const lines: M3ULine = <M3ULine><any>{ program: channel };
+  lines.program = channel;
 
   const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
@@ -52,7 +53,7 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 }
 
 function videoToM3u(video: Video, group: string): M3ULine {
-  const lines: M3ULine = <M3ULine>{};
+  const lines: M3ULine = <M3ULine><any>{ program: video };
 
   lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="VOD - ${group}",${video.name}`;
   lines.command = decodeURI(video.cmd);
@@ -114,13 +115,72 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
       console.info('Generating url links');
       return new Promise<void>((res, err) => {
 
-        res(m3u.reduce((acc, next, idx) => {
-          return acc.then(() => {
-            return resolveUrlLink(next).then(() => {
-              printProgress(idx, m3u.length);
-            });
-          });
-        }, Promise.resolve()));
+        const maxNumberOfChannelsToTest: number = config.maxNumberOfChannelsToTest !== 0 ? (config.maxNumberOfChannelsToTest ?? 5) : config.maxNumberOfChannelsToTest;
+
+        new Promise<boolean>((r, e) => {
+          if (maxNumberOfChannelsToTest !== 0) {
+            let testM3u: M3ULine[] = [...m3u];
+            shuffleArray(testM3u);
+            testM3u = testM3u.slice(0, Math.min(maxNumberOfChannelsToTest, m3u.length));
+
+            console.info(`Testing ${maxNumberOfChannelsToTest} channels randomly... : ${testM3u.map(m => m.program.name).join(', ')}`);
+
+            testM3u.reduce((acc, next, idx) => {
+
+              return acc.then(() => {
+
+                return resolveUrlLink(next).then(() => {
+
+                  return new Promise<void>((resp, err) => {
+
+                    // Test stream URL
+                    var req = http.get(next.url, (resHttp: any) => {
+
+                      if (resHttp.statusCode !== 200) {
+                        console.error(`Did not resolve stream ${next.url} of channel ${next.program.name}. Code: ${resHttp.statusCode}`);
+                        resHttp.resume();
+                        next.testResult = false;
+                      } else {
+                        //console.debug(`Resolved successfully stream ${next.url} of channel ${next.program.name}.`);
+                        next.testResult = true;
+                      }
+
+                      resp();
+                    }, (errHttp: any) => {
+                      next.testResult = false;
+                      resp();
+                    });
+
+                    req.end();
+                  });
+                });
+              });
+            }, Promise.resolve())
+              .then(() => {
+                const nbTestedOk: number = testM3u.filter(r => !!r.testResult).length;
+                console.info(`${nbTestedOk}/${maxNumberOfChannelsToTest} streams were tested successfully`);
+                // if at least 1 was responding, it's ok to continue with this portal
+                r(nbTestedOk > 0);
+              });
+
+          } else {
+            r(true);
+          }
+        }).then((testedOk: boolean) => {
+          if (testedOk) {
+            res(m3u.reduce((acc, next, idx) => {
+              return acc.then(() => {
+                return resolveUrlLink(next).then(() => {
+                  printProgress(idx, m3u.length);
+                });
+              });
+            }, Promise.resolve()));
+          } else {
+            console.error("Aborting M3U generation");
+            process.exit(1);
+          }
+        });
+
       });
 
     }).then(() => {
@@ -134,6 +194,15 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
     });
 
   });
+
+function shuffleArray<T>(array: T[]): void {
+  for (var i = array.length - 1; i >= 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
 
 function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
 
