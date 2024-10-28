@@ -6,6 +6,7 @@ export interface Config {
     mac: string;
     tvgIdPreFill?: boolean;
     computeUrlLink?: boolean;
+    maxNumberOfChannelsToTest?: number;
     vodMaxPagePerGenre?: number;
 }
 
@@ -52,9 +53,11 @@ export interface Programs<T> {
 }
 
 export interface M3ULine {
+    program: Program;
     header: string;
     command?: string;
     url?: string;
+    testResult?: boolean;
 }
 
 export class M3U {
