@@ -19,6 +19,10 @@ In order to use this script, following are needed :
 
 ## Script
 
+Run configuration script at first execution only (only to be done once or after every new version) :
+- [configure.bat](./configure.bat) (_Windows_)
+- [configure](./configure) (_Linux / MacOS_)
+
 The main entrypoint to run the script is from file :
 - [stalker-to-m3u.bat](./stalker-to-m3u.bat) (_Windows_)
 - [stalker-to-m3u](./stalker-to-m3u) (_Linux / MacOS_)
@@ -68,4 +72,4 @@ Considering following stalker provider :
 ### Options from command line
 Options can also be passed to the script to override a value set from `config.json`, by adding `--<property>=<value>` for each desired property.
 
-Example : `$> ./stalker-to-m3u --hostname="my.alternate.dns" --vodMaxPagePerGenre=15`
+Example : `$> ./stalker-to-m3u --mac="00:1A:79:12:98:76" --vodMaxPagePerGenre=15`
