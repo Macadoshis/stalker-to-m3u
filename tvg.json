@@ -1,4 +1,9 @@
 {
+    "": [
+        "A la carte",
+        "Amazon prime",
+        "DAZN"
+    ],
     "13emeRue.fr": [
         "13eme Rue",
         "13 eme Rue"
@@ -15,6 +20,10 @@
     "AB1.fr": [
         "AB 1",
         "AB1"
+    ],
+    "AB3(French).ch": [
+        "AB 3",
+        "AB3"
     ],
     "Action.fr": [
         "Action"
@@ -47,71 +56,48 @@
     "BBlackClassik(src01).fr": [
         "BBlack"
     ],
-    "BeINSports1(src01).fr": [
-        "BeIN Sports 1",
-        "BeIN Sport 1"
-    ],
     "BeINSPORTS1.fr": [
         "BeIN SPORTS 1",
+        "BeINSPORTS 1",
         "BeIN SPORT 1"
     ],
     "BeINSPORTS2.fr": [
         "BeIN SPORTS 2",
+        "BeINSPORTS 2",
         "BeIN SPORT 2"
     ],
-    "BeINSports2(src01).fr": [
-        "BeIN Sports 2",
-        "BeIN Sport 2"
-    ],
-    "BeINSPORTS3.fr": [
-        "BeIN SPORTS 3",
-        "BeIN SPORT 3"
-    ],
-    "BeINSports3(src01).fr": [
+    "BeINSports3.fr": [
         "BeIN Sports 3",
+        "BeINSports 3",
         "BeIN Sport 3"
     ],
-    "BeINSPORTSMax10.fr": [
-        "BeIN SPORTS Max 10"
-    ],
-    "BeINSportsMAX10(src01).fr": [
-        "BeIN Sports MAX 10"
-    ],
-    "BeINSportsMAX4(src01).fr": [
-        "BeIN Sports MAX 4"
+    "BeINSportsMAX10.fr": [
+        "BeIN Sports MAX 10",
+        "BeINSports MAX 10"
     ],
     "BeINSPORTSMax4.fr": [
-        "BeIN SPORTS Max 4"
+        "BeIN SPORTS Max 4",
+        "BeINSPORTS Max 4"
     ],
     "BeINSPORTSMax5.fr": [
-        "BeIN SPORTS Max 5"
-    ],
-    "BeINSportsMAX5(src01).fr": [
-        "BeIN Sports MAX 5"
-    ],
-    "BeINSportsMAX6(src01).fr": [
-        "BeIN Sports MAX 6"
+        "BeIN SPORTS Max 5",
+        "BeINSPORTS Max 5"
     ],
     "BeINSPORTSMax6.fr": [
-        "BeIN SPORTS Max 6"
+        "BeIN SPORTS Max 6",
+        "BeINSPORTS Max 6"
     ],
     "BeINSPORTSMax7.fr": [
-        "BeIN SPORTS Max 7"
-    ],
-    "BeINSportsMAX7(src01).fr": [
-        "BeIN Sports MAX 7"
-    ],
-    "BeINSportsMAX8(src01).fr": [
-        "BeIN Sports MAX 8"
+        "BeIN SPORTS Max 7",
+        "BeINSPORTS Max 7"
     ],
     "BeINSPORTSMax8.fr": [
-        "BeIN SPORTS Max 8"
+        "BeIN SPORTS Max 8",
+        "BeINSPORTS Max 8"
     ],
     "BeINSPORTSMax9.fr": [
-        "BeIN SPORTS Max 9"
-    ],
-    "BeINSportsMAX9(src01).fr": [
-        "BeIN Sports MAX 9"
+        "BeIN SPORTS Max 9",
+        "BeINSPORTS Max 9"
     ],
     "BET.fr": [
         "BET"
@@ -198,6 +184,9 @@
         "CANAL+ FOOT",
         "CANAL + FOOT"
     ],
+    "CANALplusLIGUE1(src01).fr": [
+        "CANAL+ LIGUE 1"
+    ],
     "Canalplus.fr": [
         "Canalplus",
         "Canal plus",
@@ -251,7 +240,7 @@
         "Cine + Classic",
         "CINE Classic"
     ],
-    "CineplusClub.fr": [
+    "CINEplusFestival.fr": [
         "Cineplus Club",
         "Cine+ Club",
         "Cine + Club",
@@ -262,7 +251,7 @@
         "Cine+ Emotion",
         "Cine + Emotion"
     ],
-    "CineplusFamiz.fr": [
+    "CINEplusFamily.fr": [
         "Cineplus Famiz",
         "Cine+ Famiz",
         "Cine + Famiz",
@@ -274,7 +263,7 @@
         "Cine + Frisson",
         "CINE FRISSON"
     ],
-    "CineplusPremier.fr": [
+    "CineplusPremier(src01).fr": [
         "Cineplus Premier",
         "Cine+ Premier",
         "Cine + Premier",
@@ -322,25 +311,25 @@
     "DemainTV.fr": [
         "Demain TV"
     ],
-    "Discovery.fr": [
-        "Discovery"
-    ],
     "DiscoveryChannel(src01).fr": [
         "Discovery Channel"
     ],
     "DiscoveryInvestigation(src01).fr": [
         "Discovery Investigation"
     ],
-    "DisneyChannel.fr": [
-        "Disney Channel"
+    "Discovery.fr": [
+        "Discovery"
     ],
     "DisneyChannelplus1.fr": [
         "Disney Channel plus1",
         "Disney Channel +1",
         "Disney Channel+1"
     ],
+    "DisneyChannel.fr": [
+        "Disney Channel"
+    ],
     "DisneyJuniorFrance.fr": [
-        "Disney Junior France"
+        "Disney Junior"
     ],
     "DjazzTV.fr": [
         "Djazz TV"
@@ -356,12 +345,13 @@
     ],
     "EEntertainment(src01).fr": [
         "EEntertainment",
-        "E!"
+        "E!",
+        "E! ENTERTAINEMENT"
     ],
     "Equidia.fr": [
         "Equidia"
     ],
-    "Equipe21(src01).fr": [
+    "LEquipe.fr": [
         "Equipe 21",
         "Equipe21",
         "LEquipe"
@@ -387,15 +377,15 @@
     "EUROSPORT3601(src01).fr": [
         "EUROSPORT 360"
     ],
+    "France24.fr": [
+        "France 24",
+        "France24"
+    ],
     "France2.fr": [
         "France 2",
         "France2",
         "FR2",
         "FR 2"
-    ],
-    "France24.fr": [
-        "France 24",
-        "France24"
     ],
     "France3.fr": [
         "France 3",
@@ -520,9 +510,6 @@
     "LCPPublicSenat.fr": [
         "Public Senat"
     ],
-    "LEquipe.fr": [
-        "LEquipe"
-    ],
     "LuxeTV.fr": [
         "Luxe TV"
     ],
@@ -585,7 +572,8 @@
         "Nautical Channel"
     ],
     "Nickelodeon4Teen.fr": [
-        "Nickelodeon 4Teen"
+        "Nickelodeon 4Teen",
+        "Nickelodeon Teen"
     ],
     "NickelodeonJunior.fr": [
         "Nickelodeon Junior",
@@ -616,11 +604,11 @@
     "OCSGeants(src01).fr": [
         "OCS Geant"
     ],
-    "OCSCity.fr": [
+    "OCSCity(French).ch": [
         "OCS City",
         "OCS Nova"
     ],
-    "OCSMax.fr": [
+    "OCSMax(French).ch": [
         "OCS Max"
     ],
     "OCSPulp.fr": [
@@ -656,28 +644,26 @@
     ],
     "PlaneteplusAventure.fr": [
         "Planeteplus Aventure",
-        "Planete+ Aventure"
-    ],
-    "PlaneteplusAventureExperience(src01).fr": [
+        "Planete+ Aventure",
+        "Planete A&E",
         "Planeteplus Aventure Experience",
         "Planete+ A&E",
         "Planeteplus A&E"
     ],
     "PlaneteplusCrime.fr": [
         "Planeteplus Crime",
-        "Planete+ Crime"
-    ],
-    "PlaneteplusCrimeInvestigation(src01).fr": [
+        "Planete+ Crime",
         "Planeteplus Crime Investigation",
         "Planete+ CI",
-        "Planeteplus CI"
+        "Planete + CI",
+        "Planeteplus CI",
+        "Planete plus CI"
     ],
     "PLANETEplus.fr": [
         "PLANETEplus",
-        "PLANETE+"
-    ],
-    "PLANETE(src01).fr": [
-        "PLANETE"
+        "PLANETE plus",
+        "PLANETE+",
+        "PLANETE +"
     ],
     "POLARplus(src01).fr": [
         "POLAR plus",
@@ -698,14 +684,11 @@
     "RMCSport1.fr": [
         "RMC Sport 1"
     ],
-    "RMCSport1(src01).fr": [
-        "RMC Sport 1"
-    ],
-    "RMCSport2(src01).fr": [
-        "RMC Sport 2"
-    ],
     "RMCSport2.fr": [
         "RMC Sport 2"
+    ],
+    "RMCSport3(French).ch": [
+        "RMC Sport 3"
     ],
     "RMCSport4K(src01).fr": [
         "RMC Sport 4K"
@@ -750,7 +733,8 @@
         "RMC Story"
     ],
     "RMCTalkSport(src01).fr": [
-        "RMC Talk Sport"
+        "RMC Talk Sport",
+        "RMC NEWS SPORT"
     ],
     "RTI1.fr": [
         "RTI 1"
@@ -762,9 +746,10 @@
     "Saisons.fr": [
         "Saisons"
     ],
-    "ScienceetVie(src01).fr": [
+    "ScienceetVieTV.fr": [
         "Science et Vie",
-        "Science & Vie"
+        "Science & Vie",
+        "SCIENCES & VIE"
     ],
     "Seasons(src01).fr": [
         "Seasons",
@@ -802,10 +787,6 @@
     "Teva.fr": [
         "Teva"
     ],
-    "TF1.fr": [
-        "TF1",
-        "TF 1"
-    ],
     "TF1plus1.fr": [
         "TF1 plus1",
         "TF 1 plus 1",
@@ -814,6 +795,10 @@
     ],
     "TF1SeriesFilms.fr": [
         "TF1 Series"
+    ],
+    "TF1.fr": [
+        "TF1",
+        "TF 1"
     ],
     "TFX.fr": [
         "TFX"
@@ -2962,7 +2947,8 @@
         "Nickelodeon (English)"
     ],
     "Noovo(CFJP)MontrealQC(src01).ca": [
-        "Noovo (CFJP) MontrealQC"
+        "Noovo (CFJP) MontrealQC",
+        "Noovo Quebec"
     ],
     "NTN24NuestraTeleNoticias24(English).ca": [
         "NTN24 Nuestra Tele Noticias 24 (English)"
@@ -4025,9 +4011,6 @@
     ],
     "YTVP(English).ca": [
         "YTVP (English)"
-    ],
-    "Z(src01).ca": [
-        "Z"
     ],
     "Z(French).ca": [
         "Z (French)"
