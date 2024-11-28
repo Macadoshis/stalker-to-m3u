@@ -7,7 +7,8 @@
     "prem3u": "npm run pregroups",
     "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
     "m3u-iptv": "npm run groups iptv && npm run m3u iptv",
-    "m3u-vod": "npm run groups vod && npm run m3u vod"
+    "m3u-vod": "npm run groups vod && npm run m3u vod",
+    "m3u-series": "npm run groups series && npm run m3u series"
   },
   "private": false,
   "devDependencies": {
@@ -15,6 +16,8 @@
     "chalk": "latest",
     "fs": "latest",
     "follow-redirects": "latest",
+    "iswitch": "latest",
+    "rxjs": "^7.8.1",
     "ts-node": "10.1.0",
     "typescript": "~4.3.2",
     "yargs-parser": "latest"

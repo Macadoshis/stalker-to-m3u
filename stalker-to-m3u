@@ -20,7 +20,7 @@ select opt in "${optionsGenerate[@]}"; do
 done
 
 echo "What media ?"
-optionsGenerate=("IPTV" "VOD")
+optionsGenerate=("IPTV" "VOD" "SERIES")
 PS3="$prompt "
 select opt in "${optionsGenerate[@]}"; do
     case "$REPLY" in
@@ -29,6 +29,9 @@ select opt in "${optionsGenerate[@]}"; do
       break;;
     2)
       media=vod;
+      break;;
+    3)
+      media=series;
       break;;
     *) echo "Invalid option.";continue;;
     esac

@@ -26,6 +26,7 @@ echo What media ?
 echo.
 echo "1" (IPTV)
 echo "2" (VOD)
+echo "3" (SERIES)
 set /P media=
 if /I "!media!" == "1" (
     set media=iptv
@@ -33,6 +34,10 @@ if /I "!media!" == "1" (
 )
 if /I "!media!" == "2" (
     set media=vod
+	goto :continue
+)
+if /I "!media!" == "3" (
+    set media=series
 	goto :continue
 )
 goto :whileChooseTarget

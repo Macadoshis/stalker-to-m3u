@@ -10,8 +10,8 @@ export interface Config {
     vodMaxPagePerGenre?: number;
 }
 
-export type GenerationKind = 'iptv' | 'vod';
-export const generationKindNames = ['iptv', 'vod'] as string[];
+export type GenerationKind = 'iptv' | 'vod' | 'series';
+export const generationKindNames = ['iptv', 'vod', 'series'] as string[];
 export type GenerationKindType = typeof generationKindNames[number];
 
 export interface Data<T> {
@@ -46,18 +46,26 @@ export interface Video extends Program {
     time: number;
 }
 
-export interface Programs<T> {
+export interface Serie extends Program {
+    screenshot_uri: string;
+    category_id: string;
+    series: Array<number>;
+}
+
+export interface Programs<T extends Program> {
     total_items: number;
     max_page_items: number;
     data: T[];
 }
 
 export interface M3ULine {
-    program: Program;
     header: string;
+    title: string;
+    name: string;
     command?: string;
     url?: string;
     testResult?: boolean;
+    episode?: number;
 }
 
 export class M3U {
@@ -77,3 +85,20 @@ export class M3U {
         return ret.join('\r\n');
     }
 }
+
+
+export class GenreSerie {
+    readonly genre: Genre;
+    readonly serie: Serie;
+
+    constructor(genre: Genre, serie: Serie) {
+        this.genre = genre;
+        this.serie = serie;
+    }
+
+    toString(): string {
+        return this.genre.title + " / " + this.serie.name;
+    }
+}
+
+export type GenreSeries = { genre: Genre, series: Serie[] };
