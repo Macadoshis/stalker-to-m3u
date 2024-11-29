@@ -141,6 +141,12 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         res(null);
                     });
             } else if (generationKind === "series") {
+                // Filter genres
+                genres = genres
+                    .filter(genre => {
+                        return groups.some(group => group.startsWith(genre.title));
+                    });
+
                 fetchSeries(genres).then(genreSeries => {
                     groups.map(group => {
                         return genreSeries.find(r => r.toString() === group)!;
