@@ -215,7 +215,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         }, Promise.resolve())
                             .then(() => {
                                 const nbTestedOk: number = testM3u.filter(r => !!r.testResult).length;
-                                console.info(`${nbTestedOk}/${maxNumberOfChannelsToTest} streams were tested successfully`);
+                                console.info(`${nbTestedOk}/${testM3u.length} streams were tested successfully`);
                                 // if at least 1 was responding, it's ok to continue with this portal
                                 r(nbTestedOk > 0);
                             });
