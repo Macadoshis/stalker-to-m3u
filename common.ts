@@ -124,7 +124,9 @@ function fetchSeriesItems(genre: Genre, page: number, series: Serie[]): Promise<
                     res(fetchSeriesItems(genre, page + 1, series));
                 }
 
-                console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
+                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
+                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
+                }
 
                 for (var serie of allPrograms.js.data) {
                     series.push(serie);

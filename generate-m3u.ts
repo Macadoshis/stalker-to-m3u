@@ -304,7 +304,9 @@ function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<bool
                     res(fetchVodItems(genre, page + 1, m3u));
                 }
 
-                console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
+                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
+                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
+                }
 
                 for (const video of allPrograms.js.data) {
                     m3u.push(videoToM3u(video, genre.title));
@@ -330,7 +332,9 @@ function fetchSeasonItems(serie: Serie, page: number, m3u: M3ULine[]): Promise<b
                     res(fetchSeasonItems(serie, page + 1, m3u));
                 }
 
-                console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of serie '${serie.name}'`);
+                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
+                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of serie '${serie.name}'`);
+                }
 
                 for (const season of allPrograms.js.data) {
                     m3u.push(...serieToM3u(serie, season, serie.name));
