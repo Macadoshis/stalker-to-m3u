@@ -80,7 +80,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false): Promis
                 res.on('close', () => {
                     //console.debug(`Retrieved data (${data.length} bytes)`);
                     try {
-                        resp(JSON.parse(data));
+                        resp(JSON.parse(!!data ? data : '{}'));
                     } catch (e) {
                         console.error(e);
                         console.debug(data);
@@ -137,6 +137,9 @@ function fetchSeriesItems(genre: Genre, page: number, series: Serie[]): Promise<
                 } else {
                     res(true);
                 }
+            }, err => {
+                console.error(`Error fetching genre '${genre.title}'`);
+                res(true);
             });
     });
 }
@@ -166,4 +169,8 @@ export function fetchSeries(genres: Array<Genre>): Promise<GenreSerie[]> {
             })
         )
     );
+}
+
+export function splitLines(lines: string): string[] {
+    return lines.split(/\r\n|\r|\n/);
 }

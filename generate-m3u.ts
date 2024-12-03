@@ -1,4 +1,4 @@
-import {fetchData, fetchSeries, getConfig, getGenerationKind} from "./common.js";
+import {fetchData, fetchSeries, getConfig, getGenerationKind, splitLines} from "./common.js";
 import {
     ArrayData,
     Channel,
@@ -31,10 +31,6 @@ const config: Config = getConfig();
 
 const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
     {encoding: 'utf8', flag: 'r'})) as Tvg;
-
-function splitLines(lines: string): string[] {
-    return lines.split(/\r\n|\r|\n/);
-}
 
 function removeAccent(str: string): string {
     return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");

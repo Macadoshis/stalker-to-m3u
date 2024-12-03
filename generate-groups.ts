@@ -26,4 +26,6 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
                 .filter(t => t !== 'All')
                 .join('\r\n'));
         }
+    }, err => {
+        process.exit(1);
     });
