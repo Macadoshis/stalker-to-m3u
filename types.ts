@@ -8,7 +8,11 @@ export interface Config {
     computeUrlLink?: boolean;
     maxNumberOfChannelsToTest?: number;
     vodMaxPagePerGenre?: number;
+    vodIncludeRating?: boolean;
+    vodOrdering?: VodOrdering;
 }
+
+export type VodOrdering = 'none' | 'rating' | 'alphabetic';
 
 export type GenerationKind = 'iptv' | 'vod' | 'series';
 export const generationKindNames = ['iptv', 'vod', 'series'] as string[];
@@ -44,6 +48,7 @@ export interface Video extends Program {
     screenshot_uri: string;
     category_id: string;
     time: number;
+    rating_imdb: string;
 }
 
 export interface Serie extends Program {
@@ -66,6 +71,7 @@ export interface M3ULine {
     url?: string;
     testResult?: boolean;
     episode?: number;
+    data?: any;
 }
 
 export class M3U {

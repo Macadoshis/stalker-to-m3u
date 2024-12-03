@@ -19,11 +19,12 @@ const fs = require('fs');
 
 const yargsParser = require('yargs-parser');
 
-const randomDeviceId: string = Array.from({length: 32}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+export const randomDeviceId: string = Array.from({length: 32}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+
+export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
 
 export function getConfig(): Readonly<Config> {
-    const configData: string = fs.readFileSync('./config.json',
-        {encoding: 'utf8', flag: 'r'});
+    const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);
     let config: Config = JSON.parse(configData) as Config;
     if (!config.deviceId) {
         // console.log(`Using generated devideId: ${randomDeviceId}`);
@@ -33,8 +34,6 @@ export function getConfig(): Readonly<Config> {
     // Override with command line additional arguments
     const args = yargsParser(process.argv.slice(3));
     config = {...config, ...args};
-
-    // console.info(config);
 
     return config;
 }
@@ -49,24 +48,39 @@ export function getGenerationKind(): GenerationKind {
 
 const config: Config = getConfig();
 
-export function fetchData<T>(path: string, ignoreError: boolean = false): Promise<T> {
+export function fetchData<T>(path: string, ignoreError: boolean = false, cfg: Config = config): Promise<T> {
+
     return new Promise<T>((resp, err) => {
-        //console.debug((!!config.contextPath ? '/' + config.contextPath : '') + path);
+
+        const completePath = (!!cfg.contextPath ? '/' + cfg.contextPath : '') + path;
+
+        const onError: (e: any) => void
+            = (e) => {
+            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`, e);
+            if (ignoreError) {
+                resp(<T>{});
+            } else {
+                err(e);
+            }
+        };
+
+        // console.debug((!!config.contextPath ? '/' + config.contextPath : '') + path);
         try {
-            var req = http.get({
-                hostname: config.hostname,
-                port: config.port,
-                path: (!!config.contextPath ? '/' + config.contextPath : '') + path,
+            const req = http.get({
+                hostname: cfg.hostname,
+                port: cfg.port,
+                path: completePath,
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'User-Agent': `stalker-to-m3u/${version}`,
-                    'Authorization': `Bearer ${config.deviceId}`,
-                    'Cookie': `mac=${config.mac}; stb_lang=en; timezone=Europe/Kiev`
+                    'Authorization': `Bearer ${cfg.deviceId}`,
+                    'Cookie': `mac=${cfg.mac}; stb_lang=en; timezone=Europe/Kiev`
                 }
             }, (res: any) => {
+
                 if (res.statusCode !== 200) {
-                    console.error(`Did not get an OK from the server (${path}). Code: ${res.statusCode}`);
+                    console.error(`Did not get an OK from the server (http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]). Code: ${res.statusCode}`);
                     res.resume();
                     err();
                 }
@@ -78,38 +92,44 @@ export function fetchData<T>(path: string, ignoreError: boolean = false): Promis
                 });
 
                 res.on('close', () => {
-                    //console.debug(`Retrieved data (${data.length} bytes)`);
+                    // console.debug(`Retrieved data (${data.length} bytes)`);
                     try {
                         resp(JSON.parse(!!data ? data : '{}'));
                     } catch (e) {
-                        console.error(e);
-                        console.debug(data);
+                        //console.error(e);
+                        //console.debug(data);
                         err(e);
                     }
+                });
+
+                res.on('error', (e: NodeJS.ErrnoException) => {
+                    console.error(`Response stream error: ${e?.message}`);
+                    onError(e);
                 });
 
                 res.on('end', () => {
                     //console.log('No more data in response.');
                 });
-            }, (err: any) => {
-                if (!!ignoreError) {
-                    console.error(err);
-                    resp(<T>{});
+            }, (e: any) => {
+                onError(e);
+            });
+
+            // Catch errors on the request
+            req.on('error', (e: NodeJS.ErrnoException) => {
+                if (e.code === 'ECONNRESET') {
+                    console.error('Connection was reset by the remote host.');
                 } else {
-                    err(err);
+                    console.error(`Request error: ${e.message}`);
                 }
+
+                onError(e);
             });
 
             req.end();
 
         } catch (e) {
-            if (!!ignoreError) {
-                resp(<T>{});
-            } else {
-                throw e;
-            }
+            onError(e);
         }
-
     });
 }
 
