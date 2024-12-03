@@ -1,4 +1,4 @@
-import {fetchData, fetchSeries, getConfig, getGenerationKind, splitLines} from "./common.js";
+import {fetchData, fetchSeries, getConfig, getGenerationKind, READ_OPTIONS, splitLines} from "./common.js";
 import {
     ArrayData,
     Channel,
@@ -10,7 +10,8 @@ import {
     M3ULine,
     Programs,
     Serie,
-    Video
+    Video,
+    VodOrdering
 } from "./types.js";
 
 import {iswitch} from 'iswitch';
@@ -19,6 +20,7 @@ type Tvg = Readonly<Record<string, string[]>>;
 
 const http = require('follow-redirects').http;
 const fs = require('fs');
+const chalk = require('chalk');
 
 const GROUP_FILE: string = './groups.txt';
 
@@ -30,7 +32,7 @@ if (!fs.existsSync(GROUP_FILE)) {
 const config: Config = getConfig();
 
 const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
-    {encoding: 'utf8', flag: 'r'})) as Tvg;
+    READ_OPTIONS)) as Tvg;
 
 function removeAccent(str: string): string {
     return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
@@ -64,12 +66,21 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
 }
 
 function videoToM3u(video: Video, group: string): M3ULine {
-    const lines: M3ULine = <M3ULine>{};
+    const ratingUnknown: string = 'N/A';
 
+    const lines: M3ULine = <M3ULine>{};
     lines.title = `VOD - ${group}`;
     lines.name = video.name;
-    lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="${lines.title}",${lines.name}`;
+    const rating: string = (config.vodIncludeRating !== undefined ? config.vodIncludeRating : true)
+    && video.rating_imdb
+    && video.rating_imdb !== ratingUnknown
+        ? `(${video.rating_imdb}) ` : '';
+    lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="${lines.title}",${rating}${lines.name}`;
     lines.command = decodeURI(video.cmd);
+    if (video.rating_imdb && video.rating_imdb !== ratingUnknown) {
+        lines.data = isFinite(parseFloat(video.rating_imdb)) ? parseFloat(video.rating_imdb) : undefined;
+    }
+
 
     return lines;
 }
@@ -92,8 +103,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
 }
 
 // Load groups
-const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE,
-    {encoding: 'utf8', flag: 'r'}));
+const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE, READ_OPTIONS));
 
 const generationKind: GenerationKind = getGenerationKind();
 
@@ -126,9 +136,11 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     });
             } else if (generationKind === "vod") {
 
-                groups.map(group => {
-                    return genres.find(r => r.title === group)!;
-                }).reduce((accPrograms, nextGenre, i) => {
+                groups
+                    .filter(group => group && group.trim().length > 0)
+                    .map(group => {
+                        return genres.find(r => r.title === group)!;
+                    }).reduce((accPrograms, nextGenre, i) => {
                     return accPrograms.then(val => {
                         return fetchVodItems(nextGenre, 1, m3u);
                     });
@@ -160,11 +172,33 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
         next.then(() => {
             if (generationKind === 'vod' || generationKind === 'series') {
+
+                // Default sorting is alphabetic
+                let sorting: (a: M3ULine, b: M3ULine) => number
+                    = (a, b) => {
+                    return a.title.localeCompare(b.title)
+                        || a.name.localeCompare(b.name);
+                };
+
+                const vodOrdering: VodOrdering = config.vodOrdering ?? 'alphabetic';
+                if (generationKind === 'vod') {
+                    switch (vodOrdering) {
+                        case "none":
+                            sorting = (a, b) => a.title.localeCompare(b.title);
+                            break;
+                        case "rating":
+                            sorting = (a, b) => {
+                                const getRatingValue: (data: Pick<M3ULine, 'data'>) => number
+                                    = (data) => data !== undefined ? data as number : 0;
+                                return a.title.localeCompare(b.title)
+                                    || getRatingValue(b.data) - getRatingValue(a.data)
+                                    || a.name.localeCompare(b.name);
+                            };
+                    }
+                }
+
                 // Order alphabetically
-                m3u.sort((a: M3ULine, b: M3ULine) => {
-                    const toString = (x: M3ULine) => x.title + ' - ' + x.name;
-                    return toString(a).localeCompare(toString(b));
-                });
+                m3u.sort(sorting);
             }
 
             if (!config.computeUrlLink) {
@@ -193,7 +227,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                     return new Promise<void>((resp, err) => {
 
                                         // Test stream URL
-                                        var req = http.get(next.url, (resHttp: any) => {
+                                        const req = http.get(next.url, (resHttp: any) => {
 
                                             if (resHttp.statusCode !== 200) {
                                                 console.error(`Did not resolve stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}`);
@@ -217,7 +251,8 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         }, Promise.resolve())
                             .then(() => {
                                 const nbTestedOk: number = testM3u.filter(r => !!r.testResult).length;
-                                console.info(`${nbTestedOk}/${testM3u.length} streams were tested successfully`);
+                                const color: string = nbTestedOk > 0 ? 'green' : 'red';
+                                console.info(chalk[color](`${nbTestedOk}/${testM3u.length} streams were tested successfully`));
                                 // if at least 1 was responding, it's ok to continue with this portal
                                 r(nbTestedOk > 0);
                             });
@@ -235,7 +270,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                             });
                         }, Promise.resolve()));
                     } else {
-                        console.error("Aborting M3U generation");
+                        console.error(chalk.rgb(255, 165, 0)("Aborting M3U generation"));
                         process.exit(1);
                     }
                 });
@@ -355,6 +390,23 @@ function printProgress(idx: number, total: number): void {
     if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);
-        process.stdout.write(`...progress: ${Math.ceil(idx * 100 / total)}%`);
+        const percentage = Math.ceil(idx * 100 / total);
+        const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
+        process.stdout.write(
+            chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...progress: ${percentage}%`));
     }
+}
+
+function getRGBFromPercentage(value: number): [number, number, number] {
+    // Ensure the input is within bounds
+    const percentage = Math.max(0, Math.min(100, value));
+
+    // Calculate red and green components based on the percentage
+    const red = Math.round((100 - percentage) * 255 / 100); // Decreases as percentage increases
+    const green = Math.round(percentage * 255 / 100);       // Increases as percentage increases
+
+    // Blue is always 0 in this gradient
+    const blue = 0;
+
+    return [red, green, blue];
 }
