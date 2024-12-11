@@ -2,6 +2,33 @@
 
 This script is used to generate M3U format files from Stalker portal streams.
 
+# Disclaimers
+
+## Purpose
+
+This project is intended solely for educational purposes, to demonstrate techniques for web scraping and parsing
+publicly available data, and conversion from stalker to M3U protocols.
+
+It is not intended to be used for accessing or distributing copyrighted materials without authorization.
+
+## Usage
+
+This tool does not endorse or condone illegal activities.
+
+The project author is not responsible for how this software is used by others.
+
+Users of this software must comply with all applicable laws, including copyright laws, in their jurisdiction.
+
+## Responsibility
+
+The author of this project assumes no responsibility for any unauthorized use of this tool.
+
+Users are solely responsible for determining the legality of their actions.
+
+## Contributions guidelines
+
+Contributions that promote or enable the unauthorized access to copyrighted materials will not be accepted.
+
 # Supported features
 
 ## Media
@@ -36,6 +63,8 @@ The main entrypoint to run the script is from file :
 
 Stalker portal provider info needs to be set into [config.json](./config.json) file.
 
+It is the responsibility of the user to use legal stalker portal sources.
+
 ## Commands
 
 ### Prompt 1
@@ -69,14 +98,14 @@ SERIES are TV shows from stalker portal.
 ## Options (`config.json`)
 
 Considering following stalker provider :
-`http://my.dns.com:8080/stalker_portal/c/` with MAC `00:1A:79:12:34:56`
+`http://my.dns.com:8080/stalker_portal/c/` with MAC `00:1F:BD:12:34:56`
 
 | Property                    | Description                                                                                                                                                                                                                                                                                         | Optional | Default                                       |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------|
 | `hostname`                  | DNS as in `my.dns.com`                                                                                                                                                                                                                                                                              |          |                                               |
 | `port`                      | Port as in `8080` (use `80` if there is no port in the URL)                                                                                                                                                                                                                                         |          |                                               |
 | `contextPath`               | Context path as in `stalker_portal`. Set to `""` or remove property from `config.json` if your portal has no context path (ex. `http://my.dns.com:8080/c/`).                                                                                                                                        | [X]      | `""` (_none_)                                 |
-| `mac`                       | Full mac address as in `00:1A:79:12:34:56`                                                                                                                                                                                                                                                          |          |                                               |
+| `mac`                       | Full mac address as in `00:1F:BD:12:34:56`                                                                                                                                                                                                                                                          |          |                                               |
 | `deviceId`                  | Device ID                                                                                                                                                                                                                                                                                           | [X]      | Random auto-generated ID of 32 hex characters |
 | `tvgIdPreFill`              | Try to assign a EPG tvid from existing mapping in `tvg.json`<br/>(feel free to add your own depending on your EPG provider)                                                                                                                                                                         | [X]      | `false`                                       |
 | `computeUrlLink`            | Resolve each channel URL (otherwise set it to STB provider default which is not resolvable).<br/>Set it to `false` for M3U generation to only list channels (for EPG purpose for instance).<br/>Set it to `true` otherwise (most of the use cases).                                                 | [X]      | `false`                                       |
@@ -90,4 +119,48 @@ Considering following stalker provider :
 Options can also be passed to the script to override a value set from `config.json`, by adding `--<property>=<value>`
 for each desired property.
 
-Example : `$> ./stalker-to-m3u --mac="00:1A:79:12:98:76" --vodMaxPagePerGenre=15`
+Example : `$> ./stalker-to-m3u --mac="00:1F:BD:12:98:76" --vodMaxPagePerGenre=15`
+
+## Stalker providers analyzer
+
+A tool acting as a web scraper can crawl content to look for all http stalker portals and corresponding MAC addresses.
+
+### Prerequisite
+
+Create and fill the file [tools/sources.txt](./tools/sources.txt) with external sources.
+
+Supported formats are web pages (`http://` or `https://`) or local files (`file:///`) with textual content (useful for
+non-public or restricted web pages).
+
+### Script
+
+Run the following script :
+
+- [tools/iptv-analyzer.bat](./tools/iptv-analyzer.bat) (_Windows_)
+- [tools/iptv-analyzer](./tools/iptv-analyzer) (_Linux / MacOS_)
+
+### Principles
+
+The script looks for all **http** and **MAC** providers and tests for each the liveness of the IPTV provider, against
+_N_ random
+groups and _N_ random channels.
+
+The number of groups and channels to fetch against can be configured through config
+file [tools/analyzer-config.json](./tools/analyzer-config.json).
+
+| Property         | Description                                                                                                                                                         | Optional | Default |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
+| `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | [X]      | `false` |
+| `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | [X]      | `1`     |
+| `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | [X]      | `1`     |
+
+A provider is considered live if at least ONE channel stream resolves successfully.
+
+### Outputs
+
+After the execution of the script, the following files are created :
+
+| File                   | Description                                                                                                                                                                                              |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| _tools/succeeded.json_ | A set of all resolving providers with following entries : `hostname`, `port`, `contextPath` and `mac`.<br/>Entries can be put selectively and manually into [config.json](./config.json) for processing. |
+| _tools/failed.json_    | A set of all **un**resolving providers with following entries : `url` and `mac`.                                                                                                                         |

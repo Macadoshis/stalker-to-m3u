@@ -8,7 +8,9 @@
     "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
     "m3u-iptv": "npm run groups iptv && npm run m3u iptv",
     "m3u-vod": "npm run groups vod && npm run m3u vod",
-    "m3u-series": "npm run groups series && npm run m3u series"
+    "m3u-series": "npm run groups series && npm run m3u series",
+    "preiptv-analyzer": "tsc types.ts common.ts",
+    "iptv-analyzer": "ts-node --project ./tsconfig.ts-node.json tools/iptv-anayzer.ts"
   },
   "private": false,
   "devDependencies": {
