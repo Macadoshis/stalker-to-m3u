@@ -13,9 +13,11 @@
   "private": false,
   "devDependencies": {
     "@types/node": "^12.11.1",
-    "chalk": "latest",
+    "axios": "latest",
+    "chalk": "^4.1.2",
     "fs": "latest",
     "follow-redirects": "latest",
+    "http": "latest",
     "iswitch": "latest",
     "rxjs": "^7.8.1",
     "ts-node": "10.1.0",
