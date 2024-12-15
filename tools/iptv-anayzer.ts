@@ -152,7 +152,7 @@ function fetchAllUrls(urls: string[]): void {
                 ).pipe(
                     pluck('js'),
                     mergeMap(genres => genres),
-                    filter(genre => genre.title !== 'All'),
+                    filter(genre => genre.title !== 'All' && genre.title.toLowerCase().indexOf('adult') < 0),
                     toArray(),
                     map(arr => {
                         // Shuffle and take N random genres
@@ -274,6 +274,18 @@ function fetchAllUrls(urls: string[]): void {
             error: err => console.error('Error:', err),
             complete: () => {
                 console.debug(chalk.bold('[COMPLETE] All entries processed.'));
+
+                // Order results
+                succeeded.sort((a, b) => {
+                    return a.hostname.localeCompare(b.hostname)
+                        || (a.contextPath ?? '').localeCompare((b.contextPath ?? ''))
+                        || a.port - b.port
+                        || (a.mac ?? '').localeCompare((b.mac ?? ''))
+                });
+                failed.sort((a, b) => {
+                    return a.url.localeCompare(b.url)
+                        || a.mac.localeCompare(b.mac);
+                });
 
                 // Output files
                 fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
