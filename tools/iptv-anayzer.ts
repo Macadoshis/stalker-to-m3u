@@ -125,9 +125,8 @@ function fetchAllUrls(urls: string[]): void {
                     return items;
                 }
             ),
+            tap(urlAndMac => console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))),
             mergeMap(urlAndMac => {
-                console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`));
-
                 if (config.cache && failed.some(u => {
                     return urlAndMac.url === u.url
                         && urlAndMac.mac === u.mac;
