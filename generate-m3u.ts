@@ -230,11 +230,11 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                         const req = http.get(next.url, (resHttp: any) => {
 
                                             if (resHttp.statusCode !== 200) {
-                                                console.error(`Did not resolve stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}`);
+                                                console.error(`Did not resolve stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}.`);
                                                 resHttp.resume();
                                                 next.testResult = false;
                                             } else {
-                                                //console.debug(`Resolved successfully stream ${next.url} of channel ${next.program.name}.`);
+                                                // console.debug(`Resolved successfully stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}.`);
                                                 next.testResult = true;
                                             }
 
