@@ -218,7 +218,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         shuffleArray(testM3u);
                         testM3u = testM3u.slice(0, Math.min(maxNumberOfChannelsToTest, m3u.length));
 
-                        console.info(`Testing ${maxNumberOfChannelsToTest} channels randomly... : ${testM3u.map(m => m.title + " - " + m.name).join(', ')}`);
+                        console.info(`Testing ${maxNumberOfChannelsToTest} channels randomly... : ${testM3u.map(m => '"' + m.title + " - " + m.name + '"').join(', ')}`);
 
                         testM3u.reduce((acc, next, idx) => {
 
@@ -395,7 +395,7 @@ function printProgress(idx: number, total: number): void {
         const percentage = Math.ceil(idx * 100 / total);
         const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
         process.stdout.write(
-            chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...progress: ${percentage}%`));
+            chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...generating (${percentage}%)`));
     }
 }
 
