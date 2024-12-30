@@ -156,9 +156,11 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     });
 
                 fetchSeries(genres).then(genreSeries => {
-                    groups.map(group => {
-                        return genreSeries.find(r => r.toString() === group)!;
-                    }).reduce((accPrograms, nextGenre, i) => {
+                    groups
+                        .filter(group => group && group.trim().length > 0)
+                        .map(group => {
+                            return genreSeries.find(r => r.toString() === group)!;
+                        }).reduce((accPrograms, nextGenre, i) => {
                         return accPrograms.then(val => {
                             return fetchSeasonItems(nextGenre.serie, 1, m3u);
                         });
