@@ -18,6 +18,9 @@ import {iswitch} from 'iswitch';
 
 type Tvg = Readonly<Record<string, string[]>>;
 
+// Start time
+const startTime = process.hrtime();
+
 const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
@@ -58,8 +61,11 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
     const tvgId: string = !!config.tvgIdPreFill ? getTvgId(channel) : '';
 
     lines.title = `TV - ${group}`;
-    lines.name = channel.name;
-    lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${channel.name}" tvg-logo="${decodeURI(channel.logo)}" group-title="${lines.title}",${lines.name}`;
+    lines.name = channel.name
+        // Special characters such as "-" and "," mess with the rendering of names
+        .replace(",", "")
+        .replace(" - ", "-");
+    lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${lines.name}" tvg-logo="${decodeURI(channel.logo)}" group-title="${lines.title}",${lines.name}`;
     lines.command = decodeURI(channel.cmd);
 
     return lines;
@@ -70,12 +76,15 @@ function videoToM3u(video: Video, group: string): M3ULine {
 
     const lines: M3ULine = <M3ULine>{};
     lines.title = `VOD - ${group}`;
-    lines.name = video.name;
+    lines.name = video.name
+        // Special characters such as "-" and "," mess with the rendering of names
+        .replace(",", "")
+        .replace(" - ", "-");
     const rating: string = (config.vodIncludeRating !== undefined ? config.vodIncludeRating : true)
     && video.rating_imdb
     && video.rating_imdb !== ratingUnknown
         ? `(${video.rating_imdb}) ` : '';
-    lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${video.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="${lines.title}",${rating}${lines.name}`;
+    lines.header = `#EXTINF:${video.time * 60} tvg-id="" tvg-name="${lines.name}" tvg-logo="${decodeURI(video.screenshot_uri)}" group-title="${lines.title}",${rating}${lines.name}`;
     lines.command = decodeURI(video.cmd);
     if (video.rating_imdb && video.rating_imdb !== ratingUnknown) {
         lines.data = isFinite(parseFloat(video.rating_imdb)) ? parseFloat(video.rating_imdb) : undefined;
@@ -91,7 +100,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
         const lines: M3ULine = <M3ULine>{};
 
         lines.title = `SERIE - ${serie.name}`;
-        lines.name = `${season.name} - E${String(episode).padStart(2, '0')}`;
+        lines.name = `${season.name} E${String(episode).padStart(2, '0')}`;
         lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${season.name} - E${String(episode).padStart(2, '0')}" tvg-logo="${decodeURI(season.screenshot_uri)}" group-title="${lines.title}",${lines.name}`;
         lines.command = decodeURI(season.cmd);
         lines.episode = episode;
@@ -287,6 +296,16 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(`Creating file ${filename}`);
             fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
+        }).finally(() => {
+            const endTime = process.hrtime(startTime);
+
+            // Calculate seconds and nanoseconds
+            const durationInSeconds = endTime[0];
+
+            // Pretty print the duration in a human-readable format
+            const durationInMilliseconds = (durationInSeconds * 1000);
+            console.log(`Execution time: ${durationInSeconds} seconds`);
+
         });
 
     });
