@@ -63,8 +63,8 @@ function channelToM3u(channel: Channel, group: string): M3ULine {
     lines.title = `TV - ${group}`;
     lines.name = channel.name
         // Special characters such as "-" and "," mess with the rendering of names
-        .replace(",", "")
-        .replace(" - ", "-");
+        .replaceAll(",", "")
+        .replaceAll(" - ", "-");
     lines.header = `#EXTINF:-1 tvg-id="${tvgId}" tvg-name="${lines.name}" tvg-logo="${decodeURI(channel.logo)}" group-title="${lines.title}",${lines.name}`;
     lines.command = decodeURI(channel.cmd);
 
@@ -78,8 +78,8 @@ function videoToM3u(video: Video, group: string): M3ULine {
     lines.title = `VOD - ${group}`;
     lines.name = video.name
         // Special characters such as "-" and "," mess with the rendering of names
-        .replace(",", "")
-        .replace(" - ", "-");
+        .replaceAll(",", "")
+        .replaceAll(" - ", "-");
     const rating: string = (config.vodIncludeRating !== undefined ? config.vodIncludeRating : true)
     && video.rating_imdb
     && video.rating_imdb !== ratingUnknown
