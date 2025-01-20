@@ -96,7 +96,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, cfg: Co
                     try {
                         resp(JSON.parse(!!data ? data : '{}'));
                     } catch (e) {
-                        //console.error(e);
+                        console.error(`Wrong JSON data received: '${data}'`);
                         //console.debug(data);
                         err(e);
                     }
