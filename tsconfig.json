@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -20,5 +20,9 @@
       "ES2021",
       "DOM"
     ]
-  }
+  },
+  "include": [
+    "types.ts",
+    "common.ts"
+  ]
 }

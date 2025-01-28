@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 *.js
+*.js.map
 *.m3u
 groups.txt
 tools/succeeded.json

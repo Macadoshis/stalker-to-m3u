@@ -2,9 +2,13 @@ export interface Config {
     hostname: string;
     contextPath?: string;
     port: number;
-    deviceId?: string;
     mac: string;
+    deviceId1?: string;
+    deviceId2?: string;
+    serialNumber?: string;
     tvgIdPreFill?: boolean;
+    tokenCacheDuration?: number;
+    delayBetweenUrlGeneration?: number;
     computeUrlLink?: boolean;
     maxNumberOfChannelsToTest?: number;
     vodMaxPagePerGenre?: number;
