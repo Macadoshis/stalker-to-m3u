@@ -28,4 +28,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
         }
     }, err => {
         process.exit(1);
+    })
+    .then(() => {
+        console.info(`File groups.txt successfully created`)
     });
