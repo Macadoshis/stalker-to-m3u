@@ -10,6 +10,8 @@ import {
     Serie
 } from "./types.js";
 
+import Ajv from "ajv";
+
 import {firstValueFrom, forkJoin, from, map, Observable, of, switchMap, tap} from 'rxjs';
 
 const version: string = require('./package.json').version;
@@ -26,7 +28,24 @@ export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
 
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);
+
     let config: Config = JSON.parse(configData) as Config;
+
+    // Validate JSON file
+    const schema: any = require('./config.schema.json');
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+    if (!validate(config)) {
+        console.error(chalk.red('\"config.json\" file is not valid. Please correct following errors:\r\n' + chalk.bold(JSON.stringify(validate.errors, null, 2))));
+        process.exit(1);
+    }
+
+    // Fill in default values if unset
+
+    if (config.computeUrlLink === undefined) {
+        config.computeUrlLink = true;
+    }
+
     if (!config.deviceId1) {
         config.deviceId1 = randomDeviceId();
         // console.log(`Using deviceId1: ${config.deviceId1}`);

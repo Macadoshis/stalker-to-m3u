@@ -1,3 +1,4 @@
+import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
 import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
 import {fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
@@ -56,6 +57,16 @@ if (!!config.cache) {
 function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
     const config: AnalyzerConfig = JSON.parse(configData) as AnalyzerConfig;
+
+    // Validate JSON file
+    const schema: any = require('./analyzer-config.schema.json');
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+    if (!validate(config)) {
+        console.error(chalk.red('\"tools/analyzer-config.json\" file is not valid. Please correct following errors:\r\n' + chalk.bold(JSON.stringify(validate.errors, null, 2))));
+        process.exit(1);
+    }
+
     if (config.cache === undefined) {
         config.cache = false;
     }
@@ -185,6 +196,7 @@ function fetchAllUrls(urls: string[]): void {
                                     }));
                             })
                         ).pipe(
+                            defaultIfEmpty([]),
                             map(results => results.flat())
                         )
                     ),
