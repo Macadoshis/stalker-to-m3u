@@ -1,6 +1,7 @@
+import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
 import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
-import {fetchData, randomDeviceId, READ_OPTIONS, splitLines} from '../common';
+import {fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
 import {ArrayData, Channel, Config, Data, Genre, Programs} from "../types";
 
 const axios = require('axios');
@@ -40,6 +41,9 @@ const failed: UrlAndMac[] = [];
 
 const config: AnalyzerConfig = getConfig();
 
+// Start time
+const startTime = process.hrtime();
+
 // Create input and output files
 if (!!config.cache) {
     if (fs.existsSync(SUCCEEDED_FILE)) {
@@ -53,6 +57,16 @@ if (!!config.cache) {
 function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
     const config: AnalyzerConfig = JSON.parse(configData) as AnalyzerConfig;
+
+    // Validate JSON file
+    const schema: any = require('./analyzer-config.schema.json');
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+    if (!validate(config)) {
+        console.error(chalk.red('\"tools/analyzer-config.json\" file is not valid. Please correct following errors:\r\n' + chalk.bold(JSON.stringify(validate.errors, null, 2))));
+        process.exit(1);
+    }
+
     if (config.cache === undefined) {
         config.cache = false;
     }
@@ -145,9 +159,15 @@ function fetchAllUrls(urls: string[]): void {
                     return of();
                 }
 
-                const cfg: Config = {...extractUrlParts(urlAndMac.url), mac: urlAndMac.mac, deviceId: randomDeviceId};
+                const cfg: Config = {
+                    ...extractUrlParts(urlAndMac.url),
+                    mac: urlAndMac.mac,
+                    deviceId1: randomDeviceId(),
+                    deviceId2: randomDeviceId(),
+                    serialNumber: randomSerialNumber()
+                };
                 return from(
-                    fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, cfg)
+                    fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, {}, '', cfg)
                 ).pipe(
                     pluck('js'),
                     mergeMap(genres => genres),
@@ -160,15 +180,13 @@ function fetchAllUrls(urls: string[]): void {
                     // Fetch all channels of each genres
                     concatMap(genres => forkJoin(
                             genres.map(genre => {
-                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, cfg)
+                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
                                     .then(allPrograms => {
 
                                         const channels: Channel[] = [];
 
                                         for (const channel of (allPrograms.js.data ?? [])) {
-                                            const genre: Genre = genres.find(r => r.id === channel.tv_genre_id)!;
-
-                                            if (!!genre && !!genre.title) {
+                                            if (genre.id === channel.tv_genre_id) {
                                                 channels.push(channel);
                                             }
                                         }
@@ -178,6 +196,7 @@ function fetchAllUrls(urls: string[]): void {
                                     }));
                             })
                         ).pipe(
+                            defaultIfEmpty([]),
                             map(results => results.flat())
                         )
                     ),
@@ -185,7 +204,7 @@ function fetchAllUrls(urls: string[]): void {
                             channels.map(channel => {
                                 return from(fetchData<Data<{
                                         cmd: string
-                                    }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, cfg)
+                                    }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, {}, '', cfg)
                                         .then(urlLink => {
                                             let url: string | undefined = '';
                                             if (urlLink?.js?.cmd) {
@@ -272,7 +291,13 @@ function fetchAllUrls(urls: string[]): void {
         .subscribe({
             error: err => console.error('Error:', err),
             complete: () => {
-                console.debug(chalk.bold('[COMPLETE] All entries processed.'));
+
+                const endTime = process.hrtime(startTime);
+
+                // Calculate total execution time
+                const durationInSeconds = endTime[0];
+
+                console.debug(chalk.bold(`[COMPLETE] All entries processed. Execution time: ${durationInSeconds} seconds.`));
 
                 // Order results
                 succeeded.sort((a, b) => {

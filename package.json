@@ -2,19 +2,20 @@
   "name": "stalker-to-m3u",
   "version": "1.1.0",
   "scripts": {
-    "pregroups": "tsc types.ts common.ts",
+    "pregroups": "tsc --sourceMap --strict types.ts common.ts",
     "groups": "ts-node --project ./tsconfig.ts-node.json generate-groups.ts",
     "prem3u": "npm run pregroups",
     "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
     "m3u-iptv": "npm run groups iptv && npm run m3u iptv",
     "m3u-vod": "npm run groups vod && npm run m3u vod",
     "m3u-series": "npm run groups series && npm run m3u series",
-    "preiptv-analyzer": "tsc types.ts common.ts",
+    "preiptv-analyzer": "npm run pregroups",
     "iptv-analyzer": "ts-node --project ./tsconfig.ts-node.json tools/iptv-anayzer.ts"
   },
   "private": false,
   "devDependencies": {
     "@types/node": "^12.11.1",
+    "ajv": "latest",
     "axios": "latest",
     "chalk": "^4.1.2",
     "fs": "latest",

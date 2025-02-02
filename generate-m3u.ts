@@ -296,18 +296,14 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(`Creating file ${filename}`);
             fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
-        }).finally(() => {
+        }).then(() => {
             const endTime = process.hrtime(startTime);
 
-            // Calculate seconds and nanoseconds
+            // Calculate total execution time
             const durationInSeconds = endTime[0];
 
-            // Pretty print the duration in a human-readable format
-            const durationInMilliseconds = (durationInSeconds * 1000);
             console.log(`Execution time: ${durationInSeconds} seconds`);
-
         });
-
     });
 
 function shuffleArray<T>(array: T[]): void {
@@ -330,7 +326,7 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
         type = '';
     }
 
-    return new Promise<void>((res, err) => {
+    return new Promise<void>(function (res, err) {
 
         fetchData<Data<{
             cmd: string
@@ -348,7 +344,11 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
                 m3uLine.url = undefined;
                 res();
             });
-    });
+    }).then(x => new Promise<void>((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, config.delayBetweenUrlGeneration ?? 0);
+    }));
 }
 
 function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<boolean> {

@@ -21,7 +21,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
                     .join('\r\n'));
             });
         } else {
-            fs.writeFileSync("groups.txt", r.js
+            fs.writeFileSync("groups.txt", (r.js ?? [])
                 .map(t => t.title)
                 .filter(t => t !== 'All')
                 .join('\r\n'));

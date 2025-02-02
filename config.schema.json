@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Schema for config.json file. Example: 'http://my.dns.com:8080/stalker_portal/c/' with MAC '00:1F:BD:12:34:56'",
+  "properties": {
+    "hostname": {
+      "type": "string",
+      "description": "DNS as in 'my.dns.com'"
+    },
+    "contextPath": {
+      "type": "string",
+      "description": "Context path as in 'stalker_portal'. Set to '\"\"' or remove property from 'config.json' if your portal has no context path (ex. 'http://my.dns.com:8080/c/').",
+      "default": "\"\""
+    },
+    "port": {
+      "type": "number",
+      "description": "Port as in '8080' (use '80' if there is no port in the URL)."
+    },
+    "mac": {
+      "type": "string",
+      "description": "Full mac address as in '00:1F:BD:12:34:56'."
+    },
+    "deviceId1": {
+      "type": "string",
+      "description": "Device ID 1.",
+      "default": "Random auto-generated ID of 64 hex characters"
+    },
+    "deviceId2": {
+      "type": "string",
+      "description": "Device ID 2.",
+      "default": "Device ID 1."
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "Serial number.",
+      "default": "Random auto-generated ID of 13 hex characters"
+    },
+    "tvgIdPreFill": {
+      "type": "boolean",
+      "description": "Try to assign a EPG tvid from existing mapping in 'tvg.json'.",
+      "default": "false"
+    },
+    "tokenCacheDuration": {
+      "type": "number",
+      "description": "Max duration in seconds to cache an authorization token before requesting another handshake of authentication.",
+      "default": "300"
+    },
+    "delayBetweenUrlGeneration": {
+      "type": "number",
+      "description": "Delay in milliseconds to wait between URL generation requests (throttle).",
+      "default": "0"
+    },
+    "computeUrlLink": {
+      "type": "boolean",
+      "description": "Resolve each channel URL (otherwise set it to STB provider default which is not resolvable).",
+      "default": "true"
+    },
+    "maxNumberOfChannelsToTest": {
+      "type": "number",
+      "description": "Only if 'computeUrlLink' is enabled. Max number of channels to be picked up randomly among selected groups, and to test if streams are resolvable. If none responds successfully, the generation is aborted. Set 'maxNumberOfChannelsToTest' to '0' to disable this test and always generate.",
+      "default": "5"
+    },
+    "vodMaxPagePerGenre": {
+      "type": "number",
+      "description": "Max number of pages per category to fetch the videos from. The more pages per genre are set, the longer the generation will take.",
+      "default": "2"
+    },
+    "vodIncludeRating": {
+      "type": "boolean",
+      "description": "Include IMDB rating in the title of each VOD (if provided).",
+      "default": "true"
+    },
+    "vodOrdering": {
+      "type": "string",
+      "enum": [
+        "none",
+        "rating",
+        "alphabetic"
+      ],
+      "description": "Indicate the sorting of each VOD item.",
+      "default": "alphabetic"
+    }
+  },
+  "required": [
+    "hostname",
+    "port",
+    "mac"
+  ],
+  "additionalProperties": false
+}
