@@ -2,6 +2,29 @@
 
 This script is used to generate M3U format files from Stalker portal streams.
 
+## Advantages
+
+- Way more desktop and mobile software (mostly freewares), as well as some browsers, support the **M3U** format compared
+  to the **Stalker** (ministra) format.
+- It is easier to manage favorites and **download streams locally** for offline viewing (especially VOD and Series), and
+  stream playback is smoother than some stalker reader which does not handle lost signal correctly forcing you to replay
+  again a stream from the beginning.
+- This generation tool allows adding features not natively supported by Stalker players, such as EPG association and
+  sorting VOD content based on multiple criteria.
+- Additionally, loading an M3U file is significantly faster than a Stalker provider, which systematically loads the
+  entire catalog. This tool enables you to select only the genres and categories that interest you, allowing you to
+  exclude channels from other countries or adult content categories.
+
+## Disadvantages
+
+- The M3U format generation is static and reflects the resources available from the Stalker provider at the time of
+  generation. There is no synchronization with provider updates (new channels, VOD additions, etc.). There is also no
+  clear way to determine if a resource has expired or is no longer compatible, except that the M3U streams will stop
+  playing.
+- Furthermore, the streams generated for the M3U rely on a token obtained at the time of generation. Generally, this
+  token has an infinite lifespan, but some providers may enforce a limited duration, causing the M3U to expire and
+  requiring a new generation.
+
 # Disclaimers
 
 ## Purpose
@@ -86,6 +109,10 @@ Only delete undesired lines. Do not manually edit or add entries in the file `gr
 #### 1 - iptv
 
 IPTV are TV channels from stalker portal.
+
+Basic EPG mapping based on keys from https://m3u4u.com/
+(currently supported channels are: French-FRANCE, French-CANADA, English-CANADA, Swiss, Morocco).
+Mapping can be updated by editing [tvg.json](./tvg.json).
 
 #### 2 - vod
 

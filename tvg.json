@@ -1,4060 +1,4102 @@
 {
-    "": [
-        "A la carte",
-        "Amazon prime",
-        "DAZN"
-    ],
-    "13emeRue.fr": [
-        "13eme Rue",
-        "13 eme Rue"
-    ],
-    "2MMonde.fr": [
-        "2M"
-    ],
-    "6ter.fr": [
-        "6ter"
-    ],
-    "8MontBlanc.fr": [
-        "MontBlanc"
-    ],
-    "AB1.fr": [
-        "AB 1",
-        "AB1"
-    ],
-    "AB3(French).ch": [
-        "AB 3",
-        "AB3"
-    ],
-    "Action.fr": [
-        "Action"
-    ],
-    "AlAoulaInternational.fr": [
-        "Al Aoula"
-    ],
-    "Animaux.fr": [
-        "Animaux"
-    ],
-    "Aplus.fr": [
-        "Aplus"
-    ],
-    "ARTE.fr": [
-        "ARTE"
-    ],
-    "AssembleeNationale(src01).fr": [
-        "Assemblee Nationale"
-    ],
-    "Automoto.fr": [
-        "Automoto"
-    ],
-    "B4UMovies(English).fr": [
-        "B4U Movies"
-    ],
-    "BabyTV.fr": [
-        "Baby TV",
-        "BabyTV"
-    ],
-    "BBlackClassik(src01).fr": [
-        "BBlack"
-    ],
-    "BeINSPORTS1.fr": [
-        "BeIN SPORTS 1",
-        "BeINSPORTS 1",
-        "BeIN SPORT 1"
-    ],
-    "BeINSPORTS2.fr": [
-        "BeIN SPORTS 2",
-        "BeINSPORTS 2",
-        "BeIN SPORT 2"
-    ],
-    "BeINSports3.fr": [
-        "BeIN Sports 3",
-        "BeINSports 3",
-        "BeIN Sport 3"
-    ],
-    "BeINSportsMAX10.fr": [
-        "BeIN Sports MAX 10",
-        "BeINSports MAX 10"
-    ],
-    "BeINSPORTSMax4.fr": [
-        "BeIN SPORTS Max 4",
-        "BeINSPORTS Max 4"
-    ],
-    "BeINSPORTSMax5.fr": [
-        "BeIN SPORTS Max 5",
-        "BeINSPORTS Max 5"
-    ],
-    "BeINSPORTSMax6.fr": [
-        "BeIN SPORTS Max 6",
-        "BeINSPORTS Max 6"
-    ],
-    "BeINSPORTSMax7.fr": [
-        "BeIN SPORTS Max 7",
-        "BeINSPORTS Max 7"
-    ],
-    "BeINSPORTSMax8.fr": [
-        "BeIN SPORTS Max 8",
-        "BeINSPORTS Max 8"
-    ],
-    "BeINSPORTSMax9.fr": [
-        "BeIN SPORTS Max 9",
-        "BeINSPORTS Max 9"
-    ],
-    "BET.fr": [
-        "BET"
-    ],
-    "BFMAlpesduSud(src01).fr": [
-        "BFM Alpes du Sud"
-    ],
-    "BFMALSACE(src01).fr": [
-        "BFM ALSACE"
-    ],
-    "BFMBusiness(src01).fr": [
-        "BFM Business"
-    ],
-    "BFMBusiness.fr": [
-        "BFM Business"
-    ],
-    "BFMLyon.fr": [
-        "BFM Lyon"
-    ],
-    "BFMParis.fr": [
-        "BFM Paris"
-    ],
-    "BFMTV.fr": [
-        "BFM TV"
-    ],
-    "BipTV(src01).fr": [
-        "Bip TV"
-    ],
-    "Boomerang.fr": [
-        "Boomerang"
-    ],
-    "Boomerangplus1.fr": [
-        "Boomerang plus1",
-        "Boomerang +1",
-        "Boomerang+1"
-    ],
-    "CMusicTV.fr": [
-        "C Music"
-    ],
-    "CStarHitsFrance(src01).fr": [
-        "C Star Hits",
-        "CStar Hits"
-    ],
-    "C8.fr": [
-        "C8"
-    ],
-    "CanalJ.fr": [
-        "Canal J"
-    ],
-    "CanalplusCinema.fr": [
-        "Canalplus Cinema",
-        "Canal+ Cinema"
-    ],
-    "CanalplusDocs.fr": [
-        "Canalplus Docs",
-        "Canal+ Docs"
-    ],
-    "CanalplusFoot.fr": [
-        "Canalplus Foot",
-        "Canal+ Foot"
-    ],
-    "CANALplusGrandEcran.fr": [
-        "CANALplus Grand Ecran",
-        "CANAL+ Grand"
-    ],
-    "CanalplusKids.fr": [
-        "Canalplus Kids",
-        "Canal+ Kids",
-        "Canalplus Family",
-        "Canal+ Family"
-    ],
-    "CanalplusSeries.fr": [
-        "Canalplus Serie",
-        "Canal+ Serie"
-    ],
-    "CanalplusSport.fr": [
-        "Canalplus Sport",
-        "Canal+ Sport",
-        "Canal + Sport"
-    ],
-    "CANALplusFOOT(src01).fr": [
-        "CANALplusFOOT",
-        "CANAL+FOOT",
-        "CANAL+ FOOT",
-        "CANAL + FOOT"
-    ],
-    "CANALplusLIGUE1(src01).fr": [
-        "CANAL+ LIGUE 1"
-    ],
-    "Canalplus.fr": [
-        "Canalplus",
-        "Canal plus",
-        "Canal+",
-        "Canal +"
-    ],
-    "CartoonNetwork.fr": [
-        "Cartoon Network"
-    ],
-    "Cartoonito.fr": [
-        "Cartoonito"
-    ],
-    "ChasseetPeche.fr": [
-        "Chasse et Peche",
-        "Chasse & Peche"
-    ],
-    "Cheddar.fr": [
-        "Cheddar"
-    ],
-    "Cherie25.fr": [
-        "Cherie 25",
-        "Cherie25"
-    ],
-    "CinecinemaClassic(src01).fr": [
-        "Cine cinema Classic",
-        "Cinecinema Classic"
-    ],
-    "CinecinemaClub(src01).fr": [
-        "Cine cinema Club",
-        "Cinecinema Club"
-    ],
-    "CinecinemaEmotion(src01).fr": [
-        "Cine cinema Emotion",
-        "Cinecinema Emotion"
-    ],
-    "CinecinemaFamiz(src01).fr": [
-        "Cine cinema Famiz",
-        "Cinecinema Famiz"
-    ],
-    "CinecinemaFrisson(src01).fr": [
-        "Cine cinema Frisson",
-        "Cinecinema Frisson"
-    ],
-    "CinecinemaPremier(src01).fr": [
-        "Cine cinema Premier",
-        "Cinecinema Premier"
-    ],
-    "CineplusClassic.fr": [
-        "Cineplus Classic",
-        "Cine+ Classic",
-        "Cine + Classic",
-        "CINE Classic"
-    ],
-    "CINEplusFestival.fr": [
-        "Cineplus Club",
-        "Cine+ Club",
-        "Cine + Club",
-        "CINE CLUB"
-    ],
-    "CineplusEmotion.fr": [
-        "Cineplus Emotion",
-        "Cine+ Emotion",
-        "Cine + Emotion"
-    ],
-    "CINEplusFamily.fr": [
-        "Cineplus Famiz",
-        "Cine+ Famiz",
-        "Cine + Famiz",
-        "CINE FAMIZ"
-    ],
-    "CineplusFrisson.fr": [
-        "Cineplus Frisson",
-        "Cine+ Frisson",
-        "Cine + Frisson",
-        "CINE FRISSON"
-    ],
-    "CineplusPremier(src01).fr": [
-        "Cineplus Premier",
-        "Cine+ Premier",
-        "Cine + Premier",
-        "CINE PREMIER"
-    ],
-    "Classica.fr": [
-        "Classica"
-    ],
-    "ClubbingTV.fr": [
-        "Clubbing"
-    ],
-    "CNews.fr": [
-        "CNews",
-        "C News"
-    ],
-    "Comedieplus.fr": [
-        "Comedieplus",
-        "Comedie+",
-        "Comedie +"
-    ],
-    "ComedyCentral.fr": [
-        "Comedy Central",
-        "ComedyCentral"
-    ],
-    "CPAC(src01).fr": [
-        "CPAC"
-    ],
-    "CrimeDistrict.fr": [
-        "Crime District"
-    ],
-    "CRTV.fr": [
-        "CRTV"
-    ],
-    "CStar.fr": [
-        "CStar",
-        "C Star"
-    ],
-    "CStarHits.fr": [
-        "CStar Hits",
-        "C Star Hits"
-    ],
-    "CultureBox.fr": [
-        "CultureBox"
-    ],
-    "DemainTV.fr": [
-        "Demain TV"
-    ],
-    "DiscoveryChannel(src01).fr": [
-        "Discovery Channel"
-    ],
-    "DiscoveryInvestigation(src01).fr": [
-        "Discovery Investigation"
-    ],
-    "Discovery.fr": [
-        "Discovery"
-    ],
-    "DisneyChannelplus1.fr": [
-        "Disney Channel plus1",
-        "Disney Channel +1",
-        "Disney Channel+1"
-    ],
-    "DisneyChannel.fr": [
-        "Disney Channel"
-    ],
-    "DisneyJuniorFrance.fr": [
-        "Disney Junior"
-    ],
-    "DjazzTV.fr": [
-        "Djazz TV"
-    ],
-    "DorcelTV.fr": [
-        "Dorcel TV"
-    ],
-    "DorcelXXX.fr": [
-        "Dorcel XXX"
-    ],
-    "Dreamworks.fr": [
-        "Dreamworks"
-    ],
-    "EEntertainment(src01).fr": [
-        "EEntertainment",
-        "E!",
-        "E! ENTERTAINEMENT"
-    ],
-    "Equidia.fr": [
-        "Equidia"
-    ],
-    "LEquipe.fr": [
-        "Equipe 21",
-        "Equipe21",
-        "LEquipe"
-    ],
-    "ES1(src01).fr": [
-        "ES1"
-    ],
-    "ETB1(src01).fr": [
-        "ETB 1"
-    ],
-    "Eurochannel.fr": [
-        "Eurochannel"
-    ],
-    "euronews.fr": [
-        "euronews"
-    ],
-    "Eurosport1.fr": [
-        "Eurosport 1"
-    ],
-    "Eurosport2.fr": [
-        "Eurosport 2"
-    ],
-    "EUROSPORT3601(src01).fr": [
-        "EUROSPORT 360"
-    ],
-    "France24.fr": [
-        "France 24",
-        "France24"
-    ],
-    "France2.fr": [
-        "France 2",
-        "France2",
-        "FR2",
-        "FR 2"
-    ],
-    "France3.fr": [
-        "France 3",
-        "France3",
-        "FR3",
-        "FR 3"
-    ],
-    "France4.fr": [
-        "France 4",
-        "France4",
-        "FR 4",
-        "FR4"
-    ],
-    "France5.fr": [
-        "France 5",
-        "France5",
-        "FR 5",
-        "FR5"
-    ],
-    "FranceInfo.fr": [
-        "France Info",
-        "FranceInfo"
-    ],
-    "FTV(English).fr": [
-        "FTV",
-        "FashionTV",
-        "Fashion TV"
-    ],
-    "FuelTV(English).fr": [
-        "Fuel TV (English)"
-    ],
-    "GameOne.fr": [
-        "Game One",
-        "GameOne"
-    ],
-    "GameOneplus1.fr": [
-        "Game One plus1",
-        "Game One +1"
-    ],
-    "GeniusTrend(German).fr": [
-        "Genius Trend (German)"
-    ],
-    "GeniusPlusTV(German).fr": [
-        "GeniusPlusTV (German)"
-    ],
-    "GeoNews(English).fr": [
-        "Geo News (English)"
-    ],
-    "GEOTV(English).fr": [
-        "GEO TV",
-        "GEOTV"
-    ],
-    "GolfChannel.fr": [
-        "Golf Channel"
-    ],
-    "Golfplus.fr": [
-        "Golfplus"
-    ],
-    "Gong.fr": [
-        "Gong"
-    ],
-    "GongMax(src01).fr": [
-        "Gong Max"
-    ],
-    "GongMaxTV.fr": [
-        "Gong Max TV"
-    ],
-    "GrandLilleTV(src01).fr": [
-        "Grand Lille TV"
-    ],
-    "Guadeloupe1ere(src01).fr": [
-        "Guadeloupe 1ere"
-    ],
-    "Gulli.fr": [
-        "Gulli"
-    ],
-    "Guyane1ere(src01).fr": [
-        "Guyane 1ere"
-    ],
-    "i24News.fr": [
-        "i24 News"
-    ],
-    "iConcerts(English).fr": [
-        "iConcerts (English)"
-    ],
-    "IDF1(src01).fr": [
-        "IDF1"
-    ],
-    "Infosport.fr": [
-        "Infosport"
-    ],
-    "infosportplus.fr": [
-        "infosportplus",
-        "infosport+"
-    ],
-    "IQRATV(English).fr": [
-        "IQRA TV"
-    ],
-    "ITVNExtra(Polish).fr": [
-        "ITVN Extra (Polish)"
-    ],
-    "JOne.fr": [
-        "JOne",
-        "J-One",
-        "J One"
-    ],
-    "KTO.fr": [
-        "KTO"
-    ],
-    "LaUne.fr": [
-        "La Une"
-    ],
-    "LBCEurope(English).fr": [
-        "LBC Europe (English)"
-    ],
-    "LCI.fr": [
-        "LCI"
-    ],
-    "LCP.fr": [
-        "LCP"
-    ],
-    "LCPPublicSenat.fr": [
-        "Public Senat"
-    ],
-    "LuxeTV.fr": [
-        "Luxe TV"
-    ],
-    "M6.fr": [
-        "M6"
-    ],
-    "M6Music.fr": [
-        "M6 Music"
-    ],
-    "MATV(src01).fr": [
-        "MA TV"
-    ],
-    "Mangas.fr": [
-        "Mangas"
-    ],
-    "ManX.fr": [
-        "ManX"
-    ],
-    "MCM.fr": [
-        "MCM"
-    ],
-    "MCMTop.fr": [
-        "MCM Top"
-    ],
-    "Melody.fr": [
-        "Melody"
-    ],
-    "MensUPTV.fr": [
-        "Mens UP",
-        "MensUP"
-    ],
-    "Mezzo.fr": [
-        "Mezzo"
-    ],
-    "MezzoLive.fr": [
-        "Mezzo Live"
-    ],
-    "MGGTV.fr": [
-        "MGGTV"
-    ],
-    "MTV.fr": [
-        "MTV"
-    ],
-    "MTVHits.fr": [
-        "MTV Hits",
-        "MTVHits"
-    ],
-    "MyZentv.fr": [
-        "MyZentv"
-    ],
-    "NationalGeographicWild.fr": [
-        "National Geographic Wild",
-        "NAT GEO WILD"
-    ],
-    "NationalGeographic.fr": [
-        "National Geographic",
-        "NAT GEO"
-    ],
-    "NauticalChannel.fr": [
-        "Nautical Channel"
-    ],
-    "Nickelodeon4Teen.fr": [
-        "Nickelodeon 4Teen",
-        "Nickelodeon Teen"
-    ],
-    "NickelodeonJunior.fr": [
-        "Nickelodeon Junior",
-        "Nickelodeon JR",
-        "Nick JR"
-    ],
-    "Nickelodeonplus1.fr": [
-        "Nickelodeon plus1",
-        "Nickelodeon +1"
-    ],
-    "Nickelodeon.fr": [
-        "Nickelodeon"
-    ],
-    "NollywoodTV.fr": [
-        "Nollywood"
-    ],
-    "NRJ12.fr": [
-        "NRJ 12",
-        "NRJ12"
-    ],
-    "NRJHits.fr": [
-        "NRJ Hits",
-        "NRJHits"
-    ],
-    "OCSGeants.fr": [
-        "OCS Geant"
-    ],
-    "OCSGeants(src01).fr": [
-        "OCS Geant"
-    ],
-    "OCSCity(French).ch": [
-        "OCS City",
-        "OCS Nova"
-    ],
-    "OCSMax(French).ch": [
-        "OCS Max"
-    ],
-    "OCSPulp.fr": [
-        "OCS Pulp",
-        "OCS Choc"
-    ],
-    "OCS.fr": [
-        "OCS GO"
-    ],
-    "OLTV(src01).fr": [
-        "OL TV",
-        "OLTV"
-    ],
-    "OlympiaTV.fr": [
-        "Olympia TV"
-    ],
-    "ORTB.fr": [
-        "ORTB"
-    ],
-    "ParamountChannel.fr": [
-        "Paramount Channel"
-    ],
-    "ParamountChannelDecale.fr": [
-        "Paramount Channel Decale"
-    ],
-    "ParisPremiere.fr": [
-        "Paris Premiere"
-    ],
-    "Piwiplus.fr": [
-        "Piwiplus",
-        "Piwi+",
-        "Piwi"
-    ],
-    "PlaneteplusAventure.fr": [
-        "Planeteplus Aventure",
-        "Planete+ Aventure",
-        "Planete A&E",
-        "Planeteplus Aventure Experience",
-        "Planete+ A&E",
-        "Planeteplus A&E"
-    ],
-    "PlaneteplusCrime.fr": [
-        "Planeteplus Crime",
-        "Planete+ Crime",
-        "Planeteplus Crime Investigation",
-        "Planete+ CI",
-        "Planete + CI",
-        "Planeteplus CI",
-        "Planete plus CI"
-    ],
-    "PLANETEplus.fr": [
-        "PLANETEplus",
-        "PLANETE plus",
-        "PLANETE+",
-        "PLANETE +"
-    ],
-    "POLARplus(src01).fr": [
-        "POLAR plus",
-        "POLAR+"
-    ],
-    "PublicSenat.fr": [
-        "Public Senat"
-    ],
-    "RFMTV.fr": [
-        "RFM TV"
-    ],
-    "RMCDecouverte.fr": [
-        "RMC Decouverte"
-    ],
-    "RMCMystere(src01).fr": [
-        "RMC Mystere"
-    ],
-    "RMCSport1.fr": [
-        "RMC Sport 1"
-    ],
-    "RMCSport2.fr": [
-        "RMC Sport 2"
-    ],
-    "RMCSport3(French).ch": [
-        "RMC Sport 3"
-    ],
-    "RMCSport4K(src01).fr": [
-        "RMC Sport 4K"
-    ],
-    "RMCSportAccess1.fr": [
-        "RMC Sport Access 1"
-    ],
-    "RMCSportLive10(src01).fr": [
-        "RMC Sport Live 10"
-    ],
-    "RMCSportLive11(src01).fr": [
-        "RMC Sport Live 11"
-    ],
-    "RMCSportLive12(src01).fr": [
-        "RMC Sport Live 12"
-    ],
-    "RMCSportLive13(src01).fr": [
-        "RMC Sport Live 13"
-    ],
-    "RMCSportLive14(src01).fr": [
-        "RMC Sport Live 14"
-    ],
-    "RMCSportLive5(src01).fr": [
-        "RMC Sport Live 5"
-    ],
-    "RMCSportLive6(src01).fr": [
-        "RMC Sport Live 6"
-    ],
-    "RMCSportLive7(src01).fr": [
-        "RMC Sport Live 7"
-    ],
-    "RMCSportLive8(src01).fr": [
-        "RMC Sport Live 8"
-    ],
-    "RMCSportLive9(src01).fr": [
-        "RMC Sport Live 9"
-    ],
-    "RMCSportUHD.fr": [
-        "RMC Sport UHD"
-    ],
-    "RMCStory.fr": [
-        "RMC Story"
-    ],
-    "RMCTalkSport(src01).fr": [
-        "RMC Talk Sport",
-        "RMC NEWS SPORT"
-    ],
-    "RTI1.fr": [
-        "RTI 1"
-    ],
-    "RTL9.fr": [
-        "RTL 9",
-        "RTL9"
-    ],
-    "Saisons.fr": [
-        "Saisons"
-    ],
-    "ScienceetVieTV.fr": [
-        "Science et Vie",
-        "Science & Vie",
-        "SCIENCES & VIE"
-    ],
-    "Seasons(src01).fr": [
-        "Seasons",
-        "Season"
-    ],
-    "SerieClub.fr": [
-        "Serie Club",
-        "SerieClub"
-    ],
-    "SyFyUniversal.fr": [
-        "SyFy"
-    ],
-    "TCM.fr": [
-        "TCM"
-    ],
-    "TeleMelody.fr": [
-        "Tele Melody"
-    ],
-    "TELEFOOT.fr": [
-        "TELEFOOT"
-    ],
-    "TeleTOON(src01).fr": [
-        "TeleTOON"
-    ],
-    "TeleTOONplus.fr": [
-        "TeleTOON plus",
-        "TeleTOON +",
-        "TeleTOON+"
-    ],
-    "TeleToonplus1.fr": [
-        "TeleToon plus1",
-        "TeleToon +1",
-        "TeleToon+1"
-    ],
-    "Teva.fr": [
-        "Teva"
-    ],
-    "TF1plus1.fr": [
-        "TF1 plus1",
-        "TF 1 plus 1",
-        "TF1+1",
-        "TF1 +1"
-    ],
-    "TF1SeriesFilms.fr": [
-        "TF1 Series"
-    ],
-    "TF1.fr": [
-        "TF1",
-        "TF 1"
-    ],
-    "TFX.fr": [
-        "TFX"
-    ],
-    "TheExplorers.fr": [
-        "The Explorers"
-    ],
-    "TheMuseumChannel.fr": [
-        "Museum"
-    ],
-    "Tiji.fr": [
-        "Tiji"
-    ],
-    "TLC.fr": [
-        "TLC"
-    ],
-    "TMC.fr": [
-        "TMC"
-    ],
-    "TMCplus1.fr": [
-        "TMC plus1",
-        "TMC+1",
-        "TMC+ 1"
-    ],
-    "ToggoPlus(German).fr": [
-        "Toggo"
-    ],
-    "Toonami(src01).fr": [
-        "Toonami"
-    ],
-    "TouteLHistoire.fr": [
-        "Toute LHistoire",
-        "Toute L Histoire",
-        "Toute L'Histoire",
-        "LHistoire"
-    ],
-    "Histoire.fr": [
-        "Histoire"
-    ],
-    "TRACEAFRICA.fr": [
-        "TRACE AFRICA"
-    ],
-    "TraceCaribbean.fr": [
-        "Trace Caribbean"
-    ],
-    "TraceGospel(src01).fr": [
-        "Trace Gospel"
-    ],
-    "TraceKitoko(src01).fr": [
-        "Trace Kitoko"
-    ],
-    "TraceLatina.fr": [
-        "Trace Latina"
-    ],
-    "TraceMziki(src01).fr": [
-        "Mziki"
-    ],
-    "TRACESportStars.fr": [
-        "TRACE Sport Stars"
-    ],
-    "TraceTropical(src01).fr": [
-        "Trace Tropical"
-    ],
-    "TraceTV(src01).fr": [
-        "Trace TV"
-    ],
-    "TraceUrban.fr": [
-        "Trace Urban"
-    ],
-    "TravelChannel(English).fr": [
-        "Travel Channel (English)"
-    ],
-    "Trek.fr": [
-        "Trek"
-    ],
-    "TRT1(Turkish).fr": [
-        "TRT 1 (Turkish)"
-    ],
-    "TVBreizh.fr": [
-        "Breizh"
-    ],
-    "TV5MondeEurope.fr": [
-        "TV5"
-    ],
-    "TV8MONTBLANC(src01).fr": [
-        "TV8 MONT BLANC"
-    ],
-    "UshuaiaTV.fr": [
-        "Ushuaia"
-    ],
-    "W9.fr": [
-        "W9"
-    ],
-    "WarnerTV(src01).fr": [
-        "Warner"
-    ],
-    "XXL.fr": [
-        "XXL"
-    ],
-    "RTSDeux(src01).ch": [
-        "RTS Deux",
-        "RTS 2",
-        "RTS2"
-    ],
-    "RTSUn(src01).ch": [
-        "RTS Un",
-        "RTS 1",
-        "RTS1"
-    ],
-    "1Plus1International(English).ca": [
-        "1 Plus 1 International (English)"
-    ],
-    "1041FMOttawaFrench(CKTFFM)(French).ca": [
-        "1041 FM Ottawa French (CKTF FM) (French)"
-    ],
-    "1053KISSFMOttawa(CISSFM)(English).ca": [
-        "1053 KISS FM Ottawa (CISS FM) (English)"
-    ],
-    "1310NewsOttawa(English).ca": [
-        "1310 News Ottawa (English)"
-    ],
-    "24Taas(English).ca": [
-        "24 Taas (English)"
-    ],
-    "2MMaroc(French-English).ca": [
-        "2M Maroc (French, English)"
-    ],
-    "4E(English).ca": [
-        "4E (English)"
-    ],
-    "5Kanal(English).ca": [
-        "5 Kanal (English)"
-    ],
-    "8AlResalah(English).ca": [
-        "8Al Resalah (English)"
-    ],
-    "923JACKFMSmithsFalls(CJETFM)(English).ca": [
-        "923 JACK FM Smiths Falls (CJET FM) (English)"
-    ],
-    "AlaCarte(English).ca": [
-        "A la Carte (English)"
-    ],
-    "AAJTAK(English).ca": [
-        "AAJ TAK (English)"
-    ],
-    "AandE(English).ca": [
-        "AandE (English)"
-    ],
-    "ABCSpark(English).ca": [
-        "ABC Spark (English)"
-    ],
-    "AboriginalPeoplesTelevisionNetwork(East)(English-French).ca": [
-        "Aboriginal Peoples Television Network (East) (English, French)"
-    ],
-    "AboriginalPeoplesTelevisionNetwork(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
-        "Aboriginal Peoples Television Network (English, French, Unknown Language (cr), Inuktitut)"
-    ],
-    "AboriginalPeoplesTelevisionNetwork(North)(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
-        "Aboriginal Peoples Television Network (North) (English, French, Unknown Language (cr), Inuktitut)"
-    ],
-    "AboriginalPeoplesTelevisionNetwork(West)(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
-        "Aboriginal Peoples Television Network (West) (English, French, Unknown Language (cr), Inuktitut)"
-    ],
-    "AbuDhabiTV(English).ca": [
-        "Abu Dhabi TV (English)"
-    ],
-    "AccessibleMediaInc(English).ca": [
-        "Accessible Media Inc (English)"
-    ],
-    "ADDIK(French).ca": [
-        "ADDIK (French)"
-    ],
-    "AddikTV(src01).ca": [
-        "Addik TV"
-    ],
-    "AdultSwim(English).ca": [
-        "Adult Swim (English)"
-    ],
-    "AFRICA24(English-French).ca": [
-        "AFRICA24 (English, French)"
-    ],
-    "AfroglobalNetworkTelevision(English).ca": [
-        "Afroglobal Network Television (English)"
-    ],
-    "AlArabiya(English).ca": [
-        "Al Arabiya (English)"
-    ],
-    "AlJazeeraEnglish(English).ca": [
-        "Al Jazeera English (English)"
-    ],
-    "AlNaharDrama(English).ca": [
-        "Al Nahar Drama (English)"
-    ],
-    "ALLTV(KOREA)(English).ca": [
-        "ALL TV (KOREA) (English)"
-    ],
-    "AllTVTheSpiritofKorea(English).ca": [
-        "All TV The Spirit of Korea (English)"
-    ],
-    "AlNahar(English).ca": [
-        "AlNahar (English)"
-    ],
-    "AlphaTV(English-Greek).ca": [
-        "Alpha TV (English, Greek)"
-    ],
-    "AMC(English).ca": [
-        "AMC (English)"
-    ],
-    "AmericanHeroesChannel(English).ca": [
-        "American Heroes Channel (English)"
-    ],
-    "AMIAudio(English).ca": [
-        "AMI Audio (English)"
-    ],
-    "AMItele(src01).ca": [
-        "AMItele"
-    ],
-    "AMItele(French).ca": [
-        "AMItele (French)"
-    ],
-    "AnimalPlanet(English).ca": [
-        "Animal Planet (English)"
-    ],
-    "Antena3Internacional(Spanish).ca": [
-        "Antena 3 Internacional (Spanish)"
-    ],
-    "APBSanjha(English).ca": [
-        "APB Sanjha (English)"
-    ],
-    "AquariumChannel(English).ca": [
-        "Aquarium Channel (English)"
-    ],
-    "AquariumChannelTV(English).ca": [
-        "Aquarium Channel TV (English)"
-    ],
-    "ArtAmerica(English).ca": [
-        "Art America (English)"
-    ],
-    "ARTV(src01).ca": [
-        "ARTV"
-    ],
-    "ARYDigital(English).ca": [
-        "ARY Digital (English)"
-    ],
-    "ARYQTV(English).ca": [
-        "ARY QTV (English)"
-    ],
-    "AryZAUQ(English).ca": [
-        "Ary ZAUQ (English)"
-    ],
-    "ASSEMBLEENATIONALE(CFCableTV)(French).ca": [
-        "ASSEMBLEE NATIONALE (CF Cable TV) (French)"
-    ],
-    "AssembleeNationale(French).ca": [
-        "Assemblee Nationale (French)"
-    ],
-    "ATNAastha(English).ca": [
-        "ATN Aastha (English)"
-    ],
-    "ATNABPNews(English).ca": [
-        "ATN ABP News (English)"
-    ],
-    "ATNARYNews(English).ca": [
-        "ATN ARY News (English)"
-    ],
-    "ATNB4UPlus(English).ca": [
-        "ATN B4U Plus (English)"
-    ],
-    "ATNBangla(English).ca": [
-        "ATN Bangla (English)"
-    ],
-    "ATNBritAsia(English).ca": [
-        "ATN BritAsia (English)"
-    ],
-    "ATNColors(English).ca": [
-        "ATN Colors (English)"
-    ],
-    "ATNColorsBangla(English).ca": [
-        "ATN Colors Bangla (English)"
-    ],
-    "ATNColorsMarathi(English).ca": [
-        "ATN Colors Marathi (English)"
-    ],
-    "ATNCricketPlus(English).ca": [
-        "ATN Cricket Plus (English)"
-    ],
-    "ATNDDBharati(English).ca": [
-        "ATN DD Bharati (English)"
-    ],
-    "ATNDDIndia(English).ca": [
-        "ATN DD India (English)"
-    ],
-    "ATNDDNews(English).ca": [
-        "ATN DD News (English)"
-    ],
-    "ATNDDUrdu(English).ca": [
-        "ATN DD Urdu (English)"
-    ],
-    "ATNFoodFood(English).ca": [
-        "ATN Food Food (English)"
-    ],
-    "ATNGujarati(English).ca": [
-        "ATN Gujarati (English)"
-    ],
-    "ATNJayaTV(English).ca": [
-        "ATN Jaya TV (English)"
-    ],
-    "ATNLife(English).ca": [
-        "ATN Life (English)"
-    ],
-    "ATNMax2(English).ca": [
-        "ATN Max 2 (English)"
-    ],
-    "ATNMovies(English).ca": [
-        "ATN Movies (English)"
-    ],
-    "ATNMTVIndia(English).ca": [
-        "ATN MTV India (English)"
-    ],
-    "ATNNews(English).ca": [
-        "ATN News (English)"
-    ],
-    "ATNNews18(English).ca": [
-        "ATN News 18 (English)"
-    ],
-    "ATNPMOne(English).ca": [
-        "ATN PM One (English)"
-    ],
-    "ATNPunjabi(English).ca": [
-        "ATN Punjabi (English)"
-    ],
-    "ATNPunjabiNews(English).ca": [
-        "ATN Punjabi News (English)"
-    ],
-    "ATNPunjabiTV(English).ca": [
-        "ATN Punjabi TV (English)"
-    ],
-    "ATNRishtey(English).ca": [
-        "ATN Rishtey (English)"
-    ],
-    "ATNSikh(English).ca": [
-        "ATN Sikh (English)"
-    ],
-    "ATNSports(English).ca": [
-        "ATN Sports (English)"
-    ],
-    "ATNStarPlus(English).ca": [
-        "ATN Star Plus (English)"
-    ],
-    "ATNSVBC(English).ca": [
-        "ATN SVBC (English)"
-    ],
-    "ATNTamilPlus(English).ca": [
-        "ATN Tamil Plus (English)"
-    ],
-    "ATNTimesNow(English).ca": [
-        "ATN Times Now (English)"
-    ],
-    "ATNURDU(English).ca": [
-        "ATN URDU (English)"
-    ],
-    "ATNVijaySuper(English).ca": [
-        "ATN Vijay Super (English)"
-    ],
-    "ATNVijayTV(English).ca": [
-        "ATN Vijay TV (English)"
-    ],
-    "AvisdeRecherche(French).ca": [
-        "Avis de Recherche (French)"
-    ],
-    "AXSTV(English).ca": [
-        "AXS TV (English)"
-    ],
-    "AztecaInternacional(Spanish).ca": [
-        "Azteca Internacional (Spanish)"
-    ],
-    "B4U(English).ca": [
-        "B4U (English)"
-    ],
-    "B4UMusicUSA(English).ca": [
-        "B4U Music USA (English)"
-    ],
-    "BabyTV(English).ca": [
-        "Baby TV (English)"
-    ],
-    "BBCArabic(English).ca": [
-        "BBC Arabic (English)"
-    ],
-    "BBCEarth(English).ca": [
-        "BBC Earth (English)"
-    ],
-    "BBCFirst(English).ca": [
-        "BBC First (English)"
-    ],
-    "BBCNews(NorthAmerica)(English).ca": [
-        "BBC News (North America) (English)"
-    ],
-    "BeijingTV(English).ca": [
-        "Beijing TV (English)"
-    ],
-    "beINSports(English).ca": [
-        "beIN Sports (English)"
-    ],
-    "beINSportsEnEspanol(Spanish).ca": [
-        "beIN Sports En Espanol (Spanish)"
-    ],
-    "Bell4kBarkerTESTChannel(English).ca": [
-        "Bell 4k Barker TEST Channel (English)"
-    ],
-    "Bell4KLiveSports(English).ca": [
-        "Bell 4K Live Sports (English)"
-    ],
-    "BellAliantAquariumChannel(English-French).ca": [
-        "Bell Aliant Aquarium Channel (English, French)"
-    ],
-    "BellCrave(FrenchEntryPoint)VOD(French).ca": [
-        "Bell Crave (French Entry Point) VOD (French)"
-    ],
-    "BellFBTL4(French).ca": [
-        "Bell FBTL4 (French)"
-    ],
-    "BellFBTL6(French-English).ca": [
-        "Bell FBTL6 (French, English)"
-    ],
-    "BellFBTV6(English).ca": [
-        "Bell FBTV6 (English)"
-    ],
-    "BellFibeTVFrenchBarkerChannel(French).ca": [
-        "Bell Fibe TV French Barker Channel (French)"
-    ],
-    "BellFibeTVVODPromoChannel(English).ca": [
-        "Bell Fibe TV VOD Promo Channel (English)"
-    ],
-    "BellFibeTV1TV1Fibe(English-French).ca": [
-        "Bell Fibe TV1TV1 Fibe (English, French)"
-    ],
-    "BellFireplace(English).ca": [
-        "Bell Fireplace (English)"
-    ],
-    "BellFreePreviews(English).ca": [
-        "Bell Free Previews (English)"
-    ],
-    "BellLOCAL(English-French).ca": [
-        "Bell LOCAL (English, French)"
-    ],
-    "BellMarketingVenusFibe(English).ca": [
-        "Bell Marketing VenusFibe (English)"
-    ],
-    "BellNetflix(English).ca": [
-        "Bell Netflix (English)"
-    ],
-    "BellNewChannels(English-French).ca": [
-        "Bell New Channels (English, French)"
-    ],
-    "BellPrimeVideo(English).ca": [
-        "Bell Prime Video (English)"
-    ],
-    "BellYoutubeFrench(French).ca": [
-        "Bell Youtube French (French)"
-    ],
-    "BenficaTV(Portuguese).ca": [
-        "Benfica TV (Portuguese)"
-    ],
-    "BigTenNetwork(English).ca": [
-        "Big Ten Network (English)"
-    ],
-    "BlackEntertainment(English).ca": [
-        "Black Entertainment (English)"
-    ],
-    "BNNBloomberg(English).ca": [
-        "BNN Bloomberg (English)"
-    ],
-    "BoomerangNetwork(English).ca": [
-        "Boomerang Network (English)"
-    ],
-    "BritishColumbiaLegislature(English).ca": [
-        "British Columbia Legislature (English)"
-    ],
-    "CableNewsNetwork(English).ca": [
-        "Cable News Network (English)"
-    ],
-    "CablePublicAffairsChannel(English).ca": [
-        "Cable Public Affairs Channel (English)"
-    ],
-    "CablePublicAffairsChannel(French)(French).ca": [
-        "Cable Public Affairs Channel (French) (French)"
-    ],
-    "CablePulse24(CP24)(English).ca": [
-        "Cable Pulse 24 (CP24) (English)"
-    ],
-    "CanadaChineseTelevision(English).ca": [
-        "Canada Chinese Television (English)"
-    ],
-    "CanalD(src01).ca": [
-        "Canal D"
-    ],
-    "CanalD(French).ca": [
-        "Canal D (French)"
-    ],
-    "CanalEvasion(French).ca": [
-        "Canal Evasion (French)"
-    ],
-    "CanalM(French).ca": [
-        "Canal M (French)"
-    ],
-    "CanalSeriesPlus(French).ca": [
-        "Canal Series Plus (French)"
-    ],
-    "CanalSur(Spanish).ca": [
-        "Canal Sur (Spanish)"
-    ],
-    "CanalVie(src01).ca": [
-        "Canal Vie"
-    ],
-    "CARACOLINTERNATIONAL(Spanish).ca": [
-        "CARACOL INTERNATIONAL (Spanish)"
-    ],
-    "CaribbeanRadio(English).ca": [
-        "Caribbean Radio (English)"
-    ],
-    "Caribvision(English).ca": [
-        "Caribvision (English)"
-    ],
-    "CartoonNetwork(English).ca": [
-        "Cartoon Network (English)"
-    ],
-    "CartoonNetwork(Pacific)(English).ca": [
-        "Cartoon Network (Pacific) (English)"
-    ],
-    "CASA(src01).ca": [
-        "CASA"
-    ],
-    "CASA(French).ca": [
-        "CASA (French)"
-    ],
-    "CBAFT(French).ca": [
-        "CBAFT (French)"
-    ],
-    "CBAFTDT(French).ca": [
-        "CBAFTDT (French)"
-    ],
-    "CBAT(English).ca": [
-        "CBAT (English)"
-    ],
-    "CBATDT(English).ca": [
-        "CBATDT (English)"
-    ],
-    "CBCCalgary(English).ca": [
-        "CBC Calgary (English)"
-    ],
-    "CBCEdmonton(English).ca": [
-        "CBC Edmonton (English)"
-    ],
-    "CBCHalifax(English).ca": [
-        "CBC Halifax (English)"
-    ],
-    "CBCNewsNetwork(English).ca": [
-        "CBC News Network (English)"
-    ],
-    "CBCOttawa(English).ca": [
-        "CBC Ottawa (English)"
-    ],
-    "CBCSaskatchewan(English).ca": [
-        "CBC Saskatchewan (English)"
-    ],
-    "CBCStJohns(English).ca": [
-        "CBC St Johns (English)"
-    ],
-    "CBCTelevisionWindsor9(English).ca": [
-        "CBC TelevisionWindsor 9 (English)"
-    ],
-    "CBCToronto(English).ca": [
-        "CBC Toronto (English)"
-    ],
-    "CBCVancouver(English).ca": [
-        "CBC Vancouver (English)"
-    ],
-    "CBCWinnipeg(English).ca": [
-        "CBC Winnipeg (English)"
-    ],
-    "CBCT(English).ca": [
-        "CBCT (English)"
-    ],
-    "CBCTDT(English).ca": [
-        "CBCTDT (English)"
-    ],
-    "CBETDT(English).ca": [
-        "CBETDT (English)"
-    ],
-    "CBFTMontreal(French).ca": [
-        "CBFT Montreal (French)"
-    ],
-    "CBFTDT(French).ca": [
-        "CBFTDT (French)"
-    ],
-    "CBKFT(French).ca": [
-        "CBKFT (French)"
-    ],
-    "CBKFTDT(French).ca": [
-        "CBKFTDT (French)"
-    ],
-    "CBLFT(French).ca": [
-        "CBLFT (French)"
-    ],
-    "CBLFTDT(French).ca": [
-        "CBLFTDT (French)"
-    ],
-    "CBME(English).ca": [
-        "CBME (English)"
-    ],
-    "CBMTCBCMontreal(English).ca": [
-        "CBMT CBC Montreal (English)"
-    ],
-    "CBMTDT(English).ca": [
-        "CBMTDT (English)"
-    ],
-    "CBNCommonwealthBroadcastingNetwork(English).ca": [
-        "CBN Commonwealth Broadcasting Network (English)"
-    ],
-    "CBO(English).ca": [
-        "CBO (English)"
-    ],
-    "CBOFT(French).ca": [
-        "CBOFT (French)"
-    ],
-    "CBOFTDT(French).ca": [
-        "CBOFTDT (French)"
-    ],
-    "CBSSportsNetwork(English).ca": [
-        "CBS Sports Network (English)"
-    ],
-    "CBUFT(French).ca": [
-        "CBUFT (French)"
-    ],
-    "CBUFTDT(French).ca": [
-        "CBUFTDT (French)"
-    ],
-    "CBVT(French).ca": [
-        "CBVT (French)"
-    ],
-    "CBVTDT(French).ca": [
-        "CBVTDT (French)"
-    ],
-    "CBWFT(French).ca": [
-        "CBWFT (French)"
-    ],
-    "CBWFTDT(French).ca": [
-        "CBWFTDT (French)"
-    ],
-    "CBXFT(French).ca": [
-        "CBXFT (French)"
-    ],
-    "CBXFTICIRadioCanada(Edmonton)(src01).ca": [
-        "CBXFT ICI RadioCanada (Edmonton)"
-    ],
-    "CBXFTDT(French).ca": [
-        "CBXFTDT (French)"
-    ],
-    "CCTVEntertainment(English).ca": [
-        "CCTV Entertainment (English)"
-    ],
-    "CCTV4ChinaCentralTV(English).ca": [
-        "CCTV4China Central TV (English)"
-    ],
-    "Ceen(English).ca": [
-        "Ceen (English)"
-    ],
-    "CFAP(French).ca": [
-        "CFAP (French)"
-    ],
-    "CFAPDT(French).ca": [
-        "CFAPDT (French)"
-    ],
-    "CFCF(English).ca": [
-        "CFCF (English)"
-    ],
-    "CFCFDT(English).ca": [
-        "CFCFDT (English)"
-    ],
-    "CFCM(French).ca": [
-        "CFCM (French)"
-    ],
-    "CFCMDT(French).ca": [
-        "CFCMDT (French)"
-    ],
-    "CFCNLDT(English).ca": [
-        "CFCNLDT (English)"
-    ],
-    "CFEM(French).ca": [
-        "CFEM (French)"
-    ],
-    "CFEMDT(French).ca": [
-        "CFEMDT (French)"
-    ],
-    "CFER(French).ca": [
-        "CFER (French)"
-    ],
-    "CFERCableFeed(French).ca": [
-        "CFER Cable Feed (French)"
-    ],
-    "CFGOAM1200(English).ca": [
-        "CFGO AM 1200 (English)"
-    ],
-    "CFGS(French).ca": [
-        "CFGS (French)"
-    ],
-    "CFGSDT(French).ca": [
-        "CFGSDT (French)"
-    ],
-    "CFJC(English).ca": [
-        "CFJC (English)"
-    ],
-    "CFJCDT(English).ca": [
-        "CFJCDT (English)"
-    ],
-    "CFJP(French).ca": [
-        "CFJP (French)"
-    ],
-    "CFJPDT(French).ca": [
-        "CFJPDT (French)"
-    ],
-    "CFKM(French).ca": [
-        "CFKM (French)"
-    ],
-    "CFKMDT(French).ca": [
-        "CFKMDT (French)"
-    ],
-    "CFKS(French).ca": [
-        "CFKS (French)"
-    ],
-    "CFKSDT(French).ca": [
-        "CFKSDT (French)"
-    ],
-    "CFNRNativeRadio(English).ca": [
-        "CFNR Native Radio (English)"
-    ],
-    "CFPLAChannelLondon(English).ca": [
-        "CFPL A Channel London (English)"
-    ],
-    "CFPLDT(English).ca": [
-        "CFPLDT (English)"
-    ],
-    "CFRA(English).ca": [
-        "CFRA (English)"
-    ],
-    "CFRB(English).ca": [
-        "CFRB (English)"
-    ],
-    "CFRS(French).ca": [
-        "CFRS (French)"
-    ],
-    "CFRSDT(French).ca": [
-        "CFRSDT (French)"
-    ],
-    "CFTFChannel29(French).ca": [
-        "CFTF Channel 29 (French)"
-    ],
-    "CFTFDT(French).ca": [
-        "CFTFDT (French)"
-    ],
-    "CFTK(English).ca": [
-        "CFTK (English)"
-    ],
-    "CFTMMontreal(French).ca": [
-        "CFTM Montreal (French)"
-    ],
-    "CFTMDT(French).ca": [
-        "CFTMDT (French)"
-    ],
-    "CFTMP(Pacific)(French).ca": [
-        "CFTMP (Pacific) (French)"
-    ],
-    "CFTVDT(English).ca": [
-        "CFTVDT (English)"
-    ],
-    "CFVS(French).ca": [
-        "CFVS (French)"
-    ],
-    "CFVSDT(French).ca": [
-        "CFVSDT (French)"
-    ],
-    "CFWENativeRadio(English).ca": [
-        "CFWE Native Radio (English)"
-    ],
-    "CFYK(English).ca": [
-        "CFYK (English)"
-    ],
-    "CFYKDT(English).ca": [
-        "CFYKDT (English)"
-    ],
-    "CFZMAM740(English).ca": [
-        "CFZMAM 740 (English)"
-    ],
-    "CGTNFrancais(French).ca": [
-        "CGTN Francais (French)"
-    ],
-    "CHVancouverIsland(English).ca": [
-        "CH Vancouver Island (English)"
-    ],
-    "Channel299(English).ca": [
-        "Channel 299 (English)"
-    ],
-    "ChannelI(English).ca": [
-        "Channel I (English)"
-    ],
-    "ChannelPunjabi(English).ca": [
-        "Channel Punjabi (English)"
-    ],
-    "CHAT(English).ca": [
-        "CHAT (English)"
-    ],
-    "CHAU(French).ca": [
-        "CHAU (French)"
-    ],
-    "CHAUDT(French).ca": [
-        "CHAUDT (French)"
-    ],
-    "CHBCHD(English).ca": [
-        "CHBCHD (English)"
-    ],
-    "CHCH(English).ca": [
-        "CHCH (English)"
-    ],
-    "CHCHDT(English).ca": [
-        "CHCHDT (English)"
-    ],
-    "CHCO(English).ca": [
-        "CHCO (English)"
-    ],
-    "CHCRGreekRadio(English).ca": [
-        "CHCR Greek Radio (English)"
-    ],
-    "CHEKDT(English).ca": [
-        "CHEKDT (English)"
-    ],
-    "CHEM(French).ca": [
-        "CHEM (French)"
-    ],
-    "CHEMDT(French).ca": [
-        "CHEMDT (French)"
-    ],
-    "CHETTV(English).ca": [
-        "CHETTV (English)"
-    ],
-    "CHEX(English).ca": [
-        "CHEX (English)"
-    ],
-    "CHEXDT(English).ca": [
-        "CHEXDT (English)"
-    ],
-    "CHEZ106FMOttawa(English).ca": [
-        "CHEZ 106 FM Ottawa (English)"
-    ],
-    "CHINRadio(English).ca": [
-        "CHIN Radio (English)"
-    ],
-    "ChinaGlobalTelevisionNetwork(English).ca": [
-        "China Global Television Network (English)"
-    ],
-    "ChinaGlobalTelevisionNetwork9Documentary(English).ca": [
-        "China Global Television Network 9 Documentary (English)"
-    ],
-    "CHIRGreekRadio(English).ca": [
-        "CHIR Greek Radio (English)"
-    ],
-    "CHLTSherbrooke(French).ca": [
-        "CHLT Sherbrooke (French)"
-    ],
-    "CHLTDT(French).ca": [
-        "CHLTDT (French)"
-    ],
-    "CHMP985FM(English-French).ca": [
-        "CHMP 985 FM (English, French)"
-    ],
-    "CHNBDT(English).ca": [
-        "CHNBDT (English)"
-    ],
-    "CHNMDT(English-UnknownLanguage(tl)-Punjabi).ca": [
-        "CHNMDT (English, Unknown Language (tl), Punjabi)"
-    ],
-    "CHNU(English).ca": [
-        "CHNU (English)"
-    ],
-    "CHNUDT(English).ca": [
-        "CHNUDT (English)"
-    ],
-    "CHOT(French).ca": [
-        "CHOT (French)"
-    ],
-    "CHOTTVA(Gatineau)(src01).ca": [
-        "CHOT TVA (Gatineau)"
-    ],
-    "CHOTDT(French).ca": [
-        "CHOTDT (French)"
-    ],
-    "CHTOAM1690Audio(English).ca": [
-        "CHTO AM 1690 Audio (English)"
-    ],
-    "CHUOFM891UofOttawa(English).ca": [
-        "CHUO FM 891 Uof Ottawa (English)"
-    ],
-    "CHWIDT(English).ca": [
-        "CHWIDT (English)"
-    ],
-    "CIIIOT(GlobalOttawa)(English).ca": [
-        "CIIIOT (Global Ottawa) (English)"
-    ],
-    "CIIT(English).ca": [
-        "CIIT (English)"
-    ],
-    "CIITDT(English-French).ca": [
-        "CIITDT (English, French)"
-    ],
-    "CIMT(French).ca": [
-        "CIMT (French)"
-    ],
-    "CIMTDT(French).ca": [
-        "CIMTDT (French)"
-    ],
-    "CineLatino(Spanish).ca": [
-        "Cine Latino (Spanish)"
-    ],
-    "CinelatinoRogers(Spanish).ca": [
-        "Cinelatino Rogers (Spanish)"
-    ],
-    "CinemaOneGlobal(English).ca": [
-        "Cinema One Global (English)"
-    ],
-    "Cinepop(src01).ca": [
-        "Cinepop"
-    ],
-    "CinePop(French).ca": [
-        "CinePop (French)"
-    ],
-    "CISAHD(English).ca": [
-        "CISAHD (English)"
-    ],
-    "CITL(English).ca": [
-        "CITL (English)"
-    ],
-    "CITLDT(English).ca": [
-        "CITLDT (English)"
-    ],
-    "CitySaskatchewan(English).ca": [
-        "City Saskatchewan (English)"
-    ],
-    "CityNews247(English).ca": [
-        "CityNews 247 (English)"
-    ],
-    "CityNews247(West)(English).ca": [
-        "CityNews 247 (West) (English)"
-    ],
-    "CityNews680(French).ca": [
-        "CityNews 680 (French)"
-    ],
-    "CityTv(English).ca": [
-        "CityTv (English)"
-    ],
-    "CitytvCalgary(English).ca": [
-        "Citytv Calgary (English)"
-    ],
-    "CitytvEdmonton(English).ca": [
-        "Citytv Edmonton (English)"
-    ],
-    "CitytvToronto(English).ca": [
-        "Citytv Toronto (English)"
-    ],
-    "CitytvVancouver(English).ca": [
-        "Citytv Vancouver (English)"
-    ],
-    "CitytvWinnipeg(English).ca": [
-        "Citytv Winnipeg (English)"
-    ],
-    "CIUTFM(English).ca": [
-        "CIUTFM (English)"
-    ],
-    "CIVM(French).ca": [
-        "CIVM (French)"
-    ],
-    "CIVMDT(French).ca": [
-        "CIVMDT (French)"
-    ],
-    "CIVO(French).ca": [
-        "CIVO (French)"
-    ],
-    "CIVODT(French).ca": [
-        "CIVODT (French)"
-    ],
-    "CJAD800Montreal(French).ca": [
-        "CJAD 800 Montreal (French)"
-    ],
-    "CJBR(French).ca": [
-        "CJBR (French)"
-    ],
-    "CJBRDT(French).ca": [
-        "CJBRDT (French)"
-    ],
-    "CJCB(English).ca": [
-        "CJCB (English)"
-    ],
-    "CJDC(CBC5)Feed(English).ca": [
-        "CJDC (CBC 5) Feed (English)"
-    ],
-    "CJDC(English).ca": [
-        "CJDC (English)"
-    ],
-    "CJEO(English).ca": [
-        "CJEO (English)"
-    ],
-    "CJILDT(English).ca": [
-        "CJILDT (English)"
-    ],
-    "CJNTCityTVMontreal(English).ca": [
-        "CJNT City TV Montreal (English)"
-    ],
-    "CJNTDT(English).ca": [
-        "CJNTDT (English)"
-    ],
-    "CJOH(English).ca": [
-        "CJOH (English)"
-    ],
-    "CJOHDT(English).ca": [
-        "CJOHDT (English)"
-    ],
-    "CJPM(French).ca": [
-        "CJPM (French)"
-    ],
-    "CJPMDT(French).ca": [
-        "CJPMDT (French)"
-    ],
-    "CJWE(English).ca": [
-        "CJWE (English)"
-    ],
-    "CKCO(English).ca": [
-        "CKCO (English)"
-    ],
-    "CKCODT(English).ca": [
-        "CKCODT (English)"
-    ],
-    "CKCU931FMCarletonUOttawa(English).ca": [
-        "CKCU 931FM Carleton U Ottawa (English)"
-    ],
-    "CKCW(English).ca": [
-        "CKCW (English)"
-    ],
-    "CKCWDT(English).ca": [
-        "CKCWDT (English)"
-    ],
-    "CKDJ1079FMAlgonquinCollegeOttawa(English).ca": [
-        "CKDJ 1079FM Algonquin College Ottawa (English)"
-    ],
-    "CKES(English).ca": [
-        "CKES (English)"
-    ],
-    "CKLT(English).ca": [
-        "CKLT (English)"
-    ],
-    "CKLTDT(English).ca": [
-        "CKLTDT (English)"
-    ],
-    "CKPG(English).ca": [
-        "CKPG (English)"
-    ],
-    "CKPGCableFeed(English).ca": [
-        "CKPG Cable Feed (English)"
-    ],
-    "CKPRThunderBay(English).ca": [
-        "CKPR Thunder Bay (English)"
-    ],
-    "CKRWNativeRadio(English).ca": [
-        "CKRW Native Radio (English)"
-    ],
-    "CKSA(English).ca": [
-        "CKSA (English)"
-    ],
-    "CKSADT(English).ca": [
-        "CKSADT (English)"
-    ],
-    "CKSH(French).ca": [
-        "CKSH (French)"
-    ],
-    "CKSHDT(French).ca": [
-        "CKSHDT (French)"
-    ],
-    "CKTM(French).ca": [
-        "CKTM (French)"
-    ],
-    "CKTMDT(French).ca": [
-        "CKTMDT (French)"
-    ],
-    "CKTV(French).ca": [
-        "CKTV (French)"
-    ],
-    "CKTVDT(French).ca": [
-        "CKTVDT (French)"
-    ],
-    "CKUA(English).ca": [
-        "CKUA (English)"
-    ],
-    "CKWS(English).ca": [
-        "CKWS (English)"
-    ],
-    "CKWSDT(English).ca": [
-        "CKWSDT (English)"
-    ],
-    "ClubJuniorsurDemande(French)(French).ca": [
-        "Club Junior sur Demande (French) (French)"
-    ],
-    "CMT(English).ca": [
-        "CMT (English)"
-    ],
-    "CMTV(Portuguese).ca": [
-        "CMTV (Portuguese)"
-    ],
-    "CNBCCanadianFeed(English).ca": [
-        "CNBC Canadian Feed (English)"
-    ],
-    "CNN(English).ca": [
-        "CNN (English)"
-    ],
-    "CNNInternational(English).ca": [
-        "CNN International (English)"
-    ],
-    "CNTV(English).ca": [
-        "CNTV (English)"
-    ],
-    "ConcordiaUniversity1690AM(CJLOAM)(English).ca": [
-        "Concordia University 1690 AM (CJLOAM) (English)"
-    ],
-    "CookingChannel(English).ca": [
-        "Cooking Channel (English)"
-    ],
-    "Corco(English).ca": [
-        "Corco (English)"
-    ],
-    "CottageLife(English).ca": [
-        "Cottage Life (English)"
-    ],
-    "Country1011SmithsFalls(English).ca": [
-        "Country 1011 Smiths Falls (English)"
-    ],
-    "Crave(English).ca": [
-        "Crave (English)"
-    ],
-    "Crave1(West)(English).ca": [
-        "Crave 1 (West) (English)"
-    ],
-    "Crave2(West)(English).ca": [
-        "Crave 2 (West) (English)"
-    ],
-    "Crave3(West)(English).ca": [
-        "Crave 3 (West) (English)"
-    ],
-    "Crave1(English).ca": [
-        "Crave1 (English)"
-    ],
-    "Crave1(English-French).ca": [
-        "Crave1",
-        "Crave 1"
-    ],
-    "Crave2(English).ca": [
-        "Crave2 (English)"
-    ],
-    "Crave2(English-French).ca": [
-        "Crave2",
-        "Crave 2"
-    ],
-    "Crave3(English).ca": [
-        "Crave3",
-        "Crave 3"
-    ],
-    "Crave4(English).ca": [
-        "Crave4",
-        "Crave 4"
-    ],
-    "CrimePlusInvestigation(English).ca": [
-        "Crime Plus Investigation (English)"
-    ],
-    "CTVCalgary(English).ca": [
-        "CTV Calgary (English)"
-    ],
-    "CTVCOMEDYCHANNEL(English).ca": [
-        "CTV COMEDY CHANNEL (English)"
-    ],
-    "CTVCOMEDYCHANNEL(West)(English).ca": [
-        "CTV COMEDY CHANNEL (West) (English)"
-    ],
-    "CTVDRAMACHANNEL(English).ca": [
-        "CTV DRAMA CHANNEL (English)"
-    ],
-    "CTVEdmonton(English).ca": [
-        "CTV Edmonton (English)"
-    ],
-    "CTVHalifax(English).ca": [
-        "CTV Halifax (English)"
-    ],
-    "CTVLIFECHANNEL(English).ca": [
-        "CTV LIFE CHANNEL (English)"
-    ],
-    "CTVNewsChannel(English).ca": [
-        "CTV News Channel (English)"
-    ],
-    "CTVPrinceAlbert(English).ca": [
-        "CTV Prince Albert (English)"
-    ],
-    "CTVRegina(English).ca": [
-        "CTV Regina (English)"
-    ],
-    "CTVSaskatoon(English).ca": [
-        "CTV Saskatoon (English)"
-    ],
-    "CTVSCIFICHANNEL(English).ca": [
-        "CTV SCIFI CHANNEL (English)"
-    ],
-    "CTVSudbury(English).ca": [
-        "CTV Sudbury (English)"
-    ],
-    "CTVSydney(English).ca": [
-        "CTV Sydney (English)"
-    ],
-    "CTVToronto(English).ca": [
-        "CTV Toronto (English)"
-    ],
-    "CTVTwoAlberta(English).ca": [
-        "CTV Two Alberta (English)"
-    ],
-    "CTVTwoAtlantic(English).ca": [
-        "CTV Two Atlantic (English)"
-    ],
-    "CTVTwoBarrie(English).ca": [
-        "CTV Two Barrie (English)"
-    ],
-    "CTVTwoLondonWindsor(English).ca": [
-        "CTV Two LondonWindsor (English)"
-    ],
-    "CTVTwoOttawa(English).ca": [
-        "CTV Two Ottawa (English)"
-    ],
-    "CTVTwoToronto(English).ca": [
-        "CTV Two Toronto (English)"
-    ],
-    "CTVTwoVancouverVictoria(English).ca": [
-        "CTV Two VancouverVictoria (English)"
-    ],
-    "CTVVancouver(English).ca": [
-        "CTV Vancouver (English)"
-    ],
-    "CTVWinnipeg(English).ca": [
-        "CTV Winnipeg (English)"
-    ],
-    "CTVYorkton(English).ca": [
-        "CTV Yorkton (English)"
-    ],
-    "CurrentTime(English).ca": [
-        "Current Time (English)"
-    ],
-    "Daystar(English).ca": [
-        "Daystar (English)"
-    ],
-    "DejaView(English).ca": [
-        "Deja View (English)"
-    ],
-    "DetskyKids(Russian).ca": [
-        "Detsky Kids (Russian)"
-    ],
-    "Discovery(English).ca": [
-        "Discovery (English)"
-    ],
-    "DiscoveryChannel(English).ca": [
-        "Discovery Channel (English)"
-    ],
-    "DiscoveryScience(English).ca": [
-        "Discovery Science (English)"
-    ],
-    "DiscoveryVelocity(English).ca": [
-        "Discovery Velocity (English)"
-    ],
-    "DisneyChannel(English).ca": [
-        "Disney Channel (English)"
-    ],
-    "DisneyJunior(English).ca": [
-        "Disney Junior (English)"
-    ],
-    "DisneyXD(English).ca": [
-        "Disney XD (English)"
-    ],
-    "documentary(English).ca": [
-        "documentary (English)"
-    ],
-    "DorcelTV(English).ca": [
-        "Dorcel TV (English)"
-    ],
-    "DORCELTV(French).ca": [
-        "DORCEL TV (French)"
-    ],
-    "DORCELTVFRENCH(French).ca": [
-        "DORCEL TV FRENCH (French)"
-    ],
-    "DRAGONTV(English).ca": [
-        "DRAGON TV (English)"
-    ],
-    "Dream1(English).ca": [
-        "Dream 1 (English)"
-    ],
-    "Dream2(English).ca": [
-        "Dream 2 (English)"
-    ],
-    "DTour(English).ca": [
-        "DTour (English)"
-    ],
-    "DW(English).ca": [
-        "DW (English)"
-    ],
-    "DW(German-English).ca": [
-        "DW (German, English)"
-    ],
-    "EEntertainmentTelevision(English).ca": [
-        "E Entertainment Television (English)"
-    ],
-    "ELLEFictions(src01).ca": [
-        "ELLE Fictions"
-    ],
-    "ELLEFICTIONS(French).ca": [
-        "ELLE FICTIONS (French)"
-    ],
-    "EPGCricket(PayPerView)(English).ca": [
-        "EPG Cricket (PayPerView) (English)"
-    ],
-    "EPGEducational(English).ca": [
-        "EPG Educational (English)"
-    ],
-    "EPGLocalOrigination(English).ca": [
-        "EPG Local Origination (English)"
-    ],
-    "ERTWorld(Greek-English).ca": [
-        "ERT World (Greek, English)"
-    ],
-    "ETNOW(English).ca": [
-        "ET NOW (English)"
-    ],
-    "Euronews(English).ca": [
-        "Euronews (English)"
-    ],
-    "euronews(French).ca": [
-        "euronews (French)"
-    ],
-    "EuroWorldSport(Spanish-English-Italian-French).ca": [
-        "EuroWorld Sport (Spanish, English, Italian, French)"
-    ],
-    "Evasion(src01).ca": [
-        "Evasion"
-    ],
-    "Evasion(French).ca": [
-        "Evasion (French)"
-    ],
-    "EWTNC(EWTNCanadianFeed)(English-French).ca": [
-        "EWTNC (EWTN Canadian Feed) (English, French)"
-    ],
-    "ExxxtsyChannel(English).ca": [
-        "Exxxtsy Channel (English)"
-    ],
-    "ExxxtsyPremium(English).ca": [
-        "Exxxtsy Premium (English)"
-    ],
-    "Fairchild(Toronto)(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
-        "Fairchild (Toronto) (English, Unknown Language (cmn), Unknown Language (yue))"
-    ],
-    "Fairchild(Vancouver)VCHILD(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
-        "Fairchild (Vancouver) VCHILD (English, Unknown Language (cmn), Unknown Language (yue))"
-    ],
-    "Fairchild2(English).ca": [
-        "Fairchild 2 (English)"
-    ],
-    "FairchildTorontoFeed(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
-        "Fairchild Toronto Feed (English, Unknown Language (cmn), Unknown Language (yue))"
-    ],
-    "FairchildVancouverFeed(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
-        "Fairchild Vancouver Feed (English, Unknown Language (cmn), Unknown Language (yue))"
-    ],
-    "FamilyChannel(English).ca": [
-        "Family Channel (English)"
-    ],
-    "FamilyJr(English).ca": [
-        "Family Jr (English)"
-    ],
-    "FestivalPortugueseTelevision(Portuguese).ca": [
-        "Festival Portuguese Television (Portuguese)"
-    ],
-    "FevaTV(English).ca": [
-        "Feva TV (English)"
-    ],
-    "FICT(CanalSeries)(French).ca": [
-        "FICT (Canal Series) (French)"
-    ],
-    "FilipinoChannel(East)(English).ca": [
-        "Filipino Channel (East) (English)"
-    ],
-    "FilipinoTV(English).ca": [
-        "Filipino TV (English)"
-    ],
-    "Filmy(English).ca": [
-        "Filmy (English)"
-    ],
-    "Fireplace(English).ca": [
-        "Fireplace (English)"
-    ],
-    "FireplaceChannelFrench(French).ca": [
-        "Fireplace Channel French (French)"
-    ],
-    "FirstNational(English).ca": [
-        "First National (English)"
-    ],
-    "FoodNetwork(English).ca": [
-        "Food Network (English)"
-    ],
-    "FoxBusiness(English).ca": [
-        "Fox Business (English)"
-    ],
-    "FoxNewsChannel(English).ca": [
-        "Fox News Channel (English)"
-    ],
-    "FoxSportsRacing(English).ca": [
-        "Fox Sports Racing (English)"
-    ],
-    "France24(French).ca": [
-        "France 24 (French)"
-    ],
-    "FreePreviewChannel1(English).ca": [
-        "Free Preview Channel 1 (English)"
-    ],
-    "FrissonsTV(src01).ca": [
-        "Frissons TV"
-    ],
-    "FrissonsTV(French).ca": [
-        "Frissons TV (French)"
-    ],
-    "FujianTV(FUJTV)ECHOSTAR(English).ca": [
-        "Fujian TV (FUJTV) ECHOSTAR (English)"
-    ],
-    "FutureTelevisionSkyvista(English).ca": [
-        "Future Television Skyvista (English)"
-    ],
-    "FX(English).ca": [
-        "FX (English)"
-    ],
-    "FXX(English).ca": [
-        "FXX (English)"
-    ],
-    "GamePlus(English).ca": [
-        "Game Plus (English)"
-    ],
-    "GameShowNetwork(English).ca": [
-        "Game Show Network (English)"
-    ],
-    "GameTV(English).ca": [
-        "GameTV (English)"
-    ],
-    "GEOTV(English).ca": [
-        "GEO TV (English)"
-    ],
-    "GermanKinoPlus(German-English).ca": [
-        "German Kino Plus (German, English)"
-    ],
-    "GINXESPORTSTV(English).ca": [
-        "GINX ESPORTS TV (English)"
-    ],
-    "GlobalBC(English).ca": [
-        "Global BC (English)"
-    ],
-    "GlobalCalgary(English).ca": [
-        "Global Calgary (English)"
-    ],
-    "GLOBALDURHAM(English).ca": [
-        "GLOBAL DURHAM (English)"
-    ],
-    "GlobalEdmonton(English).ca": [
-        "Global Edmonton (English)"
-    ],
-    "GlobalLethbridge(English).ca": [
-        "Global Lethbridge (English)"
-    ],
-    "GlobalManitoba(English).ca": [
-        "Global Manitoba (English)"
-    ],
-    "GlobalMaritimes(English).ca": [
-        "Global Maritimes (English)"
-    ],
-    "GlobalMontreal(English).ca": [
-        "Global Montreal (English)"
-    ],
-    "GlobalNewsBC1(English).ca": [
-        "Global News BC1 (English)"
-    ],
-    "GlobalOkanagan(English).ca": [
-        "Global Okanagan (English)"
-    ],
-    "GlobalRegina(English).ca": [
-        "Global Regina (English)"
-    ],
-    "GlobalSaskatoon(English).ca": [
-        "Global Saskatoon (English)"
-    ],
-    "GlobalThunderBay(English).ca": [
-        "Global Thunder Bay (English)"
-    ],
-    "GlobalToronto(English).ca": [
-        "Global Toronto (English)"
-    ],
-    "GMALifeTV(English).ca": [
-        "GMA Life TV (English)"
-    ],
-    "GMANews(English).ca": [
-        "GMA News (English)"
-    ],
-    "GMAPinoyTV(English).ca": [
-        "GMA Pinoy TV (English)"
-    ],
-    "GolfChannel(English).ca": [
-        "Golf Channel (English)"
-    ],
-    "GreekCinema(Greek-English).ca": [
-        "Greek Cinema (Greek, English)"
-    ],
-    "GreekMusicChannel(English).ca": [
-        "Greek Music Channel (English)"
-    ],
-    "GRTGBASatelliteTV(English).ca": [
-        "GRT GBA Satellite TV (English)"
-    ],
-    "GURKIBANI(English).ca": [
-        "GURKIBANI (English)"
-    ],
-    "HallaBol(English).ca": [
-        "Halla Bol (English)"
-    ],
-    "HBO(West)(English).ca": [
-        "HBO (West) (English)"
-    ],
-    "HBO1(English).ca": [
-        "HBO 1 (English)"
-    ],
-    "HDNHL3(English).ca": [
-        "HDNHL3 (English)"
-    ],
-    "HelloFM(English).ca": [
-        "Hello FM (English)"
-    ],
-    "HGTV(English).ca": [
-        "HGTV (English)"
-    ],
-    "Historia(src01).ca": [
-        "Historia"
-    ],
-    "Historia(French).ca": [
-        "Historia (French)"
-    ],
-    "HistoriaCanalHistoire(French).ca": [
-        "Historia Canal Histoire (French)"
-    ],
-    "History(English).ca": [
-        "History (English)"
-    ],
-    "HISTORY2(English).ca": [
-        "HISTORY 2 (English)"
-    ],
-    "HistoryTelevision(English).ca": [
-        "History Television (English)"
-    ],
-    "HistoryTelevision(Pacific)(English).ca": [
-        "History Television (Pacific) (English)"
-    ],
-    "HLN(English).ca": [
-        "HLN (English)"
-    ],
-    "HollywoodSuite2000s(English).ca": [
-        "Hollywood Suite 2000s (English)"
-    ],
-    "HollywoodSuite70s(English).ca": [
-        "Hollywood Suite 70s (English)"
-    ],
-    "HollywoodSuite80s(English).ca": [
-        "Hollywood Suite 80s (English)"
-    ],
-    "HollywoodSuite90s(English).ca": [
-        "Hollywood Suite 90s (English)"
-    ],
-    "HOT899FMOttawa(CIHTFM)(English).ca": [
-        "HOT 899 FM Ottawa (CIHT FM) (English)"
-    ],
-    "HowToChannel(English).ca": [
-        "How To Channel (English)"
-    ],
-    "HPItv(English).ca": [
-        "HPItv (English)"
-    ],
-    "HPItv(West)(English).ca": [
-        "HPItv (West) (English)"
-    ],
-    "HPItvInternational(English).ca": [
-        "HPItv International (English)"
-    ],
-    "HPItvOdds(English).ca": [
-        "HPItv Odds (English)"
-    ],
-    "HRT(English).ca": [
-        "HRT (English)"
-    ],
-    "HumMasala(English).ca": [
-        "Hum Masala (English)"
-    ],
-    "HumNews(English).ca": [
-        "Hum News (English)"
-    ],
-    "HumTV(English).ca": [
-        "Hum TV (English)"
-    ],
-    "Hunan(English).ca": [
-        "Hunan (English)"
-    ],
-    "HustlerMature(English).ca": [
-        "Hustler Mature (English)"
-    ],
-    "i24NewsEnglish(English).ca": [
-        "i24 News English (English)"
-    ],
-    "ICI(CBFT)MontrealQC(src01).ca": [
-        "ICI (CBFT) Montreal QC"
-    ],
-    "ICIARTV(French).ca": [
-        "ICI ARTV (French)"
-    ],
-    "ICIExplora(French).ca": [
-        "ICI Explora (French)"
-    ],
-    "ICIRadioCanadaPremiereToronto(CJBCAM)(French).ca": [
-        "ICI RadioCanada Premiere Toronto (CJBCAM) (French)"
-    ],
-    "ICIRDI(French).ca": [
-        "ICI RDI (French)"
-    ],
-    "ICITele(English-French-Italian-UnknownLanguage(tl)).ca": [
-        "ICI Tele (English, French, Italian, Unknown Language (tl))"
-    ],
-    "ICITele(English-French-UnknownLanguage(tl)).ca": [
-        "ICI Tele (English, French, Unknown Language (tl))"
-    ],
-    "ICITelevision(Montreal)(src01).ca": [
-        "ICI Television (Montreal)"
-    ],
-    "InuitTVNetwork(English).ca": [
-        "Inuit TV Network (English)"
-    ],
-    "Investigation(src01).ca": [
-        "Investigation"
-    ],
-    "Investigation(French).ca": [
-        "Investigation (French)"
-    ],
-    "InvestigationDiscovery(English).ca": [
-        "Investigation Discovery (English)"
-    ],
-    "JewelryTelevision(English).ca": [
-        "Jewelry Television (English)"
-    ],
-    "JewishLifeTV(English).ca": [
-        "Jewish Life TV (English)"
-    ],
-    "JiangsuInternationalChannel(English).ca": [
-        "Jiangsu International Channel (English)"
-    ],
-    "Kapatid(English).ca": [
-        "Kapatid (English)"
-    ],
-    "KCPQ(English).ca": [
-        "KCPQ (English)"
-    ],
-    "KCPQDT(English).ca": [
-        "KCPQDT (English)"
-    ],
-    "KCTS(English).ca": [
-        "KCTS (English)"
-    ],
-    "KCTSDT(English).ca": [
-        "KCTSDT (English)"
-    ],
-    "KING(English).ca": [
-        "KING (English)"
-    ],
-    "KINGDT(English).ca": [
-        "KINGDT (English)"
-    ],
-    "KIRO7(English).ca": [
-        "KIRO 7 (English)"
-    ],
-    "KnowledgeNetwork(English).ca": [
-        "Knowledge Network (English)"
-    ],
-    "KOMO(English).ca": [
-        "KOMO (English)"
-    ],
-    "KOMODT(English).ca": [
-        "KOMODT (English)"
-    ],
-    "KSPSDT(English).ca": [
-        "KSPSDT (English)"
-    ],
-    "KTLA(English).ca": [
-        "KTLA (English)"
-    ],
-    "KTLADT(English).ca": [
-        "KTLADT (English)"
-    ],
-    "LaChaineDisney(src01).ca": [
-        "La Chaine Disney"
-    ],
-    "LachaineDisney(French).ca": [
-        "La chaine Disney (French)"
-    ],
-    "LasEstrellasInternacional(Spanish).ca": [
-        "Las Estrellas Internacional (Spanish)"
-    ],
-    "LCN(src01).ca": [
-        "LCN"
-    ],
-    "LeCanalNouvellesTVA(French).ca": [
-        "Le Canal Nouvelles TVA (French)"
-    ],
-    "LeCanalVie(French).ca": [
-        "Le Canal Vie (French)"
-    ],
-    "LifestyleNetwork(English).ca": [
-        "Lifestyle Network (English)"
-    ],
-    "Lifetime(English).ca": [
-        "Lifetime (English)"
-    ],
-    "LobbyWatchChannel1(English).ca": [
-        "Lobby Watch Channel 1 (English)"
-    ],
-    "LobbyWatchChannel2(English).ca": [
-        "Lobby Watch Channel 2 (English)"
-    ],
-    "LobbyWatchChannel3(English).ca": [
-        "Lobby Watch Channel 3 (English)"
-    ],
-    "LobbyWatchChannel4(English).ca": [
-        "Lobby Watch Channel 4 (English)"
-    ],
-    "LobbyWatchChannel5(English).ca": [
-        "Lobby Watch Channel 5 (English)"
-    ],
-    "LobbyWatchChannel6(English).ca": [
-        "Lobby Watch Channel 6 (English)"
-    ],
-    "LobbyWatchChannel7(English).ca": [
-        "Lobby Watch Channel 7 (English)"
-    ],
-    "LobbyWatchChannel8(English).ca": [
-        "Lobby Watch Channel 8 (English)"
-    ],
-    "LocalProgramming(English).ca": [
-        "Local Programming (English)"
-    ],
-    "Lock(Static)(English).ca": [
-        "Lock (Static) (English)"
-    ],
-    "LoveNature(src01).ca": [
-        "Love Nature"
-    ],
-    "LoveNature(English).ca": [
-        "Love Nature (English)"
-    ],
-    "LoveNature4K(English).ca": [
-        "Love Nature 4K (English)"
-    ],
-    "LSTimesTV(English).ca": [
-        "LS Times TV (English)"
-    ],
-    "M6International(French).ca": [
-        "M6 International (French)"
-    ],
-    "MagnoliaNetwork(English).ca": [
-        "Magnolia Network (English)"
-    ],
-    "Majic100Ottawa(CJMJFM)(English).ca": [
-        "Majic 100 Ottawa (CJMJ FM) (English)"
-    ],
-    "MakefulTV(English).ca": [
-        "Makeful TV (English)"
-    ],
-    "MavTV(English).ca": [
-        "MavTV (English)"
-    ],
-    "MAX(src01).ca": [
-        "MAX"
-    ],
-    "Max(French).ca": [
-        "Max (French)"
-    ],
-    "MCTVCTVNorthBay(English).ca": [
-        "MCTVCTV North Bay (English)"
-    ],
-    "MCTVCTVSaultSteMarie(CHBX)(English).ca": [
-        "MCTVCTV Sault Ste Marie (CHBX) (English)"
-    ],
-    "MCTVCTVSaultSteMarie(English).ca": [
-        "MCTVCTV Sault Ste Marie (English)"
-    ],
-    "MCTVCTVSudburyCh5(English).ca": [
-        "MCTVCTV Sudbury Ch5 (English)"
-    ],
-    "MCTVCTVTimmins(CITO)(English).ca": [
-        "MCTVCTV Timmins (CITO) (English)"
-    ],
-    "MCTVCTVTimmins(English).ca": [
-        "MCTVCTV Timmins (English)"
-    ],
-    "MediasetItalia(English).ca": [
-        "Mediaset Italia (English)"
-    ],
-    "MediasetTGCOM24(English).ca": [
-        "Mediaset TGCOM 24 (English)"
-    ],
-    "MegaCosmos(US)(English).ca": [
-        "Mega Cosmos (US) (English)"
-    ],
-    "MelodyAflam(English).ca": [
-        "Melody Aflam (English)"
-    ],
-    "MelodyDrama(English).ca": [
-        "Melody Drama (English)"
-    ],
-    "MelodyHits(English).ca": [
-        "Melody Hits (English)"
-    ],
-    "MeteoMedia(MM)(French).ca": [
-        "MeteoMedia (MM) (French)"
-    ],
-    "MezzoLive(English).ca": [
-        "Mezzo Live (English)"
-    ],
-    "MLBExtraInnings1(English).ca": [
-        "MLB Extra Innings 1 (English)"
-    ],
-    "MLBExtraInnings10(English).ca": [
-        "MLB Extra Innings 10 (English)"
-    ],
-    "MLBExtraInnings11(English).ca": [
-        "MLB Extra Innings 11 (English)"
-    ],
-    "MLBExtraInnings12(English).ca": [
-        "MLB Extra Innings 12 (English)"
-    ],
-    "MLBExtraInnings13(English).ca": [
-        "MLB Extra Innings 13 (English)"
-    ],
-    "MLBExtraInnings14(English).ca": [
-        "MLB Extra Innings 14 (English)"
-    ],
-    "MLBExtraInnings2(English).ca": [
-        "MLB Extra Innings 2 (English)"
-    ],
-    "MLBExtraInnings3(English).ca": [
-        "MLB Extra Innings 3 (English)"
-    ],
-    "MLBExtraInnings4(English).ca": [
-        "MLB Extra Innings 4 (English)"
-    ],
-    "MLBExtraInnings5(English).ca": [
-        "MLB Extra Innings 5 (English)"
-    ],
-    "MLBExtraInnings6(English).ca": [
-        "MLB Extra Innings 6 (English)"
-    ],
-    "MLBExtraInnings7(English).ca": [
-        "MLB Extra Innings 7 (English)"
-    ],
-    "MLBExtraInnings8(English).ca": [
-        "MLB Extra Innings 8 (English)"
-    ],
-    "MLBExtraInnings9(English).ca": [
-        "MLB Extra Innings 9 (English)"
-    ],
-    "MLBNetwork(English).ca": [
-        "MLB Network (English)"
-    ],
-    "Moietcompagnie(src01).ca": [
-        "Moi et compagnie"
-    ],
-    "MomoKids(English).ca": [
-        "Momo Kids (English)"
-    ],
-    "MovieTime(English).ca": [
-        "MovieTime (English)"
-    ],
-    "MSNBC(English).ca": [
-        "MSNBC (English)"
-    ],
-    "MSNBCCaribbeanandInternational(English).ca": [
-        "MSNBC Caribbean and International (English)"
-    ],
-    "MTV(English).ca": [
-        "MTV (English)"
-    ],
-    "MuchMusic(English).ca": [
-        "Much Music (English)"
-    ],
-    "MuchMusicNetwork(English).ca": [
-        "MuchMusic Network (English)"
-    ],
-    "MuseumTV(English).ca": [
-        "MuseumTV (English)"
-    ],
-    "MuseumTV(French).ca": [
-        "MuseumTV (French)"
-    ],
-    "NASATV(English).ca": [
-        "NASA TV (English)"
-    ],
-    "NationalGeographic(English).ca": [
-        "National Geographic (English)"
-    ],
-    "NationalGeographicWild(English).ca": [
-        "National Geographic Wild (English)"
-    ],
-    "NatyfTV(French).ca": [
-        "Natyf TV (French)"
-    ],
-    "NBALEAGUEPASS0(English).ca": [
-        "NBA LEAGUE PASS 0 (English)"
-    ],
-    "NBALeaguePass1(English).ca": [
-        "NBA League Pass 1 (English)"
-    ],
-    "NBALeaguePass10(English).ca": [
-        "NBA League Pass 10 (English)"
-    ],
-    "NBALeaguePass2(English).ca": [
-        "NBA League Pass 2 (English)"
-    ],
-    "NBALeaguePass3(English).ca": [
-        "NBA League Pass 3 (English)"
-    ],
-    "NBALeaguePass4(English).ca": [
-        "NBA League Pass 4 (English)"
-    ],
-    "NBALeaguePass5(English).ca": [
-        "NBA League Pass 5 (English)"
-    ],
-    "NBALeaguePass6(English).ca": [
-        "NBA League Pass 6 (English)"
-    ],
-    "NBALeaguePass7(English).ca": [
-        "NBA League Pass 7 (English)"
-    ],
-    "NBALeaguePass8(English).ca": [
-        "NBA League Pass 8 (English)"
-    ],
-    "NBALeaguePass9(English).ca": [
-        "NBA League Pass 9 (English)"
-    ],
-    "NBATV(English).ca": [
-        "NBA TV (English)"
-    ],
-    "NCAACollegeSportsPackage(English).ca": [
-        "NCAA College Sports Package (English)"
-    ],
-    "NCAACollegeSportsPackage10(English).ca": [
-        "NCAA College Sports Package 10 (English)"
-    ],
-    "NCAACollegeSportsPackage9(English).ca": [
-        "NCAA College Sports Package 9 (English)"
-    ],
-    "NDTV24X7(English).ca": [
-        "NDTV 24X7 (English)"
-    ],
-    "NDTVGoodTimes(English).ca": [
-        "NDTV Good Times (English)"
-    ],
-    "NeepawaAccessTV(English).ca": [
-        "Neepawa Access TV (English)"
-    ],
-    "NewGreekTelevision(English).ca": [
-        "New Greek Television (English)"
-    ],
-    "NewTangDynasty(English).ca": [
-        "New Tang Dynasty (English)"
-    ],
-    "NEWSONLY(English).ca": [
-        "NEWS ONLY (English)"
-    ],
-    "NFLNetworkALTCanadianFeed(English).ca": [
-        "NFL Network ALT Canadian Feed (English)"
-    ],
-    "NFLSundayTicket10(English).ca": [
-        "NFL Sunday Ticket 10 (English)"
-    ],
-    "NFLSundayTicket9(English).ca": [
-        "NFL Sunday Ticket 9 (English)"
-    ],
-    "NFLSundayTicketNFL1(English).ca": [
-        "NFL Sunday Ticket NFL1 (English)"
-    ],
-    "NFLSundayTicketNFL10(English).ca": [
-        "NFL Sunday Ticket NFL10 (English)"
-    ],
-    "NFLSundayTicketNFL11(English).ca": [
-        "NFL Sunday Ticket NFL11 (English)"
-    ],
-    "NFLSundayTicketNFL12(English).ca": [
-        "NFL Sunday Ticket NFL12 (English)"
-    ],
-    "NFLSundayTicketNFL13(English).ca": [
-        "NFL Sunday Ticket NFL13 (English)"
-    ],
-    "NFLSundayTicketNFL14(English).ca": [
-        "NFL Sunday Ticket NFL14 (English)"
-    ],
-    "NFLSundayTicketNFL15(English).ca": [
-        "NFL Sunday Ticket NFL15 (English)"
-    ],
-    "NFLSundayTicketNFL16(English).ca": [
-        "NFL Sunday Ticket NFL16 (English)"
-    ],
-    "NFLSundayTicketNFL17(English).ca": [
-        "NFL Sunday Ticket NFL17 (English)"
-    ],
-    "NFLSundayTicketNFL18(English).ca": [
-        "NFL Sunday Ticket NFL18 (English)"
-    ],
-    "NFLSundayTicketNFL2(English).ca": [
-        "NFL Sunday Ticket NFL2 (English)"
-    ],
-    "NFLSundayTicketNFL3(English).ca": [
-        "NFL Sunday Ticket NFL3 (English)"
-    ],
-    "NFLSundayTicketNFL4(English).ca": [
-        "NFL Sunday Ticket NFL4 (English)"
-    ],
-    "NFLSundayTicketNFL5(English).ca": [
-        "NFL Sunday Ticket NFL5 (English)"
-    ],
-    "NFLSundayTicketNFL6(English).ca": [
-        "NFL Sunday Ticket NFL6 (English)"
-    ],
-    "NFLSundayTicketNFL7(English).ca": [
-        "NFL Sunday Ticket NFL7 (English)"
-    ],
-    "NFLSundayTicketNFL8(English).ca": [
-        "NFL Sunday Ticket NFL8 (English)"
-    ],
-    "NFLSundayTicketNFL9(English).ca": [
-        "NFL Sunday Ticket NFL9 (English)"
-    ],
-    "NFL10SC(English).ca": [
-        "NFL10SC (English)"
-    ],
-    "NFL11SC(English).ca": [
-        "NFL11SC (English)"
-    ],
-    "NFL12SC(English).ca": [
-        "NFL12SC (English)"
-    ],
-    "NFL13SC(English).ca": [
-        "NFL13SC (English)"
-    ],
-    "NFL14SC(English).ca": [
-        "NFL14SC (English)"
-    ],
-    "NFL1SC(English).ca": [
-        "NFL1SC (English)"
-    ],
-    "NFL2SC(English).ca": [
-        "NFL2SC (English)"
-    ],
-    "NFL3SC(English).ca": [
-        "NFL3SC (English)"
-    ],
-    "NFL4SC(English).ca": [
-        "NFL4SC (English)"
-    ],
-    "NFL5SC(English).ca": [
-        "NFL5SC (English)"
-    ],
-    "NFL6SC(English).ca": [
-        "NFL6SC (English)"
-    ],
-    "NFL7SC(English).ca": [
-        "NFL7SC (English)"
-    ],
-    "NFL8SC(English).ca": [
-        "NFL8SC (English)"
-    ],
-    "NFL9SC(English).ca": [
-        "NFL9SC (English)"
-    ],
-    "NHKWorldTV(English).ca": [
-        "NHK World TV (English)"
-    ],
-    "NHLCentreIce1(English).ca": [
-        "NHL Centre Ice 1 (English)"
-    ],
-    "NHLCentreIce1(French).ca": [
-        "NHL Centre Ice 1 (French)"
-    ],
-    "NHLCentreIce10(English).ca": [
-        "NHL Centre Ice 10 (English)"
-    ],
-    "NHLCentreIce11(English).ca": [
-        "NHL Centre Ice 11 (English)"
-    ],
-    "NHLCentreIce12(English).ca": [
-        "NHL Centre Ice 12 (English)"
-    ],
-    "NHLCentreIce2(English).ca": [
-        "NHL Centre Ice 2 (English)"
-    ],
-    "NHLCentreIce2(French).ca": [
-        "NHL Centre Ice 2 (French)"
-    ],
-    "NHLCentreIce3(English).ca": [
-        "NHL Centre Ice 3 (English)"
-    ],
-    "NHLCentreIce4(English).ca": [
-        "NHL Centre Ice 4 (English)"
-    ],
-    "NHLCentreIce5(English).ca": [
-        "NHL Centre Ice 5 (English)"
-    ],
-    "NHLCentreIce6(English).ca": [
-        "NHL Centre Ice 6 (English)"
-    ],
-    "NHLCentreIce7(English).ca": [
-        "NHL Centre Ice 7 (English)"
-    ],
-    "NHLCentreIce8(English).ca": [
-        "NHL Centre Ice 8 (English)"
-    ],
-    "NHLCentreIce9(English).ca": [
-        "NHL Centre Ice 9 (English)"
-    ],
-    "NHLVU(Static)(English).ca": [
-        "NHLVU (Static) (English)"
-    ],
-    "Nickelodeon(English).ca": [
-        "Nickelodeon (English)"
-    ],
-    "Noovo(CFJP)MontrealQC(src01).ca": [
-        "Noovo (CFJP) MontrealQC",
-        "Noovo Quebec"
-    ],
-    "NTN24NuestraTeleNoticias24(English).ca": [
-        "NTN24 Nuestra Tele Noticias 24 (English)"
-    ],
-    "NTV(English).ca": [
-        "NTV (English)"
-    ],
-    "NTV1(Echostar)NTVInternationalChannelBanglad(English).ca": [
-        "NTV1 (Echostar) NTV International Channel Banglad (English)"
-    ],
-    "NuestraTeleInternacional(Spanish).ca": [
-        "Nuestra Tele Internacional (Spanish)"
-    ],
-    "NWTandNunavutLegislativeAssembly(English).ca": [
-        "NWT and Nunavut Legislative Assembly (English)"
-    ],
-    "OdysseyGreekTV(Greek-English).ca": [
-        "Odyssey Greek TV (Greek, English)"
-    ],
-    "OMNI(East)(English).ca": [
-        "OMNI (East) (English)"
-    ],
-    "OMNI(East)(English-UnknownLanguage(tl)-Punjabi).ca": [
-        "OMNI (East) (English, Unknown Language (tl), Punjabi)"
-    ],
-    "OMNI(Pacific)(English-UnknownLanguage(tl)).ca": [
-        "OMNI (Pacific) (English, Unknown Language (tl))"
-    ],
-    "OMNI(Pacific)(English-UnknownLanguage(tl)-Punjabi-French).ca": [
-        "OMNI (Pacific) (English, Unknown Language (tl), Punjabi, French)"
-    ],
-    "OMNICalgary(English).ca": [
-        "OMNI Calgary (English)"
-    ],
-    "OMNICalgary(English-UnknownLanguage(tl)-Punjabi).ca": [
-        "OMNI Calgary (English, Unknown Language (tl), Punjabi)"
-    ],
-    "OMNIPrairies(English).ca": [
-        "OMNI Prairies (English)"
-    ],
-    "OMNIPrairies(English-UnknownLanguage(tl)-Punjabi).ca": [
-        "OMNI Prairies (English, Unknown Language (tl), Punjabi)"
-    ],
-    "OMNIVancouver(English).ca": [
-        "OMNI Vancouver (English)"
-    ],
-    "OMNI1(English).ca": [
-        "OMNI1 (English)"
-    ],
-    "OMNI1(English-UnknownLanguage(tl)).ca": [
-        "OMNI1 (English, Unknown Language (tl))"
-    ],
-    "OMNI2(English).ca": [
-        "OMNI2 (English)"
-    ],
-    "OMNI2(English-UnknownLanguage(tl)-Punjabi).ca": [
-        "OMNI2 (English, Unknown Language (tl), Punjabi)"
-    ],
-    "ONETV(English).ca": [
-        "ONETV (English)"
-    ],
-    "OntarioLegislature(English).ca": [
-        "Ontario Legislature (English)"
-    ],
-    "OprahWinfreyNetwork(English).ca": [
-        "Oprah Winfrey Network (English)"
-    ],
-    "OutdoorLifeNetwork(English).ca": [
-        "Outdoor Life Network (English)"
-    ],
-    "OUTtv(English).ca": [
-        "OUTtv (English)"
-    ],
-    "OUTtvOnDemand(English).ca": [
-        "OUTtv OnDemand (English)"
-    ],
-    "PenthouseTVPremium(English).ca": [
-        "Penthouse TV Premium (English)"
-    ],
-    "PeopleTV(English).ca": [
-        "PeopleTV (English)"
-    ],
-    "PersonalVideoRecorder(English).ca": [
-        "Personal Video Recorder (English)"
-    ],
-    "PhoenixSatelliteTV(English).ca": [
-        "Phoenix Satellite TV (English)"
-    ],
-    "PITAARAInternational(English).ca": [
-        "PITAARA International (English)"
-    ],
-    "Planete971French(CHLXFM)(English).ca": [
-        "Planete 971 French (CHLX FM) (English)"
-    ],
-    "PlanetePlus(French).ca": [
-        "Planete Plus (French)"
-    ],
-    "Playboy(English).ca": [
-        "Playboy (English)"
-    ],
-    "PlayboyTV(English).ca": [
-        "Playboy TV (English)"
-    ],
-    "PlaymenTV(English).ca": [
-        "Playmen TV (English)"
-    ],
-    "PlaymenTVPremium(English).ca": [
-        "Playmen TV Premium (English)"
-    ],
-    "PrimeAsiaTV(English).ca": [
-        "Prime Asia TV (English)"
-    ],
-    "Prise2(src01).ca": [
-        "Prise 2"
-    ],
-    "Prise2(French).ca": [
-        "Prise 2 (French)"
-    ],
-    "Promo(Static)(English).ca": [
-        "Promo (Static) (English)"
-    ],
-    "PTCPunjabiTV(English).ca": [
-        "PTC Punjabi TV (English)"
-    ],
-    "PTCPunjabiTVDelayedFeed(English).ca": [
-        "PTC Punjabi TV Delayed Feed (English)"
-    ],
-    "PTVGlobal(English).ca": [
-        "PTV Global (English)"
-    ],
-    "PunjjabiTV(English).ca": [
-        "Punjjabi TV (English)"
-    ],
-    "PVR(English).ca": [
-        "PVR (English)"
-    ],
-    "QUB(French).ca": [
-        "QUB (French)"
-    ],
-    "RaiItalia(Italian).ca": [
-        "Rai Italia (Italian)"
-    ],
-    "RaiNews24(Italian).ca": [
-        "Rai News 24 (Italian)"
-    ],
-    "RaiPremium(Italian).ca": [
-        "Rai Premium (Italian)"
-    ],
-    "RDPInternacionalRaidioPortugal(Portuguese).ca": [
-        "RDP Internacional Raidio Portugal (Portuguese)"
-    ],
-    "RDS(Reseaudessports)(src01).ca": [
-        "RDS (Reseau des sports)"
-    ],
-    "RDS2(src01).ca": [
-        "RDS 2"
-    ],
-    "RDSInfo(src01).ca": [
-        "RDS Info"
-    ],
-    "RDS2(French).ca": [
-        "RDS2 (French)"
-    ],
-    "RealEstate(English).ca": [
-        "Real Estate (English)"
-    ],
-    "RealEstateChannel(English).ca": [
-        "Real Estate Channel (English)"
-    ],
-    "RecordInternational(Portuguese).ca": [
-        "Record International (Portuguese)"
-    ],
-    "RedHotPremium(English).ca": [
-        "Red Hot Premium (English)"
-    ],
-    "RedHotTV(English).ca": [
-        "Red Hot TV (English)"
-    ],
-    "RedeGloboTVInternacional(Portuguese).ca": [
-        "Rede Globo TV Internacional (Portuguese)"
-    ],
-    "ReseaudesSports(RDS)(French).ca": [
-        "Reseau des Sports (RDS) (French)"
-    ],
-    "ReseaudesSportsInfo(French).ca": [
-        "Reseau des Sports Info (French)"
-    ],
-    "REVTV(English).ca": [
-        "REV TV (English)"
-    ],
-    "Rewind(English).ca": [
-        "Rewind (English)"
-    ],
-    "RFDTV(English).ca": [
-        "RFDTV (English)"
-    ],
-    "RikSat(English).ca": [
-        "Rik Sat (English)"
-    ],
-    "RogersChannel299(English).ca": [
-        "Rogers Channel 299 (English)"
-    ],
-    "RogersFireplaceChannelEnglish(English).ca": [
-        "Rogers Fireplace Channel English (English)"
-    ],
-    "RogersNFLSundayTicket1(English).ca": [
-        "Rogers NFL Sunday Ticket 1 (English)"
-    ],
-    "RogersNFLSundayTicket10(English).ca": [
-        "Rogers NFL Sunday Ticket 10 (English)"
-    ],
-    "RogersNFLSundayTicket2(English).ca": [
-        "Rogers NFL Sunday Ticket 2 (English)"
-    ],
-    "RogersNFLSundayTicket3(English).ca": [
-        "Rogers NFL Sunday Ticket 3 (English)"
-    ],
-    "RogersNFLSundayTicket4(English).ca": [
-        "Rogers NFL Sunday Ticket 4 (English)"
-    ],
-    "RogersNFLSundayTicket5(English).ca": [
-        "Rogers NFL Sunday Ticket 5 (English)"
-    ],
-    "RogersNFLSundayTicket6(English).ca": [
-        "Rogers NFL Sunday Ticket 6 (English)"
-    ],
-    "RogersNFLSundayTicket7(English).ca": [
-        "Rogers NFL Sunday Ticket 7 (English)"
-    ],
-    "RogersNFLSundayTicket8(English).ca": [
-        "Rogers NFL Sunday Ticket 8 (English)"
-    ],
-    "RogersNFLSundayTicket9(English).ca": [
-        "Rogers NFL Sunday Ticket 9 (English)"
-    ],
-    "RogersSportsnetOntario2(English).ca": [
-        "Rogers Sportsnet Ontario 2 (English)"
-    ],
-    "RogersSuperSportsPack(English).ca": [
-        "Rogers Super Sports Pack (English)"
-    ],
-    "RogersSuperSportsPack1(English).ca": [
-        "Rogers Super Sports Pack 1 (English)"
-    ],
-    "RogersSuperSportsPack10(English).ca": [
-        "Rogers Super Sports Pack 10 (English)"
-    ],
-    "RogersSuperSportsPack11(English).ca": [
-        "Rogers Super Sports Pack 11 (English)"
-    ],
-    "RogersSuperSportsPack12(English).ca": [
-        "Rogers Super Sports Pack 12 (English)"
-    ],
-    "RogersSuperSportsPack13(English).ca": [
-        "Rogers Super Sports Pack 13 (English)"
-    ],
-    "RogersSuperSportsPack14(English).ca": [
-        "Rogers Super Sports Pack 14 (English)"
-    ],
-    "RogersSuperSportsPack15(English).ca": [
-        "Rogers Super Sports Pack 15 (English)"
-    ],
-    "RogersSuperSportsPack16(English).ca": [
-        "Rogers Super Sports Pack 16 (English)"
-    ],
-    "RogersSuperSportsPack17(English).ca": [
-        "Rogers Super Sports Pack 17 (English)"
-    ],
-    "RogersSuperSportsPack18(English).ca": [
-        "Rogers Super Sports Pack 18 (English)"
-    ],
-    "RogersSuperSportsPack19(English).ca": [
-        "Rogers Super Sports Pack 19 (English)"
-    ],
-    "RogersSuperSportsPack2(English).ca": [
-        "Rogers Super Sports Pack 2 (English)"
-    ],
-    "RogersSuperSportsPack20(English).ca": [
-        "Rogers Super Sports Pack 20 (English)"
-    ],
-    "RogersSuperSportsPack20(HD20)(English).ca": [
-        "Rogers Super Sports Pack 20 (HD20) (English)"
-    ],
-    "RogersSuperSportsPack21(English-French).ca": [
-        "Rogers Super Sports Pack 21 (English, French)"
-    ],
-    "RogersSuperSportsPack22(English).ca": [
-        "Rogers Super Sports Pack 22 (English)"
-    ],
-    "RogersSuperSportsPack23(English-French).ca": [
-        "Rogers Super Sports Pack 23 (English, French)"
-    ],
-    "RogersSuperSportsPack24(English-French).ca": [
-        "Rogers Super Sports Pack 24 (English, French)"
-    ],
-    "RogersSuperSportsPack25(English-French).ca": [
-        "Rogers Super Sports Pack 25 (English, French)"
-    ],
-    "RogersSuperSportsPack26(English-French).ca": [
-        "Rogers Super Sports Pack 26 (English, French)"
-    ],
-    "RogersSuperSportsPack27(English-French).ca": [
-        "Rogers Super Sports Pack 27 (English, French)"
-    ],
-    "RogersSuperSportsPack28(English-French).ca": [
-        "Rogers Super Sports Pack 28 (English, French)"
-    ],
-    "RogersSuperSportsPack29(English-French).ca": [
-        "Rogers Super Sports Pack 29 (English, French)"
-    ],
-    "RogersSuperSportsPack3(English).ca": [
-        "Rogers Super Sports Pack 3 (English)"
-    ],
-    "RogersSuperSportsPack30(English-French).ca": [
-        "Rogers Super Sports Pack 30 (English, French)"
-    ],
-    "RogersSuperSportsPack31(English-French).ca": [
-        "Rogers Super Sports Pack 31 (English, French)"
-    ],
-    "RogersSuperSportsPack33(English).ca": [
-        "Rogers Super Sports Pack 33 (English)"
-    ],
-    "RogersSuperSportsPack36(English).ca": [
-        "Rogers Super Sports Pack 36 (English)"
-    ],
-    "RogersSuperSportsPack37(English).ca": [
-        "Rogers Super Sports Pack 37 (English)"
-    ],
-    "RogersSuperSportsPack38(English).ca": [
-        "Rogers Super Sports Pack 38 (English)"
-    ],
-    "RogersSuperSportsPack39(English).ca": [
-        "Rogers Super Sports Pack 39 (English)"
-    ],
-    "RogersSuperSportsPack4(English).ca": [
-        "Rogers Super Sports Pack 4 (English)"
-    ],
-    "RogersSuperSportsPack40(English).ca": [
-        "Rogers Super Sports Pack 40 (English)"
-    ],
-    "RogersSuperSportsPack41(English-French).ca": [
-        "Rogers Super Sports Pack 41 (English, French)"
-    ],
-    "RogersSuperSportsPack5(English).ca": [
-        "Rogers Super Sports Pack 5 (English)"
-    ],
-    "RogersSuperSportsPack6(English).ca": [
-        "Rogers Super Sports Pack 6 (English)"
-    ],
-    "RogersSuperSportsPack7(English).ca": [
-        "Rogers Super Sports Pack 7 (English)"
-    ],
-    "RogersSuperSportsPack8(English).ca": [
-        "Rogers Super Sports Pack 8 (English)"
-    ],
-    "RogersSuperSportsPack9(English).ca": [
-        "Rogers Super Sports Pack 9 (English)"
-    ],
-    "RogersTelevision(English).ca": [
-        "Rogers Television (English)"
-    ],
-    "RotanaAflam(English).ca": [
-        "Rotana Aflam (English)"
-    ],
-    "RotanaCinema(English).ca": [
-        "Rotana Cinema (English)"
-    ],
-    "RotanaClassic(English).ca": [
-        "Rotana Classic (English)"
-    ],
-    "RotanaClip(English).ca": [
-        "Rotana Clip (English)"
-    ],
-    "RotanaKhalijia(English).ca": [
-        "Rotana Khalijia (English)"
-    ],
-    "RotanaMasriya(English).ca": [
-        "Rotana Masriya (English)"
-    ],
-    "RotanaMousica(English).ca": [
-        "Rotana Mousica (English)"
-    ],
-    "RTNWMNB(Russian).ca": [
-        "RTNWMNB (Russian)"
-    ],
-    "RTPiRadioTVPortuguesaIntl(Portuguese).ca": [
-        "RTPi RadioTV Portuguesa Intl (Portuguese)"
-    ],
-    "RTSSat(Serbian-English).ca": [
-        "RTS Sat (Serbian, English)"
-    ],
-    "RTVInternational(Russian).ca": [
-        "RTV International (Russian)"
-    ],
-    "RussianIllusion(Russian).ca": [
-        "Russian Illusion (Russian)"
-    ],
-    "SAB(English).ca": [
-        "SAB (English)"
-    ],
-    "SAHARAONE(English).ca": [
-        "SAHARA ONE (English)"
-    ],
-    "SaigonBroadcastingNetwork(English).ca": [
-        "Saigon Broadcasting Network (English)"
-    ],
-    "SaintPierreetMiquelon1ere(French).ca": [
-        "SaintPierre et Miquelon 1ere (French)"
-    ],
-    "Saisons(French).ca": [
-        "Saisons (French)"
-    ],
-    "SaltandLightTelevision(English-French-Italian-Spanish).ca": [
-        "Salt and Light Television (English, French, Italian, Spanish)"
-    ],
-    "SanjhaTV(English).ca": [
-        "Sanjha TV (English)"
-    ],
-    "SavoirMedia(src01).ca": [
-        "Savoir Media"
-    ],
-    "Savoirmedia(French-English).ca": [
-        "Savoir media (French, English)"
-    ],
-    "Schlager(English).ca": [
-        "Schlager (English)"
-    ],
-    "Seriesplus(src01).ca": [
-        "Series plus"
-    ],
-    "SETAsiaInternational(English).ca": [
-        "SET Asia International (English)"
-    ],
-    "SetMax(English).ca": [
-        "Set Max (English)"
-    ],
-    "Showcase(English).ca": [
-        "Showcase (English)"
-    ],
-    "ShowcaseTelevisionInc(English).ca": [
-        "Showcase Television Inc (English)"
-    ],
-    "SICNoticias(Portuguese).ca": [
-        "SIC Noticias (Portuguese)"
-    ],
-    "SilverScreenClassics(English).ca": [
-        "Silver Screen Classics (English)"
-    ],
-    "Skinemax(English).ca": [
-        "Skinemax (English)"
-    ],
-    "SkyNews(English).ca": [
-        "Sky News (English)"
-    ],
-    "SkyNewsArabia(English).ca": [
-        "Sky News Arabia (English)"
-    ],
-    "SLICE(English).ca": [
-        "SLICE (English)"
-    ],
-    "SmithsonianChannel(English).ca": [
-        "Smithsonian Channel (English)"
-    ],
-    "SonyAATH(English).ca": [
-        "Sony AATH (English)"
-    ],
-    "SportPlus(English).ca": [
-        "SportPlus (English)"
-    ],
-    "SportsmanChannel(English).ca": [
-        "Sportsman Channel (English)"
-    ],
-    "Sportsnet(East)(English).ca": [
-        "Sportsnet (East) (English)"
-    ],
-    "Sportsnet(Pacific)(English).ca": [
-        "Sportsnet (Pacific) (English)"
-    ],
-    "Sportsnet(West)(English).ca": [
-        "Sportsnet (West) (English)"
-    ],
-    "Sportsnet360(English).ca": [
-        "Sportsnet 360 (English)"
-    ],
-    "Sportsnet4K(English).ca": [
-        "Sportsnet 4K (English)"
-    ],
-    "SportsnetMST(English).ca": [
-        "Sportsnet MST (English)"
-    ],
-    "SportsnetOne(English).ca": [
-        "Sportsnet One (English)"
-    ],
-    "SportsnetOne4K(English).ca": [
-        "Sportsnet One 4K (English)"
-    ],
-    "SportsnetOneCanucks(English).ca": [
-        "Sportsnet One Canucks (English)"
-    ],
-    "SportsnetOneFlames(English).ca": [
-        "Sportsnet One Flames (English)"
-    ],
-    "SportsnetOneOilers(English).ca": [
-        "Sportsnet One Oilers (English)"
-    ],
-    "SportsnetOneSenators(English).ca": [
-        "Sportsnet One Senators (English)"
-    ],
-    "SportsnetOntario(Alt)(English).ca": [
-        "Sportsnet Ontario (Alt) (English)"
-    ],
-    "SportsnetOntario(English).ca": [
-        "Sportsnet Ontario (English)"
-    ],
-    "SportsnetWorld(English).ca": [
-        "Sportsnet World (English)"
-    ],
-    "SportsnetWorldPlus1(English).ca": [
-        "Sportsnet World Plus 1 (English)"
-    ],
-    "SportsnetWorldPlus2(English).ca": [
-        "Sportsnet World Plus 2 (English)"
-    ],
-    "SportsnetWorldPlus3(English).ca": [
-        "Sportsnet World Plus 3 (English)"
-    ],
-    "SportsnetWorldPlus4(English).ca": [
-        "Sportsnet World Plus 4 (English)"
-    ],
-    "SportsnewsTV(OTT)(English).ca": [
-        "Sportsnews TV (OTT) (English)"
-    ],
-    "Star(English).ca": [
-        "Star (English)"
-    ],
-    "STARZ1(English).ca": [
-        "STARZ 1 (English)"
-    ],
-    "STARZ1(West)(English).ca": [
-        "STARZ 1 (West) (English)"
-    ],
-    "STARZ2(English).ca": [
-        "STARZ 2 (English)"
-    ],
-    "STARZ2(West)(English).ca": [
-        "STARZ 2 (West) (English)"
-    ],
-    "STARZonDemand(English).ca": [
-        "STARZ onDemand (English)"
-    ],
-    "StudioCanal(src01).ca": [
-        "StudioCanal"
-    ],
-    "StudioCanal(French).ca": [
-        "StudioCanal (French)"
-    ],
-    "SuperChannelFuse(English).ca": [
-        "Super Channel Fuse (English)"
-    ],
-    "SuperChannelHeartandHome(English).ca": [
-        "Super Channel Heart and Home (English)"
-    ],
-    "SuperChannelVault(English).ca": [
-        "Super Channel Vault (English)"
-    ],
-    "SuperEcran2(src01).ca": [
-        "Super Ecran 2"
-    ],
-    "SuperEcran3(src01).ca": [
-        "Super Ecran 3"
-    ],
-    "SuperEcran4(src01).ca": [
-        "Super Ecran 4"
-    ],
-    "SuperEcranSurDemande(French).ca": [
-        "Super Ecran Sur Demande (French)"
-    ],
-    "SuperEcran(src01).ca": [
-        "Super Ecran"
-    ],
-    "SurSagarTV(English).ca": [
-        "Sur Sagar TV (English)"
-    ],
-    "TamilEntertainmentTV(English).ca": [
-        "Tamil Entertainment TV (English)"
-    ],
-    "TamilVision(English).ca": [
-        "Tamil Vision (English)"
-    ],
-    "TamilOne(English).ca": [
-        "TamilOne (English)"
-    ],
-    "Telebimbi(English).ca": [
-        "Telebimbi (English)"
-    ],
-    "TelefeInternacional(Spanish).ca": [
-        "Telefe Internacional (Spanish)"
-    ],
-    "TelehitMusica(Spanish).ca": [
-        "Telehit Musica (Spanish)"
-    ],
-    "Telelatino(English).ca": [
-        "Telelatino (English)"
-    ],
-    "TelelatinoNetwork(English).ca": [
-        "Telelatino Network (English)"
-    ],
-    "TeleMag(French).ca": [
-        "TeleMag"
-    ],
-    "Telemagino(src01).ca": [
-        "Telemagino"
-    ],
-    "Telemagino(French).ca": [
-        "Telemagino (French)"
-    ],
-    "TeleNinos(Spanish).ca": [
-        "TeleNinos (Spanish)"
-    ],
-    "TeleQuebec(CIVM)Montreal(src01).ca": [
-        "TeleQuebec (CIVM) Montreal"
-    ],
-    "Teleritmo(Spanish).ca": [
-        "Teleritmo (Spanish)"
-    ],
-    "TeleTOONfrancais(src01).ca": [
-        "TeleTOON francais"
-    ],
-    "TeletoonFrancais(French).ca": [
-        "Teletoon Francais (French)"
-    ],
-    "TelileTV(CIMCTV)(English).ca": [
-        "Telile TV (CIMCTV) (English)"
-    ],
-    "TEMOIN(French).ca": [
-        "TEMOIN (French)"
-    ],
-    "TestChannel1(English).ca": [
-        "Test Channel 1 (English)"
-    ],
-    "TestChannel3(English).ca": [
-        "Test Channel 3 (English)"
-    ],
-    "TestChannel4(English).ca": [
-        "Test Channel 4 (English)"
-    ],
-    "TestChannel5(English).ca": [
-        "Test Channel 5 (English)"
-    ],
-    "TestChannel6UHD(English).ca": [
-        "Test Channel 6 UHD (English)"
-    ],
-    "TestPBSBuffalo(WNED)GTA(English).ca": [
-        "Test PBS Buffalo (WNED) GTA (English)"
-    ],
-    "TestStation(English).ca": [
-        "Test Station (English)"
-    ],
-    "TFO(French).ca": [
-        "TFO (French)"
-    ],
-    "TFO(TVOntario)(src01).ca": [
-        "TFO (TV Ontario)"
-    ],
-    "TheAfricaChannel(English).ca": [
-        "The Africa Channel (English)"
-    ],
-    "TheCowboyChannel(English).ca": [
-        "The Cowboy Channel (English)"
-    ],
-    "TheFamilyChannel(English).ca": [
-        "The Family Channel (English)"
-    ],
-    "TheFamilyChannel(Pacific)(English).ca": [
-        "The Family Channel (Pacific) (English)"
-    ],
-    "TheFightNetwork(English).ca": [
-        "The Fight Network (English)"
-    ],
-    "TheFilipinoChannel(Pacific)(English).ca": [
-        "The Filipino Channel (Pacific) (English)"
-    ],
-    "TheFrame(English).ca": [
-        "The Frame (English)"
-    ],
-    "TheIsraeliNetwork(English).ca": [
-        "The Israeli Network (English)"
-    ],
-    "TheLearningChannel(English).ca": [
-        "The Learning Channel (English)"
-    ],
-    "TheMiracleChannelCJIL(English).ca": [
-        "The Miracle Channel CJIL (English)"
-    ],
-    "TheNewsForum(English).ca": [
-        "The News Forum (English)"
-    ],
-    "TheRuralChannel(English).ca": [
-        "The Rural Channel (English)"
-    ],
-    "TheWeatherNetwork(English).ca": [
-        "The Weather Network (English)"
-    ],
-    "TimeShiftingInformation(English).ca": [
-        "Time Shifting Information (English)"
-    ],
-    "TimeShiftingInformation(French)(French).ca": [
-        "Time Shifting Information (French) (French)"
-    ],
-    "TLNovelas(Spanish).ca": [
-        "TLNovelas (Spanish)"
-    ],
-    "TooMuchforTVTMFTV(English).ca": [
-        "Too Much for TV TMFTV (English)"
-    ],
-    "ToonAVision(English).ca": [
-        "ToonAVision (English)"
-    ],
-    "TOTALLYENTERTAINING(English).ca": [
-        "TOTALLY ENTERTAINING (English)"
-    ],
-    "TravelXP(English).ca": [
-        "Travel XP (English)"
-    ],
-    "Treehouse(English).ca": [
-        "Treehouse (English)"
-    ],
-    "TSC(English).ca": [
-        "TSC (English)"
-    ],
-    "TSN(English).ca": [
-        "TSN (English)"
-    ],
-    "TSN1(English).ca": [
-        "TSN 1 (English)"
-    ],
-    "TSN2(English).ca": [
-        "TSN 2 (English)"
-    ],
-    "TSN24K(English).ca": [
-        "TSN 2 4K (English)"
-    ],
-    "TSN3(English).ca": [
-        "TSN 3 (English)"
-    ],
-    "TSN3Blackout(English).ca": [
-        "TSN 3 Blackout (English)"
-    ],
-    "TSN4(English).ca": [
-        "TSN 4 (English)"
-    ],
-    "TSN4Blackout(English).ca": [
-        "TSN 4 Blackout (English)"
-    ],
-    "TSN5(English).ca": [
-        "TSN 5 (English)"
-    ],
-    "TSN54K(English).ca": [
-        "TSN5 4K (English)"
-    ],
-    "TurnerClassicMovies(English).ca": [
-        "Turner Classic Movies (English)"
-    ],
-    "TV5Quebec(French).ca": [
-        "TV 5 Quebec (French)"
-    ],
-    "TVAsia(English).ca": [
-        "TV Asia (English)"
-    ],
-    "TVCallDisplay(English).ca": [
-        "TV Call Display (English)"
-    ],
-    "TVChile(Spanish).ca": [
-        "TV Chile (Spanish)"
-    ],
-    "TVGuide(English).ca": [
-        "TV Guide (English)"
-    ],
-    "TVRogers(Ottawa)(French).ca": [
-        "TV Rogers (Ottawa) (French)"
-    ],
-    "TV1CF(English-French).ca": [
-        "TV1CF (English, French)"
-    ],
-    "TV5(LaTelevisionInternationale)(French).ca": [
-        "TV5 (La Television Internationale) (French)"
-    ],
-    "TV5International(East)(src01).ca": [
-        "TV5 International (East)"
-    ],
-    "TVA(src01).ca": [
-        "TVA"
-    ],
-    "TVA(Pacific)(French).ca": [
-        "TVA (Pacific) (French)"
-    ],
-    "TVASports(src01).ca": [
-        "TVA Sports"
-    ],
-    "TVASports(French).ca": [
-        "TVA Sports (French)"
-    ],
-    "TVASports2(src01).ca": [
-        "TVA Sports 2"
-    ],
-    "TVASports2(French).ca": [
-        "TVA Sports 2 (French)"
-    ],
-    "TVASports3(French).ca": [
-        "TVA Sports 3 (French)"
-    ],
-    "TVE(Spanish).ca": [
-        "TVE (Spanish)"
-    ],
-    "TVIPortugal(English).ca": [
-        "TVI Portugal (English)"
-    ],
-    "TVNInternational(Polish).ca": [
-        "TVN International (Polish)"
-    ],
-    "TVO(English).ca": [
-        "TVO (English)"
-    ],
-    "TVONEGlobal(English).ca": [
-        "TVONE Global (English)"
-    ],
-    "TVPInfo(Polish).ca": [
-        "TVP Info (Polish)"
-    ],
-    "Unis(src01).ca": [
-        "Unis"
-    ],
-    "UnisTV(French).ca": [
-        "Unis TV (French)"
-    ],
-    "Univision(Spanish).ca": [
-        "Univision (Spanish)"
-    ],
-    "Vanakkam(English).ca": [
-        "Vanakkam (English)"
-    ],
-    "VanakkamFM(English).ca": [
-        "Vanakkam FM (English)"
-    ],
-    "VCTV(CHVCTV)(English).ca": [
-        "VCTV (CHVCTV) (English)"
-    ],
-    "Venus(Spanish).ca": [
-        "Venus (Spanish)"
-    ],
-    "VietGlobalNetworkTV(English).ca": [
-        "Viet Global Network TV (English)"
-    ],
-    "VisionTV(English).ca": [
-        "Vision TV (English)"
-    ],
-    "VividTVSurDemande(French).ca": [
-        "Vivid TV Sur Demande (French)"
-    ],
-    "VODEntryPoint4(English).ca": [
-        "VOD Entry Point 4 (English)"
-    ],
-    "VODEntryPoint5(English).ca": [
-        "VOD Entry Point 5 (English)"
-    ],
-    "VODEntryPoint6(English).ca": [
-        "VOD Entry Point 6 (English)"
-    ],
-    "VODEntryPoint7(English).ca": [
-        "VOD Entry Point 7 (English)"
-    ],
-    "VRAK(src01).ca": [
-        "VRAK"
-    ],
-    "W(WomensTelevisionNetwork)(Pacific)(English).ca": [
-        "W (Womens Television Network) (Pacific) (English)"
-    ],
-    "WNetwork(English).ca": [
-        "W Network (English)"
-    ],
-    "WATERTelevisionNetwork(English).ca": [
-        "WATER Television Network (English)"
-    ],
-    "WBFO887FM(English).ca": [
-        "WBFO 887FM (English)"
-    ],
-    "WBTSCD(English).ca": [
-        "WBTSCD (English)"
-    ],
-    "WBZ(English).ca": [
-        "WBZ (English)"
-    ],
-    "WBZDT(English).ca": [
-        "WBZDT (English)"
-    ],
-    "WCVBSatellite(English).ca": [
-        "WCVB Satellite (English)"
-    ],
-    "WCVBDT(English).ca": [
-        "WCVBDT (English)"
-    ],
-    "WDIV(English).ca": [
-        "WDIV (English)"
-    ],
-    "WDIVDT(English).ca": [
-        "WDIVDT (English)"
-    ],
-    "WeatherNetwork(CWEA)(English).ca": [
-        "Weather Network (CWEA) (English)"
-    ],
-    "WFXT(English).ca": [
-        "WFXT (English)"
-    ],
-    "WFXTDT(English).ca": [
-        "WFXTDT (English)"
-    ],
-    "WGBH(English).ca": [
-        "WGBH (English)"
-    ],
-    "WGBHDT(English).ca": [
-        "WGBHDT (English)"
-    ],
-    "WGN(Chicago)(English).ca": [
-        "WGN (Chicago) (English)"
-    ],
-    "WGNDT(English).ca": [
-        "WGNDT (English)"
-    ],
-    "WGRZ(English).ca": [
-        "WGRZ (English)"
-    ],
-    "WGRZDT(English).ca": [
-        "WGRZDT (English)"
-    ],
-    "WILDTV(English).ca": [
-        "WILD TV (English)"
-    ],
-    "WildBrainTV(East)(English).ca": [
-        "WildBrainTV (East) (English)"
-    ],
-    "WillowCricket(English).ca": [
-        "Willow Cricket (English)"
-    ],
-    "WinTVCaribbean(English).ca": [
-        "Win TV Caribbean (English)"
-    ],
-    "WIVB(English).ca": [
-        "WIVB (English)"
-    ],
-    "WIVBDT(English).ca": [
-        "WIVBDT (English)"
-    ],
-    "WJBK(English).ca": [
-        "WJBK (English)"
-    ],
-    "WJBKDT(English).ca": [
-        "WJBKDT (English)"
-    ],
-    "WKBW(English).ca": [
-        "WKBW (English)"
-    ],
-    "WKBWDT(English).ca": [
-        "WKBWDT (English)"
-    ],
-    "WKND995(French).ca": [
-        "WKND 995 (French)"
-    ],
-    "WNEDDT(English).ca": [
-        "WNEDDT (English)"
-    ],
-    "WNYO(English).ca": [
-        "WNYO (English)"
-    ],
-    "WNYODT(English).ca": [
-        "WNYODT (English)"
-    ],
-    "WOWTV(English).ca": [
-        "WOWTV (English)"
-    ],
-    "WPBS(English).ca": [
-        "WPBS (English)"
-    ],
-    "WPBSDT(English).ca": [
-        "WPBSDT (English)"
-    ],
-    "WPCHCable(English).ca": [
-        "WPCH Cable (English)"
-    ],
-    "WPCHDT4(English).ca": [
-        "WPCHDT4 (English)"
-    ],
-    "WPIX(English).ca": [
-        "WPIX (English)"
-    ],
-    "WPIXDT(English).ca": [
-        "WPIXDT (English)"
-    ],
-    "WSBK(English).ca": [
-        "WSBK (English)"
-    ],
-    "WSBKDT(English).ca": [
-        "WSBKDT (English)"
-    ],
-    "WTVS(English).ca": [
-        "WTVS (English)"
-    ],
-    "WTVSDT(English).ca": [
-        "WTVSDT (English)"
-    ],
-    "WUHFDT(English).ca": [
-        "WUHFDT (English)"
-    ],
-    "WUTV(English).ca": [
-        "WUTV (English)"
-    ],
-    "WUTVDT(English).ca": [
-        "WUTVDT (English)"
-    ],
-    "WWENetwork(English).ca": [
-        "WWE Network (English)"
-    ],
-    "WWJ(English).ca": [
-        "WWJ (English)"
-    ],
-    "WWJDT(English).ca": [
-        "WWJDT (English)"
-    ],
-    "WXYZ(English).ca": [
-        "WXYZ (English)"
-    ],
-    "WXYZCABLE(English).ca": [
-        "WXYZ CABLE (English)"
-    ],
-    "WXYZDT(English).ca": [
-        "WXYZDT (English)"
-    ],
-    "YChannel(English-Hindi-Urdu-Punjabi).ca": [
-        "Y Channel (English, Hindi, Urdu, Punjabi)"
-    ],
-    "YaHalaInternational(English).ca": [
-        "Ya Hala International (English)"
-    ],
-    "YesTVCalgary(English).ca": [
-        "Yes TV Calgary (English)"
-    ],
-    "YesTV(English).ca": [
-        "YesTV (English)"
-    ],
-    "Yoopa(src01).ca": [
-        "Yoopa"
-    ],
-    "YourWorldThisWeek(English).ca": [
-        "Your World This Week (English)"
-    ],
-    "YouTBell(English).ca": [
-        "YouTBell (English)"
-    ],
-    "YTV(English).ca": [
-        "YTV (English)"
-    ],
-    "YTVP(English).ca": [
-        "YTVP (English)"
-    ],
-    "Z(French).ca": [
-        "Z (French)"
-    ],
-    "ZeeBangla(English).ca": [
-        "Zee Bangla (English)"
-    ],
-    "ZeeBollywood(English).ca": [
-        "Zee Bollywood (English)"
-    ],
-    "ZeeCinema(English).ca": [
-        "Zee Cinema (English)"
-    ],
-    "ZeeMarathi(English).ca": [
-        "Zee Marathi (English)"
-    ],
-    "ZeePunjabi(English).ca": [
-        "Zee Punjabi (English)"
-    ],
-    "ZeeSalaam(English).ca": [
-        "Zee Salaam (English)"
-    ],
-    "ZeeTalkies(English).ca": [
-        "Zee Talkies (English)"
-    ],
-    "ZeeTamil(English).ca": [
-        "Zee Tamil (English)"
-    ],
-    "ZeeTV(English).ca": [
-        "Zee TV (English)"
-    ],
-    "Zeste(src01).ca": [
-        "Zeste"
-    ],
-    "Zeste(French).ca": [
-        "Zeste (French)"
-    ],
-    "ZesteHD(French).ca": [
-        "ZesteHD (French)"
-    ],
-    "Zing(English).ca": [
-        "Zing (English)"
-    ],
-    "Zoom(English).ca": [
-        "Zoom (English)"
-    ]
+  "": [
+    "A la carte",
+    "Amazon prime",
+    "DAZN",
+    "CINEMAX"
+  ],
+  "13emeRue.fr": [
+    "13eme Rue",
+    "13 eme Rue"
+  ],
+  "2MMonde.fr": [
+    "2M"
+  ],
+  "6ter.fr": [
+    "6ter"
+  ],
+  "8MontBlanc.fr": [
+    "MontBlanc",
+    "Mont Blanc"
+  ],
+  "AB1.fr": [
+    "AB 1",
+    "AB1"
+  ],
+  "AB3(French).ch": [
+    "AB 3",
+    "AB3"
+  ],
+  "Action.fr": [
+    "Action"
+  ],
+  "AlAoulaInternational.fr": [
+    "Al Aoula"
+  ],
+  "Animaux.fr": [
+    "Animaux"
+  ],
+  "Aplus.fr": [
+    "Aplus",
+    "A+"
+  ],
+  "ARTE.fr": [
+    "ARTE"
+  ],
+  "AssembleeNationale(src01).fr": [
+    "Assemblee Nationale"
+  ],
+  "Automoto.fr": [
+    "Automoto"
+  ],
+  "B4UMovies(English).fr": [
+    "B4U Movies"
+  ],
+  "BabyTV.fr": [
+    "Baby TV",
+    "BabyTV"
+  ],
+  "BBlackClassik(src01).fr": [
+    "BBlack"
+  ],
+  "BeINSPORTS1.fr": [
+    "BeIN SPORTS 1",
+    "BeINSPORTS 1",
+    "BeIN SPORT 1"
+  ],
+  "BeINSPORTS2.fr": [
+    "BeIN SPORTS 2",
+    "BeINSPORTS 2",
+    "BeIN SPORT 2"
+  ],
+  "BeINSports3.fr": [
+    "BeIN Sports 3",
+    "BeINSports 3",
+    "BeIN Sport 3"
+  ],
+  "BeINSportsMAX10.fr": [
+    "BeIN Sports MAX 10",
+    "BeINSports MAX 10"
+  ],
+  "BeINSPORTSMax4.fr": [
+    "BeIN SPORTS Max 4",
+    "BeINSPORTS Max 4"
+  ],
+  "BeINSPORTSMax5.fr": [
+    "BeIN SPORTS Max 5",
+    "BeINSPORTS Max 5"
+  ],
+  "BeINSPORTSMax6.fr": [
+    "BeIN SPORTS Max 6",
+    "BeINSPORTS Max 6"
+  ],
+  "BeINSPORTSMax7.fr": [
+    "BeIN SPORTS Max 7",
+    "BeINSPORTS Max 7"
+  ],
+  "BeINSPORTSMax8.fr": [
+    "BeIN SPORTS Max 8",
+    "BeINSPORTS Max 8"
+  ],
+  "BeINSPORTSMax9.fr": [
+    "BeIN SPORTS Max 9",
+    "BeINSPORTS Max 9"
+  ],
+  "BET.fr": [
+    "BET"
+  ],
+  "BFMAlpesduSud(src01).fr": [
+    "BFM Alpes du Sud"
+  ],
+  "BFMALSACE(src01).fr": [
+    "BFM ALSACE"
+  ],
+  "BFMBusiness(src01).fr": [
+    "BFM Business"
+  ],
+  "BFMBusiness.fr": [
+    "BFM Business"
+  ],
+  "BFMLyon.fr": [
+    "BFM Lyon"
+  ],
+  "BFMParis.fr": [
+    "BFM Paris"
+  ],
+  "BFMTV.fr": [
+    "BFM TV"
+  ],
+  "BipTV(src01).fr": [
+    "Bip TV"
+  ],
+  "Boomerang.fr": [
+    "Boomerang"
+  ],
+  "Boomerangplus1.fr": [
+    "Boomerang plus1",
+    "Boomerang +1",
+    "Boomerang+1"
+  ],
+  "CMusicTV.fr": [
+    "C Music"
+  ],
+  "CStarHitsFrance(src01).fr": [
+    "C Star Hits",
+    "CStar Hits"
+  ],
+  "C8.fr": [
+    "C8"
+  ],
+  "CanalJ.fr": [
+    "Canal J"
+  ],
+  "CanalplusCinema.fr": [
+    "Canalplus Cinema",
+    "Canal+ Cinema"
+  ],
+  "CanalplusDocs.fr": [
+    "Canalplus Docs",
+    "Canal+ Docs"
+  ],
+  "CanalplusFoot.fr": [
+    "Canalplus Foot",
+    "Canal+ Foot"
+  ],
+  "CANALplusGrandEcran.fr": [
+    "CANALplus Grand Ecran",
+    "CANAL+ Grand"
+  ],
+  "CanalplusKids.fr": [
+    "Canalplus Kids",
+    "Canalplus Kid",
+    "Canal+ Kids",
+    "Canal+ Kid",
+    "Canalplus Family",
+    "Canal+ Family"
+  ],
+  "CanalplusSeries.fr": [
+    "Canalplus Serie",
+    "Canal+ Serie"
+  ],
+  "CanalplusSport.fr": [
+    "Canalplus Sport",
+    "Canal+ Sport",
+    "Canal Sport",
+    "Canal + Sport"
+  ],
+  "CANALplusFOOT(src01).fr": [
+    "CANALplusFOOT",
+    "CANAL+FOOT",
+    "CANAL+ FOOT",
+    "CANAL + FOOT"
+  ],
+  "CANALplusLIGUE1(src01).fr": [
+    "CANAL+ LIGUE 1"
+  ],
+  "Canalplus.fr": [
+    "Canalplus",
+    "Canal plus",
+    "Canal+",
+    "Canal +"
+  ],
+  "CartoonNetwork.fr": [
+    "Cartoon Network"
+  ],
+  "Cartoonito.fr": [
+    "Cartoonito"
+  ],
+  "ChasseetPeche.fr": [
+    "Chasse et Peche",
+    "Chasse & Peche"
+  ],
+  "Cheddar.fr": [
+    "Cheddar"
+  ],
+  "Cherie25.fr": [
+    "Cherie 25",
+    "Cherie25"
+  ],
+  "CinecinemaClassic(src01).fr": [
+    "Cine cinema Classic",
+    "Cinecinema Classic"
+  ],
+  "CinecinemaClub(src01).fr": [
+    "Cine cinema Club",
+    "Cinecinema Club"
+  ],
+  "CinecinemaEmotion(src01).fr": [
+    "Cine cinema Emotion",
+    "Cinecinema Emotion"
+  ],
+  "CinecinemaFamiz(src01).fr": [
+    "Cine cinema Famiz",
+    "Cinecinema Famiz"
+  ],
+  "CinecinemaFrisson(src01).fr": [
+    "Cine cinema Frisson",
+    "Cinecinema Frisson"
+  ],
+  "CinecinemaPremier(src01).fr": [
+    "Cine cinema Premier",
+    "Cinecinema Premier"
+  ],
+  "CineplusClassic.fr": [
+    "Cineplus Classic",
+    "Cine+ Classic",
+    "Cine + Classic",
+    "CINE Classic"
+  ],
+  "CINEplusFestival.fr": [
+    "Cineplus Club",
+    "Cine+ Club",
+    "Cine + Club",
+    "CINE CLUB"
+  ],
+  "CineplusEmotion.fr": [
+    "Cineplus Emotion",
+    "Cine+ Emotion",
+    "Cine + Emotion"
+  ],
+  "CINEplusFamily.fr": [
+    "Cineplus Famiz",
+    "Cine+ Famiz",
+    "Cine + Famiz",
+    "CINE FAMIZ"
+  ],
+  "CineplusFrisson.fr": [
+    "Cineplus Frisson",
+    "Cine+ Frisson",
+    "Cine + Frisson",
+    "CINE FRISSON"
+  ],
+  "CineplusPremier(src01).fr": [
+    "Cineplus Premier",
+    "Cine+ Premier",
+    "Cine + Premier",
+    "CINE PREMIER"
+  ],
+  "Classica.fr": [
+    "Classica"
+  ],
+  "ClubbingTV.fr": [
+    "Clubbing"
+  ],
+  "CNews.fr": [
+    "CNews",
+    "C News"
+  ],
+  "Comedieplus.fr": [
+    "Comedieplus",
+    "Comedie+",
+    "Comedie +"
+  ],
+  "ComedyCentral.fr": [
+    "Comedy Central",
+    "ComedyCentral"
+  ],
+  "CPAC(src01).fr": [
+    "CPAC"
+  ],
+  "CrimeDistrict.fr": [
+    "Crime District"
+  ],
+  "CRTV.fr": [
+    "CRTV"
+  ],
+  "CStar.fr": [
+    "CStar",
+    "C Star"
+  ],
+  "CStarHits.fr": [
+    "CStar Hits",
+    "C Star Hits"
+  ],
+  "CultureBox.fr": [
+    "CultureBox"
+  ],
+  "DAZN1(src01).fr": [
+    "DAZN1",
+    "DAZN 1"
+  ],
+  "DemainTV.fr": [
+    "Demain TV"
+  ],
+  "DiscoveryChannel(src01).fr": [
+    "Discovery Channel"
+  ],
+  "DiscoveryInvestigation(src01).fr": [
+    "Discovery Investigation"
+  ],
+  "Discovery.fr": [
+    "Discovery"
+  ],
+  "DisneyChannelplus1.fr": [
+    "Disney Channel plus1",
+    "Disney Channel +1",
+    "Disney Channel+1"
+  ],
+  "DisneyChannel.fr": [
+    "Disney Channel"
+  ],
+  "DisneyJuniorFrance.fr": [
+    "Disney Junior"
+  ],
+  "DjazzTV.fr": [
+    "Djazz TV"
+  ],
+  "DorcelTV.fr": [
+    "Dorcel TV"
+  ],
+  "DorcelXXX.fr": [
+    "Dorcel XXX"
+  ],
+  "Dreamworks.fr": [
+    "Dreamworks"
+  ],
+  "EEntertainment(src01).fr": [
+    "EEntertainment",
+    "E!",
+    "E! ENTERTAINEMENT"
+  ],
+  "Equidia.fr": [
+    "Equidia"
+  ],
+  "LEquipe.fr": [
+    "Equipe 21",
+    "Equipe21",
+    "LEquipe",
+    "L Equipe"
+  ],
+  "LuckyJacktv.fr": [
+    "Lucky Jack"
+  ],
+  "ES1(src01).fr": [
+    "ES1"
+  ],
+  "ETB1(src01).fr": [
+    "ETB 1"
+  ],
+  "Eurochannel.fr": [
+    "Eurochannel",
+    "Euro channel"
+  ],
+  "euronews.fr": [
+    "euronews"
+  ],
+  "Eurosport1.fr": [
+    "Eurosport 1"
+  ],
+  "Eurosport2.fr": [
+    "Eurosport 2"
+  ],
+  "EUROSPORT3601(src01).fr": [
+    "EUROSPORT 360"
+  ],
+  "France24.fr": [
+    "France 24",
+    "France24"
+  ],
+  "France2.fr": [
+    "France 2",
+    "France2",
+    "FR2",
+    "FR 2"
+  ],
+  "France3.fr": [
+    "France 3",
+    "France3",
+    "FR3",
+    "FR 3"
+  ],
+  "France4.fr": [
+    "France 4",
+    "France4",
+    "FR 4",
+    "FR4"
+  ],
+  "France5.fr": [
+    "France 5",
+    "France5",
+    "FR 5",
+    "FR5"
+  ],
+  "FranceInfo.fr": [
+    "France Info",
+    "FranceInfo"
+  ],
+  "FTV(English).fr": [
+    "FTV",
+    "FashionTV",
+    "Fashion TV"
+  ],
+  "FuelTV(English).fr": [
+    "Fuel TV"
+  ],
+  "GameOne.fr": [
+    "Game One",
+    "GameOne"
+  ],
+  "GameOneplus1.fr": [
+    "Game One plus1",
+    "Game One +1"
+  ],
+  "GeniusTrend(German).fr": [
+    "Genius Trend"
+  ],
+  "GeniusPlusTV(German).fr": [
+    "GeniusPlusTV"
+  ],
+  "GeoNews(English).fr": [
+    "Geo News"
+  ],
+  "GEOTV(English).fr": [
+    "GEO TV",
+    "GEOTV"
+  ],
+  "GolfChannel.fr": [
+    "Golf Channel"
+  ],
+  "Golfplus.fr": [
+    "Golf+",
+    "Golf +",
+    "Golfplus"
+  ],
+  "Gong.fr": [
+    "Gong"
+  ],
+  "GongMax(src01).fr": [
+    "Gong Max"
+  ],
+  "GongMaxTV.fr": [
+    "Gong Max TV"
+  ],
+  "GrandLilleTV(src01).fr": [
+    "Grand Lille TV"
+  ],
+  "Guadeloupe1ere(src01).fr": [
+    "Guadeloupe 1ere"
+  ],
+  "Gulli.fr": [
+    "Gulli"
+  ],
+  "Guyane1ere(src01).fr": [
+    "Guyane 1ere"
+  ],
+  "i24News.fr": [
+    "i24 News",
+    "i 24 News"
+  ],
+  "iConcerts(English).fr": [
+    "iConcerts"
+  ],
+  "IDF1(src01).fr": [
+    "IDF1"
+  ],
+  "Infosport.fr": [
+    "Infosport"
+  ],
+  "infosportplus.fr": [
+    "infosport",
+    "info sport"
+  ],
+  "IQRATV(English).fr": [
+    "IQRA TV"
+  ],
+  "ITVNExtra(Polish).fr": [
+    "ITVN Extra"
+  ],
+  "JOne.fr": [
+    "JOne",
+    "J-One",
+    "J One"
+  ],
+  "KTO.fr": [
+    "KTO"
+  ],
+  "LaUne.fr": [
+    "La Une"
+  ],
+  "LBCEurope(English).fr": [
+    "LBC Europe"
+  ],
+  "LCI.fr": [
+    "LCI"
+  ],
+  "LCP.fr": [
+    "LCP"
+  ],
+  "LCPPublicSenat.fr": [
+    "Public Senat"
+  ],
+  "LuxeTV.fr": [
+    "Luxe TV"
+  ],
+  "M6.fr": [
+    "M6"
+  ],
+  "M6Music.fr": [
+    "M6 Music"
+  ],
+  "MATV(src01).fr": [
+    "MA TV"
+  ],
+  "Mangas.fr": [
+    "Mangas"
+  ],
+  "ManX.fr": [
+    "ManX"
+  ],
+  "MCM.fr": [
+    "MCM"
+  ],
+  "MCMTop.fr": [
+    "MCM Top"
+  ],
+  "Melody.fr": [
+    "Melody"
+  ],
+  "MensUPTV.fr": [
+    "Mens UP",
+    "MensUP"
+  ],
+  "Mezzo.fr": [
+    "Mezzo"
+  ],
+  "MezzoLive.fr": [
+    "Mezzo Live"
+  ],
+  "MGGTV.fr": [
+    "MGGTV"
+  ],
+  "MTV.fr": [
+    "MTV"
+  ],
+  "MTVHits.fr": [
+    "MTV Hits",
+    "MTVHits"
+  ],
+  "MyZentv.fr": [
+    "MyZentv"
+  ],
+  "NationalGeographicWild.fr": [
+    "National Geographic Wild",
+    "NAT GEO WILD"
+  ],
+  "NationalGeographic.fr": [
+    "National Geographic",
+    "NAT GEO"
+  ],
+  "NauticalChannel.fr": [
+    "Nautical Channel"
+  ],
+  "Nickelodeon4Teen.fr": [
+    "Nickelodeon 4Teen",
+    "Nickelodeon Teen",
+    "Nick4 Teen",
+    "Nick 4 Teen"
+  ],
+  "NickelodeonJunior.fr": [
+    "Nickelodeon Junior",
+    "Nickelodeon JR",
+    "Nick JR",
+    "Nick Junior"
+  ],
+  "Nickelodeonplus1.fr": [
+    "Nickelodeon plus1",
+    "Nickelodeon +1"
+  ],
+  "Nickelodeon.fr": [
+    "Nickelodeon"
+  ],
+  "NollywoodTV.fr": [
+    "Nollywood"
+  ],
+  "NRJ12.fr": [
+    "NRJ 12",
+    "NRJ12"
+  ],
+  "NRJHits.fr": [
+    "NRJ Hits",
+    "NRJHits"
+  ],
+  "OCSGeants.fr": [
+    "OCS Geant"
+  ],
+  "OCSGeants(src01).fr": [
+    "OCS Geant"
+  ],
+  "OCSCity(French).ch": [
+    "OCS City",
+    "OCS Nova"
+  ],
+  "OCSMax(French).ch": [
+    "OCS Max"
+  ],
+  "OCSPulp.fr": [
+    "OCS Pulp",
+    "OCS Choc"
+  ],
+  "OCS.fr": [
+    "OCS GO"
+  ],
+  "OLTV(src01).fr": [
+    "OL TV",
+    "OLTV"
+  ],
+  "OlympiaTV.fr": [
+    "Olympia TV"
+  ],
+  "ORTB.fr": [
+    "ORTB"
+  ],
+  "ParamountChannel.fr": [
+    "Paramount Channel"
+  ],
+  "ParamountChannelDecale.fr": [
+    "Paramount Decale",
+    "Paramount Channel Decale"
+  ],
+  "ParisPremiere.fr": [
+    "Paris Premiere"
+  ],
+  "Piwiplus.fr": [
+    "Piwiplus",
+    "Piwi+",
+    "Piwi"
+  ],
+  "PlaneteplusAventure.fr": [
+    "Planeteplus Aventure",
+    "Planete+ Aventure",
+    "Planete A&E",
+    "Planeteplus Aventure Experience",
+    "Planete+ A&E",
+    "Planeteplus A&E"
+  ],
+  "PlaneteplusCrime.fr": [
+    "Planeteplus Crime",
+    "Planete+ Crime",
+    "Planeteplus Crime Investigation",
+    "Planete+ CI",
+    "Planete CI",
+    "Planete + CI",
+    "Planeteplus CI",
+    "Planete plus CI"
+  ],
+  "PLANETEplus.fr": [
+    "PLANETEplus",
+    "PLANETE plus",
+    "PLANETE+",
+    "PLANETE",
+    "PLANETE +"
+  ],
+  "POLARplus(src01).fr": [
+    "POLAR plus",
+    "POLAR+"
+  ],
+  "PublicSenat.fr": [
+    "Public Senat"
+  ],
+  "RFMTV.fr": [
+    "RFM TV"
+  ],
+  "RMCDecouverte.fr": [
+    "RMC Decouverte"
+  ],
+  "RMCMystere(src01).fr": [
+    "RMC Mystere"
+  ],
+  "RMCSport1.fr": [
+    "RMC Sport 1"
+  ],
+  "RMCSport2.fr": [
+    "RMC Sport 2"
+  ],
+  "RMCSport3(French).ch": [
+    "RMC Sport 3"
+  ],
+  "RMCSport4K(src01).fr": [
+    "RMC Sport 4K"
+  ],
+  "RMCSportAccess1.fr": [
+    "RMC Sport Access 1"
+  ],
+  "RMCSportLive10(src01).fr": [
+    "RMC Sport Live 10"
+  ],
+  "RMCSportLive11(src01).fr": [
+    "RMC Sport Live 11"
+  ],
+  "RMCSportLive12(src01).fr": [
+    "RMC Sport Live 12"
+  ],
+  "RMCSportLive13(src01).fr": [
+    "RMC Sport Live 13"
+  ],
+  "RMCSportLive14(src01).fr": [
+    "RMC Sport Live 14"
+  ],
+  "RMCSportLive5(src01).fr": [
+    "RMC Sport Live 5"
+  ],
+  "RMCSportLive6(src01).fr": [
+    "RMC Sport Live 6"
+  ],
+  "RMCSportLive7(src01).fr": [
+    "RMC Sport Live 7"
+  ],
+  "RMCSportLive8(src01).fr": [
+    "RMC Sport Live 8"
+  ],
+  "RMCSportLive9(src01).fr": [
+    "RMC Sport Live 9"
+  ],
+  "RMCSportUHD.fr": [
+    "RMC Sport UHD"
+  ],
+  "RMCStory.fr": [
+    "RMC Story"
+  ],
+  "RMCTalkSport(src01).fr": [
+    "RMC Talk Sport",
+    "RMC NEWS SPORT"
+  ],
+  "RTI1.fr": [
+    "RTI 1"
+  ],
+  "RTL9.fr": [
+    "RTL 9",
+    "RTL9"
+  ],
+  "Saisons.fr": [
+    "Saisons"
+  ],
+  "ScienceetVieTV.fr": [
+    "Science et Vie",
+    "Science & Vie",
+    "SCIENCES & VIE"
+  ],
+  "Seasons(src01).fr": [
+    "Seasons",
+    "Season"
+  ],
+  "SerieClub.fr": [
+    "Serie Club",
+    "SerieClub"
+  ],
+  "SyFyUniversal.fr": [
+    "SyFy"
+  ],
+  "TCM.fr": [
+    "TCM"
+  ],
+  "TeleMelody.fr": [
+    "Tele Melody"
+  ],
+  "TELEFOOT.fr": [
+    "TELEFOOT"
+  ],
+  "TeleTOON(src01).fr": [
+    "TeleTOON"
+  ],
+  "TeleTOONplus.fr": [
+    "TeleTOON plus",
+    "TeleTOON +",
+    "TeleTOON+"
+  ],
+  "TeleToonplus1.fr": [
+    "TeleToon plus1",
+    "TeleToon +1",
+    "TeleToon+1"
+  ],
+  "Teva.fr": [
+    "Teva"
+  ],
+  "TF1plus1.fr": [
+    "TF1 plus1",
+    "TF 1 plus 1",
+    "TF1+1",
+    "TF1 +1"
+  ],
+  "TF1SeriesFilms.fr": [
+    "TF1 Series"
+  ],
+  "TF1.fr": [
+    "TF1",
+    "TF 1"
+  ],
+  "TFX.fr": [
+    "TFX"
+  ],
+  "TheExplorers.fr": [
+    "The Explorers"
+  ],
+  "TheMuseumChannel.fr": [
+    "Museum"
+  ],
+  "Tiji.fr": [
+    "Tiji"
+  ],
+  "TLC.fr": [
+    "TLC"
+  ],
+  "TMC.fr": [
+    "TMC"
+  ],
+  "TMCplus1.fr": [
+    "TMC plus1",
+    "TMC+1",
+    "TMC+ 1"
+  ],
+  "ToggoPlus(German).fr": [
+    "Toggo"
+  ],
+  "Toonami(src01).fr": [
+    "Toonami"
+  ],
+  "TouteLHistoire.fr": [
+    "Toute LHistoire",
+    "Toute L Histoire",
+    "Toute L'Histoire",
+    "LHistoire"
+  ],
+  "Histoire.fr": [
+    "Histoire"
+  ],
+  "TRACEAFRICA.fr": [
+    "TRACE AFRICA"
+  ],
+  "TraceCaribbean.fr": [
+    "Trace Caribbean"
+  ],
+  "TraceGospel(src01).fr": [
+    "Trace Gospel"
+  ],
+  "TraceKitoko(src01).fr": [
+    "Trace Kitoko"
+  ],
+  "TraceLatina.fr": [
+    "Trace Latina"
+  ],
+  "TraceMziki(src01).fr": [
+    "Mziki"
+  ],
+  "TRACESportStars.fr": [
+    "TRACE Sport Stars"
+  ],
+  "TraceTropical(src01).fr": [
+    "Trace Tropical"
+  ],
+  "TraceTV(src01).fr": [
+    "Trace TV"
+  ],
+  "TraceUrban.fr": [
+    "Trace Urban"
+  ],
+  "TravelChannel(English).fr": [
+    "Travel Channel"
+  ],
+  "Trek.fr": [
+    "Trek"
+  ],
+  "TRT1(Turkish).fr": [
+    "TRT 1"
+  ],
+  "TVBreizh.fr": [
+    "Breizh"
+  ],
+  "TV5MondeEurope.fr": [
+    "TV5"
+  ],
+  "TV8MONTBLANC(src01).fr": [
+    "TV8 MONT BLANC"
+  ],
+  "UshuaiaTV.fr": [
+    "Ushuaia"
+  ],
+  "W9.fr": [
+    "W9"
+  ],
+  "WarnerTV(src01).fr": [
+    "Warner"
+  ],
+  "Weo(src01).fr": [
+    "Weo"
+  ],
+  "XXL.fr": [
+    "XXL"
+  ],
+  "1Plus1International(English).ca": [
+    "1 Plus 1 International"
+  ],
+  "1041FMOttawaFrench(CKTFFM)(French).ca": [
+    "FM Ottawa French"
+  ],
+  "1053KISSFMOttawa(CISSFM)(English).ca": [
+    "KISS FM Ottawa"
+  ],
+  "1310NewsOttawa(English).ca": [
+    "News Ottawa"
+  ],
+  "24Taas(English).ca": [
+    "24 Taas"
+  ],
+  "2MMaroc(French-English).ca": [
+    "2M Maroc"
+  ],
+  "4E(English).ca": [
+    "4E"
+  ],
+  "5Kanal(English).ca": [
+    "5 Kanal"
+  ],
+  "8AlResalah(English).ca": [
+    "Resalah"
+  ],
+  "923JACKFMSmithsFalls(CJETFM)(English).ca": [
+    "923 JACK FM Smiths Falls (CJET FM)"
+  ],
+  "AlaCarte(English).ca": [
+    "A la Carte"
+  ],
+  "AAJTAK(English).ca": [
+    "AAJ TAK"
+  ],
+  "AandE(English).ca": [
+    "AandE"
+  ],
+  "ABCSpark(English).ca": [
+    "ABC Spark"
+  ],
+  "AboriginalPeoplesTelevisionNetwork(East)(English-French).ca": [
+    "Aboriginal Peoples Television Network (East)"
+  ],
+  "AboriginalPeoplesTelevisionNetwork(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
+    "Aboriginal Peoples Television Network"
+  ],
+  "AboriginalPeoplesTelevisionNetwork(North)(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
+    "Aboriginal Peoples Television Network (North)"
+  ],
+  "AboriginalPeoplesTelevisionNetwork(West)(English-French-UnknownLanguage(cr)-Inuktitut).ca": [
+    "Aboriginal Peoples Television Network (West)"
+  ],
+  "AbuDhabiTV(English).ca": [
+    "Abu Dhabi"
+  ],
+  "AccessibleMediaInc(English).ca": [
+    "Accessible Media Inc"
+  ],
+  "ADDIK(French).ca": [
+    "ADDIK"
+  ],
+  "AddikTV(src01).ca": [
+    "Addik TV"
+  ],
+  "AdultSwim(English).ca": [
+    "Adult Swim"
+  ],
+  "AFRICA24(English-French).ca": [
+    "AFRICA24"
+  ],
+  "AfroglobalNetworkTelevision(English).ca": [
+    "Afroglobal"
+  ],
+  "AlArabiya(English).ca": [
+    "Al Arabiya"
+  ],
+  "AlJazeeraEnglish(English).ca": [
+    "Al Jazeera English)"
+  ],
+  "AlNaharDrama(English).ca": [
+    "Al Nahar Drama"
+  ],
+  "ALLTV(KOREA)(English).ca": [
+    "ALL TV (KOREA)"
+  ],
+  "AllTVTheSpiritofKorea(English).ca": [
+    "All TV The Spirit of Korea"
+  ],
+  "AlNahar(English).ca": [
+    "AlNahar"
+  ],
+  "AlphaTV(English-Greek).ca": [
+    "Alpha TV (English, Greek)"
+  ],
+  "AMC(English).ca": [
+    "AMC"
+  ],
+  "AmericanHeroesChannel(English).ca": [
+    "American Heroes Channel"
+  ],
+  "AMIAudio(English).ca": [
+    "AMI Audio"
+  ],
+  "AMItele(src01).ca": [
+    "AMItele",
+    "AMI-tele",
+    "AMI tele",
+    "AMITV",
+    "AMI+TV",
+    "AMI TV"
+  ],
+  "AMItele(French).ca": [
+    "AMItele"
+  ],
+  "AnimalPlanet(English).ca": [
+    "Animal Planet"
+  ],
+  "Antena3Internacional(Spanish).ca": [
+    "Antena 3 Internacional (Spanish)"
+  ],
+  "APBSanjha(English).ca": [
+    "APB Sanjha"
+  ],
+  "AquariumChannel(English).ca": [
+    "Aquarium Channel"
+  ],
+  "AquariumChannelTV(English).ca": [
+    "Aquarium Channel TV"
+  ],
+  "ArtAmerica(English).ca": [
+    "Art America"
+  ],
+  "ARTV(src01).ca": [
+    "ARTV"
+  ],
+  "ARYDigital(English).ca": [
+    "ARY Digital"
+  ],
+  "ARYQTV(English).ca": [
+    "ARY QTV"
+  ],
+  "AryZAUQ(English).ca": [
+    "Ary ZAUQ"
+  ],
+  "ASSEMBLEENATIONALE(CFCableTV)(French).ca": [
+    "ASSEMBLEE NATIONALE (CF Cable TV)"
+  ],
+  "AssembleeNationale(French).ca": [
+    "Assemblee Nationale"
+  ],
+  "ATNAastha(English).ca": [
+    "ATN Aastha"
+  ],
+  "ATNABPNews(English).ca": [
+    "ATN ABP News"
+  ],
+  "ATNARYNews(English).ca": [
+    "ATN ARY News"
+  ],
+  "ATNB4UPlus(English).ca": [
+    "ATN B4U Plus"
+  ],
+  "ATNBangla(English).ca": [
+    "ATN Bangla"
+  ],
+  "ATNBritAsia(English).ca": [
+    "ATN BritAsia"
+  ],
+  "ATNColors(English).ca": [
+    "ATN Colors"
+  ],
+  "ATNColorsBangla(English).ca": [
+    "ATN Colors Bangla"
+  ],
+  "ATNColorsMarathi(English).ca": [
+    "ATN Colors Marathi"
+  ],
+  "ATNCricketPlus(English).ca": [
+    "ATN Cricket Plus"
+  ],
+  "ATNDDBharati(English).ca": [
+    "ATN DD Bharati"
+  ],
+  "ATNDDIndia(English).ca": [
+    "ATN DD India"
+  ],
+  "ATNDDNews(English).ca": [
+    "ATN DD News"
+  ],
+  "ATNDDUrdu(English).ca": [
+    "ATN DD Urdu"
+  ],
+  "ATNFoodFood(English).ca": [
+    "ATN Food Food"
+  ],
+  "ATNGujarati(English).ca": [
+    "ATN Gujarati"
+  ],
+  "ATNJayaTV(English).ca": [
+    "ATN Jaya TV"
+  ],
+  "ATNLife(English).ca": [
+    "ATN Life"
+  ],
+  "ATNMax2(English).ca": [
+    "ATN Max 2"
+  ],
+  "ATNMovies(English).ca": [
+    "ATN Movies"
+  ],
+  "ATNMTVIndia(English).ca": [
+    "ATN MTV India"
+  ],
+  "ATNNews(English).ca": [
+    "ATN News"
+  ],
+  "ATNNews18(English).ca": [
+    "ATN News 18"
+  ],
+  "ATNPMOne(English).ca": [
+    "ATN PM One"
+  ],
+  "ATNPunjabi(English).ca": [
+    "ATN Punjabi"
+  ],
+  "ATNPunjabiNews(English).ca": [
+    "ATN Punjabi News"
+  ],
+  "ATNPunjabiTV(English).ca": [
+    "ATN Punjabi TV"
+  ],
+  "ATNRishtey(English).ca": [
+    "ATN Rishtey"
+  ],
+  "ATNSikh(English).ca": [
+    "ATN Sikh"
+  ],
+  "ATNSports(English).ca": [
+    "ATN Sports"
+  ],
+  "ATNStarPlus(English).ca": [
+    "ATN Star Plus"
+  ],
+  "ATNSVBC(English).ca": [
+    "ATN SVBC"
+  ],
+  "ATNTamilPlus(English).ca": [
+    "ATN Tamil Plus"
+  ],
+  "ATNTimesNow(English).ca": [
+    "ATN Times Now"
+  ],
+  "ATNURDU(English).ca": [
+    "ATN URDU"
+  ],
+  "ATNVijaySuper(English).ca": [
+    "ATN Vijay Super"
+  ],
+  "ATNVijayTV(English).ca": [
+    "ATN Vijay TV"
+  ],
+  "AvisdeRecherche(French).ca": [
+    "Avis de Recherche"
+  ],
+  "AXSTV(English).ca": [
+    "AXS TV"
+  ],
+  "AztecaInternacional(Spanish).ca": [
+    "Azteca Internacional (Spanish)"
+  ],
+  "B4U(English).ca": [
+    "B4U"
+  ],
+  "B4UMusicUSA(English).ca": [
+    "B4U Music USA"
+  ],
+  "BabyTV(English).ca": [
+    "Baby TV"
+  ],
+  "BBCArabic(English).ca": [
+    "BBC Arabic"
+  ],
+  "BBCEarth(English).ca": [
+    "BBC Earth"
+  ],
+  "BBCFirst(English).ca": [
+    "BBC First"
+  ],
+  "BBCNews(NorthAmerica)(English).ca": [
+    "BBC News (North America)"
+  ],
+  "BeijingTV(English).ca": [
+    "Beijing TV"
+  ],
+  "beINSports(English).ca": [
+    "beIN Sports"
+  ],
+  "beINSportsEnEspanol(Spanish).ca": [
+    "beIN Sports En Espanol (Spanish)"
+  ],
+  "Bell4kBarkerTESTChannel(English).ca": [
+    "Bell 4k Barker TEST Channel"
+  ],
+  "Bell4KLiveSports(English).ca": [
+    "Bell 4K Live Sports"
+  ],
+  "BellAliantAquariumChannel(English-French).ca": [
+    "Bell Aliant Aquarium Channel (English, French)"
+  ],
+  "BellCrave(FrenchEntryPoint)VOD(French).ca": [
+    "Bell Crave (French Entry Point) VOD"
+  ],
+  "BellFBTL4(French).ca": [
+    "Bell FBTL4"
+  ],
+  "BellFBTL6(French-English).ca": [
+    "Bell FBTL6 (French, English)"
+  ],
+  "BellFBTV6(English).ca": [
+    "Bell FBTV6"
+  ],
+  "BellFibeTVFrenchBarkerChannel(French).ca": [
+    "Bell Fibe TV French Barker Channel"
+  ],
+  "BellFibeTVVODPromoChannel(English).ca": [
+    "Bell Fibe TV VOD Promo Channel"
+  ],
+  "BellFibeTV1TV1Fibe(English-French).ca": [
+    "Bell Fibe TV1TV1 Fibe (English, French)"
+  ],
+  "BellFireplace(English).ca": [
+    "Bell Fireplace"
+  ],
+  "BellFreePreviews(English).ca": [
+    "Bell Free Previews"
+  ],
+  "BellLOCAL(English-French).ca": [
+    "Bell LOCAL (English, French)"
+  ],
+  "BellMarketingVenusFibe(English).ca": [
+    "Bell Marketing VenusFibe"
+  ],
+  "BellNetflix(English).ca": [
+    "Bell Netflix"
+  ],
+  "BellNewChannels(English-French).ca": [
+    "Bell New Channels (English, French)"
+  ],
+  "BellPrimeVideo(English).ca": [
+    "Bell Prime Video"
+  ],
+  "BellYoutubeFrench(French).ca": [
+    "Bell Youtube French"
+  ],
+  "BenficaTV(Portuguese).ca": [
+    "Benfica TV (Portuguese)"
+  ],
+  "BigTenNetwork(English).ca": [
+    "Big Ten Network"
+  ],
+  "BlackEntertainment(English).ca": [
+    "Black Entertainment"
+  ],
+  "BNNBloomberg(English).ca": [
+    "BNN Bloomberg"
+  ],
+  "BoomerangNetwork(English).ca": [
+    "Boomerang Network"
+  ],
+  "BritishColumbiaLegislature(English).ca": [
+    "British Columbia Legislature"
+  ],
+  "CableNewsNetwork(English).ca": [
+    "Cable News Network"
+  ],
+  "CablePublicAffairsChannel(English).ca": [
+    "Cable Public Affairs Channel"
+  ],
+  "CablePublicAffairsChannel(French)(French).ca": [
+    "Cable Public Affairs Channel"
+  ],
+  "CablePulse24(CP24)(English).ca": [
+    "Cable Pulse 24 (CP24)"
+  ],
+  "CanadaChineseTelevision(English).ca": [
+    "Canada Chinese Television"
+  ],
+  "CanalD(src01).ca": [
+    "Canal D"
+  ],
+  "CanalD(French).ca": [
+    "Canal D"
+  ],
+  "CanalEvasion(French).ca": [
+    "Canal Evasion"
+  ],
+  "CanalM(French).ca": [
+    "Canal M"
+  ],
+  "CanalSeriesPlus(French).ca": [
+    "Canal Series Plus"
+  ],
+  "CanalSur(Spanish).ca": [
+    "Canal Sur (Spanish)"
+  ],
+  "CanalVie(src01).ca": [
+    "Canal Vie"
+  ],
+  "CARACOLINTERNATIONAL(Spanish).ca": [
+    "CARACOL INTERNATIONAL (Spanish)"
+  ],
+  "CaribbeanRadio(English).ca": [
+    "Caribbean Radio"
+  ],
+  "Caribvision(English).ca": [
+    "Caribvision"
+  ],
+  "CartoonNetwork(English).ca": [
+    "Cartoon Network"
+  ],
+  "CartoonNetwork(Pacific)(English).ca": [
+    "Cartoon Network (Pacific)"
+  ],
+  "CASA(src01).ca": [
+    "CASA"
+  ],
+  "CASA(French).ca": [
+    "CASA"
+  ],
+  "CBAFT(French).ca": [
+    "CBAFT"
+  ],
+  "CBAFTDT(French).ca": [
+    "CBAFTDT"
+  ],
+  "CBAT(English).ca": [
+    "CBAT"
+  ],
+  "CBATDT(English).ca": [
+    "CBATDT"
+  ],
+  "CBCCalgary(English).ca": [
+    "CBC Calgary"
+  ],
+  "CBCEdmonton(English).ca": [
+    "CBC Edmonton"
+  ],
+  "CBCHalifax(English).ca": [
+    "CBC Halifax"
+  ],
+  "CBCNewsNetwork(English).ca": [
+    "CBC News Network"
+  ],
+  "CBCOttawa(English).ca": [
+    "CBC Ottawa"
+  ],
+  "CBCSaskatchewan(English).ca": [
+    "CBC Saskatchewan"
+  ],
+  "CBCStJohns(English).ca": [
+    "CBC St Johns"
+  ],
+  "CBCTelevisionWindsor9(English).ca": [
+    "CBC TelevisionWindsor 9"
+  ],
+  "CBCToronto(English).ca": [
+    "CBC Toronto"
+  ],
+  "CBCVancouver(English).ca": [
+    "CBC Vancouver"
+  ],
+  "CBCWinnipeg(English).ca": [
+    "CBC Winnipeg"
+  ],
+  "CBCT(English).ca": [
+    "CBCT"
+  ],
+  "CBCTDT(English).ca": [
+    "CBCTDT"
+  ],
+  "CBETDT(English).ca": [
+    "CBETDT"
+  ],
+  "CBFTMontreal(French).ca": [
+    "CBFT Montreal"
+  ],
+  "CBFTDT(French).ca": [
+    "CBFTDT"
+  ],
+  "CBKFT(French).ca": [
+    "CBKFT"
+  ],
+  "CBKFTDT(French).ca": [
+    "CBKFTDT"
+  ],
+  "CBLFT(French).ca": [
+    "CBLFT"
+  ],
+  "CBLFTDT(French).ca": [
+    "CBLFTDT"
+  ],
+  "CBME(English).ca": [
+    "CBME"
+  ],
+  "CBMTCBCMontreal(English).ca": [
+    "CBMT CBC Montreal",
+    "CBC Montreal"
+  ],
+  "CBMTDT(English).ca": [
+    "CBMTDT"
+  ],
+  "CBNCommonwealthBroadcastingNetwork(English).ca": [
+    "CBN Commonwealth Broadcasting Network"
+  ],
+  "CBO(English).ca": [
+    "CBO"
+  ],
+  "CBOFT(French).ca": [
+    "CBOFT"
+  ],
+  "CBOFTDT(French).ca": [
+    "CBOFTDT"
+  ],
+  "CBSSportsNetwork(English).ca": [
+    "CBS Sports Network"
+  ],
+  "CBUFT(French).ca": [
+    "CBUFT"
+  ],
+  "CBUFTDT(French).ca": [
+    "CBUFTDT"
+  ],
+  "CBVT(French).ca": [
+    "CBVT"
+  ],
+  "CBVTDT(French).ca": [
+    "CBVTDT"
+  ],
+  "CBWFT(French).ca": [
+    "CBWFT"
+  ],
+  "CBWFTDT(French).ca": [
+    "CBWFTDT"
+  ],
+  "CBXFT(French).ca": [
+    "CBXFT"
+  ],
+  "CBXFTICIRadioCanada(Edmonton)(src01).ca": [
+    "CBXFT ICI RadioCanada (Edmonton)"
+  ],
+  "CBXFTDT(French).ca": [
+    "CBXFTDT"
+  ],
+  "CCTVEntertainment(English).ca": [
+    "CCTV Entertainment"
+  ],
+  "CCTV4ChinaCentralTV(English).ca": [
+    "CCTV4China Central TV"
+  ],
+  "Ceen(English).ca": [
+    "Ceen"
+  ],
+  "CFAP(French).ca": [
+    "CFAP"
+  ],
+  "CFAPDT(French).ca": [
+    "CFAPDT"
+  ],
+  "CFCF(English).ca": [
+    "CFCF"
+  ],
+  "CFCFDT(English).ca": [
+    "CFCFDT"
+  ],
+  "CFCM(French).ca": [
+    "CFCM"
+  ],
+  "CFCMDT(French).ca": [
+    "CFCMDT"
+  ],
+  "CFCNLDT(English).ca": [
+    "CFCNLDT"
+  ],
+  "CFEM(French).ca": [
+    "CFEM"
+  ],
+  "CFEMDT(French).ca": [
+    "CFEMDT"
+  ],
+  "CFER(French).ca": [
+    "CFER"
+  ],
+  "CFERCableFeed(French).ca": [
+    "CFER Cable Feed"
+  ],
+  "CFGOAM1200(English).ca": [
+    "CFGO AM 1200"
+  ],
+  "CFGS(French).ca": [
+    "CFGS"
+  ],
+  "CFGSDT(French).ca": [
+    "CFGSDT"
+  ],
+  "CFJC(English).ca": [
+    "CFJC"
+  ],
+  "CFJCDT(English).ca": [
+    "CFJCDT"
+  ],
+  "CFJP(French).ca": [
+    "CFJP"
+  ],
+  "CFJPDT(French).ca": [
+    "CFJPDT"
+  ],
+  "CFKM(French).ca": [
+    "CFKM"
+  ],
+  "CFKMDT(French).ca": [
+    "CFKMDT"
+  ],
+  "CFKS(French).ca": [
+    "CFKS"
+  ],
+  "CFKSDT(French).ca": [
+    "CFKSDT"
+  ],
+  "CFNRNativeRadio(English).ca": [
+    "CFNR Native Radio"
+  ],
+  "CFPLAChannelLondon(English).ca": [
+    "CFPL A Channel London"
+  ],
+  "CFPLDT(English).ca": [
+    "CFPLDT"
+  ],
+  "CFRA(English).ca": [
+    "CFRA"
+  ],
+  "CFRB(English).ca": [
+    "CFRB"
+  ],
+  "CFRS(French).ca": [
+    "CFRS"
+  ],
+  "CFRSDT(French).ca": [
+    "CFRSDT"
+  ],
+  "CFTFChannel29(French).ca": [
+    "CFTF Channel 29"
+  ],
+  "CFTFDT(French).ca": [
+    "CFTFDT"
+  ],
+  "CFTK(English).ca": [
+    "CFTK"
+  ],
+  "CFTMMontreal(French).ca": [
+    "CFTM Montreal"
+  ],
+  "CFTMDT(French).ca": [
+    "CFTMDT"
+  ],
+  "CFTMP(Pacific)(French).ca": [
+    "CFTMP (Pacific)"
+  ],
+  "CFTVDT(English).ca": [
+    "CFTVDT"
+  ],
+  "CFVS(French).ca": [
+    "CFVS"
+  ],
+  "CFVSDT(French).ca": [
+    "CFVSDT"
+  ],
+  "CFWENativeRadio(English).ca": [
+    "CFWE Native Radio"
+  ],
+  "CFYK(English).ca": [
+    "CFYK"
+  ],
+  "CFYKDT(English).ca": [
+    "CFYKDT"
+  ],
+  "CFZMAM740(English).ca": [
+    "CFZMAM 740"
+  ],
+  "CGTNFrancais(French).ca": [
+    "CGTN Francais"
+  ],
+  "CHVancouverIsland(English).ca": [
+    "CH Vancouver Island"
+  ],
+  "Channel299(English).ca": [
+    "Channel 299"
+  ],
+  "ChannelI(English).ca": [
+    "Channel I"
+  ],
+  "ChannelPunjabi(English).ca": [
+    "Channel Punjabi"
+  ],
+  "CHAT(English).ca": [
+    "CHAT"
+  ],
+  "CHAU(French).ca": [
+    "CHAU"
+  ],
+  "CHAUDT(French).ca": [
+    "CHAUDT"
+  ],
+  "CHBCHD(English).ca": [
+    "CHBCHD"
+  ],
+  "CHCH(English).ca": [
+    "CHCH"
+  ],
+  "CHCHDT(English).ca": [
+    "CHCHDT"
+  ],
+  "CHCO(English).ca": [
+    "CHCO"
+  ],
+  "CHCRGreekRadio(English).ca": [
+    "CHCR Greek Radio"
+  ],
+  "CHEKDT(English).ca": [
+    "CHEKDT"
+  ],
+  "CHEM(French).ca": [
+    "CHEM"
+  ],
+  "CHEMDT(French).ca": [
+    "CHEMDT"
+  ],
+  "CHETTV(English).ca": [
+    "CHETTV"
+  ],
+  "CHEX(English).ca": [
+    "CHEX"
+  ],
+  "CHEXDT(English).ca": [
+    "CHEXDT"
+  ],
+  "CHEZ106FMOttawa(English).ca": [
+    "CHEZ 106 FM Ottawa"
+  ],
+  "CHINRadio(English).ca": [
+    "CHIN Radio"
+  ],
+  "ChinaGlobalTelevisionNetwork(English).ca": [
+    "China Global Television Network"
+  ],
+  "ChinaGlobalTelevisionNetwork9Documentary(English).ca": [
+    "China Global Television Network 9 Documentary"
+  ],
+  "CHIRGreekRadio(English).ca": [
+    "CHIR Greek Radio"
+  ],
+  "CHLTSherbrooke(French).ca": [
+    "CHLT Sherbrooke"
+  ],
+  "CHLTDT(French).ca": [
+    "CHLTDT"
+  ],
+  "CHMP985FM(English-French).ca": [
+    "CHMP 985 FM (English, French)"
+  ],
+  "CHNBDT(English).ca": [
+    "CHNBDT"
+  ],
+  "CHNMDT(English-UnknownLanguage(tl)-Punjabi).ca": [
+    "CHNMDT (English, Unknown Language (tl), Punjabi)"
+  ],
+  "CHNU(English).ca": [
+    "CHNU"
+  ],
+  "CHNUDT(English).ca": [
+    "CHNUDT"
+  ],
+  "CHOT(French).ca": [
+    "CHOT"
+  ],
+  "CHOTTVA(Gatineau)(src01).ca": [
+    "CHOT TVA (Gatineau)"
+  ],
+  "CHOTDT(French).ca": [
+    "CHOTDT"
+  ],
+  "CHTOAM1690Audio(English).ca": [
+    "CHTO AM 1690 Audio"
+  ],
+  "CHUOFM891UofOttawa(English).ca": [
+    "CHUO FM 891 Uof Ottawa"
+  ],
+  "CHWIDT(English).ca": [
+    "CHWIDT"
+  ],
+  "CIIIOT(GlobalOttawa)(English).ca": [
+    "CIIIOT (Global Ottawa)"
+  ],
+  "CIIT(English).ca": [
+    "CIIT"
+  ],
+  "CIITDT(English-French).ca": [
+    "CIITDT (English, French)"
+  ],
+  "CIMT(French).ca": [
+    "CIMT"
+  ],
+  "CIMTDT(French).ca": [
+    "CIMTDT"
+  ],
+  "CineLatino(Spanish).ca": [
+    "Cine Latino (Spanish)"
+  ],
+  "CinelatinoRogers(Spanish).ca": [
+    "Cinelatino Rogers (Spanish)"
+  ],
+  "CinemaOneGlobal(English).ca": [
+    "Cinema One Global"
+  ],
+  "Cinepop(src01).ca": [
+    "Cinepop"
+  ],
+  "CinePop(French).ca": [
+    "CinePop"
+  ],
+  "CISAHD(English).ca": [
+    "CISAHD"
+  ],
+  "CITL(English).ca": [
+    "CITL"
+  ],
+  "CITLDT(English).ca": [
+    "CITLDT"
+  ],
+  "CitySaskatchewan(English).ca": [
+    "City Saskatchewan"
+  ],
+  "CityNews247(English).ca": [
+    "CityNews 247"
+  ],
+  "CityNews247(West)(English).ca": [
+    "CityNews 247 (West)"
+  ],
+  "CityNews680(French).ca": [
+    "CityNews 680"
+  ],
+  "CityTv(English).ca": [
+    "CityTv"
+  ],
+  "CitytvCalgary(English).ca": [
+    "Citytv Calgary"
+  ],
+  "CitytvEdmonton(English).ca": [
+    "Citytv Edmonton"
+  ],
+  "CitytvToronto(English).ca": [
+    "Citytv Toronto"
+  ],
+  "CitytvVancouver(English).ca": [
+    "Citytv Vancouver"
+  ],
+  "CitytvWinnipeg(English).ca": [
+    "Citytv Winnipeg"
+  ],
+  "CIUTFM(English).ca": [
+    "CIUTFM"
+  ],
+  "CIVM(French).ca": [
+    "CIVM"
+  ],
+  "CIVMDT(French).ca": [
+    "CIVMDT"
+  ],
+  "CIVO(French).ca": [
+    "CIVO"
+  ],
+  "CIVODT(French).ca": [
+    "CIVODT"
+  ],
+  "CJAD800Montreal(French).ca": [
+    "CJAD 800 Montreal"
+  ],
+  "CJBR(French).ca": [
+    "CJBR"
+  ],
+  "CJBRDT(French).ca": [
+    "CJBRDT"
+  ],
+  "CJCB(English).ca": [
+    "CJCB"
+  ],
+  "CJDC(CBC5)Feed(English).ca": [
+    "CJDC (CBC 5) Feed"
+  ],
+  "CJDC(English).ca": [
+    "CJDC"
+  ],
+  "CJEO(English).ca": [
+    "CJEO"
+  ],
+  "CJILDT(English).ca": [
+    "CJILDT"
+  ],
+  "CJNTCityTVMontreal(English).ca": [
+    "CJNT City TV Montreal",
+    "City Montreal",
+    "City TV Montreal"
+  ],
+  "CJNTDT(English).ca": [
+    "CJNTDT"
+  ],
+  "CJOH(English).ca": [
+    "CJOH"
+  ],
+  "CJOHDT(English).ca": [
+    "CJOHDT"
+  ],
+  "CJPM(French).ca": [
+    "CJPM"
+  ],
+  "CJPMDT(French).ca": [
+    "CJPMDT"
+  ],
+  "CJWE(English).ca": [
+    "CJWE"
+  ],
+  "CKCO(English).ca": [
+    "CKCO"
+  ],
+  "CKCODT(English).ca": [
+    "CKCODT"
+  ],
+  "CKCU931FMCarletonUOttawa(English).ca": [
+    "CKCU 931FM Carleton U Ottawa"
+  ],
+  "CKCW(English).ca": [
+    "CKCW"
+  ],
+  "CKCWDT(English).ca": [
+    "CKCWDT"
+  ],
+  "CKDJ1079FMAlgonquinCollegeOttawa(English).ca": [
+    "CKDJ 1079FM Algonquin College Ottawa"
+  ],
+  "CKES(English).ca": [
+    "CKES"
+  ],
+  "CKLT(English).ca": [
+    "CKLT"
+  ],
+  "CKLTDT(English).ca": [
+    "CKLTDT"
+  ],
+  "CKPG(English).ca": [
+    "CKPG"
+  ],
+  "CKPGCableFeed(English).ca": [
+    "CKPG Cable Feed"
+  ],
+  "CKPRThunderBay(English).ca": [
+    "CKPR Thunder Bay"
+  ],
+  "CKRWNativeRadio(English).ca": [
+    "CKRW Native Radio"
+  ],
+  "CKSA(English).ca": [
+    "CKSA"
+  ],
+  "CKSADT(English).ca": [
+    "CKSADT"
+  ],
+  "CKSH(French).ca": [
+    "CKSH"
+  ],
+  "CKSHDT(French).ca": [
+    "CKSHDT"
+  ],
+  "CKTM(French).ca": [
+    "CKTM"
+  ],
+  "CKTMDT(French).ca": [
+    "CKTMDT"
+  ],
+  "CKTV(French).ca": [
+    "CKTV"
+  ],
+  "CKTVDT(French).ca": [
+    "CKTVDT"
+  ],
+  "CKUA(English).ca": [
+    "CKUA"
+  ],
+  "CKWS(English).ca": [
+    "CKWS"
+  ],
+  "CKWSDT(English).ca": [
+    "CKWSDT"
+  ],
+  "ClubJuniorsurDemande(French)(French).ca": [
+    "Club Junior sur Demande"
+  ],
+  "CMT(English).ca": [
+    "CMT"
+  ],
+  "CMTV(Portuguese).ca": [
+    "CMTV (Portuguese)"
+  ],
+  "CNBCCanadianFeed(English).ca": [
+    "CNBC Canadian Feed"
+  ],
+  "CNN(English).ca": [
+    "CNN"
+  ],
+  "CNNInternational(English).ca": [
+    "CNN International"
+  ],
+  "CNTV(English).ca": [
+    "CNTV"
+  ],
+  "ConcordiaUniversity1690AM(CJLOAM)(English).ca": [
+    "Concordia University 1690 AM (CJLOAM)"
+  ],
+  "CookingChannel(English).ca": [
+    "Cooking Channel"
+  ],
+  "Corco(English).ca": [
+    "Corco"
+  ],
+  "CottageLife(English).ca": [
+    "Cottage Life"
+  ],
+  "Country1011SmithsFalls(English).ca": [
+    "Country 1011 Smiths Falls"
+  ],
+  "Crave1(West)(English).ca": [
+    "Crave 1 (West)"
+  ],
+  "Crave2(West)(English).ca": [
+    "Crave 2 (West)"
+  ],
+  "Crave3(West)(English).ca": [
+    "Crave 3 (West)"
+  ],
+  "Crave1(English).ca": [
+    "Crave1"
+  ],
+  "Crave1(English-French).ca": [
+    "Crave1",
+    "Crave 1"
+  ],
+  "Crave2(English).ca": [
+    "Crave2"
+  ],
+  "Crave2(English-French).ca": [
+    "Crave2",
+    "Crave 2"
+  ],
+  "Crave3(English).ca": [
+    "Crave3",
+    "Crave 3"
+  ],
+  "Crave4(English).ca": [
+    "Crave4",
+    "Crave 4"
+  ],
+  "Crave(English).ca": [
+    "Crave"
+  ],
+  "CrimePlusInvestigation(English).ca": [
+    "Crime Plus Investigation"
+  ],
+  "CTVCalgary(English).ca": [
+    "CTV Calgary"
+  ],
+  "CTVCOMEDYCHANNEL(English).ca": [
+    "CTV COMEDY CHANNEL"
+  ],
+  "CTVCOMEDYCHANNEL(West)(English).ca": [
+    "CTV COMEDY CHANNEL (West)"
+  ],
+  "CTVDRAMACHANNEL(English).ca": [
+    "CTV DRAMA CHANNEL"
+  ],
+  "CTVEdmonton(English).ca": [
+    "CTV Edmonton"
+  ],
+  "CTVHalifax(English).ca": [
+    "CTV Halifax"
+  ],
+  "CTVLIFECHANNEL(English).ca": [
+    "CTV LIFE CHANNEL"
+  ],
+  "CTVNewsChannel(English).ca": [
+    "CTV News Channel"
+  ],
+  "CTVPrinceAlbert(English).ca": [
+    "CTV Prince Albert"
+  ],
+  "CTVRegina(English).ca": [
+    "CTV Regina"
+  ],
+  "CTVSaskatoon(English).ca": [
+    "CTV Saskatoon"
+  ],
+  "CTVSCIFICHANNEL(English).ca": [
+    "CTV SCIFI CHANNEL"
+  ],
+  "CTVSudbury(English).ca": [
+    "CTV Sudbury"
+  ],
+  "CTVSydney(English).ca": [
+    "CTV Sydney"
+  ],
+  "CTVToronto(English).ca": [
+    "CTV Toronto"
+  ],
+  "CTVTwoAlberta(English).ca": [
+    "CTV Two Alberta"
+  ],
+  "CTVTwoAtlantic(English).ca": [
+    "CTV Two Atlantic"
+  ],
+  "CTVTwoBarrie(English).ca": [
+    "CTV Two Barrie"
+  ],
+  "CTVTwoLondonWindsor(English).ca": [
+    "CTV Two LondonWindsor"
+  ],
+  "CTVTwoOttawa(English).ca": [
+    "CTV Two Ottawa"
+  ],
+  "CTVTwoToronto(English).ca": [
+    "CTV Two Toronto"
+  ],
+  "CTVTwoVancouverVictoria(English).ca": [
+    "CTV Two VancouverVictoria"
+  ],
+  "CTVVancouver(English).ca": [
+    "CTV Vancouver"
+  ],
+  "CTVWinnipeg(English).ca": [
+    "CTV Winnipeg"
+  ],
+  "CTVYorkton(English).ca": [
+    "CTV Yorkton"
+  ],
+  "CurrentTime(English).ca": [
+    "Current Time"
+  ],
+  "Daystar(English).ca": [
+    "Daystar"
+  ],
+  "DejaView(English).ca": [
+    "Deja View"
+  ],
+  "DetskyKids(Russian).ca": [
+    "Detsky Kids (Russian)"
+  ],
+  "Discovery(English).ca": [
+    "Discovery"
+  ],
+  "DiscoveryChannel(English).ca": [
+    "Discovery Channel"
+  ],
+  "DiscoveryScience(English).ca": [
+    "Discovery Science"
+  ],
+  "DiscoveryVelocity(English).ca": [
+    "Discovery Velocity"
+  ],
+  "DisneyChannel(English).ca": [
+    "Disney Channel"
+  ],
+  "DisneyJunior(English).ca": [
+    "Disney Junior"
+  ],
+  "DisneyXD(English).ca": [
+    "Disney XD"
+  ],
+  "documentary(English).ca": [
+    "documentary"
+  ],
+  "DorcelTV(English).ca": [
+    "Dorcel TV"
+  ],
+  "DORCELTV(French).ca": [
+    "DORCEL TV"
+  ],
+  "DORCELTVFRENCH(French).ca": [
+    "DORCEL TV FRENCH"
+  ],
+  "DRAGONTV(English).ca": [
+    "DRAGON TV"
+  ],
+  "Dream1(English).ca": [
+    "Dream 1"
+  ],
+  "Dream2(English).ca": [
+    "Dream 2"
+  ],
+  "DTour(English).ca": [
+    "DTour"
+  ],
+  "DW(English).ca": [
+    "DW"
+  ],
+  "DW(German-English).ca": [
+    "DW (German, English)"
+  ],
+  "EEntertainmentTelevision(English).ca": [
+    "E Entertainment Television"
+  ],
+  "ELLEFictions(src01).ca": [
+    "ELLE Fictions"
+  ],
+  "ELLEFICTIONS(French).ca": [
+    "ELLE FICTIONS"
+  ],
+  "EPGCricket(PayPerView)(English).ca": [
+    "EPG Cricket (PayPerView)"
+  ],
+  "EPGEducational(English).ca": [
+    "EPG Educational"
+  ],
+  "EPGLocalOrigination(English).ca": [
+    "EPG Local Origination"
+  ],
+  "ERTWorld(Greek-English).ca": [
+    "ERT World (Greek, English)"
+  ],
+  "ETNOW(English).ca": [
+    "ET NOW"
+  ],
+  "Euronews(English).ca": [
+    "Euronews"
+  ],
+  "euronews(French).ca": [
+    "euronews"
+  ],
+  "EuroWorldSport(Spanish-English-Italian-French).ca": [
+    "EuroWorld Sport (Spanish, English, Italian, French)"
+  ],
+  "Evasion(src01).ca": [
+    "Evasion"
+  ],
+  "Evasion(French).ca": [
+    "Evasion"
+  ],
+  "EWTNC(EWTNCanadianFeed)(English-French).ca": [
+    "EWTNC (EWTN Canadian Feed) (English, French)"
+  ],
+  "ExxxtsyChannel(English).ca": [
+    "Exxxtsy Channel"
+  ],
+  "ExxxtsyPremium(English).ca": [
+    "Exxxtsy Premium"
+  ],
+  "Fairchild(Toronto)(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
+    "Fairchild (Toronto) (English, Unknown Language (cmn), Unknown Language (yue))"
+  ],
+  "Fairchild(Vancouver)VCHILD(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
+    "Fairchild (Vancouver) VCHILD (English, Unknown Language (cmn), Unknown Language (yue))"
+  ],
+  "Fairchild2(English).ca": [
+    "Fairchild 2"
+  ],
+  "FairchildTorontoFeed(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
+    "Fairchild Toronto Feed (English, Unknown Language (cmn), Unknown Language (yue))"
+  ],
+  "FairchildVancouverFeed(English-UnknownLanguage(cmn)-UnknownLanguage(yue)).ca": [
+    "Fairchild Vancouver Feed (English, Unknown Language (cmn), Unknown Language (yue))"
+  ],
+  "FamilyChannel(English).ca": [
+    "Family Channel"
+  ],
+  "FamilyJr(English).ca": [
+    "Family Jr"
+  ],
+  "FestivalPortugueseTelevision(Portuguese).ca": [
+    "Festival Portuguese Television (Portuguese)"
+  ],
+  "FevaTV(English).ca": [
+    "Feva TV"
+  ],
+  "FICT(CanalSeries)(French).ca": [
+    "FICT (Canal Series)"
+  ],
+  "FilipinoChannel(East)(English).ca": [
+    "Filipino Channel (East)"
+  ],
+  "FilipinoTV(English).ca": [
+    "Filipino TV"
+  ],
+  "Filmy(English).ca": [
+    "Filmy"
+  ],
+  "Fireplace(English).ca": [
+    "Fireplace"
+  ],
+  "FireplaceChannelFrench(French).ca": [
+    "Fireplace Channel French"
+  ],
+  "FirstNational(English).ca": [
+    "First National"
+  ],
+  "FoodNetwork(English).ca": [
+    "Food Network"
+  ],
+  "FoxBusiness(English).ca": [
+    "Fox Business"
+  ],
+  "FoxNewsChannel(English).ca": [
+    "Fox News Channel"
+  ],
+  "FoxSportsRacing(English).ca": [
+    "Fox Sports Racing"
+  ],
+  "France24(French).ca": [
+    "France 24"
+  ],
+  "FreePreviewChannel1(English).ca": [
+    "Free Preview Channel 1"
+  ],
+  "FrissonsTV(src01).ca": [
+    "Frissons TV"
+  ],
+  "FrissonsTV(French).ca": [
+    "Frissons TV"
+  ],
+  "FujianTV(FUJTV)ECHOSTAR(English).ca": [
+    "Fujian TV (FUJTV) ECHOSTAR"
+  ],
+  "FutureTelevisionSkyvista(English).ca": [
+    "Future Television Skyvista"
+  ],
+  "FX(English).ca": [
+    "FX"
+  ],
+  "FXX(English).ca": [
+    "FXX"
+  ],
+  "GamePlus(English).ca": [
+    "Game Plus"
+  ],
+  "GameShowNetwork(English).ca": [
+    "Game Show Network"
+  ],
+  "GameTV(English).ca": [
+    "GameTV"
+  ],
+  "GEOTV(English).ca": [
+    "GEO TV"
+  ],
+  "GermanKinoPlus(German-English).ca": [
+    "German Kino Plus (German, English)"
+  ],
+  "GINXESPORTSTV(English).ca": [
+    "GINX ESPORTS TV"
+  ],
+  "GlobalBC(English).ca": [
+    "Global BC"
+  ],
+  "GlobalCalgary(English).ca": [
+    "Global Calgary"
+  ],
+  "GLOBALDURHAM(English).ca": [
+    "GLOBAL DURHAM"
+  ],
+  "GlobalEdmonton(English).ca": [
+    "Global Edmonton"
+  ],
+  "GlobalLethbridge(English).ca": [
+    "Global Lethbridge"
+  ],
+  "GlobalManitoba(English).ca": [
+    "Global Manitoba"
+  ],
+  "GlobalMaritimes(English).ca": [
+    "Global Maritimes"
+  ],
+  "GlobalMontreal(English).ca": [
+    "Global Montreal"
+  ],
+  "GlobalNewsBC1(English).ca": [
+    "Global News BC1"
+  ],
+  "GlobalOkanagan(English).ca": [
+    "Global Okanagan"
+  ],
+  "GlobalRegina(English).ca": [
+    "Global Regina"
+  ],
+  "GlobalSaskatoon(English).ca": [
+    "Global Saskatoon"
+  ],
+  "GlobalThunderBay(English).ca": [
+    "Global Thunder Bay"
+  ],
+  "GlobalToronto(English).ca": [
+    "Global Toronto"
+  ],
+  "GMALifeTV(English).ca": [
+    "GMA Life TV"
+  ],
+  "GMANews(English).ca": [
+    "GMA News"
+  ],
+  "GMAPinoyTV(English).ca": [
+    "GMA Pinoy TV"
+  ],
+  "GolfChannel(English).ca": [
+    "Golf Channel"
+  ],
+  "GreekCinema(Greek-English).ca": [
+    "Greek Cinema (Greek, English)"
+  ],
+  "GreekMusicChannel(English).ca": [
+    "Greek Music Channel"
+  ],
+  "GRTGBASatelliteTV(English).ca": [
+    "GRT GBA Satellite TV"
+  ],
+  "GURKIBANI(English).ca": [
+    "GURKIBANI"
+  ],
+  "HallaBol(English).ca": [
+    "Halla Bol"
+  ],
+  "HBO(West)(English).ca": [
+    "HBO (West)"
+  ],
+  "HBO1(English).ca": [
+    "HBO 1"
+  ],
+  "HDNHL3(English).ca": [
+    "HDNHL3"
+  ],
+  "HelloFM(English).ca": [
+    "Hello FM"
+  ],
+  "HGTV(English).ca": [
+    "HGTV"
+  ],
+  "Historia(src01).ca": [
+    "Historia"
+  ],
+  "Historia(French).ca": [
+    "Historia"
+  ],
+  "HistoriaCanalHistoire(French).ca": [
+    "Historia Canal Histoire"
+  ],
+  "History(English).ca": [
+    "History"
+  ],
+  "HISTORY2(English).ca": [
+    "HISTORY 2"
+  ],
+  "HistoryTelevision(English).ca": [
+    "History Television"
+  ],
+  "HistoryTelevision(Pacific)(English).ca": [
+    "History Television (Pacific)"
+  ],
+  "HLN(English).ca": [
+    "HLN"
+  ],
+  "HollywoodSuite2000s(English).ca": [
+    "Hollywood Suite 2000s"
+  ],
+  "HollywoodSuite70s(English).ca": [
+    "Hollywood Suite 70s"
+  ],
+  "HollywoodSuite80s(English).ca": [
+    "Hollywood Suite 80s"
+  ],
+  "HollywoodSuite90s(English).ca": [
+    "Hollywood Suite 90s"
+  ],
+  "HOT899FMOttawa(CIHTFM)(English).ca": [
+    "HOT 899 FM Ottawa (CIHT FM)"
+  ],
+  "HowToChannel(English).ca": [
+    "How To Channel"
+  ],
+  "HPItv(English).ca": [
+    "HPItv"
+  ],
+  "HPItv(West)(English).ca": [
+    "HPItv (West)"
+  ],
+  "HPItvInternational(English).ca": [
+    "HPItv International"
+  ],
+  "HPItvOdds(English).ca": [
+    "HPItv Odds"
+  ],
+  "HRT(English).ca": [
+    "HRT"
+  ],
+  "HumMasala(English).ca": [
+    "Hum Masala"
+  ],
+  "HumNews(English).ca": [
+    "Hum News"
+  ],
+  "HumTV(English).ca": [
+    "Hum TV"
+  ],
+  "Hunan(English).ca": [
+    "Hunan"
+  ],
+  "HustlerMature(English).ca": [
+    "Hustler Mature"
+  ],
+  "i24NewsEnglish(English).ca": [
+    "i24 News English"
+  ],
+  "ICI(CBFT)MontrealQC(src01).ca": [
+    "ICI (CBFT) Montreal QC"
+  ],
+  "ICIARTV(French).ca": [
+    "ICI ARTV"
+  ],
+  "ICIExplora(French).ca": [
+    "ICI Explora"
+  ],
+  "ICIRadioCanadaPremiereToronto(CJBCAM)(French).ca": [
+    "ICI RadioCanada Premiere Toronto (CJBCAM)"
+  ],
+  "ICIRDI(French).ca": [
+    "ICI RDI"
+  ],
+  "ICITele(English-French-Italian-UnknownLocale(tl)).ca": [
+    "ICI Tele (English, French, Italian, Unknown Language (tl))",
+    "ICI Tele"
+  ],
+  "ICITele(English-French-UnknownLanguage(tl)).ca": [
+    "ICI Tele (English, French, Unknown Language (tl))"
+  ],
+  "ICITelevision(Montreal)(src01).ca": [
+    "ICI Television (Montreal)",
+    "ICI Television Montreal",
+    "ICI Montreal"
+  ],
+  "InuitTVNetwork(English).ca": [
+    "Inuit TV Network"
+  ],
+  "Investigation(src01).ca": [
+    "Investigation"
+  ],
+  "Investigation(French).ca": [
+    "Investigation"
+  ],
+  "InvestigationDiscovery(English).ca": [
+    "Investigation Discovery"
+  ],
+  "JewelryTelevision(English).ca": [
+    "Jewelry Television"
+  ],
+  "JewishLifeTV(English).ca": [
+    "Jewish Life TV"
+  ],
+  "JiangsuInternationalChannel(English).ca": [
+    "Jiangsu International Channel"
+  ],
+  "Kapatid(English).ca": [
+    "Kapatid"
+  ],
+  "KCPQ(English).ca": [
+    "KCPQ"
+  ],
+  "KCPQDT(English).ca": [
+    "KCPQDT"
+  ],
+  "KCTS(English).ca": [
+    "KCTS"
+  ],
+  "KCTSDT(English).ca": [
+    "KCTSDT"
+  ],
+  "KING(English).ca": [
+    "KING"
+  ],
+  "KINGDT(English).ca": [
+    "KINGDT"
+  ],
+  "KIRO7(English).ca": [
+    "KIRO 7"
+  ],
+  "KnowledgeNetwork(English).ca": [
+    "Knowledge Network"
+  ],
+  "KOMO(English).ca": [
+    "KOMO"
+  ],
+  "KOMODT(English).ca": [
+    "KOMODT"
+  ],
+  "KSPSDT(English).ca": [
+    "KSPSDT"
+  ],
+  "KTLA(English).ca": [
+    "KTLA"
+  ],
+  "KTLADT(English).ca": [
+    "KTLADT"
+  ],
+  "LaChaineDisney(src01).ca": [
+    "La Chaine Disney"
+  ],
+  "LachaineDisney(French).ca": [
+    "La chaine Disney"
+  ],
+  "LasEstrellasInternacional(Spanish).ca": [
+    "Las Estrellas Internacional (Spanish)"
+  ],
+  "LCN(src01).ca": [
+    "LCN"
+  ],
+  "LeCanalNouvellesTVA(French).ca": [
+    "Le Canal Nouvelles TVA"
+  ],
+  "LeCanalVie(French).ca": [
+    "Le Canal Vie"
+  ],
+  "LifestyleNetwork(English).ca": [
+    "Lifestyle Network"
+  ],
+  "Lifetime(English).ca": [
+    "Lifetime"
+  ],
+  "LobbyWatchChannel1(English).ca": [
+    "Lobby Watch Channel 1"
+  ],
+  "LobbyWatchChannel2(English).ca": [
+    "Lobby Watch Channel 2"
+  ],
+  "LobbyWatchChannel3(English).ca": [
+    "Lobby Watch Channel 3"
+  ],
+  "LobbyWatchChannel4(English).ca": [
+    "Lobby Watch Channel 4"
+  ],
+  "LobbyWatchChannel5(English).ca": [
+    "Lobby Watch Channel 5"
+  ],
+  "LobbyWatchChannel6(English).ca": [
+    "Lobby Watch Channel 6"
+  ],
+  "LobbyWatchChannel7(English).ca": [
+    "Lobby Watch Channel 7"
+  ],
+  "LobbyWatchChannel8(English).ca": [
+    "Lobby Watch Channel 8"
+  ],
+  "LocalProgramming(English).ca": [
+    "Local Programming"
+  ],
+  "Lock(Static)(English).ca": [
+    "Lock (Static)"
+  ],
+  "LoveNature(src01).ca": [
+    "Love Nature"
+  ],
+  "LoveNature(English).ca": [
+    "Love Nature"
+  ],
+  "LoveNature4K(English).ca": [
+    "Love Nature 4K"
+  ],
+  "LSTimesTV(English).ca": [
+    "LS Times TV"
+  ],
+  "M6International(French).ca": [
+    "M6 International"
+  ],
+  "MagnoliaNetwork(English).ca": [
+    "Magnolia Network"
+  ],
+  "Majic100Ottawa(CJMJFM)(English).ca": [
+    "Majic 100 Ottawa (CJMJ FM)"
+  ],
+  "MakefulTV(English).ca": [
+    "Makeful TV"
+  ],
+  "MavTV(English).ca": [
+    "MavTV"
+  ],
+  "MAX(src01).ca": [
+    "MAX"
+  ],
+  "Max(French).ca": [
+    "Max"
+  ],
+  "MCTVCTVNorthBay(English).ca": [
+    "MCTVCTV North Bay"
+  ],
+  "MCTVCTVSaultSteMarie(CHBX)(English).ca": [
+    "MCTVCTV Sault Ste Marie (CHBX)"
+  ],
+  "MCTVCTVSaultSteMarie(English).ca": [
+    "MCTVCTV Sault Ste Marie"
+  ],
+  "MCTVCTVSudburyCh5(English).ca": [
+    "MCTVCTV Sudbury Ch5"
+  ],
+  "MCTVCTVTimmins(CITO)(English).ca": [
+    "MCTVCTV Timmins (CITO)"
+  ],
+  "MCTVCTVTimmins(English).ca": [
+    "MCTVCTV Timmins"
+  ],
+  "MediasetItalia(English).ca": [
+    "Mediaset Italia"
+  ],
+  "MediasetTGCOM24(English).ca": [
+    "Mediaset TGCOM 24"
+  ],
+  "MegaCosmos(US)(English).ca": [
+    "Mega Cosmos (US)"
+  ],
+  "MelodyAflam(English).ca": [
+    "Melody Aflam"
+  ],
+  "MelodyDrama(English).ca": [
+    "Melody Drama"
+  ],
+  "MelodyHits(English).ca": [
+    "Melody Hits"
+  ],
+  "MeteoMedia(MM)(French).ca": [
+    "MeteoMedia",
+    "Meteo Media"
+  ],
+  "MezzoLive(English).ca": [
+    "Mezzo Live"
+  ],
+  "MLBExtraInnings1(English).ca": [
+    "MLB Extra Innings 1"
+  ],
+  "MLBExtraInnings10(English).ca": [
+    "MLB Extra Innings 10"
+  ],
+  "MLBExtraInnings11(English).ca": [
+    "MLB Extra Innings 11"
+  ],
+  "MLBExtraInnings12(English).ca": [
+    "MLB Extra Innings 12"
+  ],
+  "MLBExtraInnings13(English).ca": [
+    "MLB Extra Innings 13"
+  ],
+  "MLBExtraInnings14(English).ca": [
+    "MLB Extra Innings 14"
+  ],
+  "MLBExtraInnings2(English).ca": [
+    "MLB Extra Innings 2"
+  ],
+  "MLBExtraInnings3(English).ca": [
+    "MLB Extra Innings 3"
+  ],
+  "MLBExtraInnings4(English).ca": [
+    "MLB Extra Innings 4"
+  ],
+  "MLBExtraInnings5(English).ca": [
+    "MLB Extra Innings 5"
+  ],
+  "MLBExtraInnings6(English).ca": [
+    "MLB Extra Innings 6"
+  ],
+  "MLBExtraInnings7(English).ca": [
+    "MLB Extra Innings 7"
+  ],
+  "MLBExtraInnings8(English).ca": [
+    "MLB Extra Innings 8"
+  ],
+  "MLBExtraInnings9(English).ca": [
+    "MLB Extra Innings 9"
+  ],
+  "MLBNetwork(English).ca": [
+    "MLB Network"
+  ],
+  "Moietcompagnie(src01).ca": [
+    "Moi et compagnie"
+  ],
+  "MomoKids(English).ca": [
+    "Momo Kids"
+  ],
+  "MovieTime(English).ca": [
+    "MovieTime"
+  ],
+  "MSNBC(English).ca": [
+    "MSNBC"
+  ],
+  "MSNBCCaribbeanandInternational(English).ca": [
+    "MSNBC Caribbean and International"
+  ],
+  "MTV(English).ca": [
+    "MTV"
+  ],
+  "MuchMusic(English).ca": [
+    "Much Music"
+  ],
+  "MuchMusicNetwork(English).ca": [
+    "MuchMusic Network"
+  ],
+  "MuseumTV(English).ca": [
+    "MuseumTV"
+  ],
+  "MuseumTV(French).ca": [
+    "MuseumTV"
+  ],
+  "NASATV(English).ca": [
+    "NASA TV"
+  ],
+  "NationalGeographic(English).ca": [
+    "National Geographic"
+  ],
+  "NationalGeographicWild(English).ca": [
+    "National Geographic Wild"
+  ],
+  "NatyfTV(French).ca": [
+    "Natyf TV"
+  ],
+  "NBALEAGUEPASS0(English).ca": [
+    "NBA LEAGUE PASS 0"
+  ],
+  "NBALeaguePass1(English).ca": [
+    "NBA League Pass 1"
+  ],
+  "NBALeaguePass10(English).ca": [
+    "NBA League Pass 10"
+  ],
+  "NBALeaguePass2(English).ca": [
+    "NBA League Pass 2"
+  ],
+  "NBALeaguePass3(English).ca": [
+    "NBA League Pass 3"
+  ],
+  "NBALeaguePass4(English).ca": [
+    "NBA League Pass 4"
+  ],
+  "NBALeaguePass5(English).ca": [
+    "NBA League Pass 5"
+  ],
+  "NBALeaguePass6(English).ca": [
+    "NBA League Pass 6"
+  ],
+  "NBALeaguePass7(English).ca": [
+    "NBA League Pass 7"
+  ],
+  "NBALeaguePass8(English).ca": [
+    "NBA League Pass 8"
+  ],
+  "NBALeaguePass9(English).ca": [
+    "NBA League Pass 9"
+  ],
+  "NBATV(English).ca": [
+    "NBA TV"
+  ],
+  "NCAACollegeSportsPackage(English).ca": [
+    "NCAA College Sports Package"
+  ],
+  "NCAACollegeSportsPackage10(English).ca": [
+    "NCAA College Sports Package 10"
+  ],
+  "NCAACollegeSportsPackage9(English).ca": [
+    "NCAA College Sports Package 9"
+  ],
+  "NDTV24X7(English).ca": [
+    "NDTV 24X7"
+  ],
+  "NDTVGoodTimes(English).ca": [
+    "NDTV Good Times"
+  ],
+  "NeepawaAccessTV(English).ca": [
+    "Neepawa Access TV"
+  ],
+  "NewGreekTelevision(English).ca": [
+    "New Greek Television"
+  ],
+  "NewTangDynasty(English).ca": [
+    "New Tang Dynasty"
+  ],
+  "NEWSONLY(English).ca": [
+    "NEWS ONLY"
+  ],
+  "NFLNetworkALTCanadianFeed(English).ca": [
+    "NFL Network ALT Canadian Feed"
+  ],
+  "NFLSundayTicket10(English).ca": [
+    "NFL Sunday Ticket 10"
+  ],
+  "NFLSundayTicket9(English).ca": [
+    "NFL Sunday Ticket 9"
+  ],
+  "NFLSundayTicketNFL1(English).ca": [
+    "NFL Sunday Ticket NFL1"
+  ],
+  "NFLSundayTicketNFL10(English).ca": [
+    "NFL Sunday Ticket NFL10"
+  ],
+  "NFLSundayTicketNFL11(English).ca": [
+    "NFL Sunday Ticket NFL11"
+  ],
+  "NFLSundayTicketNFL12(English).ca": [
+    "NFL Sunday Ticket NFL12"
+  ],
+  "NFLSundayTicketNFL13(English).ca": [
+    "NFL Sunday Ticket NFL13"
+  ],
+  "NFLSundayTicketNFL14(English).ca": [
+    "NFL Sunday Ticket NFL14"
+  ],
+  "NFLSundayTicketNFL15(English).ca": [
+    "NFL Sunday Ticket NFL15"
+  ],
+  "NFLSundayTicketNFL16(English).ca": [
+    "NFL Sunday Ticket NFL16"
+  ],
+  "NFLSundayTicketNFL17(English).ca": [
+    "NFL Sunday Ticket NFL17"
+  ],
+  "NFLSundayTicketNFL18(English).ca": [
+    "NFL Sunday Ticket NFL18"
+  ],
+  "NFLSundayTicketNFL2(English).ca": [
+    "NFL Sunday Ticket NFL2"
+  ],
+  "NFLSundayTicketNFL3(English).ca": [
+    "NFL Sunday Ticket NFL3"
+  ],
+  "NFLSundayTicketNFL4(English).ca": [
+    "NFL Sunday Ticket NFL4"
+  ],
+  "NFLSundayTicketNFL5(English).ca": [
+    "NFL Sunday Ticket NFL5"
+  ],
+  "NFLSundayTicketNFL6(English).ca": [
+    "NFL Sunday Ticket NFL6"
+  ],
+  "NFLSundayTicketNFL7(English).ca": [
+    "NFL Sunday Ticket NFL7"
+  ],
+  "NFLSundayTicketNFL8(English).ca": [
+    "NFL Sunday Ticket NFL8"
+  ],
+  "NFLSundayTicketNFL9(English).ca": [
+    "NFL Sunday Ticket NFL9"
+  ],
+  "NFL10SC(English).ca": [
+    "NFL10SC"
+  ],
+  "NFL11SC(English).ca": [
+    "NFL11SC"
+  ],
+  "NFL12SC(English).ca": [
+    "NFL12SC"
+  ],
+  "NFL13SC(English).ca": [
+    "NFL13SC"
+  ],
+  "NFL14SC(English).ca": [
+    "NFL14SC"
+  ],
+  "NFL1SC(English).ca": [
+    "NFL1SC"
+  ],
+  "NFL2SC(English).ca": [
+    "NFL2SC"
+  ],
+  "NFL3SC(English).ca": [
+    "NFL3SC"
+  ],
+  "NFL4SC(English).ca": [
+    "NFL4SC"
+  ],
+  "NFL5SC(English).ca": [
+    "NFL5SC"
+  ],
+  "NFL6SC(English).ca": [
+    "NFL6SC"
+  ],
+  "NFL7SC(English).ca": [
+    "NFL7SC"
+  ],
+  "NFL8SC(English).ca": [
+    "NFL8SC"
+  ],
+  "NFL9SC(English).ca": [
+    "NFL9SC"
+  ],
+  "NHKWorldTV(English).ca": [
+    "NHK World TV"
+  ],
+  "NHLCentreIce1(English).ca": [
+    "NHL Centre Ice 1"
+  ],
+  "NHLCentreIce1(French).ca": [
+    "NHL Centre Ice 1"
+  ],
+  "NHLCentreIce10(English).ca": [
+    "NHL Centre Ice 10"
+  ],
+  "NHLCentreIce11(English).ca": [
+    "NHL Centre Ice 11"
+  ],
+  "NHLCentreIce12(English).ca": [
+    "NHL Centre Ice 12"
+  ],
+  "NHLCentreIce2(English).ca": [
+    "NHL Centre Ice 2"
+  ],
+  "NHLCentreIce2(French).ca": [
+    "NHL Centre Ice 2"
+  ],
+  "NHLCentreIce3(English).ca": [
+    "NHL Centre Ice 3"
+  ],
+  "NHLCentreIce4(English).ca": [
+    "NHL Centre Ice 4"
+  ],
+  "NHLCentreIce5(English).ca": [
+    "NHL Centre Ice 5"
+  ],
+  "NHLCentreIce6(English).ca": [
+    "NHL Centre Ice 6"
+  ],
+  "NHLCentreIce7(English).ca": [
+    "NHL Centre Ice 7"
+  ],
+  "NHLCentreIce8(English).ca": [
+    "NHL Centre Ice 8"
+  ],
+  "NHLCentreIce9(English).ca": [
+    "NHL Centre Ice 9"
+  ],
+  "NHLVU(Static)(English).ca": [
+    "NHLVU (Static)"
+  ],
+  "Nickelodeon(English).ca": [
+    "Nickelodeon"
+  ],
+  "Noovo(CFJP)MontrealQC(src01).ca": [
+    "Noovo (CFJP) MontrealQC",
+    "Noovo Quebec",
+    "Noovo"
+  ],
+  "NTN24NuestraTeleNoticias24(English).ca": [
+    "NTN24 Nuestra Tele Noticias 24"
+  ],
+  "NTV(English).ca": [
+    "NTV"
+  ],
+  "NTV1(Echostar)NTVInternationalChannelBanglad(English).ca": [
+    "NTV1 (Echostar) NTV International Channel Banglad"
+  ],
+  "NuestraTeleInternacional(Spanish).ca": [
+    "Nuestra Tele Internacional (Spanish)"
+  ],
+  "NWTandNunavutLegislativeAssembly(English).ca": [
+    "NWT and Nunavut Legislative Assembly"
+  ],
+  "OdysseyGreekTV(Greek-English).ca": [
+    "Odyssey Greek TV (Greek, English)"
+  ],
+  "OMNI(East)(English).ca": [
+    "OMNI (East)"
+  ],
+  "OMNI(East)(English-UnknownLanguage(tl)-Punjabi).ca": [
+    "OMNI (East) (English, Unknown Language (tl), Punjabi)"
+  ],
+  "OMNI(Pacific)(English-UnknownLanguage(tl)).ca": [
+    "OMNI (Pacific) (English, Unknown Language (tl))"
+  ],
+  "OMNI(Pacific)(English-UnknownLanguage(tl)-Punjabi-French).ca": [
+    "OMNI (Pacific) (English, Unknown Language (tl), Punjabi, French)"
+  ],
+  "OMNICalgary(English).ca": [
+    "OMNI Calgary"
+  ],
+  "OMNICalgary(English-UnknownLanguage(tl)-Punjabi).ca": [
+    "OMNI Calgary (English, Unknown Language (tl), Punjabi)"
+  ],
+  "OMNIPrairies(English).ca": [
+    "OMNI Prairies"
+  ],
+  "OMNIPrairies(English-UnknownLanguage(tl)-Punjabi).ca": [
+    "OMNI Prairies (English, Unknown Language (tl), Punjabi)"
+  ],
+  "OMNIVancouver(English).ca": [
+    "OMNI Vancouver"
+  ],
+  "OMNI1(English).ca": [
+    "OMNI1"
+  ],
+  "OMNI1(English-UnknownLanguage(tl)).ca": [
+    "OMNI1 (English, Unknown Language (tl))"
+  ],
+  "OMNI2(English).ca": [
+    "OMNI2"
+  ],
+  "OMNI2(English-UnknownLanguage(tl)-Punjabi).ca": [
+    "OMNI2 (English, Unknown Language (tl), Punjabi)"
+  ],
+  "ONETV(English).ca": [
+    "ONETV"
+  ],
+  "OntarioLegislature(English).ca": [
+    "Ontario Legislature"
+  ],
+  "OprahWinfreyNetwork(English).ca": [
+    "Oprah Winfrey Network"
+  ],
+  "OutdoorLifeNetwork(English).ca": [
+    "Outdoor Life Network"
+  ],
+  "OUTtv(English).ca": [
+    "OUTtv"
+  ],
+  "OUTtvOnDemand(English).ca": [
+    "OUTtv OnDemand"
+  ],
+  "PenthouseTVPremium(English).ca": [
+    "Penthouse TV Premium"
+  ],
+  "PeopleTV(English).ca": [
+    "PeopleTV"
+  ],
+  "PersonalVideoRecorder(English).ca": [
+    "Personal Video Recorder"
+  ],
+  "PhoenixSatelliteTV(English).ca": [
+    "Phoenix Satellite TV"
+  ],
+  "PITAARAInternational(English).ca": [
+    "PITAARA International"
+  ],
+  "Planete971French(CHLXFM)(English).ca": [
+    "Planete 971 French (CHLX FM)"
+  ],
+  "PlanetePlus(French).ca": [
+    "Planete Plus"
+  ],
+  "Playboy(English).ca": [
+    "Playboy"
+  ],
+  "PlayboyTV(English).ca": [
+    "Playboy TV"
+  ],
+  "PlaymenTV(English).ca": [
+    "Playmen TV"
+  ],
+  "PlaymenTVPremium(English).ca": [
+    "Playmen TV Premium"
+  ],
+  "PrimeAsiaTV(English).ca": [
+    "Prime Asia TV"
+  ],
+  "Prise2(src01).ca": [
+    "Prise 2"
+  ],
+  "Prise2(French).ca": [
+    "Prise 2"
+  ],
+  "Promo(Static)(English).ca": [
+    "Promo (Static)"
+  ],
+  "PTCPunjabiTV(English).ca": [
+    "PTC Punjabi TV"
+  ],
+  "PTCPunjabiTVDelayedFeed(English).ca": [
+    "PTC Punjabi TV Delayed Feed"
+  ],
+  "PTVGlobal(English).ca": [
+    "PTV Global"
+  ],
+  "PunjjabiTV(English).ca": [
+    "Punjjabi TV"
+  ],
+  "PVR(English).ca": [
+    "PVR"
+  ],
+  "QUB(French).ca": [
+    "QUB"
+  ],
+  "RaiItalia(Italian).ca": [
+    "Rai Italia (Italian)"
+  ],
+  "RaiNews24(Italian).ca": [
+    "Rai News 24 (Italian)"
+  ],
+  "RaiPremium(Italian).ca": [
+    "Rai Premium (Italian)"
+  ],
+  "RDPInternacionalRaidioPortugal(Portuguese).ca": [
+    "RDP Internacional Raidio Portugal (Portuguese)"
+  ],
+  "RDS(Reseaudessports)(src01).ca": [
+    "RDS (Reseau des sports)"
+  ],
+  "RDS2(src01).ca": [
+    "RDS 2",
+    "RDS2"
+  ],
+  "RDSInfo(src01).ca": [
+    "RDS Info",
+    "RDS"
+  ],
+  "RealEstate(English).ca": [
+    "Real Estate"
+  ],
+  "RealEstateChannel(English).ca": [
+    "Real Estate Channel"
+  ],
+  "RecordInternational(Portuguese).ca": [
+    "Record International (Portuguese)"
+  ],
+  "RedHotPremium(English).ca": [
+    "Red Hot Premium"
+  ],
+  "RedHotTV(English).ca": [
+    "Red Hot TV"
+  ],
+  "RedeGloboTVInternacional(Portuguese).ca": [
+    "Rede Globo TV Internacional (Portuguese)"
+  ],
+  "ReseaudesSports(RDS)(French).ca": [
+    "Reseau des Sports (RDS)"
+  ],
+  "ReseaudesSportsInfo(French).ca": [
+    "Reseau des Sports Info"
+  ],
+  "REVTV(English).ca": [
+    "REV TV"
+  ],
+  "Rewind(English).ca": [
+    "Rewind"
+  ],
+  "RFDTV(English).ca": [
+    "RFDTV"
+  ],
+  "RikSat(English).ca": [
+    "Rik Sat"
+  ],
+  "RogersChannel299(English).ca": [
+    "Rogers Channel 299"
+  ],
+  "RogersFireplaceChannelEnglish(English).ca": [
+    "Rogers Fireplace Channel English"
+  ],
+  "RogersNFLSundayTicket1(English).ca": [
+    "Rogers NFL Sunday Ticket 1"
+  ],
+  "RogersNFLSundayTicket10(English).ca": [
+    "Rogers NFL Sunday Ticket 10"
+  ],
+  "RogersNFLSundayTicket2(English).ca": [
+    "Rogers NFL Sunday Ticket 2"
+  ],
+  "RogersNFLSundayTicket3(English).ca": [
+    "Rogers NFL Sunday Ticket 3"
+  ],
+  "RogersNFLSundayTicket4(English).ca": [
+    "Rogers NFL Sunday Ticket 4"
+  ],
+  "RogersNFLSundayTicket5(English).ca": [
+    "Rogers NFL Sunday Ticket 5"
+  ],
+  "RogersNFLSundayTicket6(English).ca": [
+    "Rogers NFL Sunday Ticket 6"
+  ],
+  "RogersNFLSundayTicket7(English).ca": [
+    "Rogers NFL Sunday Ticket 7"
+  ],
+  "RogersNFLSundayTicket8(English).ca": [
+    "Rogers NFL Sunday Ticket 8"
+  ],
+  "RogersNFLSundayTicket9(English).ca": [
+    "Rogers NFL Sunday Ticket 9"
+  ],
+  "RogersSportsnetOntario2(English).ca": [
+    "Rogers Sportsnet Ontario 2"
+  ],
+  "RogersSuperSportsPack(English).ca": [
+    "Rogers Super Sports Pack"
+  ],
+  "RogersSuperSportsPack1(English).ca": [
+    "Rogers Super Sports Pack 1"
+  ],
+  "RogersSuperSportsPack10(English).ca": [
+    "Rogers Super Sports Pack 10"
+  ],
+  "RogersSuperSportsPack11(English).ca": [
+    "Rogers Super Sports Pack 11"
+  ],
+  "RogersSuperSportsPack12(English).ca": [
+    "Rogers Super Sports Pack 12"
+  ],
+  "RogersSuperSportsPack13(English).ca": [
+    "Rogers Super Sports Pack 13"
+  ],
+  "RogersSuperSportsPack14(English).ca": [
+    "Rogers Super Sports Pack 14"
+  ],
+  "RogersSuperSportsPack15(English).ca": [
+    "Rogers Super Sports Pack 15"
+  ],
+  "RogersSuperSportsPack16(English).ca": [
+    "Rogers Super Sports Pack 16"
+  ],
+  "RogersSuperSportsPack17(English).ca": [
+    "Rogers Super Sports Pack 17"
+  ],
+  "RogersSuperSportsPack18(English).ca": [
+    "Rogers Super Sports Pack 18"
+  ],
+  "RogersSuperSportsPack19(English).ca": [
+    "Rogers Super Sports Pack 19"
+  ],
+  "RogersSuperSportsPack2(English).ca": [
+    "Rogers Super Sports Pack 2"
+  ],
+  "RogersSuperSportsPack20(English).ca": [
+    "Rogers Super Sports Pack 20"
+  ],
+  "RogersSuperSportsPack20(HD20)(English).ca": [
+    "Rogers Super Sports Pack 20 (HD20)"
+  ],
+  "RogersSuperSportsPack21(English-French).ca": [
+    "Rogers Super Sports Pack 21 (English, French)"
+  ],
+  "RogersSuperSportsPack22(English).ca": [
+    "Rogers Super Sports Pack 22"
+  ],
+  "RogersSuperSportsPack23(English-French).ca": [
+    "Rogers Super Sports Pack 23 (English, French)"
+  ],
+  "RogersSuperSportsPack24(English-French).ca": [
+    "Rogers Super Sports Pack 24 (English, French)"
+  ],
+  "RogersSuperSportsPack25(English-French).ca": [
+    "Rogers Super Sports Pack 25 (English, French)"
+  ],
+  "RogersSuperSportsPack26(English-French).ca": [
+    "Rogers Super Sports Pack 26 (English, French)"
+  ],
+  "RogersSuperSportsPack27(English-French).ca": [
+    "Rogers Super Sports Pack 27 (English, French)"
+  ],
+  "RogersSuperSportsPack28(English-French).ca": [
+    "Rogers Super Sports Pack 28 (English, French)"
+  ],
+  "RogersSuperSportsPack29(English-French).ca": [
+    "Rogers Super Sports Pack 29 (English, French)"
+  ],
+  "RogersSuperSportsPack3(English).ca": [
+    "Rogers Super Sports Pack 3"
+  ],
+  "RogersSuperSportsPack30(English-French).ca": [
+    "Rogers Super Sports Pack 30 (English, French)"
+  ],
+  "RogersSuperSportsPack31(English-French).ca": [
+    "Rogers Super Sports Pack 31 (English, French)"
+  ],
+  "RogersSuperSportsPack33(English).ca": [
+    "Rogers Super Sports Pack 33"
+  ],
+  "RogersSuperSportsPack36(English).ca": [
+    "Rogers Super Sports Pack 36"
+  ],
+  "RogersSuperSportsPack37(English).ca": [
+    "Rogers Super Sports Pack 37"
+  ],
+  "RogersSuperSportsPack38(English).ca": [
+    "Rogers Super Sports Pack 38"
+  ],
+  "RogersSuperSportsPack39(English).ca": [
+    "Rogers Super Sports Pack 39"
+  ],
+  "RogersSuperSportsPack4(English).ca": [
+    "Rogers Super Sports Pack 4"
+  ],
+  "RogersSuperSportsPack40(English).ca": [
+    "Rogers Super Sports Pack 40"
+  ],
+  "RogersSuperSportsPack41(English-French).ca": [
+    "Rogers Super Sports Pack 41 (English, French)"
+  ],
+  "RogersSuperSportsPack5(English).ca": [
+    "Rogers Super Sports Pack 5"
+  ],
+  "RogersSuperSportsPack6(English).ca": [
+    "Rogers Super Sports Pack 6"
+  ],
+  "RogersSuperSportsPack7(English).ca": [
+    "Rogers Super Sports Pack 7"
+  ],
+  "RogersSuperSportsPack8(English).ca": [
+    "Rogers Super Sports Pack 8"
+  ],
+  "RogersSuperSportsPack9(English).ca": [
+    "Rogers Super Sports Pack 9"
+  ],
+  "RogersTelevision(English).ca": [
+    "Rogers Television"
+  ],
+  "RotanaAflam(English).ca": [
+    "Rotana Aflam"
+  ],
+  "RotanaCinema(English).ca": [
+    "Rotana Cinema"
+  ],
+  "RotanaClassic(English).ca": [
+    "Rotana Classic"
+  ],
+  "RotanaClip(English).ca": [
+    "Rotana Clip"
+  ],
+  "RotanaKhalijia(English).ca": [
+    "Rotana Khalijia"
+  ],
+  "RotanaMasriya(English).ca": [
+    "Rotana Masriya"
+  ],
+  "RotanaMousica(English).ca": [
+    "Rotana Mousica"
+  ],
+  "RTNWMNB(Russian).ca": [
+    "RTNWMNB (Russian)"
+  ],
+  "RTPiRadioTVPortuguesaIntl(Portuguese).ca": [
+    "RTPi RadioTV Portuguesa Intl (Portuguese)"
+  ],
+  "RTSSat(Serbian-English).ca": [
+    "RTS Sat (Serbian, English)"
+  ],
+  "RTVInternational(Russian).ca": [
+    "RTV International (Russian)"
+  ],
+  "RussianIllusion(Russian).ca": [
+    "Russian Illusion (Russian)"
+  ],
+  "SAB(English).ca": [
+    "SAB"
+  ],
+  "SAHARAONE(English).ca": [
+    "SAHARA ONE"
+  ],
+  "SaigonBroadcastingNetwork(English).ca": [
+    "Saigon Broadcasting Network"
+  ],
+  "SaintPierreetMiquelon1ere(French).ca": [
+    "SaintPierre et Miquelon 1ere"
+  ],
+  "Saisons(French).ca": [
+    "Saisons"
+  ],
+  "SaltandLightTelevision(English-French-Italian-Spanish).ca": [
+    "Salt and Light Television (English, French, Italian, Spanish)"
+  ],
+  "SanjhaTV(English).ca": [
+    "Sanjha TV"
+  ],
+  "SavoirMedia(src01).ca": [
+    "Savoir Media"
+  ],
+  "Savoirmedia(French-English).ca": [
+    "Savoir media (French, English)"
+  ],
+  "Schlager(English).ca": [
+    "Schlager"
+  ],
+  "Seriesplus(src01).ca": [
+    "Series plus"
+  ],
+  "SETAsiaInternational(English).ca": [
+    "SET Asia International"
+  ],
+  "SetMax(English).ca": [
+    "Set Max"
+  ],
+  "Showcase(English).ca": [
+    "Showcase"
+  ],
+  "ShowcaseTelevisionInc(English).ca": [
+    "Showcase Television Inc"
+  ],
+  "SICNoticias(Portuguese).ca": [
+    "SIC Noticias (Portuguese)"
+  ],
+  "SilverScreenClassics(English).ca": [
+    "Silver Screen Classics"
+  ],
+  "Skinemax(English).ca": [
+    "Skinemax"
+  ],
+  "SkyNews(English).ca": [
+    "Sky News"
+  ],
+  "SkyNewsArabia(English).ca": [
+    "Sky News Arabia"
+  ],
+  "SLICE(English).ca": [
+    "SLICE"
+  ],
+  "SmithsonianChannel(English).ca": [
+    "Smithsonian Channel"
+  ],
+  "SonyAATH(English).ca": [
+    "Sony AATH"
+  ],
+  "SportPlus(English).ca": [
+    "SportPlus"
+  ],
+  "SportsmanChannel(English).ca": [
+    "Sportsman Channel"
+  ],
+  "Sportsnet(East)(English).ca": [
+    "Sportsnet (East)"
+  ],
+  "Sportsnet(Pacific)(English).ca": [
+    "Sportsnet (Pacific)"
+  ],
+  "Sportsnet(West)(English).ca": [
+    "Sportsnet (West)"
+  ],
+  "Sportsnet360(English).ca": [
+    "Sportsnet 360"
+  ],
+  "Sportsnet4K(English).ca": [
+    "Sportsnet 4K"
+  ],
+  "SportsnetMST(English).ca": [
+    "Sportsnet MST"
+  ],
+  "SportsnetOne(English).ca": [
+    "Sportsnet One"
+  ],
+  "SportsnetOne4K(English).ca": [
+    "Sportsnet One 4K"
+  ],
+  "SportsnetOneCanucks(English).ca": [
+    "Sportsnet One Canucks"
+  ],
+  "SportsnetOneFlames(English).ca": [
+    "Sportsnet One Flames"
+  ],
+  "SportsnetOneOilers(English).ca": [
+    "Sportsnet One Oilers"
+  ],
+  "SportsnetOneSenators(English).ca": [
+    "Sportsnet One Senators"
+  ],
+  "SportsnetOntario(Alt)(English).ca": [
+    "Sportsnet Ontario (Alt)"
+  ],
+  "SportsnetOntario(English).ca": [
+    "Sportsnet Ontario"
+  ],
+  "SportsnetWorld(English).ca": [
+    "Sportsnet World"
+  ],
+  "SportsnetWorldPlus1(English).ca": [
+    "Sportsnet World Plus 1"
+  ],
+  "SportsnetWorldPlus2(English).ca": [
+    "Sportsnet World Plus 2"
+  ],
+  "SportsnetWorldPlus3(English).ca": [
+    "Sportsnet World Plus 3"
+  ],
+  "SportsnetWorldPlus4(English).ca": [
+    "Sportsnet World Plus 4"
+  ],
+  "SportsnewsTV(OTT)(English).ca": [
+    "Sportsnews TV (OTT)"
+  ],
+  "Star(English).ca": [
+    "Star"
+  ],
+  "STARZ1(English).ca": [
+    "STARZ 1"
+  ],
+  "STARZ1(West)(English).ca": [
+    "STARZ 1 (West)"
+  ],
+  "STARZ2(English).ca": [
+    "STARZ 2"
+  ],
+  "STARZ2(West)(English).ca": [
+    "STARZ 2 (West)"
+  ],
+  "STARZonDemand(English).ca": [
+    "STARZ onDemand"
+  ],
+  "StudioCanal(src01).ca": [
+    "StudioCanal"
+  ],
+  "StudioCanal(French).ca": [
+    "StudioCanal"
+  ],
+  "SuperChannelFuse(English).ca": [
+    "Super Channel Fuse"
+  ],
+  "SuperChannelHeartandHome(English).ca": [
+    "Super Channel Heart and Home"
+  ],
+  "SuperChannelVault(English).ca": [
+    "Super Channel Vault"
+  ],
+  "SuperEcran2(src01).ca": [
+    "Super Ecran 2"
+  ],
+  "SuperEcran3(src01).ca": [
+    "Super Ecran 3"
+  ],
+  "SuperEcran4(src01).ca": [
+    "Super Ecran 4"
+  ],
+  "SuperEcranSurDemande(French).ca": [
+    "Super Ecran Sur Demande"
+  ],
+  "SuperEcran(src01).ca": [
+    "Super Ecran"
+  ],
+  "SurSagarTV(English).ca": [
+    "Sur Sagar TV"
+  ],
+  "TamilEntertainmentTV(English).ca": [
+    "Tamil Entertainment TV"
+  ],
+  "TamilVision(English).ca": [
+    "Tamil Vision"
+  ],
+  "TamilOne(English).ca": [
+    "TamilOne"
+  ],
+  "Telebimbi(English).ca": [
+    "Telebimbi"
+  ],
+  "TelefeInternacional(Spanish).ca": [
+    "Telefe Internacional (Spanish)"
+  ],
+  "TelehitMusica(Spanish).ca": [
+    "Telehit Musica (Spanish)"
+  ],
+  "Telelatino(English).ca": [
+    "Telelatino"
+  ],
+  "TelelatinoNetwork(English).ca": [
+    "Telelatino Network"
+  ],
+  "TeleMag(French).ca": [
+    "TeleMag"
+  ],
+  "Telemagino(src01).ca": [
+    "Telemagino"
+  ],
+  "Telemagino(French).ca": [
+    "Telemagino"
+  ],
+  "TeleNinos(Spanish).ca": [
+    "TeleNinos (Spanish)"
+  ],
+  "TeleQuebec(CIVM)Montreal(src01).ca": [
+    "TeleQuebec (CIVM) Montreal",
+    "TeleQuebec",
+    "Tele Quebec"
+  ],
+  "Teleritmo(Spanish).ca": [
+    "Teleritmo (Spanish)"
+  ],
+  "TeleTOONfrancais(src01).ca": [
+    "TeleTOON francais"
+  ],
+  "TeletoonFrancais(French).ca": [
+    "Teletoon Francais"
+  ],
+  "TelileTV(CIMCTV)(English).ca": [
+    "Telile TV (CIMCTV)"
+  ],
+  "TEMOIN(French).ca": [
+    "TEMOIN"
+  ],
+  "TestChannel1(English).ca": [
+    "Test Channel 1"
+  ],
+  "TestChannel3(English).ca": [
+    "Test Channel 3"
+  ],
+  "TestChannel4(English).ca": [
+    "Test Channel 4"
+  ],
+  "TestChannel5(English).ca": [
+    "Test Channel 5"
+  ],
+  "TestChannel6UHD(English).ca": [
+    "Test Channel 6 UHD"
+  ],
+  "TestPBSBuffalo(WNED)GTA(English).ca": [
+    "Test PBS Buffalo (WNED) GTA"
+  ],
+  "TestStation(English).ca": [
+    "Test Station"
+  ],
+  "TFO(French).ca": [
+    "TFO"
+  ],
+  "TFO(TVOntario)(src01).ca": [
+    "TFO (TV Ontario)"
+  ],
+  "TheAfricaChannel(English).ca": [
+    "The Africa Channel"
+  ],
+  "TheCowboyChannel(English).ca": [
+    "The Cowboy Channel"
+  ],
+  "TheFamilyChannel(English).ca": [
+    "The Family Channel"
+  ],
+  "TheFamilyChannel(Pacific)(English).ca": [
+    "The Family Channel (Pacific)"
+  ],
+  "TheFightNetwork(English).ca": [
+    "The Fight Network"
+  ],
+  "TheFilipinoChannel(Pacific)(English).ca": [
+    "The Filipino Channel (Pacific)"
+  ],
+  "TheFrame(English).ca": [
+    "The Frame"
+  ],
+  "TheIsraeliNetwork(English).ca": [
+    "The Israeli Network"
+  ],
+  "TheLearningChannel(English).ca": [
+    "The Learning Channel"
+  ],
+  "TheMiracleChannelCJIL(English).ca": [
+    "The Miracle Channel CJIL"
+  ],
+  "TheNewsForum(English).ca": [
+    "The News Forum"
+  ],
+  "TheRuralChannel(English).ca": [
+    "The Rural Channel"
+  ],
+  "TheWeatherNetwork(English).ca": [
+    "The Weather Network"
+  ],
+  "TimeShiftingInformation(English).ca": [
+    "Time Shifting Information"
+  ],
+  "TimeShiftingInformation(French)(French).ca": [
+    "Time Shifting Information"
+  ],
+  "TLNovelas(Spanish).ca": [
+    "TLNovelas (Spanish)"
+  ],
+  "TooMuchforTVTMFTV(English).ca": [
+    "Too Much for TV TMFTV"
+  ],
+  "ToonAVision(English).ca": [
+    "ToonAVision"
+  ],
+  "TOTALLYENTERTAINING(English).ca": [
+    "TOTALLY ENTERTAINING"
+  ],
+  "TravelXP(English).ca": [
+    "Travel XP"
+  ],
+  "Treehouse(English).ca": [
+    "Treehouse"
+  ],
+  "TSC(English).ca": [
+    "TSC"
+  ],
+  "TSN(English).ca": [
+    "TSN"
+  ],
+  "TSN1(English).ca": [
+    "TSN 1"
+  ],
+  "TSN2(English).ca": [
+    "TSN 2"
+  ],
+  "TSN24K(English).ca": [
+    "TSN 2 4K"
+  ],
+  "TSN3(English).ca": [
+    "TSN 3"
+  ],
+  "TSN3Blackout(English).ca": [
+    "TSN 3 Blackout"
+  ],
+  "TSN4(English).ca": [
+    "TSN 4"
+  ],
+  "TSN4Blackout(English).ca": [
+    "TSN 4 Blackout"
+  ],
+  "TSN5(English).ca": [
+    "TSN 5"
+  ],
+  "TSN54K(English).ca": [
+    "TSN5 4K"
+  ],
+  "TurnerClassicMovies(English).ca": [
+    "Turner Classic Movies"
+  ],
+  "TV5Quebec(French).ca": [
+    "TV 5 Quebec"
+  ],
+  "TVAsia(English).ca": [
+    "TV Asia"
+  ],
+  "TVCallDisplay(English).ca": [
+    "TV Call Display"
+  ],
+  "TVChile(Spanish).ca": [
+    "TV Chile (Spanish)"
+  ],
+  "TVGuide(English).ca": [
+    "TV Guide"
+  ],
+  "TVRogers(Ottawa)(French).ca": [
+    "TV Rogers (Ottawa)"
+  ],
+  "TV1CF(English-French).ca": [
+    "TV1CF (English, French)"
+  ],
+  "TV5(LaTelevisionInternationale)(French).ca": [
+    "TV5 (La Television Internationale)"
+  ],
+  "TV5International(East)(src01).ca": [
+    "TV5 International (East)"
+  ],
+  "TVA(src01).ca": [
+    "TVA"
+  ],
+  "TVA(Pacific)(French).ca": [
+    "TVA (Pacific)"
+  ],
+  "TVASports(src01).ca": [
+    "TVA Sports"
+  ],
+  "TVASports(French).ca": [
+    "TVA Sports"
+  ],
+  "TVASports2(src01).ca": [
+    "TVA Sports 2"
+  ],
+  "TVASports2(French).ca": [
+    "TVA Sports 2"
+  ],
+  "TVASports3(French).ca": [
+    "TVA Sports 3"
+  ],
+  "TVE(Spanish).ca": [
+    "TVE (Spanish)"
+  ],
+  "TVIPortugal(English).ca": [
+    "TVI Portugal"
+  ],
+  "TVNInternational(Polish).ca": [
+    "TVN International (Polish)"
+  ],
+  "TVO(English).ca": [
+    "TVO"
+  ],
+  "TVONEGlobal(English).ca": [
+    "TVONE Global"
+  ],
+  "TVPInfo(Polish).ca": [
+    "TVP Info (Polish)"
+  ],
+  "Unis(src01).ca": [
+    "Unis"
+  ],
+  "UnisTV(French).ca": [
+    "Unis TV"
+  ],
+  "Univision(Spanish).ca": [
+    "Univision (Spanish)"
+  ],
+  "Vanakkam(English).ca": [
+    "Vanakkam"
+  ],
+  "VanakkamFM(English).ca": [
+    "Vanakkam FM"
+  ],
+  "VCTV(CHVCTV)(English).ca": [
+    "VCTV (CHVCTV)"
+  ],
+  "Venus(Spanish).ca": [
+    "Venus (Spanish)"
+  ],
+  "VietGlobalNetworkTV(English).ca": [
+    "Viet Global Network TV"
+  ],
+  "VisionTV(English).ca": [
+    "Vision TV"
+  ],
+  "VividTVSurDemande(French).ca": [
+    "Vivid TV Sur Demande"
+  ],
+  "VODEntryPoint4(English).ca": [
+    "VOD Entry Point 4"
+  ],
+  "VODEntryPoint5(English).ca": [
+    "VOD Entry Point 5"
+  ],
+  "VODEntryPoint6(English).ca": [
+    "VOD Entry Point 6"
+  ],
+  "VODEntryPoint7(English).ca": [
+    "VOD Entry Point 7"
+  ],
+  "VRAK(src01).ca": [
+    "VRAK"
+  ],
+  "W(WomensTelevisionNetwork)(Pacific)(English).ca": [
+    "W (Womens Television Network) (Pacific)"
+  ],
+  "WNetwork(English).ca": [
+    "W Network"
+  ],
+  "WATERTelevisionNetwork(English).ca": [
+    "WATER Television Network"
+  ],
+  "WBFO887FM(English).ca": [
+    "WBFO 887FM"
+  ],
+  "WBTSCD(English).ca": [
+    "WBTSCD"
+  ],
+  "WBZ(English).ca": [
+    "WBZ"
+  ],
+  "WBZDT(English).ca": [
+    "WBZDT"
+  ],
+  "WCVBSatellite(English).ca": [
+    "WCVB Satellite"
+  ],
+  "WCVBDT(English).ca": [
+    "WCVBDT"
+  ],
+  "WDIV(English).ca": [
+    "WDIV"
+  ],
+  "WDIVDT(English).ca": [
+    "WDIVDT"
+  ],
+  "WeatherNetwork(CWEA)(English).ca": [
+    "Weather Network (CWEA)"
+  ],
+  "WFXT(English).ca": [
+    "WFXT"
+  ],
+  "WFXTDT(English).ca": [
+    "WFXTDT"
+  ],
+  "WGBH(English).ca": [
+    "WGBH"
+  ],
+  "WGBHDT(English).ca": [
+    "WGBHDT"
+  ],
+  "WGN(Chicago)(English).ca": [
+    "WGN (Chicago)",
+    "WGN"
+  ],
+  "WGNDT(English).ca": [
+    "WGNDT"
+  ],
+  "WGRZ(English).ca": [
+    "WGRZ"
+  ],
+  "WGRZDT(English).ca": [
+    "WGRZDT"
+  ],
+  "WILDTV(English).ca": [
+    "WILD TV"
+  ],
+  "WildBrainTV(East)(English).ca": [
+    "WildBrainTV (East)"
+  ],
+  "WillowCricket(English).ca": [
+    "Willow Cricket"
+  ],
+  "WinTVCaribbean(English).ca": [
+    "Win TV Caribbean"
+  ],
+  "WIVB(English).ca": [
+    "WIVB"
+  ],
+  "WIVBDT(English).ca": [
+    "WIVBDT"
+  ],
+  "WJBK(English).ca": [
+    "WJBK"
+  ],
+  "WJBKDT(English).ca": [
+    "WJBKDT"
+  ],
+  "WKBW(English).ca": [
+    "WKBW"
+  ],
+  "WKBWDT(English).ca": [
+    "WKBWDT"
+  ],
+  "WKND995(French).ca": [
+    "WKND 995"
+  ],
+  "WNEDDT(English).ca": [
+    "WNEDDT"
+  ],
+  "WNYO(English).ca": [
+    "WNYO"
+  ],
+  "WNYODT(English).ca": [
+    "WNYODT"
+  ],
+  "WOWTV(English).ca": [
+    "WOWTV"
+  ],
+  "WPBS(English).ca": [
+    "WPBS"
+  ],
+  "WPBSDT(English).ca": [
+    "WPBSDT"
+  ],
+  "WPCHCable(English).ca": [
+    "WPCH Cable"
+  ],
+  "WPCHDT4(English).ca": [
+    "WPCHDT4"
+  ],
+  "WPIX(English).ca": [
+    "WPIX"
+  ],
+  "WPIXDT(English).ca": [
+    "WPIXDT"
+  ],
+  "WSBK(English).ca": [
+    "WSBK"
+  ],
+  "WSBKDT(English).ca": [
+    "WSBKDT"
+  ],
+  "WTVS(English).ca": [
+    "WTVS"
+  ],
+  "WTVSDT(English).ca": [
+    "WTVSDT"
+  ],
+  "WUHFDT(English).ca": [
+    "WUHFDT"
+  ],
+  "WUTV(English).ca": [
+    "WUTV"
+  ],
+  "WUTVDT(English).ca": [
+    "WUTVDT"
+  ],
+  "WWENetwork(English).ca": [
+    "WWE Network"
+  ],
+  "WWJ(English).ca": [
+    "WWJ"
+  ],
+  "WWJDT(English).ca": [
+    "WWJDT"
+  ],
+  "WXYZ(English).ca": [
+    "WXYZ"
+  ],
+  "WXYZCABLE(English).ca": [
+    "WXYZ CABLE"
+  ],
+  "WXYZDT(English).ca": [
+    "WXYZDT"
+  ],
+  "YChannel(English-Hindi-Urdu-Punjabi).ca": [
+    "Y Channel (English, Hindi, Urdu, Punjabi)"
+  ],
+  "YaHalaInternational(English).ca": [
+    "Ya Hala International"
+  ],
+  "YesTVCalgary(English).ca": [
+    "Yes TV Calgary"
+  ],
+  "YesTV(English).ca": [
+    "YesTV"
+  ],
+  "Yoopa(src01).ca": [
+    "Yoopa"
+  ],
+  "YourWorldThisWeek(English).ca": [
+    "Your World This Week"
+  ],
+  "YouTBell(English).ca": [
+    "YouTBell"
+  ],
+  "YTV(English).ca": [
+    "YTV"
+  ],
+  "YTVP(English).ca": [
+    "YTVP"
+  ],
+  "Z(French).ca": [
+    "Z"
+  ],
+  "ZeeBangla(English).ca": [
+    "Zee Bangla"
+  ],
+  "ZeeBollywood(English).ca": [
+    "Zee Bollywood"
+  ],
+  "ZeeCinema(English).ca": [
+    "Zee Cinema"
+  ],
+  "ZeeMarathi(English).ca": [
+    "Zee Marathi"
+  ],
+  "ZeePunjabi(English).ca": [
+    "Zee Punjabi"
+  ],
+  "ZeeSalaam(English).ca": [
+    "Zee Salaam"
+  ],
+  "ZeeTalkies(English).ca": [
+    "Zee Talkies"
+  ],
+  "ZeeTamil(English).ca": [
+    "Zee Tamil"
+  ],
+  "ZeeTV(English).ca": [
+    "Zee TV"
+  ],
+  "Zeste(src01).ca": [
+    "Zeste"
+  ],
+  "Zeste(French).ca": [
+    "Zeste"
+  ],
+  "ZesteHD(French).ca": [
+    "ZesteHD"
+  ],
+  "Zing(English).ca": [
+    "Zing"
+  ],
+  "Zoom(English).ca": [
+    "Zoom"
+  ],
+  "RTSDeux(src01).ch": [
+    "RTS Deux",
+    "RTS 2",
+    "RTS2"
+  ],
+  "RTSUn(src01).ch": [
+    "RTS Un",
+    "RTS 1",
+    "RTS1"
+  ]
 }
