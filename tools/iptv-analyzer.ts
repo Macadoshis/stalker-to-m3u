@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
 import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
-import {fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
+import {checkStream, fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
 import {ArrayData, Channel, Config, Data, Genre, Programs} from "../types";
 
 const axios = require('axios');
@@ -83,21 +83,22 @@ function fetchUrl(url: string): Observable<FetchContent> {
             body: fs.readFileSync(url.replace('file:///', ''), READ_OPTIONS),
         }));
     } else {
-        return from(axios.get(url)).pipe(
-            map(response => ({
-                url,
-                body: (<any>response).data as string,
-            })),
-            catchError(error => {
-                console.error(`Error fetching ${url}:`, error.message);
-                return of(
-                    <FetchContent>{
-                        url,
-                        error: error.message,
-                    },
-                );
-            })
-        );
+        return from(axios.get(url))
+            .pipe(
+                map(response => ({
+                    url,
+                    body: (<any>response).data as string,
+                })),
+                catchError(error => {
+                    console.error(`Error fetching ${url}:`, error.message);
+                    return of(
+                        <FetchContent>{
+                            url,
+                            error: error.message,
+                        },
+                    );
+                })
+            );
     }
 }
 
@@ -231,37 +232,15 @@ function fetchAllUrls(urls: string[]): void {
                                 .map(url => new Promise<boolean>((resp, err) => {
 
                                         // Test stream URL
-                                        const req = http.get(url!, (resHttp: any) => {
-
-                                            if (resHttp.statusCode !== 200) {
-                                                console.error(`Did not resolve stream ${url} for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}. Code: ${resHttp.statusCode}`);
-                                                resHttp.resume();
-                                                resp(false);
-                                            } else {
-                                                //console.debug(`Resolved successfully stream ${next.url} of channel ${next.program.name}.`);
-                                                resp(true);
-                                            }
-
-                                            resHttp.on('error', (e: NodeJS.ErrnoException) => {
-                                                console.error(`Response stream error: ${e?.message} for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`);
-                                                resp(false);
-                                            });
-                                        }, (errHttp: any) => {
-                                            resp(false);
-                                        });
-
-                                        // Catch errors on the request
-                                        req.on('error', (e: NodeJS.ErrnoException) => {
-                                            if (e.code === 'ECONNRESET') {
-                                                console.error(`Connection was reset by the remote host  for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`);
-                                            } else {
-                                                console.error(`Request error: ${e.message}  for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`);
-                                            }
-
-                                            resp(false);
-                                        });
-
-                                        req.end();
+                                        checkStream(url!)
+                                            .then(
+                                                res => {
+                                                    resp(res);
+                                                },
+                                                err => {
+                                                    resp(false);
+                                                }
+                                            );
                                     }
                                 ))
                         ).pipe(

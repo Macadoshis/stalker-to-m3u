@@ -1,4 +1,4 @@
-import {fetchData, fetchSeries, getConfig, getGenerationKind, READ_OPTIONS, splitLines} from "./common.js";
+import {checkStream, fetchData, fetchSeries, getConfig, getGenerationKind, READ_OPTIONS, splitLines} from "./common.js";
 import {
     ArrayData,
     Channel,
@@ -236,26 +236,19 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                 return resolveUrlLink(next).then(() => {
 
                                     return new Promise<void>((resp, err) => {
-
                                         // Test stream URL
-                                        const req = http.get(next.url, (resHttp: any) => {
-
-                                            if (resHttp.statusCode !== 200) {
-                                                console.error(`Did not resolve stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}.`);
-                                                resHttp.resume();
-                                                next.testResult = false;
-                                            } else {
-                                                // console.debug(`Resolved successfully stream ${next.url} of channel ${next.title + ' - ' + next.name}. Code: ${resHttp.statusCode}.`);
-                                                next.testResult = true;
-                                            }
-
-                                            resp();
-                                        }, (errHttp: any) => {
-                                            next.testResult = false;
-                                            resp();
-                                        });
-
-                                        req.end();
+                                        checkStream(next.url!)
+                                            .then(
+                                                res => {
+                                                    next.testResult = res;
+                                                },
+                                                err => {
+                                                    next.testResult = false;
+                                                }
+                                            )
+                                            .finally(() => {
+                                                resp();
+                                            });
                                     });
                                 });
                             });

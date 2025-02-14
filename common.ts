@@ -12,14 +12,20 @@ import {
 
 import Ajv from "ajv";
 
-import {firstValueFrom, forkJoin, from, map, Observable, of, switchMap, tap} from 'rxjs';
+import {catchError, finalize, firstValueFrom, forkJoin, from, map, Observable, of, switchMap, tap} from 'rxjs';
+// import axios, { AxiosResponse } from 'axios';
+// import axios from 'axios';
+// import axios, { AxiosResponse } from 'axios/index.cjs';
 
 const version: string = require('./package.json').version;
+
+const TEST_STREAM_REQUEST_TIMEOUT: number = 10000;
 
 const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
+const axios = require('axios');
 
 export const randomDeviceId: () => string = () => Array.from({length: 64}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
 export const randomSerialNumber: () => string = () => Array.from({length: 13}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
@@ -294,4 +300,105 @@ export function fetchSeries(genres: Array<Genre>): Promise<GenreSerie[]> {
 
 export function splitLines(lines: string): string[] {
     return lines.split(/\r\n|\r|\n/);
+}
+
+/**
+ * Check if a stream is accessible by:
+ * 1. Fetching the stream.
+ * 2. Extracting and testing the first media segment.
+ * 3. Handling network errors and edge cases.
+ *
+ * @param {string} url - The stream from m3u URL.
+ * @returns {Promise<boolean>} - True if the stream is accessible, false otherwise.
+ */
+export function checkStream(url: string): Promise<boolean> {
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), TEST_STREAM_REQUEST_TIMEOUT);
+
+    try {
+        console.log(`...Checking stream: ${url}`);
+
+
+        // Fetch the stream
+        const streamResponse: Observable<any> = from(axios.get(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0', // Mimic real browser behavior
+                'Accept': 'application/vnd.apple.mpegurl, application/x-mpegURL, text/plain'
+            },
+            responseType: 'arraybuffer', // Handle binary data
+            signal: controller.signal, // Cancels if it exceeds REQUEST_TIMEOUT
+            timeout: TEST_STREAM_REQUEST_TIMEOUT, // Avoid hanging requests
+            maxRedirects: 5, // Follow up to 5 redirects
+            validateStatus: (status: number) => status < 400 // Consider only 2xx and 3xx as valid
+        }));
+
+        return streamResponse
+            .pipe(
+                map(r => {
+                    if (r && r.status === 200) {
+                        console.log(`Stream is accessible and playable.`);
+                        return true;
+                    }
+
+                    console.error(`Segment request failed: HTTP ${r?.status}`);
+                    return false;
+                }),
+                catchError(error => {
+                    handleRequestError(error, `Stream test failed for ${url}`);
+                    return of(false);
+                }),
+                finalize(() => {
+                    clearTimeout(timeout);
+                })
+            ).toPromise() as Promise<boolean>;
+    } catch (err) {
+        clearTimeout(timeout);
+        handleRequestError(err, `Stream test failed`);
+        return Promise.resolve(false);
+    }
+}
+
+/**
+ * Handle different types of request errors.
+ *
+ * @param {Error} error - The Axios or Node.js error object.
+ * @param {string} context - Custom error message context.
+ */
+function handleRequestError(error: any, context: string) {
+    if (error.response) {
+        console.error(`${context}: Server responded with HTTP ${error.response.status}`);
+    } else if (error.request) {
+        console.error(`${context}: No response received (Possible timeout or network issue)`);
+    } else if (axios.isCancel(error)) {
+        console.error(`Request aborted due to timeout`);
+    } else {
+        console.error(`${context}: Request setup failed - ${error.message}`);
+    }
+
+    if (error.code) {
+        switch (error.code) {
+            case 'ECONNRESET':
+                console.error(`${context}: Connection was forcibly closed by the server (ECONNRESET)`);
+                break;
+            case 'ETIMEDOUT':
+                console.error(`${context}: Request timed out (ETIMEDOUT)`);
+                break;
+            case 'ECONNABORTED':
+                console.error(`${context}: Response timeout exceeded (ECONNABORTED)`);
+                break;
+            case 'EHOSTUNREACH':
+                console.error(`${context}: Host unreachable (EHOSTUNREACH)`);
+                break;
+            case 'ENOTFOUND':
+                console.error(`${context}: Domain or server not found (ENOTFOUND)`);
+                break;
+            case 'ECONNREFUSED':
+                console.error(`${context}: Connection refused by the server (ECONNREFUSED)`);
+                break;
+            default:
+                console.error(`${context}: Network error (${error.code})`);
+                break;
+        }
+    }
 }

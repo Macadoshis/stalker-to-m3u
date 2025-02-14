@@ -10,7 +10,7 @@
     "m3u-vod": "npm run groups vod && npm run m3u vod",
     "m3u-series": "npm run groups series && npm run m3u series",
     "preiptv-analyzer": "npm run pregroups",
-    "iptv-analyzer": "ts-node --project ./tsconfig.ts-node.json tools/iptv-anayzer.ts"
+    "iptv-analyzer": "ts-node --project ./tsconfig.ts-node.json tools/iptv-analyzer.ts"
   },
   "private": false,
   "devDependencies": {
