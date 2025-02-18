@@ -14,7 +14,8 @@ tools/sources.txt
 
 # dependencies
 /node_modules
-/ffmpeg/
+ffmpeg.exe
+ffprobe*
 
 # profiling files
 chrome-profiler-events*.json

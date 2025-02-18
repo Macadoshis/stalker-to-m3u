@@ -72,11 +72,17 @@ In order to use this script, following are needed :
 
 ## Script
 
+### Prerequisite
 Run configuration script at first execution only (only to be done once or after every new version) :
 
 - [configure.bat](./configure.bat) (_Windows_)
 - [configure](./configure) (_Linux / MacOS_)
 
+The `configure` script performs in that order :
+- download the dependencies for NodeJS to `node_modules` directory.
+- download the ffmpeg binaries (`ffmpeg` and `ffprobe`). Note that a failure at this point does not prevent to use the tool, only to set the `streamTester` option to `ffmpeg` (default value is `http`).
+
+### Main entry
 The main entrypoint to run the script is from file :
 
 - [stalker-to-m3u.bat](./stalker-to-m3u.bat) (_Windows_)
@@ -144,6 +150,7 @@ Considering following stalker provider :
 | `vodIncludeRating`          | Include IMDB rating in the title of each VOD (if provided).                                                                                                                                                                                                                                         | [X]      | `true`                                        |
 | `vodOrdering`               | Indicate the sorting of each VOD item.<br/> Possible values are `none` (as given by provider), `alphabetic` (by VOD title) or `rating` (by IMDB rating where provided, _alphabetically_ for items with no rating).                                                                                  | [X]      | `alphabetic`                                  |
 | `maxNumberOfChannelsToTest` | (Only if `computeUrlLink` is enabled.)<br/>Max number of channels to be picked up randomly among selected groups, and to test if streams are resolvable. If none responds successfully, the generation is aborted. Set `maxNumberOfChannelsToTest` to `0` to disable this test and always generate. | [X]      | `5`                                           |
+| `streamTester`              | (Only if `maxNumberOfChannelsToTest` is greater than 0)<br/>Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                                                                                    | [X]      | `http`                                        |
 
 ### Options from command line
 
@@ -184,6 +191,7 @@ file [tools/analyzer-config.json](./tools/analyzer-config.json).
 | `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | [X]      | `false` |
 | `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | [X]      | `1`     |
 | `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | [X]      | `1`     |
+| `streamTester`   | Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                | [X]      | `http`  |
 
 A provider is considered live if at least ONE channel stream resolves successfully.
 

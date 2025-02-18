@@ -17,6 +17,11 @@
       "type": "number",
       "description": "Number of IPTV channels to check the liveness. The channel(s) are selected randomly among all channels from the result of selected genres (see 'groupsToTest').",
       "default": 1
+    },
+    "streamTester": {
+      "type": "string",
+      "description": "Stream tester mode",
+      "default": "http"
     }
   },
   "additionalProperties": false

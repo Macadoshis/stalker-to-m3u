@@ -14,9 +14,11 @@ export interface Config {
     vodMaxPagePerGenre?: number;
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;
+    streamTester?: StreamTester;
 }
 
 export type VodOrdering = 'none' | 'rating' | 'alphabetic';
+export type StreamTester = 'http' | 'ffmpeg';
 
 export type GenerationKind = 'iptv' | 'vod' | 'series';
 export const generationKindNames = ['iptv', 'vod', 'series'] as string[];

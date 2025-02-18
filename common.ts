@@ -7,15 +7,15 @@ import {
     GenreSerie,
     GenreSeries,
     Programs,
-    Serie
+    Serie,
+    StreamTester
 } from "./types.js";
 
 import Ajv from "ajv";
 
 import {catchError, finalize, firstValueFrom, forkJoin, from, map, Observable, of, switchMap, tap} from 'rxjs';
-// import axios, { AxiosResponse } from 'axios';
-// import axios from 'axios';
-// import axios, { AxiosResponse } from 'axios/index.cjs';
+
+const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
 
 const version: string = require('./package.json').version;
 
@@ -26,6 +26,13 @@ const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
 const axios = require('axios');
+const path = require('path');
+const ffmpeg = require('fluent-ffmpeg');
+const {spawn} = require('child_process');
+
+// Set FFmpeg binary path
+ffmpeg.setFfmpegPath(path.resolve(__dirname, 'ffmpeg'));
+ffmpeg.setFfprobePath(path.resolve(__dirname, 'ffprobe'));
 
 export const randomDeviceId: () => string = () => Array.from({length: 64}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
 export const randomSerialNumber: () => string = () => Array.from({length: 13}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
@@ -309,17 +316,32 @@ export function splitLines(lines: string): string[] {
  * 3. Handling network errors and edge cases.
  *
  * @param {string} url - The stream from m3u URL.
+ * @param {Config} config - The stream tester mode.
  * @returns {Promise<boolean>} - True if the stream is accessible, false otherwise.
  */
-export function checkStream(url: string): Promise<boolean> {
+export function checkStream(url: string, config: Pick<Config, 'streamTester'>): Promise<boolean> {
+
+    const streamTester: StreamTester = config.streamTester !== undefined ? config.streamTester : 'http';
+
+    console.log(`...Checking stream [${streamTester}]: ${url}`);
+
+    if (streamTester === "http") {
+        // HTTP stream tester
+        return checkStreamHttp(url);
+    } else if (streamTester === "ffmpeg") {
+        // FFMPEG stream tester
+        return checkStreamFfmpeg(url);
+    } else {
+        throw new Error(`Stream tester "${streamTester}" not supported`);
+    }
+}
+
+function checkStreamHttp(url: string): Promise<boolean> {
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), TEST_STREAM_REQUEST_TIMEOUT);
 
     try {
-        console.log(`...Checking stream: ${url}`);
-
-
         // Fetch the stream
         const streamResponse: Observable<any> = from(axios.get(url, {
             headers: {
@@ -337,7 +359,7 @@ export function checkStream(url: string): Promise<boolean> {
             .pipe(
                 map(r => {
                     if (r && r.status === 200) {
-                        console.log(`Stream is accessible and playable.`);
+                        console.log(chalk.greenBright(`Stream is accessible and playable.`));
                         return true;
                     }
 
@@ -358,6 +380,58 @@ export function checkStream(url: string): Promise<boolean> {
         return Promise.resolve(false);
     }
 }
+
+
+function checkStreamFfmpeg(url: string): Promise<boolean> {
+
+    return new Promise<boolean>((resolve) => {
+
+        let timeout: any | undefined = undefined;
+
+        let command = ffmpeg(url, {
+            logger: {
+                debug: (m: any) => console.debug(m),
+                info: (m: any) => console.info(m),
+                warn: (m: any) => console.warn(m),
+                error: (m: any) => console.error(m)
+            }
+        })
+            .withNoAudio()
+            .inputOptions(`-t ${FFMPEG_TESTER_DURATION_SECONDS}`) // Read stream for N seconds
+            .outputOptions('-f null')
+            .output('null')
+            .on("start", (cmd: string) => {
+                // console.debug(`▶️  Running FFmpeg: ${cmd}`);
+            })
+            .on("error", (err: any, stdout: any, stderr: any) => {
+                clearTimeout(timeout);
+                console.error(chalk.redBright(`❌  Stream failed: ${err.message}`));
+                // console.debug(`📜 FFmpeg stdout: ${stdout}`);
+                // console.debug(`📜 FFmpeg stderr: ${stderr}`);
+
+                // Stream is unreachable
+                resolve(false);
+            })
+            .on("end", () => {
+                clearTimeout(timeout);
+                console.log(chalk.greenBright(`Stream is accessible and playable.`));
+                // Stream is accessible
+                resolve(true);
+            });
+        command.run();
+
+        // Kill ffmpeg after timeout reached (if not ended yet)
+        timeout = setTimeout(function () {
+            command.on('error', function () {
+                console.log(`Ffmpeg for ${url} has been killed (timeout of ${TEST_STREAM_REQUEST_TIMEOUT} ms reached)`);
+            });
+
+            command.kill();
+            resolve(false);
+        }, TEST_STREAM_REQUEST_TIMEOUT);
+    });
+}
+
 
 /**
  * Handle different types of request errors.

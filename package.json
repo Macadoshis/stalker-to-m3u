@@ -19,6 +19,7 @@
     "axios": "latest",
     "chalk": "^4.1.2",
     "fs": "latest",
+    "fluent-ffmpeg": "latest",
     "follow-redirects": "latest",
     "http": "latest",
     "iswitch": "latest",

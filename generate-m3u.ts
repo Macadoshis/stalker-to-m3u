@@ -237,7 +237,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
                                     return new Promise<void>((resp, err) => {
                                         // Test stream URL
-                                        checkStream(next.url!)
+                                        checkStream(next.url!, config)
                                             .then(
                                                 res => {
                                                     next.testResult = res;

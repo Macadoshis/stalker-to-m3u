@@ -1,2 +1,25 @@
 #!/bin/bash
+
+# Install NodeJS dependencies
+echo "Download NodeJS dependencies"
 npm install
+
+echo "Download ffmpeg (for stream testing)"
+set -e  # Exit on error
+
+FFMPEG_TAR="ffmpeg-release-amd64-static.tar.xz"
+FFMPEG_URL="https://johnvansickle.com/ffmpeg/releases/$FFMPEG_TAR"
+
+echo "Downloading FFmpeg..."
+curl -L -o "$FFMPEG_TAR" "$FFMPEG_URL"
+
+echo "Extracting FFmpeg..."
+tar -xJf "$FFMPEG_TAR" --no-anchored --strip-components=1 -C . --wildcards "*/ffmpeg" "*/ffprobe"
+
+echo "Cleaning up..."
+rm "$FFMPEG_TAR"
+
+chmod +x ./ffmpeg ./ffprobe
+
+echo "Ffmpeg binaries successfully installed in $(pwd)"
+

@@ -2,7 +2,7 @@ import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
 import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
 import {checkStream, fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
-import {ArrayData, Channel, Config, Data, Genre, Programs} from "../types";
+import {ArrayData, Channel, Config, Data, Genre, Programs, StreamTester} from "../types";
 
 const axios = require('axios');
 const http = require('follow-redirects').http;
@@ -23,6 +23,7 @@ export interface AnalyzerConfig {
     cache?: boolean;
     groupsToTest?: number;
     channelsToTest?: number;
+    streamTester?: StreamTester;
 }
 
 const SOURCES_FILE: string = './tools/sources.txt';
@@ -165,7 +166,8 @@ function fetchAllUrls(urls: string[]): void {
                     mac: urlAndMac.mac,
                     deviceId1: randomDeviceId(),
                     deviceId2: randomDeviceId(),
-                    serialNumber: randomSerialNumber()
+                    serialNumber: randomSerialNumber(),
+                    streamTester: config.streamTester
                 };
                 return from(
                     fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, {}, '', cfg)
@@ -193,12 +195,13 @@ function fetchAllUrls(urls: string[]): void {
                                         }
 
                                         console.info(chalk.gray(`Fetched ${channels.length} channels of group "${genre.title}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`))
-                                        return Promise.resolve(channels.sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1));
+                                        return Promise.resolve(channels);
                                     }));
                             })
                         ).pipe(
                             defaultIfEmpty([]),
-                            map(results => results.flat())
+                            map(results => results.flat()),
+                            map(channels => channels.sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1))
                         )
                     ),
                     mergeMap(channels => forkJoin(
@@ -232,7 +235,7 @@ function fetchAllUrls(urls: string[]): void {
                                 .map(url => new Promise<boolean>((resp, err) => {
 
                                         // Test stream URL
-                                        checkStream(url!)
+                                        checkStream(url!, cfg)
                                             .then(
                                                 res => {
                                                     resp(res);
@@ -313,7 +316,7 @@ function extractUrlParts(url: string): UrlConfig {
 
 function extractUrlsAndMacs(text: string): UrlToMacMap {
     // Regexp for URL and MACs
-    const urlRegex = /http:\/\/[^\s]+?\/c\/?/g;
+    const urlRegex = /http:\/\/[^\s^"]+?\/c\/?/g;
     const macRegex = /([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/g;
 
     // Look for all URLs and their index

@@ -79,6 +79,11 @@
       ],
       "description": "Indicate the sorting of each VOD item.",
       "default": "alphabetic"
+    },
+    "streamTester": {
+      "type": "string",
+      "description": "Stream tester mode",
+      "default": "http"
     }
   },
   "required": [
