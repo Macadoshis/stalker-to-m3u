@@ -14,7 +14,7 @@ tools/sources.txt
 
 # dependencies
 /node_modules
-ffmpeg.exe
+ffmpeg*
 ffprobe*
 
 # profiling files
