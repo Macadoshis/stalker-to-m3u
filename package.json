@@ -17,7 +17,7 @@
   },
   "private": false,
   "devDependencies": {
-    "@types/node": "^12.11.1",
+    "@types/node": "^22.13.10",
     "ajv": "latest",
     "axios": "latest",
     "chalk": "^4.1.2",
