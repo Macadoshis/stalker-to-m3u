@@ -1,4 +1,13 @@
-import {checkStream, fetchData, fetchSeries, getConfig, getGenerationKind, READ_OPTIONS, splitLines} from "./common.js";
+import {
+    checkStream,
+    fetchData,
+    fetchSeries,
+    getConfig,
+    getGenerationKind,
+    logConfig,
+    READ_OPTIONS,
+    splitLines
+} from "./common.js";
 import {
     ArrayData,
     Channel,
@@ -15,13 +24,13 @@ import {
 } from "./types.js";
 
 import {iswitch} from 'iswitch';
+import {checkM3u, getConfig as getConfigM3uTester, M3uTesterConfig} from "./tools/m3u-tester";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
 // Start time
 const startTime = process.hrtime();
 
-const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
 
@@ -33,6 +42,7 @@ if (!fs.existsSync(GROUP_FILE)) {
 }
 
 const config: Config = getConfig();
+logConfig(config);
 
 const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
     READ_OPTIONS)) as Tvg;
@@ -288,7 +298,19 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(`Creating file ${filename}`);
-            fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
+            fs.writeFileSync(filename, new M3U(m3u).print(config));
+
+            // Test m3u file
+            if (config.testM3uFile) {
+                getConfigM3uTester();
+                checkM3u(filename, Object.assign(getConfigM3uTester(), <M3uTesterConfig>{
+                        m3uLocation: filename,
+                        minSuccess: 1,
+                        maxFailures: -1,
+                        streamTester: config.streamTester
+                    }
+                ));
+            }
         }).then(() => {
             const endTime = process.hrtime(startTime);
 

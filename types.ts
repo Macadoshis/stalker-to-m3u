@@ -15,6 +15,7 @@ export interface Config {
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;
     streamTester?: StreamTester;
+    testM3uFile?: boolean
 }
 
 export type VodOrdering = 'none' | 'rating' | 'alphabetic';

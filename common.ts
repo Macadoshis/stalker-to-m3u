@@ -28,7 +28,6 @@ const yargsParser = require('yargs-parser');
 const axios = require('axios');
 const path = require('path');
 const ffmpeg = require('fluent-ffmpeg');
-const {spawn} = require('child_process');
 
 // Set FFmpeg binary path
 ffmpeg.setFfmpegPath(path.resolve(__dirname, 'ffmpeg'));
@@ -45,7 +44,7 @@ export function getConfig(): Readonly<Config> {
     let config: Config = JSON.parse(configData) as Config;
 
     // Validate JSON file
-    const schema: any = require('./config.schema.json');
+    const schema: any = require('./schemas/config.schema.json');
     const ajv = new Ajv();
     const validate = ajv.compile(schema);
     if (!validate(config)) {
@@ -57,6 +56,9 @@ export function getConfig(): Readonly<Config> {
 
     if (config.computeUrlLink === undefined) {
         config.computeUrlLink = true;
+    }
+    if (config.testM3uFile === undefined) {
+        config.testM3uFile = true;
     }
 
     if (!config.deviceId1) {
@@ -325,6 +327,10 @@ export function checkStream(url: string, config: Pick<Config, 'streamTester'>): 
 
     console.log(`...Checking stream [${streamTester}]: ${url}`);
 
+    if (!url) {
+        return Promise.resolve(false);
+    }
+
     if (streamTester === "http") {
         // HTTP stream tester
         return checkStreamHttp(url);
@@ -475,4 +481,20 @@ function handleRequestError(error: any, context: string) {
                 break;
         }
     }
+}
+
+/**
+ * Log current config.
+ *
+ * @param config
+ */
+export function logConfig(config: { [key: string]: any }): void {
+    console.log(chalk.gray('Running with active configuration:'));
+    console.log('-----------------\n');
+    Object.keys(config).forEach((key: string) => {
+        if (key !== '_') {
+            console.log(chalk.blueBright(`"${chalk.bold(key)}": ${chalk.black(config[key])}`));
+        }
+    });
+    console.log('-----------------\n');
 }

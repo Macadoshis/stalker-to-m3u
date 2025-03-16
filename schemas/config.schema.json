@@ -82,8 +82,13 @@
     },
     "streamTester": {
       "type": "string",
-      "description": "Stream tester mode",
+      "description": "Stream tester mode. One of value `http` or `ffmpeg`.",
       "default": "http"
+    },
+    "testM3uFile": {
+      "type": "boolean",
+      "description": "Whether to test the M3U file after generation",
+      "default": "true"
     }
   },
   "required": [

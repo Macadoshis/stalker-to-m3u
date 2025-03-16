@@ -1,0 +1,7 @@
+{
+  "m3uLocation": ".",
+  "maxFailures": 10,
+  "minSuccess": 1,
+  "renameOnFailure": false,
+  "renamePrefix": "_"
+}

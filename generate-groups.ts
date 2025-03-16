@@ -1,10 +1,11 @@
-import {fetchData, fetchSeries, getGenerationKind} from "./common.js";
+import {fetchData, fetchSeries, getConfig, getGenerationKind, logConfig} from "./common.js";
 import {ArrayData, GenerationKind, Genre} from "./types.js";
 import {iswitch} from 'iswitch';
 
 const fs = require('fs');
 
 const generationKind: GenerationKind = getGenerationKind();
+logConfig(getConfig());
 
 fetchData<ArrayData<Genre>>('/server/load.php?'
     + iswitch(generationKind, ['iptv', () => 'type=itv&action=get_genres'],

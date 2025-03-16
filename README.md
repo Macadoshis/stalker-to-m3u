@@ -21,6 +21,8 @@ This script is used to generate M3U format files from Stalker portal streams.
   generation. There is no synchronization with provider updates (new channels, VOD additions, etc.). There is also no
   clear way to determine if a resource has expired or is no longer compatible, except that the M3U streams will stop
   playing.
+- The M3U8 standard is restricted to very little information (title, group, duration) and cannot hold all the meta from
+  a stalker resource such as synopsis, actors, genre, ...
 - Furthermore, the streams generated for the M3U rely on a token obtained at the time of generation. Generally, this
   token has an infinite lifespan, but some providers may enforce a limited duration, causing the M3U to expire and
   requiring a new generation.
@@ -151,6 +153,7 @@ Considering following stalker provider :
 | `vodOrdering`               | Indicate the sorting of each VOD item.<br/> Possible values are `none` (as given by provider), `alphabetic` (by VOD title) or `rating` (by IMDB rating where provided, _alphabetically_ for items with no rating).                                                                                  | [X]      | `alphabetic`                                  |
 | `maxNumberOfChannelsToTest` | (Only if `computeUrlLink` is enabled.)<br/>Max number of channels to be picked up randomly among selected groups, and to test if streams are resolvable. If none responds successfully, the generation is aborted. Set `maxNumberOfChannelsToTest` to `0` to disable this test and always generate. | [X]      | `5`                                           |
 | `streamTester`              | (Only if `maxNumberOfChannelsToTest` is greater than 0)<br/>Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                                                                                    | [X]      | `http`                                        |
+| `testM3uFile`               | Whether to test the M3U file after generation.                                                                                                                                                                                                                                                      | [X]      | `true`                                        |
 
 ### Options from command line
 
@@ -180,8 +183,7 @@ Run the following script :
 ### Principles
 
 The script looks for all **http** and **MAC** providers and tests for each the liveness of the IPTV provider, against
-_N_ random
-groups and _N_ random channels.
+_N_ random groups and _N_ random channels.
 
 The number of groups and channels to fetch against can be configured through config
 file [tools/analyzer-config.json](./tools/analyzer-config.json).
@@ -203,3 +205,38 @@ After the execution of the script, the following files are created :
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | _tools/succeeded.json_ | A set of all resolving providers with following entries : `hostname`, `port`, `contextPath` and `mac`.<br/>Entries can be put selectively and manually into [config.json](./config.json) for processing. |
 | _tools/failed.json_    | A set of all **un**resolving providers with following entries : `url` and `mac`.                                                                                                                         |
+
+## M3U files checker
+
+Verify the health of a single M3U file or all M3U files in a given location, through specific criteria.
+
+### Prerequisite
+
+M3U file or location must exist locally.
+
+### Script
+
+Run the following script :
+
+- [tools/m3u-tester.bat](./tools/m3u-tester.bat) (_Windows_)
+- [tools/m3u-tester](./tools/m3u-tester) (_Linux / MacOS_)
+
+### Principles
+
+The script looks for all M3U files in a given location or a single M3U file, and test its stream health to assert or not the global
+health of the M3U file through specific customizable criteria.
+
+The criteria can be configured through config file [m3u-tester-config.json](tools/m3u-tester-config.json).
+
+| Property          | Description                                                                                                       | Optional | Default      |
+|-------------------|-------------------------------------------------------------------------------------------------------------------|----------|--------------|
+| `m3uLocation`     | M3U location. Can be a file or a directory.                                                                       | [X]      | `.`          |
+| `maxFailures`     | Maximal number of failures before marking a M3U file as failed. Deactivate testing upon failures with value -1.   | [X]      | `10`         |
+| `minSuccess`      | Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1. | [X]      | `1`          |
+| `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | [X]      | `false`      |
+| `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
+| `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
+
+### Outputs
+
+After the execution of the script, M3U unhealthy file(s) are renamed with a prefix if `renameOnFailure` is set to `true`.
