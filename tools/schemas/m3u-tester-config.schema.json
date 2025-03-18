@@ -24,7 +24,7 @@
       "default": false
     },
     "renamePrefix": {
-      "type": "boolean",
+      "type": "string",
       "description": "Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true)",
       "default": "UNHEALTHY_"
     },
