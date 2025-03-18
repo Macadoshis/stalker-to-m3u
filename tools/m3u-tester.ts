@@ -99,7 +99,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
     } else {
         return of(playlist.items)
             .pipe(
-                tap(x => console.info(chalk.gray(`...Testing ${m3uFile}`))),
+                tap(x => console.info(chalk.gray(`...Testing ${m3uFile} (${x.length} channels)`))),
                 mergeMap(items => items),
                 // Process items sequentially
                 mergeMap((item) => checkStream(item.url as string, cfg)
