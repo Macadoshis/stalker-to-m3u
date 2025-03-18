@@ -13,7 +13,6 @@ import {
 import {ArrayData, Channel, Config, Data, Genre, Programs, StreamTester} from "../types";
 
 const axios = require('axios');
-const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');

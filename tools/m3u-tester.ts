@@ -2,7 +2,7 @@ import {StreamTester} from "../types";
 import {checkStream, logConfig, READ_OPTIONS} from "../common";
 import Ajv from "ajv";
 import {basename, dirname, extname, join} from "path";
-import {forkJoin, from, last, map, Observable, of, scan, takeWhile} from "rxjs";
+import {forkJoin, from, last, map, Observable, of, scan, takeWhile, tap} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 
 export interface M3uTesterConfig {
@@ -73,8 +73,6 @@ if (!fs.existsSync(config.m3uLocation)) {
 
 export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observable<M3uResult> {
 
-    console.info(chalk.gray(`...Testing ${m3uFile}`));
-
     const m3uResult: M3uResult = {
         status: true,
         file: m3uFile,
@@ -100,6 +98,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
     } else {
         return from(playlist.items)
             .pipe(
+                tap(x => console.info(chalk.gray(`...Testing ${m3uFile}`))),
                 mergeMap((item: any) => checkStream(item.url as string, cfg)
                     .then(s => Promise.resolve<M3uResultStream & { success?: boolean }>({
                         success: s,
