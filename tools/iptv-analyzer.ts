@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
-import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
+import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray} from 'rxjs/operators';
 import {
     checkStream,
     fetchData,
@@ -159,8 +159,10 @@ function fetchAllUrls(urls: string[]): void {
                     return items;
                 }
             ),
-            tap(urlAndMac => console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))),
             mergeMap(urlAndMac => {
+
+                console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))
+
                 if (config.cache && failed.some(u => {
                     return urlAndMac.url === u.url
                         && urlAndMac.mac === u.mac;
@@ -190,7 +192,7 @@ function fetchAllUrls(urls: string[]): void {
                 return from(
                     fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, {}, '', cfg)
                 ).pipe(
-                    pluck('js'),
+                    map(x => x?.js),
                     mergeMap(genres => genres),
                     filter(genre => genre.title !== 'All' && genre.title.toLowerCase().indexOf('adult') < 0),
                     toArray(),

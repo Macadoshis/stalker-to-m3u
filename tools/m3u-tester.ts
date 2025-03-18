@@ -2,8 +2,9 @@ import {StreamTester} from "../types";
 import {checkStream, logConfig, READ_OPTIONS} from "../common";
 import Ajv from "ajv";
 import {basename, dirname, extname, join} from "path";
-import {forkJoin, from, last, map, Observable, of, scan, takeWhile, tap} from "rxjs";
+import {forkJoin, last, map, Observable, of, scan, takeWhile, tap} from "rxjs";
 import {mergeMap} from "rxjs/operators";
+import {Playlist} from "iptv-playlist-parser";
 
 export interface M3uTesterConfig {
     m3uLocation: string;
@@ -80,7 +81,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
         succeededStreams: [] as M3uResultStream[]
     } as M3uResult;
 
-    const playlist = parser.parse(fs.readFileSync(m3uFile, READ_OPTIONS));
+    const playlist: Playlist = parser.parse(fs.readFileSync(m3uFile, READ_OPTIONS));
 
     // Update max values according to number of items
     if (cfg.minSuccess > 0) {
@@ -96,15 +97,17 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
     if (playlist.items.length === 0) {
         return of({...m3uResult, status: false});
     } else {
-        return from(playlist.items)
+        return of(playlist.items)
             .pipe(
                 tap(x => console.info(chalk.gray(`...Testing ${m3uFile}`))),
-                mergeMap((item: any) => checkStream(item.url as string, cfg)
+                mergeMap(items => items),
+                // Process items sequentially
+                mergeMap((item) => checkStream(item.url as string, cfg)
                     .then(s => Promise.resolve<M3uResultStream & { success?: boolean }>({
                         success: s,
                         name: item.name,
                         url: item.url
-                    })), 1), // Process items sequentially
+                    })), 1),
                 scan((acc, result) => {
                     const success = result.success;
                     delete result["success"];
