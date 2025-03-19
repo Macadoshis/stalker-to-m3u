@@ -299,7 +299,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
-            console.info(`Creating file ${filename}`);
+            console.info(chalk.bold(`Creating file ${filename}`));
             fs.writeFileSync(filename, new M3U(m3u).print(config));
 
             // Test m3u file
@@ -313,9 +313,9 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     }
                 )).then(x => {
                     if (!!x.status) {
-                        console.info(chalk.greenBright(`M3U file has been tested successfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                        console.info(chalk.bold.greenBright(`M3U file has been tested successfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
                     } else {
-                        console.info(chalk.redBright(`M3U file has been tested unsuccessfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                        console.info(chalk.bold.redBright(`M3U file has been tested unsuccessfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
                     }
                 });
             }

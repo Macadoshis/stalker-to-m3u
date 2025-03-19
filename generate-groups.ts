@@ -3,6 +3,7 @@ import {ArrayData, GenerationKind, Genre} from "./types.js";
 import {iswitch} from 'iswitch';
 
 const fs = require('fs');
+const chalk = require('chalk');
 
 const generationKind: GenerationKind = getGenerationKind();
 logConfig(getConfig());
@@ -31,5 +32,5 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
         process.exit(1);
     })
     .then(() => {
-        console.info(`File groups.txt successfully created`)
+        console.info(chalk.bold(`File groups.txt successfully created`));
     });
