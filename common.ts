@@ -6,6 +6,9 @@ import {
     Genre,
     GenreSerie,
     GenreSeries,
+    M3uResult,
+    M3uResultStream,
+    M3uTesterConfig,
     Programs,
     Serie,
     StreamTester
@@ -13,7 +16,23 @@ import {
 
 import Ajv from "ajv";
 
-import {catchError, finalize, firstValueFrom, forkJoin, from, map, Observable, of, switchMap, tap} from 'rxjs';
+import {
+    catchError,
+    finalize,
+    firstValueFrom,
+    forkJoin,
+    from,
+    last,
+    map,
+    Observable,
+    of,
+    scan,
+    switchMap,
+    takeWhile,
+    tap
+} from 'rxjs';
+import {Playlist} from "iptv-playlist-parser";
+import {mergeMap} from "rxjs/operators";
 
 const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
 
@@ -27,6 +46,7 @@ const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
 const axios = require('axios');
 const path = require('path');
+const parser = require('iptv-playlist-parser');
 const ffmpeg = require('fluent-ffmpeg');
 
 // Set FFmpeg binary path
@@ -497,4 +517,88 @@ export function logConfig(config: { [key: string]: any }): void {
         }
     });
     console.log('-----------------\n');
+}
+
+export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uResult> {
+
+    const m3uResult: M3uResult = {
+        status: true,
+        file: m3uFile,
+        failedStreams: [] as M3uResultStream[],
+        succeededStreams: [] as M3uResultStream[]
+    } as M3uResult;
+
+    const playlist: Playlist = parser.parse(fs.readFileSync(m3uFile, READ_OPTIONS));
+
+    // Update max values according to number of items
+    cfg = {...cfg};
+    if (cfg.minSuccess > 0) {
+        cfg.minSuccess = Math.min(cfg.minSuccess, playlist.items.length);
+    }
+    if (cfg.maxFailures > 0) {
+        cfg.maxFailures = Math.min(cfg.maxFailures, playlist.items.length);
+    }
+
+    // Shuffle items randomly to avoid starting the test with the first channel often being a "fake" channel separator
+    playlist.items = shuffleItems(playlist.items);
+
+    if (playlist.items.length === 0) {
+        return of({...m3uResult, status: false});
+    } else {
+        return of(playlist.items)
+            .pipe(
+                tap(x => console.info(chalk.gray(`...Testing ${m3uFile} (${x.length} channels)`))),
+                mergeMap(items => items),
+                // Process items sequentially
+                mergeMap((item) => checkStream(item.url as string, cfg)
+                    .then(s => Promise.resolve<M3uResultStream & { success?: boolean }>({
+                        success: s,
+                        name: item.name,
+                        url: item.url
+                    })), 1),
+                scan((acc, result) => {
+                    const success = result.success;
+                    delete result["success"];
+                    if (success) {
+                        acc.succeededStreams = [...acc.succeededStreams, result];
+                    } else {
+                        acc.failedStreams = [...acc.failedStreams, result];
+                    }
+                    return acc;
+                }, m3uResult),
+                takeWhile(acc => {
+                    if (cfg.minSuccess < 0) {
+                        // Test against failures only
+                        return acc.failedStreams.length < cfg.maxFailures;
+                    }
+                    if (cfg.maxFailures < 0) {
+                        // Test against successes only
+                        return acc.succeededStreams.length < cfg.minSuccess;
+                    }
+                    return acc.succeededStreams.length < cfg.minSuccess && acc.failedStreams.length < cfg.maxFailures;
+                }, true), // Stop when limits are reached
+                last(),
+                map(acc => {
+                    let status: boolean;
+                    if (cfg.minSuccess < 0) {
+                        // Test against failures only
+                        status = acc.failedStreams.length < cfg.maxFailures;
+                    } else {
+                        // Test against successes only
+                        status = acc.succeededStreams.length >= cfg.minSuccess;
+                    }
+
+                    return {...acc, status: status};
+                })
+            )
+    }
+}
+
+function shuffleItems<T>(array: T[]): T[] {
+    const shuffled = [...array]; // Create a copy to keep original array intact
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }

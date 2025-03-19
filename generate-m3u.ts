@@ -1,4 +1,5 @@
 import {
+    checkM3u,
     checkStream,
     fetchData,
     fetchSeries,
@@ -17,6 +18,7 @@ import {
     Genre,
     M3U,
     M3ULine,
+    M3uTesterConfig,
     Programs,
     Serie,
     Video,
@@ -24,7 +26,7 @@ import {
 } from "./types.js";
 
 import {iswitch} from 'iswitch';
-import {checkM3u, getConfig as getConfigM3uTester, M3uTesterConfig} from "./tools/m3u-tester.js";
+import {getConfig as getConfigM3uTester} from "./tools/m3u-tester.js";
 import {firstValueFrom} from "rxjs";
 
 type Tvg = Readonly<Record<string, string[]>>;
