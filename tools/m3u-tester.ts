@@ -2,7 +2,7 @@ import {StreamTester} from "../types";
 import {checkStream, logConfig, READ_OPTIONS} from "../common";
 import Ajv from "ajv";
 import {basename, dirname, extname, join} from "path";
-import {forkJoin, last, map, Observable, of, scan, takeWhile, tap} from "rxjs";
+import {forkJoin, from, last, map, Observable, of, scan, takeWhile, tap} from "rxjs";
 import {mergeMap} from "rxjs/operators";
 import {Playlist} from "iptv-playlist-parser";
 
@@ -72,7 +72,7 @@ if (!fs.existsSync(config.m3uLocation)) {
     process.exit(1);
 }
 
-export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observable<M3uResult> {
+export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = {...config}): Observable<M3uResult> {
 
     const m3uResult: M3uResult = {
         status: true,
@@ -112,11 +112,11 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
                     const success = result.success;
                     delete result["success"];
                     if (success) {
-                        m3uResult.succeededStreams = [...m3uResult.succeededStreams, result];
+                        acc.succeededStreams = [...acc.succeededStreams, result];
                     } else {
-                        m3uResult.failedStreams = [...m3uResult.failedStreams, result];
+                        acc.failedStreams = [...acc.failedStreams, result];
                     }
-                    return m3uResult;
+                    return acc;
                 }, m3uResult),
                 takeWhile(acc => {
                     if (cfg.minSuccess < 0) {
@@ -140,7 +140,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig = config): Observ
                         status = acc.succeededStreams.length >= cfg.minSuccess;
                     }
 
-                    return {...m3uResult, status: status};
+                    return {...acc, status: status};
                 })
             )
     }
@@ -162,7 +162,15 @@ if (fs.statSync(config.m3uLocation).isDirectory()) {
     const files = fs.readdirSync(config.m3uLocation) as string[];
     const m3uFiles: string[] = files.filter(file => extname(file) === '.m3u').map(file => join(config.m3uLocation, file));
 
-    runner = forkJoin(m3uFiles.map(file => checkM3u(file)));
+    runner = from(m3uFiles)
+        .pipe(
+            mergeMap(file => checkM3u(file), 1),
+            scan((acc, result) => {
+                return [...acc, result];
+            }, [] as M3uResult[]),
+            last()
+        );
+    forkJoin(m3uFiles.map(file => checkM3u(file)));
 } else if (fs.statSync(config.m3uLocation).isFile()) {
     // M3U file provided
     runner = checkM3u(config.m3uLocation).pipe(
