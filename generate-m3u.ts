@@ -26,7 +26,6 @@ import {
 } from "./types.js";
 
 import {iswitch} from 'iswitch';
-import {getConfig as getConfigM3uTester} from "./tools/m3u-tester.js";
 import {firstValueFrom} from "rxjs";
 
 type Tvg = Readonly<Record<string, string[]>>;
@@ -305,13 +304,14 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
             // Test m3u file
             if (config.testM3uFile) {
-                return firstValueFrom(checkM3u(filename, Object.assign(getConfigM3uTester(), <M3uTesterConfig>{
+                return firstValueFrom(checkM3u(filename, <M3uTesterConfig>{
                         m3uLocation: filename,
                         minSuccess: 1,
                         maxFailures: -1,
+                        renameOnFailure: false,
                         streamTester: config.streamTester
                     }
-                ))).then(() => {
+                )).then(() => {
                 });
             }
             return Promise.resolve();
