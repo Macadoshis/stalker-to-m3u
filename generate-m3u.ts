@@ -311,7 +311,12 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         renameOnFailure: false,
                         streamTester: config.streamTester
                     }
-                )).then(() => {
+                )).then(x => {
+                    if (!!x.status) {
+                        console.info(chalk.greenBright(`M3U file has been tested successfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                    } else {
+                        console.info(chalk.redBright(`M3U file has been tested unsuccessfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                    }
                 });
             }
             return Promise.resolve();
