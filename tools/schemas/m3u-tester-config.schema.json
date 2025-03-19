@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Schema for m3u-tester-config.json file.",
+  "properties": {
+    "m3uLocation": {
+      "type": "string",
+      "description": "M3U location. Can be a file or a directory.",
+      "default": "."
+    },
+    "maxFailures": {
+      "type": "number",
+      "description": "Maximal number of failures before marking a M3U file as failed. Deactivate testing upon failures with value -1.",
+      "default": 10
+    },
+    "minSuccess": {
+      "type": "number",
+      "description": "Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1.",
+      "default": 1
+    },
+    "renameOnFailure": {
+      "type": "boolean",
+      "description": "Whether to rename a failed M3U by prefixing with 'renamePrefix'",
+      "default": false
+    },
+    "renamePrefix": {
+      "type": "string",
+      "description": "Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true)",
+      "default": "UNHEALTHY_"
+    },
+    "streamTester": {
+      "type": "string",
+      "description": "Stream tester mode. One of value `http` or `ffmpeg`.",
+      "default": "http"
+    }
+  },
+  "required": [
+    "m3uLocation"
+  ],
+  "additionalProperties": false
+}

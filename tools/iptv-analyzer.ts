@@ -1,13 +1,21 @@
 import Ajv from "ajv";
 import {forkJoin, from, Observable, of} from 'rxjs';
-import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, pluck, tap, toArray} from 'rxjs/operators';
-import {checkStream, fetchData, randomDeviceId, randomSerialNumber, READ_OPTIONS, splitLines} from '../common';
+import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray} from 'rxjs/operators';
+import {
+    checkStream,
+    fetchData,
+    logConfig,
+    randomDeviceId,
+    randomSerialNumber,
+    READ_OPTIONS,
+    splitLines
+} from '../common';
 import {ArrayData, Channel, Config, Data, Genre, Programs, StreamTester} from "../types";
 
 const axios = require('axios');
-const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
+const yargsParser = require('yargs-parser');
 
 interface FetchContent {
     url: string;
@@ -19,7 +27,7 @@ type UrlToMacMap = Map<string, Set<string>>;
 type UrlAndMac = { url: string; mac: string; };
 type UrlConfig = Pick<Omit<Config, 'mac'>, 'hostname' | 'port' | 'contextPath'> & Partial<Pick<Config, 'mac'>>;
 
-export interface AnalyzerConfig {
+interface AnalyzerConfig {
     cache?: boolean;
     groupsToTest?: number;
     channelsToTest?: number;
@@ -41,6 +49,7 @@ const succeeded: UrlConfig[] = [];
 const failed: UrlAndMac[] = [];
 
 const config: AnalyzerConfig = getConfig();
+logConfig(config);
 
 // Start time
 const startTime = process.hrtime();
@@ -57,10 +66,10 @@ if (!!config.cache) {
 
 function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
-    const config: AnalyzerConfig = JSON.parse(configData) as AnalyzerConfig;
+    let config: AnalyzerConfig = JSON.parse(configData) as AnalyzerConfig;
 
     // Validate JSON file
-    const schema: any = require('./analyzer-config.schema.json');
+    const schema: any = require('./schemas/analyzer-config.schema.json');
     const ajv = new Ajv();
     const validate = ajv.compile(schema);
     if (!validate(config)) {
@@ -68,11 +77,20 @@ function getConfig(): Readonly<AnalyzerConfig> {
         process.exit(1);
     }
 
+    // Fill in default values if unset
+
     if (config.cache === undefined) {
         config.cache = false;
     }
+    if (config.streamTester === undefined) {
+        config.streamTester = "http";
+    }
     config.groupsToTest = config.groupsToTest ?? 1;
     config.channelsToTest = config.channelsToTest ?? 1;
+
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(2));
+    config = {...config, ...args};
 
     return config;
 }
@@ -141,8 +159,10 @@ function fetchAllUrls(urls: string[]): void {
                     return items;
                 }
             ),
-            tap(urlAndMac => console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))),
             mergeMap(urlAndMac => {
+
+                console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))
+
                 if (config.cache && failed.some(u => {
                     return urlAndMac.url === u.url
                         && urlAndMac.mac === u.mac;
@@ -172,7 +192,7 @@ function fetchAllUrls(urls: string[]): void {
                 return from(
                     fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, {}, '', cfg)
                 ).pipe(
-                    pluck('js'),
+                    map(x => x?.js),
                     mergeMap(genres => genres),
                     filter(genre => genre.title !== 'All' && genre.title.toLowerCase().indexOf('adult') < 0),
                     toArray(),

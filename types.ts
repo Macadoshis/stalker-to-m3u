@@ -15,6 +15,7 @@ export interface Config {
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;
     streamTester?: StreamTester;
+    testM3uFile?: boolean
 }
 
 export type VodOrdering = 'none' | 'rating' | 'alphabetic';
@@ -114,3 +115,24 @@ export class GenreSerie {
 }
 
 export type GenreSeries = { genre: Genre, series: Serie[] };
+
+export interface M3uTesterConfig {
+    m3uLocation: string;
+    maxFailures: number;
+    minSuccess: number;
+    renameOnFailure?: boolean;
+    renamePrefix?: string;
+    streamTester?: StreamTester;
+}
+
+export interface M3uResultStream {
+    name: string;
+    url: string;
+}
+
+export interface M3uResult {
+    file: string;
+    status: boolean;
+    failedStreams: M3uResultStream[];
+    succeededStreams: M3uResultStream[];
+}

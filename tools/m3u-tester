@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Running script..."
+npm run m3u-tester

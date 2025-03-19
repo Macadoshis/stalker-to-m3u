@@ -1,4 +1,14 @@
-import {checkStream, fetchData, fetchSeries, getConfig, getGenerationKind, READ_OPTIONS, splitLines} from "./common.js";
+import {
+    checkM3u,
+    checkStream,
+    fetchData,
+    fetchSeries,
+    getConfig,
+    getGenerationKind,
+    logConfig,
+    READ_OPTIONS,
+    splitLines
+} from "./common.js";
 import {
     ArrayData,
     Channel,
@@ -8,6 +18,7 @@ import {
     Genre,
     M3U,
     M3ULine,
+    M3uTesterConfig,
     Programs,
     Serie,
     Video,
@@ -15,13 +26,13 @@ import {
 } from "./types.js";
 
 import {iswitch} from 'iswitch';
+import {firstValueFrom} from "rxjs";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
 // Start time
 const startTime = process.hrtime();
 
-const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
 
@@ -33,6 +44,7 @@ if (!fs.existsSync(GROUP_FILE)) {
 }
 
 const config: Config = getConfig();
+logConfig(config);
 
 const tvgData: Tvg = JSON.parse(fs.readFileSync('./tvg.json',
     READ_OPTIONS)) as Tvg;
@@ -287,8 +299,27 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
 
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
-            console.info(`Creating file ${filename}`);
-            fs.writeFileSync(`${generationKind}-${config.hostname}.m3u`, new M3U(m3u).print(config));
+            console.info(chalk.bold(`Creating file ${filename}`));
+            fs.writeFileSync(filename, new M3U(m3u).print(config));
+
+            // Test m3u file
+            if (config.testM3uFile) {
+                return firstValueFrom(checkM3u(filename, <M3uTesterConfig>{
+                        m3uLocation: filename,
+                        minSuccess: 1,
+                        maxFailures: -1,
+                        renameOnFailure: false,
+                        streamTester: config.streamTester
+                    }
+                )).then(x => {
+                    if (!!x.status) {
+                        console.info(chalk.bold.greenBright(`M3U file has been tested successfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                    } else {
+                        console.info(chalk.bold.redBright(`M3U file has been tested unsuccessfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                    }
+                });
+            }
+            return Promise.resolve();
         }).then(() => {
             const endTime = process.hrtime(startTime);
 
