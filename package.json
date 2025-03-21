@@ -20,7 +20,7 @@
     "@types/node": "^12.11.1",
     "ajv": "latest",
     "axios": "latest",
-    "chalk": "^4.1.2",
+    "chalk": "^5.4.1",
     "fs": "latest",
     "fluent-ffmpeg": "latest",
     "follow-redirects": "latest",
