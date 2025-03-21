@@ -22,7 +22,6 @@
     ]
   },
   "include": [
-    "types.ts",
-    "common.ts"
+    "**/*.ts"
   ]
 }
