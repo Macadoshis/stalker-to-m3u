@@ -375,6 +375,8 @@ export function checkStream(url: string, config: Pick<Config, 'streamTester'>): 
 
     console.log(`...Checking stream [${streamTester}]: ${url}`);
 
+    return Promise.resolve(false);
+
     if (!url) {
         return Promise.resolve(false);
     }
