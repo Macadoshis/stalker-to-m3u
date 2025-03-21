@@ -1,5 +1,5 @@
-import {fetchData, fetchSeries, getConfig, getGenerationKind, logConfig} from "./common.js";
-import {ArrayData, GenerationKind, Genre} from "./types.js";
+import {fetchData, fetchSeries, getConfig, getGenerationKind, logConfig} from "./common";
+import {ArrayData, GenerationKind, Genre} from "./types";
 import {iswitch} from 'iswitch';
 
 const fs = require('fs');

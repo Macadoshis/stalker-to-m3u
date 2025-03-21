@@ -211,7 +211,8 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                         port: cfg.port,
                         path: completePath,
                         method: 'GET',
-                        headers: headers
+                        headers: headers,
+                        timeout: 3000
                     }, (res: any) => {
 
                         if (res.statusCode !== 200) {
@@ -250,6 +251,13 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                     });
 
                     // Catch errors on the request
+
+                    req.on('timeout', () => {
+                        console.error('Request timed out');
+                        // Close the request to prevent leaks
+                        req.destroy();
+                    });
+
                     req.on('error', (e: NodeJS.ErrnoException) => {
                         if (e.code === 'ECONNRESET') {
                             console.error('Connection was reset by the remote host.');

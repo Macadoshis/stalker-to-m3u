@@ -8,7 +8,7 @@ import {
     logConfig,
     READ_OPTIONS,
     splitLines
-} from "./common.js";
+} from "./common";
 import {
     ArrayData,
     Channel,
@@ -23,7 +23,7 @@ import {
     Serie,
     Video,
     VodOrdering
-} from "./types.js";
+} from "./types";
 
 import {iswitch} from 'iswitch';
 import {firstValueFrom} from "rxjs";

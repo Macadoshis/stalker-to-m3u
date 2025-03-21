@@ -1,5 +1,5 @@
-import {M3uResult, M3uTesterConfig} from "../types.js";
-import {checkM3u, logConfig, READ_OPTIONS} from "../common.js";
+import {M3uResult, M3uTesterConfig} from "../types";
+import {checkM3u, logConfig, READ_OPTIONS} from "../common";
 import Ajv from "ajv";
 import {basename, dirname, extname, join} from "path";
 import {from, last, map, Observable, of, scan} from "rxjs";
