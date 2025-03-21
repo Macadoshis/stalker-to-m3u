@@ -4,6 +4,7 @@ import Ajv from "ajv";
 import {basename, dirname, extname, join} from "path";
 import {from, last, map, Observable, of, scan} from "rxjs";
 import {mergeMap} from "rxjs/operators";
+import * as process from "process";
 
 const fs = require('fs');
 const chalk = require('chalk');
@@ -57,6 +58,11 @@ if (fs.statSync(config.m3uLocation).isDirectory()) {
     const files = fs.readdirSync(config.m3uLocation) as string[];
     const m3uFiles: string[] = files.filter(file => extname(file) === '.m3u').map(file => join(config.m3uLocation, file));
 
+    if (!!m3uFiles) {
+        console.warn('No files found.');
+        process.exit(0);
+    }
+
     runner = from(m3uFiles)
         .pipe(
             mergeMap(file => checkM3u(file, config), 1),
@@ -83,4 +89,9 @@ runner.subscribe(results => {
             }
         }
     });
+
+    if (!results.map(x => x.status).some(r => r)) {
+        console.error(`At least one file was not successful`);
+        process.exit(1);
+    }
 });
