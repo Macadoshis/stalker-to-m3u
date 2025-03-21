@@ -28,7 +28,7 @@
     "iptv-playlist-parser": "latest",
     "iswitch": "latest",
     "rxjs": "^7.8.1",
-    "ts-node": "10.1.0",
+    "ts-node": "10.9.2",
     "typescript": "~4.3.2",
     "yargs-parser": "latest"
   }
