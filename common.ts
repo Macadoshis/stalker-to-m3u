@@ -34,6 +34,18 @@ import {
 import {Playlist} from "iptv-playlist-parser";
 import {mergeMap} from "rxjs/operators";
 
+// Override console methods to prepend the current datetime
+['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
+    const original = console[method as keyof Console];
+
+    console[method as keyof Console] = (...args: any[]) => {
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+        original(`[${formattedDate}]`, ...args);
+    };
+});
+
 const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
 
 const version: string = require('./package.json').version;
