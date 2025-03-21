@@ -6,7 +6,7 @@
 /out-tsc
 *.js
 *.js.map
-*.m3u
+./*.m3u
 groups.txt
 tools/succeeded.json
 tools/failed.json

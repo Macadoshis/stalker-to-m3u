@@ -1,0 +1,49 @@
+name: TEST
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure NODE
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Download NPM dependencies
+        run: npm install
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  m3u-tester:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        input: [ "c", "d" ]  # This will create two parallel jobs
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Restore Cached Node Modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Run Tests
+        run: npm test --input=${{ matrix.input }}
