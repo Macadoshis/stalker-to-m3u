@@ -2,6 +2,7 @@
   "name": "stalker-to-m3u",
   "version": "1.1.0",
   "scripts": {
+    "compile": "tsc --noEmit --pretty false",
     "pregroups": "tsc --sourceMap --strict types.ts common.ts",
     "groups": "ts-node --project ./tsconfig.ts-node.json generate-groups.ts",
     "prem3u": "npm run pregroups",

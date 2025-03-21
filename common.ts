@@ -38,10 +38,12 @@ import {mergeMap} from "rxjs/operators";
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
     const original = console[method as keyof Console];
 
+    // @ts-ignore
     console[method as keyof Console] = (...args: any[]) => {
         const now = new Date();
         const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
+        // @ts-ignore
         original(`[${formattedDate}]`, ...args);
     };
 });
