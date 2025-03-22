@@ -121,6 +121,9 @@ function fetchUrl(url: string): Observable<FetchContent> {
     }
 }
 
+/** Number of threads for analyze process */
+const NB_THREADS = 10;
+
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
     const requests = urls
@@ -161,7 +164,7 @@ function fetchAllUrls(urls: string[]): void {
             ),
             mergeMap(urlAndMac => {
 
-                console.info(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`))
+                console.info(chalk.bold(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`)));
 
                 if (config.cache && failed.some(u => {
                     return urlAndMac.url === u.url
@@ -288,7 +291,7 @@ function fetchAllUrls(urls: string[]): void {
                         return of([]);
                     })
                 );
-            }),
+            }, NB_THREADS),
         )
         .subscribe({
             error: err => console.error('Error:', err),

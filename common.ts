@@ -176,6 +176,9 @@ function getToken(refresh: boolean = false, cfg: Config = config): Observable<st
         );
 }
 
+/** HTTP timeout (ms) */
+const HTTP_TIMEOUT = 5000;
+
 export function fetchData<T>(path: string, ignoreError: boolean = false, headers: {
     [key: string]: string
 } = {}, token: string = '', cfg: Config = config): Promise<T> {
@@ -226,7 +229,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                         path: completePath,
                         method: 'GET',
                         headers: headers,
-                        timeout: 3000
+                        timeout: HTTP_TIMEOUT
                     }, (res: any) => {
 
                         if (res.statusCode !== 200) {
@@ -267,9 +270,12 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                     // Catch errors on the request
 
                     req.on('timeout', () => {
-                        console.error('Request timed out');
-                        // Close the request to prevent leaks
-                        req.destroy();
+                        try {
+                            onError(`Request timed out after ${HTTP_TIMEOUT} ms`);
+                        } finally {
+                            // Close the request to prevent leaks
+                            req.destroy();
+                        }
                     });
 
                     req.on('error', (e: NodeJS.ErrnoException) => {
