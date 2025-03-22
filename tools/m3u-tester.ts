@@ -42,6 +42,10 @@ export function getConfig(): Readonly<M3uTesterConfig> {
     const args = yargsParser(process.argv.slice(2));
     config = {...config, ...args};
 
+    if (typeof config.renameOnFailure !== "boolean") {
+        config.renameOnFailure = config.renameOnFailure as any === "true";
+    }
+
     return config;
 }
 
@@ -91,7 +95,11 @@ runner.subscribe(results => {
     });
 
     if (!results.map(x => x.status).some(r => r)) {
-        console.error(`At least one file was not successful`);
+        if (results.length === 1) {
+            console.error(`File was not successful`);
+        } else {
+            console.error(`At least one file was not successful`);
+        }
         process.exit(1);
     }
 });

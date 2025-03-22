@@ -33,7 +33,9 @@ jobs:
     needs: build
     strategy:
       matrix:
-        input: [ "c", "d" ]  # This will create two parallel jobs
+        minSuccess: [ 1, 10 ]
+        maxFailures: [ 0, -1, 1 ]
+        file: [ "0-10-success.m3u", "5-10-success.m3u", "10-0-success.m3u" ]
 
     steps:
       - name: Checkout Repository
@@ -45,5 +47,47 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
-      - name: Run Tests
-        run: npm test --input=${{ matrix.input }}
+      - name: Run [m3u-tester] on test/m3u-tester/${{ matrix.file }} with minSuccess=${{ matrix.minSuccess }} and maxFailures=${{ matrix.maxFailures }}
+        run: |
+          
+          get_expected_exit_code() {
+            case "${{ matrix.file }}:${{ matrix.minSuccess }}:${{ matrix.maxFailures }}" in
+            "0-10-success.m3u:1:0") echo 1 ;;
+            "0-10-success.m3u:10:-1") echo 1 ;;
+            "0-10-success.m3u:1:1") echo 1 ;;
+            "0-10-success.m3u:10:0") echo 1 ;;
+            "0-10-success.m3u:1:-1") echo 1 ;;
+            "0-10-success.m3u:10:1") echo 1 ;;
+            "5-5-success.m3u:1:0") echo 1 ;;
+            "5-5-success.m3u:10:-1") echo 1 ;;
+            "5-5-success.m3u:1:1") echo 0 ;;
+            "5-5-success.m3u:10:0") echo 1 ;;
+            "5-5-success.m3u:1:-1") echo 0 ;;
+            "5-5-success.m3u:10:1") echo 1 ;;
+            "10-0-success.m3u:1:0") echo 0 ;;
+            "10-0-success.m3u:10:-1") echo 0 ;;
+            "10-0-success.m3u:1:1") echo 0 ;;
+            "10-0-success.m3u:10:0") echo 0 ;;
+            "10-0-success.m3u:1:-1") echo 0 ;;
+            "10-0-success.m3u:10:1") echo 0 ;;
+            *) echo 1 ;;  # Default unexpected case
+            esac
+          }
+
+          set +e
+          npm run m3u-tester -- --m3uLocation=test/m3u-tester/${{ matrix.file }} --minSuccess=${{ matrix.minSuccess }} --maxFailures=${{ matrix.maxFailures }}
+          exit_code=$?
+          set -e
+          
+          if [ $exit_code -eq 1 ]; then
+            echo "Result: FAILED"
+          else
+            echo "Result: SUCCESS"
+          fi
+          expected_exit_code=$(get_expected_exit_code)
+          if [ "$exit_code" -eq "$expected_exit_code" ]; then
+            echo "Test PASSED (Expected: $expected_exit_code, Got: $exit_code)"
+          else
+            echo "Test FAILED (Expected: $expected_exit_code, Got: $exit_code)"
+            exit 1
+          fi

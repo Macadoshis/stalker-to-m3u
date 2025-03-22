@@ -603,7 +603,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
                         // Test against successes only
                         return acc.succeededStreams.length < cfg.minSuccess;
                     }
-                    return acc.succeededStreams.length < cfg.minSuccess && acc.failedStreams.length < cfg.maxFailures;
+                    return acc.succeededStreams.length < cfg.minSuccess && acc.failedStreams.length <= cfg.maxFailures;
                 }, true), // Stop when limits are reached
                 last(),
                 map(acc => {
