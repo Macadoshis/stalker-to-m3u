@@ -29,7 +29,7 @@
     "iswitch": "latest",
     "rxjs": "^7.8.1",
     "ts-node": "10.9.2",
-    "typescript": "~4.3.2",
+    "typescript": "~5.8.2",
     "yargs-parser": "latest"
   }
 }
