@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +30,7 @@ jobs:
 
   m3u-tester:
     runs-on: ubuntu-latest
-    needs: build
+    needs: prepare
     strategy:
       matrix:
         minSuccess: [ 1, 10 ]
