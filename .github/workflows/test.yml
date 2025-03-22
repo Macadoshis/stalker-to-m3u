@@ -91,3 +91,10 @@ jobs:
             echo "Test FAILED (Expected: $expected_exit_code, Got: $exit_code)"
             exit 1
           fi
+
+  end:
+    runs-on: ubuntu-latest
+    needs: m3u-tester
+    steps:
+      - name: Success
+        run: echo "Success"
