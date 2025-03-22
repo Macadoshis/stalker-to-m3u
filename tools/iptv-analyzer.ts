@@ -122,7 +122,7 @@ function fetchUrl(url: string): Observable<FetchContent> {
 }
 
 /** Number of threads for analyze process */
-const NB_THREADS = 10;
+const NB_THREADS = 50;
 
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {

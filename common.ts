@@ -189,7 +189,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
 
         const onError: (e: any) => void
             = (e) => {
-            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`, e);
+            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
             if (ignoreError) {
                 resp(<T>{});
             } else {
