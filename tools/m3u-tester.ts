@@ -58,7 +58,7 @@ if (fs.statSync(config.m3uLocation).isDirectory()) {
     const files = fs.readdirSync(config.m3uLocation) as string[];
     const m3uFiles: string[] = files.filter(file => extname(file) === '.m3u').map(file => join(config.m3uLocation, file));
 
-    if (!!m3uFiles) {
+    if (m3uFiles.length === 0) {
         console.warn('No files found.');
         process.exit(0);
     }
