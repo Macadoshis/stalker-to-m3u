@@ -1,7 +1,8 @@
 # General
 
-[![CI](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml)
-[![TEST](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/test.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/test.yml)
+[![BUILD](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml)
+[![SETUP](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml)
+[![TESTS](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml)
 
 This script is used to generate M3U format files from Stalker portal streams.
 
