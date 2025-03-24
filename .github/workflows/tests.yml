@@ -92,6 +92,34 @@ jobs:
             exit 1
           fi
 
+  iptv-analyzer:
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Restore Cached Node Modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Run [iptv-analyzer]
+        run: |
+          echo "file:///./test/iptv-analyzer/feeds.txt" > ./tools/sources.txt
+          npm run iptv-analyzer
+      - name: Verify output files
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "tools/succeeded.json, tools/failed.json"
+          fail: true
+      - name: Compare results with expectations
+        run: |
+          diff -q tools/succeeded.json test/iptv-analyzer/succeeded.json
+          diff -q tools/failed.json test/iptv-analyzer/failed.json
+
   end:
     runs-on: ubuntu-latest
     needs: m3u-tester

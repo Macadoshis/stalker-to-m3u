@@ -1,0 +1,4 @@
+My feed is http://my.dns.com:8080/stalker_portal/c/ for 00:1F:BD:12:34:56
+but I also use http://my.dns.com:8080/stalker_portal/ with MAC 00:1F:BD:99:88:77
+because 2 MAC are proposed for http://my.otherdns.com:8080/c/ (00:1F:BD:11:22:33|00:1F:BD:44:55:66)
+Thank you

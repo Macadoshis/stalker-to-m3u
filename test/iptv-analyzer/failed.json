@@ -1,0 +1,18 @@
+[
+  {
+    "url": "http://my.dns.com:8080/stalker_portal/c/",
+    "mac": "00:1F:BD:12:34:56"
+  },
+  {
+    "url": "http://my.dns.com:8080/stalker_portal/c/",
+    "mac": "00:1F:BD:99:88:77"
+  },
+  {
+    "url": "http://my.otherdns.com:8080/c/",
+    "mac": "00:1F:BD:11:22:33"
+  },
+  {
+    "url": "http://my.otherdns.com:8080/c/",
+    "mac": "00:1F:BD:44:55:66"
+  }
+]
