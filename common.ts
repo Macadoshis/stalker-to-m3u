@@ -1,4 +1,5 @@
 import {
+    BaseConfig,
     Config,
     Data,
     GenerationKind,
@@ -31,8 +32,8 @@ import {
     takeWhile,
     tap
 } from 'rxjs';
-import {Playlist} from "iptv-playlist-parser";
-import {mergeMap} from "rxjs/operators";
+import { Playlist } from "iptv-playlist-parser";
+import { mergeMap } from "rxjs/operators";
 
 // Override console methods to prepend the current datetime
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
@@ -67,10 +68,10 @@ const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(path.resolve(__dirname, 'ffmpeg'));
 ffmpeg.setFfprobePath(path.resolve(__dirname, 'ffprobe'));
 
-export const randomDeviceId: () => string = () => Array.from({length: 64}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
-export const randomSerialNumber: () => string = () => Array.from({length: 13}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+export const randomDeviceId: () => string = () => Array.from({ length: 64 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+export const randomSerialNumber: () => string = () => Array.from({ length: 13 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
 
-export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
+export const READ_OPTIONS = { encoding: 'utf8', flag: 'r' };
 
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);
@@ -109,7 +110,7 @@ export function getConfig(): Readonly<Config> {
     }
     // Override with command line additional arguments
     const args = yargsParser(process.argv.slice(3));
-    config = {...config, ...args};
+    config = { ...config, ...args };
 
     return config;
 }
@@ -129,6 +130,10 @@ type Token = {
     date: Date;
 }
 const authTokenMap: Map<String, Token> = new Map<String, Token>();
+
+function getUserAgent(cfg: BaseConfig): string {
+    return cfg.userAgent ?? "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG250";
+}
 
 function getToken(refresh: boolean = false, cfg: Config = config): Observable<string> {
     const tokenKey: string = cfg.hostname + cfg.port + cfg.contextPath + cfg.mac;
@@ -150,8 +155,8 @@ function getToken(refresh: boolean = false, cfg: Config = config): Observable<st
     return from(fetchData<Data<{ token: string }>>('/server/load.php?type=stb&action=handshake', false,
         {
             'Accept': 'application/json',
-            'User-Agent': `stalker-to-m3u/${version}`,
-            'X-User-Agent': `stalker-to-m3u/${version}`,
+            'User-Agent': getUserAgent(cfg),
+            'X-User-Agent': getUserAgent(cfg),
             'Cookie': `mac=${cfg.mac}; stb_lang=en`,
         }, '', cfg))
         .pipe(
@@ -160,18 +165,18 @@ function getToken(refresh: boolean = false, cfg: Config = config): Observable<st
                 return from(fetchData<Data<any>>(`/server/load.php?type=stb&action=get_profile&hd=1&auth_second_step=0&num_banks=1&stb_type=&image_version=&hw_version=&not_valid_token=0&device_id=${cfg.deviceId1}&device_id2=${cfg.deviceId2}&signature=&sn=${cfg.serialNumber!}&ver=`, false,
                     {
                         'Accept': 'application/json',
-                        'User-Agent': `stalker-to-m3u/${version}`,
-                        'X-User-Agent': `stalker-to-m3u/${version}`,
+                        'User-Agent': getUserAgent(cfg),
+                        'X-User-Agent': getUserAgent(cfg),
                         'Cookie': `mac=${cfg.mac}; stb_lang=en`,
                         'Authorization': `Bearer ${token}`,
                         'SN': cfg.serialNumber!
                     }, '', cfg)).pipe(
-                    map(x => token),
-                    tap(x => {
-                        console.debug(chalk.blueBright(`Fetched token for http://${cfg.hostname}:${cfg.port}${cfg.contextPath ? '/' + cfg.contextPath : ''} [${cfg.mac}] (renewed in ${tokenCacheDuration} seconds)`));
-                        return authTokenMap.set(tokenKey, {token: token, date: new Date()});
-                    })
-                )
+                        map(x => token),
+                        tap(x => {
+                            console.debug(chalk.blueBright(`Fetched token for http://${cfg.hostname}:${cfg.port}${cfg.contextPath ? '/' + cfg.contextPath : ''} [${cfg.mac}] (renewed in ${tokenCacheDuration} seconds)`));
+                            return authTokenMap.set(tokenKey, { token: token, date: new Date() });
+                        })
+                    )
             })
         );
 }
@@ -189,13 +194,13 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
 
         const onError: (e: any) => void
             = (e) => {
-            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
-            if (ignoreError) {
-                resp(<T>{});
-            } else {
-                err(e);
-            }
-        };
+                console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
+                if (ignoreError) {
+                    resp(<T>{});
+                } else {
+                    err(e);
+                }
+            };
 
         let token$: Observable<string>;
         const headersProvided: boolean = Object.keys(headers).length !== 0;
@@ -213,8 +218,8 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                     if (!headersProvided) {
                         headers = {
                             'Accept': 'application/json',
-                            'User-Agent': `stalker-to-m3u/${version}`,
-                            'X-User-Agent': `stalker-to-m3u/${version}`,
+                            'User-Agent': getUserAgent(cfg),
+                            'X-User-Agent': getUserAgent(cfg),
                             'Cookie': `mac=${cfg.mac}; stb_lang=en`,
                             'SN': cfg.serialNumber!
                         };
@@ -334,12 +339,12 @@ export function fetchSeries(genres: Array<Genre>): Promise<GenreSerie[]> {
         forkJoin(
             genres.filter(genre => isFinite(parseInt(genre.id)))
                 .map(genre => {
-                        series[genre.id] = [];
-                        return from(fetchSeriesItems(genre, 1, series[genre.id]))
-                            .pipe(
-                                map(x => <GenreSeries>{genre: genre, series: series[genre.id]})
-                            );
-                    }
+                    series[genre.id] = [];
+                    return from(fetchSeriesItems(genre, 1, series[genre.id]))
+                        .pipe(
+                            map(x => <GenreSeries>{ genre: genre, series: series[genre.id] })
+                        );
+                }
                 )
         ).pipe(
             map(r => {
@@ -369,7 +374,7 @@ export function splitLines(lines: string): string[] {
  * @param {Config} config - The stream tester mode.
  * @returns {Promise<boolean>} - True if the stream is accessible, false otherwise.
  */
-export function checkStream(url: string, config: Pick<Config, 'streamTester'>): Promise<boolean> {
+export function checkStream(url: string, config: Pick<Config, 'streamTester' | 'userAgent'>): Promise<boolean> {
 
     const streamTester: StreamTester = config.streamTester !== undefined ? config.streamTester : 'http';
 
@@ -381,7 +386,7 @@ export function checkStream(url: string, config: Pick<Config, 'streamTester'>): 
 
     if (streamTester === "http") {
         // HTTP stream tester
-        return checkStreamHttp(url);
+        return checkStreamHttp(url, getUserAgent(config));
     } else if (streamTester === "ffmpeg") {
         // FFMPEG stream tester
         return checkStreamFfmpeg(url);
@@ -390,7 +395,7 @@ export function checkStream(url: string, config: Pick<Config, 'streamTester'>): 
     }
 }
 
-function checkStreamHttp(url: string): Promise<boolean> {
+function checkStreamHttp(url: string, userAgent: string): Promise<boolean> {
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), TEST_STREAM_REQUEST_TIMEOUT);
@@ -399,7 +404,7 @@ function checkStreamHttp(url: string): Promise<boolean> {
         // Fetch the stream
         const streamResponse: Observable<any> = from(axios.get(url, {
             headers: {
-                'User-Agent': 'Mozilla/5.0', // Mimic real browser behavior
+                'User-Agent': userAgent,
                 'Accept': 'application/vnd.apple.mpegurl, application/x-mpegURL, text/plain'
             },
             responseType: 'arraybuffer', // Handle binary data
@@ -559,7 +564,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
     const playlist: Playlist = parser.parse(fs.readFileSync(m3uFile, READ_OPTIONS));
 
     // Update max values according to number of items
-    cfg = {...cfg};
+    cfg = { ...cfg };
     if (cfg.minSuccess > 0) {
         cfg.minSuccess = Math.min(cfg.minSuccess, playlist.items.length);
     }
@@ -571,7 +576,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
     playlist.items = shuffleItems(playlist.items);
 
     if (playlist.items.length === 0) {
-        return of({...m3uResult, status: false});
+        return of({ ...m3uResult, status: false });
     } else {
         return of(playlist.items)
             .pipe(
@@ -616,7 +621,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
                         status = acc.succeededStreams.length >= cfg.minSuccess;
                     }
 
-                    return {...acc, status: status};
+                    return { ...acc, status: status };
                 })
             )
     }

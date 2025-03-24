@@ -1,4 +1,9 @@
-export interface Config {
+export interface BaseConfig {
+    streamTester?: StreamTester;
+    userAgent?: string;
+}
+
+export interface Config extends BaseConfig {
     hostname: string;
     contextPath?: string;
     port: number;
@@ -14,7 +19,6 @@ export interface Config {
     vodMaxPagePerGenre?: number;
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;
-    streamTester?: StreamTester;
     testM3uFile?: boolean
 }
 
@@ -116,13 +120,12 @@ export class GenreSerie {
 
 export type GenreSeries = { genre: Genre, series: Serie[] };
 
-export interface M3uTesterConfig {
+export interface M3uTesterConfig extends BaseConfig {
     m3uLocation: string;
     maxFailures: number;
     minSuccess: number;
     renameOnFailure?: boolean;
     renamePrefix?: string;
-    streamTester?: StreamTester;
 }
 
 export interface M3uResultStream {

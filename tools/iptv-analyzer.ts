@@ -1,6 +1,6 @@
 import Ajv from "ajv";
-import {forkJoin, from, Observable, of} from 'rxjs';
-import {catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray} from 'rxjs/operators';
+import { forkJoin, from, Observable, of } from 'rxjs';
+import { catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import {
     checkStream,
     fetchData,
@@ -10,7 +10,8 @@ import {
     READ_OPTIONS,
     splitLines
 } from '../common';
-import {ArrayData, Channel, Config, Data, Genre, Programs, StreamTester} from "../types";
+import { BaseConfig } from '../types';
+import { ArrayData, Channel, Config, Data, Genre, Programs, StreamTester } from "../types";
 
 const axios = require('axios');
 const fs = require('fs');
@@ -27,11 +28,10 @@ type UrlToMacMap = Map<string, Set<string>>;
 type UrlAndMac = { url: string; mac: string; };
 type UrlConfig = Pick<Omit<Config, 'mac'>, 'hostname' | 'port' | 'contextPath'> & Partial<Pick<Config, 'mac'>>;
 
-interface AnalyzerConfig {
+interface AnalyzerConfig extends BaseConfig {
     cache?: boolean;
     groupsToTest?: number;
     channelsToTest?: number;
-    streamTester?: StreamTester;
 }
 
 const SOURCES_FILE: string = './tools/sources.txt';
@@ -90,7 +90,7 @@ function getConfig(): Readonly<AnalyzerConfig> {
 
     // Override with command line additional arguments
     const args = yargsParser(process.argv.slice(2));
-    config = {...config, ...args};
+    config = { ...config, ...args };
 
     return config;
 }
@@ -153,14 +153,14 @@ function fetchAllUrls(urls: string[]): void {
                 return urls;
             }),
             concatMap(urls => {
-                    const items: UrlAndMac[] = [];
-                    urls.forEach((macs, url) => {
-                        macs.forEach(mac => {
-                            items.push(({url, mac}));
-                        });
+                const items: UrlAndMac[] = [];
+                urls.forEach((macs, url) => {
+                    macs.forEach(mac => {
+                        items.push(({ url, mac }));
                     });
-                    return items;
-                }
+                });
+                return items;
+            }
             ),
             mergeMap(urlAndMac => {
 
@@ -190,7 +190,8 @@ function fetchAllUrls(urls: string[]): void {
                     deviceId1: randomDeviceId(),
                     deviceId2: randomDeviceId(),
                     serialNumber: randomSerialNumber(),
-                    streamTester: config.streamTester
+                    streamTester: config.streamTester,
+                    userAgent: config.userAgent
                 };
                 return from(
                     fetchData<ArrayData<Genre>>('/server/load.php?type=itv&action=get_genres', true, {}, '', cfg)
@@ -205,69 +206,69 @@ function fetchAllUrls(urls: string[]): void {
                     }),
                     // Fetch all channels of each genres
                     concatMap(genres => forkJoin(
-                            genres.map(genre => {
-                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
-                                    .then(allPrograms => {
+                        genres.map(genre => {
+                            return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
+                                .then(allPrograms => {
 
-                                        const channels: Channel[] = [];
+                                    const channels: Channel[] = [];
 
-                                        for (const channel of (allPrograms.js.data ?? [])) {
-                                            if (genre.id === channel.tv_genre_id) {
-                                                channels.push(channel);
-                                            }
+                                    for (const channel of (allPrograms.js.data ?? [])) {
+                                        if (genre.id === channel.tv_genre_id) {
+                                            channels.push(channel);
                                         }
+                                    }
 
-                                        console.info(chalk.gray(`Fetched ${channels.length} channels of group "${genre.title}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`))
-                                        return Promise.resolve(channels);
-                                    }));
-                            })
-                        ).pipe(
-                            defaultIfEmpty([]),
-                            map(results => results.flat()),
-                            map(channels => channels.sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1))
-                        )
+                                    console.info(chalk.gray(`Fetched ${channels.length} channels of group "${genre.title}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`))
+                                    return Promise.resolve(channels);
+                                }));
+                        })
+                    ).pipe(
+                        defaultIfEmpty([]),
+                        map(results => results.flat()),
+                        map(channels => channels.sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1))
+                    )
                     ),
                     mergeMap(channels => forkJoin(
-                            channels.map(channel => {
-                                return from(fetchData<Data<{
-                                        cmd: string
-                                    }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, {}, '', cfg)
-                                        .then(urlLink => {
-                                            let url: string | undefined = '';
-                                            if (urlLink?.js?.cmd) {
-                                                url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
-                                            } else {
-                                                console.error(`Error fetching media URL of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
-                                                url = undefined;
-                                            }
-                                            return Promise.resolve(url);
-                                        }, err => {
-                                            console.error(`Error generating stream url of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
-                                            return Promise.resolve(undefined);
-                                        })
-                                )
-                            })
-                        ).pipe(
-                            defaultIfEmpty([]),
-                            map(results => results.flat())
-                        )
+                        channels.map(channel => {
+                            return from(fetchData<Data<{
+                                cmd: string
+                            }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, {}, '', cfg)
+                                .then(urlLink => {
+                                    let url: string | undefined = '';
+                                    if (urlLink?.js?.cmd) {
+                                        url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+                                    } else {
+                                        console.error(`Error fetching media URL of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
+                                        url = undefined;
+                                    }
+                                    return Promise.resolve(url);
+                                }, err => {
+                                    console.error(`Error generating stream url of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
+                                    return Promise.resolve(undefined);
+                                })
+                            )
+                        })
+                    ).pipe(
+                        defaultIfEmpty([]),
+                        map(results => results.flat())
+                    )
                     ),
                     mergeMap(urls => {
                         return forkJoin(
                             urls.filter(url => !!url)
                                 .map(url => new Promise<boolean>((resp, err) => {
 
-                                        // Test stream URL
-                                        checkStream(url!, cfg)
-                                            .then(
-                                                res => {
-                                                    resp(res);
-                                                },
-                                                err => {
-                                                    resp(false);
-                                                }
-                                            );
-                                    }
+                                    // Test stream URL
+                                    checkStream(url!, cfg)
+                                        .then(
+                                            res => {
+                                                resp(res);
+                                            },
+                                            err => {
+                                                resp(false);
+                                            }
+                                        );
+                                }
                                 ))
                         ).pipe(
                             defaultIfEmpty([])
@@ -334,7 +335,7 @@ function extractUrlParts(url: string): UrlConfig {
     const port: number = parseInt(match[2] || '80');
     const context: string | undefined = match[3] || undefined;
 
-    return {hostname: domain, port, contextPath: context};
+    return { hostname: domain, port, contextPath: context };
 }
 
 function extractUrlsAndMacs(text: string): UrlToMacMap {
@@ -347,7 +348,7 @@ function extractUrlsAndMacs(text: string): UrlToMacMap {
     let match: RegExpExecArray | null;
 
     while ((match = urlRegex.exec(text)) !== null) {
-        urlsWithIndices.push({url: match[0], startIndex: match.index});
+        urlsWithIndices.push({ url: match[0], startIndex: match.index });
     }
 
     const urlToMacMap: UrlToMacMap = new Map();
