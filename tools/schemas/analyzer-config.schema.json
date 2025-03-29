@@ -21,6 +21,16 @@
     "streamTester": {
       "type": "string",
       "description": "Stream tester mode",
+      "anyOf": [
+        {
+          "const": "http",
+          "title": "Check the endpoint liveness with HTTP"
+        },
+        {
+          "const": "ffmpeg",
+          "title": "Check the stream liveness with FFMPEG"
+        }
+      ],
       "default": "http"
     }
   },
