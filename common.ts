@@ -32,8 +32,8 @@ import {
     takeWhile,
     tap
 } from 'rxjs';
-import { Playlist } from "iptv-playlist-parser";
-import { mergeMap } from "rxjs/operators";
+import {Playlist} from "iptv-playlist-parser";
+import {mergeMap} from "rxjs/operators";
 
 // Override console methods to prepend the current datetime
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
@@ -68,10 +68,10 @@ const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(path.resolve(__dirname, 'ffmpeg'));
 ffmpeg.setFfprobePath(path.resolve(__dirname, 'ffprobe'));
 
-export const randomDeviceId: () => string = () => Array.from({ length: 64 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
-export const randomSerialNumber: () => string = () => Array.from({ length: 13 }, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+export const randomDeviceId: () => string = () => Array.from({length: 64}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
+export const randomSerialNumber: () => string = () => Array.from({length: 13}, () => "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))).join('');
 
-export const READ_OPTIONS = { encoding: 'utf8', flag: 'r' };
+export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
 
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);
@@ -110,7 +110,7 @@ export function getConfig(): Readonly<Config> {
     }
     // Override with command line additional arguments
     const args = yargsParser(process.argv.slice(3));
-    config = { ...config, ...args };
+    config = {...config, ...args};
 
     return config;
 }
@@ -171,12 +171,12 @@ function getToken(refresh: boolean = false, cfg: Config = config): Observable<st
                         'Authorization': `Bearer ${token}`,
                         'SN': cfg.serialNumber!
                     }, '', cfg)).pipe(
-                        map(x => token),
-                        tap(x => {
-                            console.debug(chalk.blueBright(`Fetched token for http://${cfg.hostname}:${cfg.port}${cfg.contextPath ? '/' + cfg.contextPath : ''} [${cfg.mac}] (renewed in ${tokenCacheDuration} seconds)`));
-                            return authTokenMap.set(tokenKey, { token: token, date: new Date() });
-                        })
-                    )
+                    map(x => token),
+                    tap(x => {
+                        console.debug(chalk.blueBright(`Fetched token for http://${cfg.hostname}:${cfg.port}${cfg.contextPath ? '/' + cfg.contextPath : ''} [${cfg.mac}] (renewed in ${tokenCacheDuration} seconds)`));
+                        return authTokenMap.set(tokenKey, {token: token, date: new Date()});
+                    })
+                )
             })
         );
 }
@@ -194,13 +194,13 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
 
         const onError: (e: any) => void
             = (e) => {
-                console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
-                if (ignoreError) {
-                    resp(<T>{});
-                } else {
-                    err(e);
-                }
-            };
+            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
+            if (ignoreError) {
+                resp(<T>{});
+            } else {
+                err(e);
+            }
+        };
 
         let token$: Observable<string>;
         const headersProvided: boolean = Object.keys(headers).length !== 0;
@@ -339,12 +339,12 @@ export function fetchSeries(genres: Array<Genre>): Promise<GenreSerie[]> {
         forkJoin(
             genres.filter(genre => isFinite(parseInt(genre.id)))
                 .map(genre => {
-                    series[genre.id] = [];
-                    return from(fetchSeriesItems(genre, 1, series[genre.id]))
-                        .pipe(
-                            map(x => <GenreSeries>{ genre: genre, series: series[genre.id] })
-                        );
-                }
+                        series[genre.id] = [];
+                        return from(fetchSeriesItems(genre, 1, series[genre.id]))
+                            .pipe(
+                                map(x => <GenreSeries>{genre: genre, series: series[genre.id]})
+                            );
+                    }
                 )
         ).pipe(
             map(r => {
@@ -563,20 +563,20 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
 
     const playlist: Playlist = parser.parse(fs.readFileSync(m3uFile, READ_OPTIONS));
 
-    // Update max values according to number of items
-    cfg = { ...cfg };
+    // Update max values according to number of items (do not test channels separator likely starting with '#')
+    cfg = {...cfg};
     if (cfg.minSuccess > 0) {
-        cfg.minSuccess = Math.min(cfg.minSuccess, playlist.items.length);
+        cfg.minSuccess = Math.min(cfg.minSuccess, playlist.items.filter(f => !f.name.startsWith('#')).length);
     }
     if (cfg.maxFailures > 0) {
-        cfg.maxFailures = Math.min(cfg.maxFailures, playlist.items.length);
+        cfg.maxFailures = Math.min(cfg.maxFailures, playlist.items.filter(f => !f.name.startsWith('#')).length);
     }
 
     // Shuffle items randomly to avoid starting the test with the first channel often being a "fake" channel separator
     playlist.items = shuffleItems(playlist.items);
 
     if (playlist.items.length === 0) {
-        return of({ ...m3uResult, status: false });
+        return of({...m3uResult, status: false});
     } else {
         return of(playlist.items)
             .pipe(
@@ -621,7 +621,7 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
                         status = acc.succeededStreams.length >= cfg.minSuccess;
                     }
 
-                    return { ...acc, status: status };
+                    return {...acc, status: status};
                 })
             )
     }

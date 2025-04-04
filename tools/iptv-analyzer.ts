@@ -223,10 +223,11 @@ function fetchAllUrls(urls: string[]): void {
                                 }));
                         })
                     ).pipe(
-                        defaultIfEmpty([]),
-                        map(results => results.flat()),
-                        map(channels => channels.sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1))
-                    )
+                            defaultIfEmpty([]),
+                            map(results => results.flat()),
+                            // (do not test channels separator likely starting with '#')
+                            map(channels => channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1))
+                        )
                     ),
                     mergeMap(channels => forkJoin(
                         channels.map(channel => {
