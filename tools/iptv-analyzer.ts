@@ -10,8 +10,7 @@ import {
     READ_OPTIONS,
     splitLines
 } from '../common';
-import { BaseConfig } from '../types';
-import { ArrayData, Channel, Config, Data, Genre, Programs, StreamTester } from "../types";
+import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs } from '../types';
 
 const axios = require('axios');
 const fs = require('fs');
@@ -32,6 +31,7 @@ interface AnalyzerConfig extends BaseConfig {
     cache?: boolean;
     groupsToTest?: number;
     channelsToTest?: number;
+    retestSuccess?: boolean;
 }
 
 const SOURCES_FILE: string = './tools/sources.txt';
@@ -90,7 +90,14 @@ function getConfig(): Readonly<AnalyzerConfig> {
 
     // Override with command line additional arguments
     const args = yargsParser(process.argv.slice(2));
-    config = { ...config, ...args };
+    config = {...config, ...args};
+
+    if (typeof config.cache !== "boolean") {
+        config.cache = config.cache as any === "true";
+    }
+    if (typeof config.retestSuccess !== "boolean") {
+        config.retestSuccess = config.retestSuccess as any === "true";
+    }
 
     return config;
 }
@@ -126,6 +133,10 @@ const NB_THREADS = 50;
 
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
+    if (config.retestSuccess) {
+        urls.push(`file:///${SUCCEEDED_FILE}`);
+    }
+
     const requests = urls
         .filter(url => url.trim().length > 0)
         .filter(url => !url.startsWith('#') && !url.startsWith(';'))
@@ -145,7 +156,7 @@ function fetchAllUrls(urls: string[]): void {
                             if (!urls.has(key)) {
                                 urls.set(key, new Set());
                             }
-                            urls.set(key, new Set([...urls.get(key)!, ...value]));
+                            urls.set(key, new Set([ ...urls.get(key)!, ...value ]));
                         });
                     }
                 });
@@ -153,14 +164,14 @@ function fetchAllUrls(urls: string[]): void {
                 return urls;
             }),
             concatMap(urls => {
-                const items: UrlAndMac[] = [];
-                urls.forEach((macs, url) => {
-                    macs.forEach(mac => {
-                        items.push(({ url, mac }));
+                    const items: UrlAndMac[] = [];
+                    urls.forEach((macs, url) => {
+                        macs.forEach(mac => {
+                            items.push(({url, mac}));
+                        });
                     });
-                });
-                return items;
-            }
+                    return items;
+                }
             ),
             mergeMap(urlAndMac => {
 
@@ -206,23 +217,23 @@ function fetchAllUrls(urls: string[]): void {
                     }),
                     // Fetch all channels of each genres
                     concatMap(genres => forkJoin(
-                        genres.map(genre => {
-                            return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
-                                .then(allPrograms => {
+                            genres.map(genre => {
+                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
+                                    .then(allPrograms => {
 
-                                    const channels: Channel[] = [];
+                                        const channels: Channel[] = [];
 
-                                    for (const channel of (allPrograms.js.data ?? [])) {
-                                        if (genre.id === channel.tv_genre_id) {
-                                            channels.push(channel);
+                                        for (const channel of (allPrograms.js.data ?? [])) {
+                                            if (genre.id === channel.tv_genre_id) {
+                                                channels.push(channel);
+                                            }
                                         }
-                                    }
 
-                                    console.info(chalk.gray(`Fetched ${channels.length} channels of group "${genre.title}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`))
-                                    return Promise.resolve(channels);
-                                }));
-                        })
-                    ).pipe(
+                                        console.info(chalk.gray(`Fetched ${channels.length} channels of group "${genre.title}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}`))
+                                        return Promise.resolve(channels);
+                                    }));
+                            })
+                        ).pipe(
                             defaultIfEmpty([]),
                             map(results => results.flat()),
                             // (do not test channels separator likely starting with '#')
@@ -230,46 +241,46 @@ function fetchAllUrls(urls: string[]): void {
                         )
                     ),
                     mergeMap(channels => forkJoin(
-                        channels.map(channel => {
-                            return from(fetchData<Data<{
-                                cmd: string
-                            }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, {}, '', cfg)
-                                .then(urlLink => {
-                                    let url: string | undefined = '';
-                                    if (urlLink?.js?.cmd) {
-                                        url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
-                                    } else {
-                                        console.error(`Error fetching media URL of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
-                                        url = undefined;
-                                    }
-                                    return Promise.resolve(url);
-                                }, err => {
-                                    console.error(`Error generating stream url of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
-                                    return Promise.resolve(undefined);
-                                })
-                            )
-                        })
-                    ).pipe(
-                        defaultIfEmpty([]),
-                        map(results => results.flat())
-                    )
+                            channels.map(channel => {
+                                return from(fetchData<Data<{
+                                        cmd: string
+                                    }>>(`/server/load.php?type=itv&action=create_link&cmd=${encodeURI(channel.cmd)}&series=&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true, {}, '', cfg)
+                                        .then(urlLink => {
+                                            let url: string | undefined = '';
+                                            if (urlLink?.js?.cmd) {
+                                                url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+                                            } else {
+                                                console.error(`Error fetching media URL of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
+                                                url = undefined;
+                                            }
+                                            return Promise.resolve(url);
+                                        }, err => {
+                                            console.error(`Error generating stream url of channel "${channel.name}" for ${chalk.blue(urlAndMac.url)} with ${chalk.red(urlAndMac.mac)}"`);
+                                            return Promise.resolve(undefined);
+                                        })
+                                )
+                            })
+                        ).pipe(
+                            defaultIfEmpty([]),
+                            map(results => results.flat())
+                        )
                     ),
                     mergeMap(urls => {
                         return forkJoin(
                             urls.filter(url => !!url)
                                 .map(url => new Promise<boolean>((resp, err) => {
 
-                                    // Test stream URL
-                                    checkStream(url!, cfg)
-                                        .then(
-                                            res => {
-                                                resp(res);
-                                            },
-                                            err => {
-                                                resp(false);
-                                            }
-                                        );
-                                }
+                                        // Test stream URL
+                                        checkStream(url!, cfg)
+                                            .then(
+                                                res => {
+                                                    resp(res);
+                                                },
+                                                err => {
+                                                    resp(false);
+                                                }
+                                            );
+                                    }
                                 ))
                         ).pipe(
                             defaultIfEmpty([])
@@ -286,6 +297,12 @@ function fetchAllUrls(urls: string[]): void {
                             succeeded.push(item);
                         } else {
                             failed.push(urlAndMac);
+                        }
+
+                        if (global.gc) {
+                            global.gc(); // Forces garbage collection
+                        } else {
+                            console.warn('Garbage collection is not exposed. Run with --expose-gc.');
                         }
                     }),
                     catchError(err => {
@@ -336,7 +353,7 @@ function extractUrlParts(url: string): UrlConfig {
     const port: number = parseInt(match[2] || '80');
     const context: string | undefined = match[3] || undefined;
 
-    return { hostname: domain, port, contextPath: context };
+    return {hostname: domain, port, contextPath: context};
 }
 
 function extractUrlsAndMacs(text: string): UrlToMacMap {
@@ -349,7 +366,7 @@ function extractUrlsAndMacs(text: string): UrlToMacMap {
     let match: RegExpExecArray | null;
 
     while ((match = urlRegex.exec(text)) !== null) {
-        urlsWithIndices.push({ url: match[0], startIndex: match.index });
+        urlsWithIndices.push({url: match[0], startIndex: match.index});
     }
 
     const urlToMacMap: UrlToMacMap = new Map();
