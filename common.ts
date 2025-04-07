@@ -112,6 +112,13 @@ export function getConfig(): Readonly<Config> {
     const args = yargsParser(process.argv.slice(3));
     config = {...config, ...args};
 
+    if (typeof config.computeUrlLink !== "boolean") {
+        config.computeUrlLink = config.computeUrlLink as any === "true";
+    }
+    if (typeof config.testM3uFile !== "boolean") {
+        config.testM3uFile = config.testM3uFile as any === "true";
+    }
+
     return config;
 }
 
@@ -246,7 +253,11 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                         let data = '';
 
                         res.on('data', (chunk: any) => {
-                            data += chunk;
+                            try {
+                                data += chunk;
+                            } catch (error) {
+                                console.error('on data error', error);
+                            }
                         });
 
                         res.on('close', () => {
