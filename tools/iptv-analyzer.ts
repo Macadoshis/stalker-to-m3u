@@ -10,12 +10,15 @@ import {
     READ_OPTIONS,
     splitLines
 } from '../common';
+import { Mutex } from 'async-mutex';
 import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs } from '../types';
 
 const axios = require('axios');
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
+
+const mutex = new Mutex();
 
 interface FetchContent {
     url: string;
@@ -62,6 +65,10 @@ if (!!config.cache) {
     if (fs.existsSync(FAILED_FILE)) {
         failed.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[])
     }
+} else {
+    // Clear files
+    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
+    fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
 }
 
 function getConfig(): Readonly<AnalyzerConfig> {
@@ -130,6 +137,8 @@ function fetchUrl(url: string): Observable<FetchContent> {
 
 /** Number of threads for analyze process */
 const NB_THREADS = 50;
+
+let totalProcessed = 0;
 
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
@@ -287,6 +296,7 @@ function fetchAllUrls(urls: string[]): void {
                         );
                     }),
                     tap(fetched => {
+
                         // If there is at least one success, the source is considered trustful
                         if (fetched.some(r => !!r)) {
                             const item: UrlConfig = {
@@ -299,13 +309,24 @@ function fetchAllUrls(urls: string[]): void {
                             failed.push(urlAndMac);
                         }
 
+                        mutex.runExclusive(() => {
+                            totalProcessed++;
+                            outputFiles();
+                        });
+
                         if (global.gc) {
                             global.gc(); // Forces garbage collection
                         } else {
-                            console.warn('Garbage collection is not exposed. Run with --expose-gc.');
+                            // console.warn('Garbage collection is not exposed. Run with --expose-gc.');
                         }
                     }),
                     catchError(err => {
+
+                        mutex.runExclusive(() => {
+                            totalProcessed++;
+                            outputFiles();
+                        });
+
                         failed.push(urlAndMac);
                         return of([]);
                     })
@@ -323,7 +344,34 @@ function fetchAllUrls(urls: string[]): void {
 
                 console.debug(chalk.bold(`[COMPLETE] All entries processed. Execution time: ${durationInSeconds} seconds.`));
 
-                // Order results
+                if (!config.cache) {
+                    // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
+                    const succeededToWrite: UrlConfig[] = [];
+                    const failedToWrite: UrlAndMac[] = [];
+                    if (fs.existsSync(SUCCEEDED_FILE)) {
+                        succeededToWrite.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
+                    }
+                    succeededToWrite.push(...succeeded);
+                    if (fs.existsSync(FAILED_FILE)) {
+                        failedToWrite.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[]);
+                    }
+                    failedToWrite.push(...failed);
+
+                    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeededToWrite, null, 2));
+                    fs.writeFileSync(FAILED_FILE, JSON.stringify(failedToWrite, null, 2));
+                } else {
+                    // Output files
+                    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
+                    fs.writeFileSync(FAILED_FILE, JSON.stringify(failed, null, 2));
+                }
+
+                // Order file content
+                succeeded.splice(0);
+                succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
+
+                failed.splice(0);
+                failed.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[])
+
                 succeeded.sort((a, b) => {
                     return a.hostname.localeCompare(b.hostname)
                         || (a.contextPath ?? '').localeCompare((b.contextPath ?? ''))
@@ -334,12 +382,34 @@ function fetchAllUrls(urls: string[]): void {
                     return a.url.localeCompare(b.url)
                         || a.mac.localeCompare(b.mac);
                 });
-
                 // Output files
                 fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
                 fs.writeFileSync(FAILED_FILE, JSON.stringify(failed, null, 2));
             },
         });
+}
+
+function outputFiles(): void {
+    if (!config.cache && totalProcessed % 50 === 0) {
+        // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
+        const succeededToWrite: UrlConfig[] = [];
+        const failedToWrite: UrlAndMac[] = [];
+        if (fs.existsSync(SUCCEEDED_FILE)) {
+            succeededToWrite.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
+        }
+        succeededToWrite.push(...succeeded);
+        if (fs.existsSync(FAILED_FILE)) {
+            failedToWrite.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[]);
+        }
+        failedToWrite.push(...failed);
+
+        fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeededToWrite, null, 2));
+        fs.writeFileSync(FAILED_FILE, JSON.stringify(failedToWrite, null, 2));
+
+        // Clears list
+        succeeded.splice(0);
+        failed.splice(0);
+    }
 }
 
 function extractUrlParts(url: string): UrlConfig {

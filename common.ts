@@ -256,7 +256,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
                             try {
                                 data += chunk;
                             } catch (error) {
-                                console.error('on data error', error);
+                                // console.error('on data error', error);
                             }
                         });
 
