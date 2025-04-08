@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/node": "^12.11.1",
     "ajv": "latest",
+    "async-mutex": "latest",
     "axios": "latest",
     "chalk": "^4.1.2",
     "fs": "latest",
