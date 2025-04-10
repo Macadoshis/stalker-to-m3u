@@ -10,8 +10,10 @@ import {
     READ_OPTIONS,
     splitLines
 } from '../common';
+
 import { Mutex } from 'async-mutex';
 import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs } from '../types';
+import { sha1 } from "object-hash";
 
 const axios = require('axios');
 const fs = require('fs');
@@ -54,22 +56,51 @@ const failed: UrlAndMac[] = [];
 const config: AnalyzerConfig = getConfig();
 logConfig(config);
 
-// Start time
+/** Start time */
 const startTime = process.hrtime();
+
+/** Number of items to store in cache before tailing in output files */
+const NB_ITEMS_TO_TAIL = 100;
+
+/** Total number of items processed */
+let totalProcessed = 0;
+
+/** SHA1 cache of successed url and mac (stored shorten to SHA1 for memory issues) */
+const cacheSuccessUrlAndMac: Set<String> = new Set<String>();
+
+/** SHA1 cache of failed url and mac (stored shorten to SHA1 for memory issues) */
+const cacheFailedUrlAndMac: Set<String> = new Set<String>();
 
 // Create input and output files
 if (!!config.cache) {
-    if (fs.existsSync(SUCCEEDED_FILE)) {
+    if (!config.retestSuccess && fs.existsSync(SUCCEEDED_FILE)) {
         succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
     }
     if (fs.existsSync(FAILED_FILE)) {
         failed.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[])
     }
+    totalProcessed = succeeded.length + failed.length;
 } else {
     // Clear files
     fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
     fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
 }
+
+if (config.retestSuccess) {
+    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
+}
+
+// Fill cache of processed items
+succeeded.forEach((element) => {
+    cacheSuccessUrlAndMac.add(sha1(element))
+});
+failed.forEach((element) => {
+    cacheFailedUrlAndMac.add(sha1(element))
+});
+
+// Empty lists
+succeeded.splice(0);
+failed.splice(0);
 
 function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
@@ -91,6 +122,9 @@ function getConfig(): Readonly<AnalyzerConfig> {
     }
     if (config.streamTester === undefined) {
         config.streamTester = "http";
+    }
+    if (config.retestSuccess === undefined) {
+        config.retestSuccess = false;
     }
     config.groupsToTest = config.groupsToTest ?? 1;
     config.channelsToTest = config.channelsToTest ?? 1;
@@ -138,8 +172,6 @@ function fetchUrl(url: string): Observable<FetchContent> {
 /** Number of threads for analyze process */
 const NB_THREADS = 50;
 
-let totalProcessed = 0;
-
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
     if (config.retestSuccess) {
@@ -186,20 +218,11 @@ function fetchAllUrls(urls: string[]): void {
 
                 console.info(chalk.bold(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`)));
 
-                if (config.cache && failed.some(u => {
-                    return urlAndMac.url === u.url
-                        && urlAndMac.mac === u.mac;
-                })) {
+                if (cacheFailedUrlAndMac.has(sha1(urlAndMac))) {
                     console.info(chalk.red(`${urlAndMac.url} [${urlAndMac.mac}] is cached from failed streams.`));
                     return of();
                 }
-                if (config.cache && succeeded.some(u => {
-                    const extract = extractUrlParts(urlAndMac.url);
-                    return urlAndMac.mac === u.mac
-                        && extract.port === u.port
-                        && extract.contextPath === u.contextPath
-                        && extract.hostname === u.hostname;
-                })) {
+                if (cacheSuccessUrlAndMac.has(sha1({...extractUrlParts(urlAndMac.url), mac: urlAndMac.mac}))) {
                     console.info(chalk.green(`${urlAndMac.url} [${urlAndMac.mac}] is cached from succeeded streams.`));
                     return of();
                 }
@@ -305,29 +328,27 @@ function fetchAllUrls(urls: string[]): void {
                             };
                             console.info(chalk.bgGreen.black.bold(`[ FOUND ] ${JSON.stringify(item)}`));
                             succeeded.push(item);
+                            cacheSuccessUrlAndMac.add(sha1(item));
                         } else {
                             failed.push(urlAndMac);
+                            cacheFailedUrlAndMac.add(sha1(urlAndMac));
                         }
 
                         mutex.runExclusive(() => {
                             totalProcessed++;
                             outputFiles();
                         });
-
-                        if (global.gc) {
-                            global.gc(); // Forces garbage collection
-                        } else {
-                            // console.warn('Garbage collection is not exposed. Run with --expose-gc.');
-                        }
                     }),
                     catchError(err => {
 
+                        failed.push(urlAndMac);
+                        cacheFailedUrlAndMac.add(sha1(urlAndMac));
+
                         mutex.runExclusive(() => {
                             totalProcessed++;
                             outputFiles();
                         });
 
-                        failed.push(urlAndMac);
                         return of([]);
                     })
                 );
@@ -344,26 +365,8 @@ function fetchAllUrls(urls: string[]): void {
 
                 console.debug(chalk.bold(`[COMPLETE] All entries processed. Execution time: ${durationInSeconds} seconds.`));
 
-                if (!config.cache) {
-                    // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
-                    const succeededToWrite: UrlConfig[] = [];
-                    const failedToWrite: UrlAndMac[] = [];
-                    if (fs.existsSync(SUCCEEDED_FILE)) {
-                        succeededToWrite.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
-                    }
-                    succeededToWrite.push(...succeeded);
-                    if (fs.existsSync(FAILED_FILE)) {
-                        failedToWrite.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[]);
-                    }
-                    failedToWrite.push(...failed);
-
-                    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeededToWrite, null, 2));
-                    fs.writeFileSync(FAILED_FILE, JSON.stringify(failedToWrite, null, 2));
-                } else {
-                    // Output files
-                    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
-                    fs.writeFileSync(FAILED_FILE, JSON.stringify(failed, null, 2));
-                }
+                // Output all remaining processed items
+                outputFiles(true);
 
                 // Order file content
                 succeeded.splice(0);
@@ -382,15 +385,15 @@ function fetchAllUrls(urls: string[]): void {
                     return a.url.localeCompare(b.url)
                         || a.mac.localeCompare(b.mac);
                 });
-                // Output files
+                // Output files (ordered)
                 fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
                 fs.writeFileSync(FAILED_FILE, JSON.stringify(failed, null, 2));
             },
         });
 }
 
-function outputFiles(): void {
-    if (!config.cache && totalProcessed % 50 === 0) {
+function outputFiles(force: boolean = false): void {
+    if (force || totalProcessed % NB_ITEMS_TO_TAIL === 0) {
         // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
         const succeededToWrite: UrlConfig[] = [];
         const failedToWrite: UrlAndMac[] = [];
@@ -406,9 +409,15 @@ function outputFiles(): void {
         fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeededToWrite, null, 2));
         fs.writeFileSync(FAILED_FILE, JSON.stringify(failedToWrite, null, 2));
 
-        // Clears list
+        // Clear lists
         succeeded.splice(0);
         failed.splice(0);
+
+        if (global.gc) {
+            global.gc(); // Forces garbage collection
+        } else {
+            // console.warn('Garbage collection is not exposed. Run with --expose-gc.');
+        }
     }
 }
 
@@ -423,7 +432,11 @@ function extractUrlParts(url: string): UrlConfig {
     const port: number = parseInt(match[2] || '80');
     const context: string | undefined = match[3] || undefined;
 
-    return {hostname: domain, port, contextPath: context};
+    const result: UrlConfig = {hostname: domain, port};
+    if (!!context) {
+        result.contextPath = context;
+    }
+    return result;
 }
 
 function extractUrlsAndMacs(text: string): UrlToMacMap {
