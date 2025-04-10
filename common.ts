@@ -32,8 +32,8 @@ import {
     takeWhile,
     tap
 } from 'rxjs';
-import {Playlist} from "iptv-playlist-parser";
-import {mergeMap} from "rxjs/operators";
+import { Playlist } from "iptv-playlist-parser";
+import { mergeMap } from "rxjs/operators";
 
 // Override console methods to prepend the current datetime
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
@@ -201,7 +201,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
 
         const onError: (e: any) => void
             = (e) => {
-            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]`);
+            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}] (ignore: ${ignoreError})`);
             if (ignoreError) {
                 resp(<T>{});
             } else {
