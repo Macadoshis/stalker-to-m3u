@@ -243,7 +243,7 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `minSuccess`      | Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1. | [X]      | `1`          |
 | `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | [X]      | `false`      |
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
-| `retestSuccess`   | "Whether to test again the success.json content (if file exists).                                                 | [X]      | `false`      |
+| `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                 | [X]      | `false`      |
 | `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
 
 ### Outputs
