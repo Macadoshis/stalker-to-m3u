@@ -44,7 +44,7 @@ const SUCCEEDED_FILE: string = './tools/succeeded.json';
 const FAILED_FILE: string = './tools/failed.json';
 
 /** Number of threads for analyze process */
-const NB_THREADS = 1;
+const NB_THREADS = 10;
 
 /** Number of items to store in cache before tailing in output files */
 const NB_ITEMS_TO_TAIL = 10;
@@ -87,10 +87,6 @@ if (!!config.cache) {
     // Clear files
     fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
     fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
-}
-
-if (config.retestSuccess) {
-    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
 }
 
 // Fill cache of processed items
@@ -175,6 +171,7 @@ function fetchUrl(url: string): Observable<FetchContent> {
 
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
+
     if (config.retestSuccess) {
         urls.push(`file:///${SUCCEEDED_FILE}`);
     }
@@ -186,6 +183,7 @@ function fetchAllUrls(urls: string[]): void {
     forkJoin(requests)
         .pipe(
             map((results: FetchContent[]) => {
+
                 const urls: UrlToMacMap = new Map();
 
                 results.forEach(result => {
@@ -209,24 +207,41 @@ function fetchAllUrls(urls: string[]): void {
                     const items: UrlAndMac[] = [];
                     urls.forEach((macs, url) => {
                         macs.forEach(mac => {
-                            items.push(({url, mac}));
+                            const urlAndMac: UrlAndMac = {url, mac};
+
+                            if (cacheFailedUrlAndMac.has(sha1(urlAndMac))) {
+                                console.info(chalk.red(`${urlAndMac.url} [${urlAndMac.mac}] is cached from failed streams.`));
+                                return;
+                            }
+                            if (cacheSuccessUrlAndMac.has(sha1({...extractUrlParts(urlAndMac.url), mac: urlAndMac.mac}))) {
+                                console.info(chalk.green(`${urlAndMac.url} [${urlAndMac.mac}] is cached from succeeded streams.`));
+                                return;
+                            }
+
+                            items.push(urlAndMac);
                         });
                     });
+
+                    if (config.retestSuccess) {
+
+                        const succeededToReplay: UrlConfig[] = [];
+                        succeededToReplay.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[])
+
+                        succeededToReplay.forEach((value) => {
+                            const url: string = `http://${value.hostname}:${value.port}${value.contextPath ? '/' + value.contextPath : ''}/c/`;
+                            items.push({url, mac: value.mac!});
+                        });
+
+                        // Clear success file
+                        fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
+                    }
+
                     return items;
                 }
             ),
             mergeMap(urlAndMac => {
 
                 console.info(chalk.bold(chalk.blue(`...Testing ${urlAndMac.url} with ${chalk.red(urlAndMac.mac)}`)));
-
-                if (cacheFailedUrlAndMac.has(sha1(urlAndMac))) {
-                    console.info(chalk.red(`${urlAndMac.url} [${urlAndMac.mac}] is cached from failed streams.`));
-                    return of();
-                }
-                if (cacheSuccessUrlAndMac.has(sha1({...extractUrlParts(urlAndMac.url), mac: urlAndMac.mac}))) {
-                    console.info(chalk.green(`${urlAndMac.url} [${urlAndMac.mac}] is cached from succeeded streams.`));
-                    return of();
-                }
 
                 const cfg: Config = {
                     ...extractUrlParts(urlAndMac.url),
@@ -251,7 +266,7 @@ function fetchAllUrls(urls: string[]): void {
                     // Fetch all channels of each genre
                     concatMap(genres => forkJoin(
                             genres.map(genre => {
-                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', true, {}, '', cfg)
+                                return from(fetchData<Data<Programs<Channel>>>('/server/load.php?type=itv&action=get_all_channels', false, {}, '', cfg)
                                     .then(allPrograms => {
 
                                         const channels: Channel[] = [];
@@ -267,12 +282,12 @@ function fetchAllUrls(urls: string[]): void {
                                     }));
                             })
                         ).pipe(
-                        defaultIfEmpty(<Channel[][]>[]),
+                            // defaultIfEmpty(<Channel[][]>[]),
                             map(results => results.flat()),
                             // (do not test channels separator likely starting with '#')
-                        map(channels => {
-                            return channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1);
-                        })
+                            map(channels => {
+                                return channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1);
+                            })
                         )
                     ),
                     mergeMap(channels => forkJoin(
@@ -296,7 +311,7 @@ function fetchAllUrls(urls: string[]): void {
                                 )
                             })
                         ).pipe(
-                        defaultIfEmpty(<(string | undefined)[]>[]),
+                            // defaultIfEmpty(<(string | undefined)[]>[]),
                             map(results => results.flat())
                         )
                     ),
@@ -343,8 +358,8 @@ function fetchAllUrls(urls: string[]): void {
                             outputFiles();
                         });
                     }),
-                    map((r: boolean[]) => of({})),
-                    defaultIfEmpty({}),
+                    //map((r: boolean[]) => of({})),
+                    //defaultIfEmpty({}),
                     catchError(err => {
 
                         // console.warn(`CatchError ${JSON.stringify(urlAndMac)}`);
@@ -360,8 +375,8 @@ function fetchAllUrls(urls: string[]): void {
                         return of({});
                     })
                 );
-            }),
-            defaultIfEmpty({})
+            }, NB_THREADS)
+            //defaultIfEmpty({})
         )
         .subscribe({
             error: err => console.error('UNEXPECTED ERROR:', err),
