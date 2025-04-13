@@ -18,13 +18,15 @@ jobs:
         with:
           node-version: 20
       - name: Download NPM dependencies
-        run: npm install
+        run: |
+          npm config set loglevel info
+          npm install
 
       - name: Cache Node Modules
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -45,7 +47,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
 
       - name: Run [m3u-tester] on test/m3u-tester/${{ matrix.file }} with minSuccess=${{ matrix.minSuccess }} and maxFailures=${{ matrix.maxFailures }} [http]
         run: |
@@ -103,7 +105,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
 
       - name: Install (powershell)
         shell: pwsh
@@ -123,7 +125,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
 
       - name: Run [iptv-analyzer]
         run: |
