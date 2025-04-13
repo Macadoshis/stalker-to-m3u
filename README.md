@@ -79,16 +79,20 @@ In order to use this script, following are needed :
 ## Script
 
 ### Prerequisite
+
 Run configuration script at first execution only (only to be done once or after every new version) :
 
 - [configure.bat](./configure.bat) (_Windows_)
 - [configure](./configure) (_Linux / MacOS_)
 
 The `configure` script performs in that order :
+
 - download the dependencies for NodeJS to `node_modules` directory.
-- download the ffmpeg binaries (`ffmpeg` and `ffprobe`). Note that a failure at this point does not prevent to use the tool, only to set the `streamTester` option to `ffmpeg` (default value is `http`).
+- download the ffmpeg binaries (`ffmpeg` and `ffprobe`). Note that a failure at this point does not prevent to use the
+  tool, only to set the `streamTester` option to `ffmpeg` (default value is `http`).
 
 ### Main entry
+
 The main entrypoint to run the script is from file :
 
 - [stalker-to-m3u.bat](./stalker-to-m3u.bat) (_Windows_)
@@ -239,6 +243,7 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `minSuccess`      | Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1. | [X]      | `1`          |
 | `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | [X]      | `false`      |
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
+| `retestSuccess`   | "Whether to test again the success.json content (if file exists).                                                 | [X]      | `false`      |
 | `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
 
 ### Outputs
