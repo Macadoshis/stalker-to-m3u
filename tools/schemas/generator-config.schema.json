@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Schema for generator-config.json file.",
+  "properties": {
+    "userAgent": {
+      "type": "string",
+      "description": "User-Agent for HTTP requests"
+    },
+    "openAiKey": {
+      "type": "string",
+      "description": "OpenAI key",
+      "default": false
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of countries for which to fetch channels for. They need to be spelled in english.",
+      "default": 1
+    },
+    "streamTester": {
+      "type": "string",
+      "description": "Stream tester mode",
+      "anyOf": [
+        {
+          "const": "http",
+          "title": "Check the endpoint liveness with HTTP"
+        },
+        {
+          "const": "ffmpeg",
+          "title": "Check the stream liveness with FFMPEG"
+        }
+      ],
+      "default": "http"
+    }
+  },
+  "additionalProperties": false
+}

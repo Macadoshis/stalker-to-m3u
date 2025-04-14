@@ -1,0 +1,5 @@
+{
+  "openAiKey": "INSERT_YOUR_OPENAPI_KEY",
+  "countries": [],
+  "streamTester": "ffmpeg"
+}

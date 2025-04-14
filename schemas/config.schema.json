@@ -3,6 +3,10 @@
   "type": "object",
   "description": "Schema for config.json file. Example: 'http://my.dns.com:8080/stalker_portal/c/' with MAC '00:1F:BD:12:34:56'",
   "properties": {
+    "userAgent": {
+      "type": "string",
+      "description": "User-Agent for HTTP requests"
+    },
     "hostname": {
       "type": "string",
       "description": "DNS as in 'my.dns.com'"
@@ -106,5 +110,5 @@
     "port",
     "mac"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }

@@ -3,6 +3,10 @@
   "type": "object",
   "description": "Schema for m3u-tester-config.json file.",
   "properties": {
+    "userAgent": {
+      "type": "string",
+      "description": "User-Agent for HTTP requests"
+    },
     "m3uLocation": {
       "type": "string",
       "description": "M3U location. Can be a file or a directory.",
@@ -47,5 +51,5 @@
   "required": [
     "m3uLocation"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }

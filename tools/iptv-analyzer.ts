@@ -12,7 +12,7 @@ import {
 } from '../common';
 
 import { Mutex } from 'async-mutex';
-import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs } from '../types';
+import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs, UrlConfig } from '../types';
 import { sha1 } from "object-hash";
 
 const axios = require('axios');
@@ -30,7 +30,6 @@ interface FetchContent {
 
 type UrlToMacMap = Map<string, Set<string>>;
 type UrlAndMac = { url: string; mac: string; };
-type UrlConfig = Pick<Omit<Config, 'mac'>, 'hostname' | 'port' | 'contextPath'> & Partial<Pick<Config, 'mac'>>;
 
 interface AnalyzerConfig extends BaseConfig {
     cache?: boolean;

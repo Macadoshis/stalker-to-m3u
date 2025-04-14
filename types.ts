@@ -139,3 +139,5 @@ export interface M3uResult {
     failedStreams: M3uResultStream[];
     succeededStreams: M3uResultStream[];
 }
+
+export type UrlConfig = Pick<Omit<Config, 'mac'>, 'hostname' | 'port' | 'contextPath'> & Partial<Pick<Config, 'mac'>>;

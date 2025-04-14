@@ -13,7 +13,9 @@
     "preiptv-analyzer": "npm run pregroups",
     "iptv-analyzer": "ts-node --project ./tsconfig.ts-node.json tools/iptv-analyzer.ts",
     "prem3u-tester": "npm run pregroups",
-    "m3u-tester": "ts-node --project ./tsconfig.ts-node.json tools/m3u-tester.ts"
+    "m3u-tester": "ts-node --project ./tsconfig.ts-node.json tools/m3u-tester.ts",
+    "preiptv-generator": "npm run pregroups",
+    "iptv-generator": "ts-node --project ./tsconfig.ts-node.json tools/iptv-generator.ts"
   },
   "private": false,
   "devDependencies": {
@@ -30,6 +32,7 @@
     "iptv-playlist-parser": "latest",
     "iswitch": "latest",
     "object-hash": "latest",
+    "openai": "latest",
     "rxjs": "^7.8.1",
     "ts-node": "10.1.0",
     "typescript": "~5.8.2",
