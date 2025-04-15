@@ -3,7 +3,7 @@
   "version": "1.3.0",
   "scripts": {
     "compile": "tsc --noEmit --pretty false",
-    "pregroups": "tsc --sourceMap --strict types.ts common.ts",
+    "pregroups": "tsc --sourceMap --strict --target ES2021 --module commonjs types.ts common.ts",
     "groups": "ts-node --project ./tsconfig.ts-node.json generate-groups.ts",
     "prem3u": "npm run pregroups",
     "m3u": "ts-node --project ./tsconfig.ts-node.json generate-m3u.ts",
@@ -32,7 +32,6 @@
     "iptv-playlist-parser": "latest",
     "iswitch": "latest",
     "object-hash": "latest",
-    "openai": "latest",
     "rxjs": "^7.8.1",
     "ts-node": "10.1.0",
     "typescript": "~5.8.2",

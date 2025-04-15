@@ -1,6 +1,6 @@
-import {fetchData, fetchSeries, getConfig, getGenerationKind, logConfig} from "./common";
-import {ArrayData, GenerationKind, Genre} from "./types";
-import {iswitch} from 'iswitch';
+import { fetchData, fetchSeries, getConfig, getGenerationKind, GROUP_FILE, logConfig } from "./common";
+import { ArrayData, GenerationKind, Genre } from "./types";
+import { iswitch } from 'iswitch';
 
 const fs = require('fs');
 const chalk = require('chalk');
@@ -17,13 +17,13 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
         if (generationKind === 'series') {
             // Look for movies for each category
             fetchSeries(r.js).then(genreSeries => {
-                fs.writeFileSync("groups.txt", genreSeries
+                fs.writeFileSync(GROUP_FILE, genreSeries
                     .map(t => t.toString())
                     .filter(t => t !== 'All')
                     .join('\r\n'));
             });
         } else {
-            fs.writeFileSync("groups.txt", (r.js ?? [])
+            fs.writeFileSync(GROUP_FILE, (r.js ?? [])
                 .map(t => t.title)
                 .filter(t => t !== 'All')
                 .join('\r\n'));
@@ -32,5 +32,5 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
         process.exit(1);
     })
     .then(() => {
-        console.info(chalk.bold(`File groups.txt successfully created`));
+        console.info(chalk.bold(`File ${GROUP_FILE} successfully created`));
     });

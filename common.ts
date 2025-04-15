@@ -73,6 +73,8 @@ export const randomSerialNumber: () => string = () => Array.from({length: 13}, (
 
 export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
 
+export const GROUP_FILE: string = './groups.txt';
+
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);
 
@@ -551,16 +553,32 @@ function handleRequestError(error: any, context: string) {
  * Log current config.
  *
  * @param config
+ * @param indent
  */
-export function logConfig(config: { [key: string]: any }): void {
-    console.log(chalk.gray('Running with active configuration:'));
-    console.log('-----------------\n');
-    Object.keys(config).forEach((key: string) => {
-        if (key !== '_') {
-            console.log(chalk.blueBright(`"${chalk.bold(key)}": ${chalk.black(config[key])}`));
+export function logConfig<T extends object>(config: T, indent: string = ''): void {
+    if (!indent) {
+        console.log(chalk.gray('Running with active configuration:'));
+        console.log('-----------------\n');
+    }
+    Object.entries(config).forEach(([key, value]) => {
+        if (key === '_') {
+            return
+        }
+
+        if (typeof value !== 'object') {
+            if (Array.isArray(config) && (typeof value !== 'object')) {
+                console.log(chalk.blueBright(`${indent}${chalk.black(value)}`));
+            } else {
+                console.log(chalk.blueBright(`${indent}"${chalk.bold(key)}": ${chalk.black(value)}`));
+            }
+        } else {
+            console.log(chalk.blueBright(`${indent}"${chalk.bold(key)}":`));
+            logConfig(value, indent + '  ');
         }
     });
-    console.log('-----------------\n');
+    if (!indent) {
+        console.log('-----------------\n');
+    }
 }
 
 export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uResult> {
