@@ -306,7 +306,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                 return firstValueFrom(checkM3u(filename, <M3uTesterConfig>{
                         m3uLocation: filename,
                         minSuccess: 1,
-                        maxFailures: -1,
+                        maxFailures: 25,
                         renameOnFailure: false,
                         streamTester: config.streamTester
                     }

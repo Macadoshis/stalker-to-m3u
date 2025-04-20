@@ -15,14 +15,15 @@
     "geminiAiModel": {
       "type": "string",
       "description": "Google GEMINI AI model (supported by your key)",
-      "default": "gpt-3.5-turbo"
+      "default": "gemini-2.0-flash"
     },
     "languages": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "List of languages to support criteria. Not applied if unset."
+      "description": "List of languages to support criteria. Not applied if unset.",
+      "default": []
     },
     "iptv": {
       "type": "object",
@@ -39,7 +40,8 @@
           "items": {
             "type": "string"
           },
-          "description": "List of channels groups to exclude (ex. 'Music', 'Sports', 'SD channels'). They need to be spelled in English. Not applied if unset."
+          "description": "List of channels groups to exclude (ex. 'Music', 'Sports', 'SD channels'). They need to be spelled in English. Not applied if unset.",
+          "default": []
         }
       },
       "required": [
@@ -61,7 +63,8 @@
           "items": {
             "type": "string"
           },
-          "description": "List of categories of VOD to exclude (ex. 'Adults', 'Romance', 'Horror', 'Prime movies'). They need to be spelled in English. Not applied if unset."
+          "description": "List of categories of VOD to exclude (ex. 'Adults', 'Romance', 'Horror', 'Prime movies'). They need to be spelled in English. Not applied if unset.",
+          "default": []
         }
       },
       "required": [
@@ -83,7 +86,8 @@
           "items": {
             "type": "string"
           },
-          "description": "List of series or themes of series to exclude (ex. 'Disney+'). They need to be spelled in English. Not applied if unset."
+          "description": "List of series or themes of series to exclude (ex. 'Disney+'). They need to be spelled in English. Not applied if unset.",
+          "default": []
         }
       },
       "required": [
@@ -106,5 +110,8 @@
       "default": "http"
     }
   },
+  "required": [
+    "geminiAiKey"
+  ],
   "additionalProperties": false
 }

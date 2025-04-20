@@ -100,7 +100,7 @@ if (!fs.existsSync(SUCCEEDED_FILE)) {
 
 const succeeded: UrlConfig[] = JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[];
 
-function getGeminiPrompt() {
+function getGeminiPrompt(): string {
     let prompt: string = '';
 
     switch (generationKind) {
@@ -130,6 +130,11 @@ function getGeminiPrompt() {
 
     return prompt;
 }
+
+console.log(chalk.gray(`Gemini prompt:\n`));
+console.log(chalk.gray('-----------------\n'));
+console.log(chalk.gray(`${getGeminiPrompt()}\n`));
+console.log(chalk.gray('-----------------\n'));
 
 forkJoin(succeeded.map(r => of(r)))
     .pipe(
