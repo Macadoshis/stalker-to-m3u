@@ -5,6 +5,7 @@ import {
     fetchSeries,
     getConfig,
     getGenerationKind,
+    GROUP_FILE,
     logConfig,
     READ_OPTIONS,
     splitLines
@@ -25,8 +26,8 @@ import {
     VodOrdering
 } from "./types";
 
-import {iswitch} from 'iswitch';
-import {firstValueFrom} from "rxjs";
+import { iswitch } from 'iswitch';
+import { firstValueFrom } from "rxjs";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -35,8 +36,6 @@ const startTime = process.hrtime();
 
 const fs = require('fs');
 const chalk = require('chalk');
-
-const GROUP_FILE: string = './groups.txt';
 
 if (!fs.existsSync(GROUP_FILE)) {
     console.error(`File ${GROUP_FILE} does not exist.`);
@@ -307,7 +306,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                 return firstValueFrom(checkM3u(filename, <M3uTesterConfig>{
                         m3uLocation: filename,
                         minSuccess: 1,
-                        maxFailures: -1,
+                        maxFailures: 25,
                         renameOnFailure: false,
                         streamTester: config.streamTester
                     }

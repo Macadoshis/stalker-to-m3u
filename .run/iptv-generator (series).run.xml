@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="iptv-generator (series)" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/stalker-to-m3u/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="iptv-generator" />
+    </scripts>
+    <arguments value="-- series" />
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

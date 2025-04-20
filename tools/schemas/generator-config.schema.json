@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Schema for generator-config.json file.",
+  "properties": {
+    "userAgent": {
+      "type": "string",
+      "description": "User-Agent for HTTP requests"
+    },
+    "geminiAiKey": {
+      "type": "string",
+      "description": "Google GEMINI AI key",
+      "default": false
+    },
+    "geminiAiModel": {
+      "type": "string",
+      "description": "Google GEMINI AI model (supported by your key)",
+      "default": "gemini-2.0-flash"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of languages to support criteria. Not applied if unset.",
+      "default": []
+    },
+    "iptv": {
+      "type": "object",
+      "properties": {
+        "countries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of countries for which to fetch channels for (ex. 'Live sports', 'Info', 'Kids'). They need to be spelled in English."
+        },
+        "excludedGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of channels groups to exclude (ex. 'Music', 'Sports', 'SD channels'). They need to be spelled in English. Not applied if unset.",
+          "default": []
+        }
+      },
+      "required": [
+        "countries"
+      ]
+    },
+    "vod": {
+      "type": "object",
+      "properties": {
+        "includedCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of categories of VOD for which to fetch movies for (ex. 'Comedy', 'Paramount movies'). They need to be spelled in English."
+        },
+        "excludedCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of categories of VOD to exclude (ex. 'Adults', 'Romance', 'Horror', 'Prime movies'). They need to be spelled in English. Not applied if unset.",
+          "default": []
+        }
+      },
+      "required": [
+        "includedCategories"
+      ]
+    },
+    "series": {
+      "type": "object",
+      "properties": {
+        "includedSeries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of series or themes of series to fetch (ex. : 'Punisher', 'Netflix'). They need to be spelled in English."
+        },
+        "excludedSeries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of series or themes of series to exclude (ex. 'Disney+'). They need to be spelled in English. Not applied if unset.",
+          "default": []
+        }
+      },
+      "required": [
+        "includedSeries"
+      ]
+    },
+    "streamTester": {
+      "type": "string",
+      "description": "Stream tester mode",
+      "anyOf": [
+        {
+          "const": "http",
+          "title": "Check the endpoint liveness with HTTP"
+        },
+        {
+          "const": "ffmpeg",
+          "title": "Check the stream liveness with FFMPEG"
+        }
+      ],
+      "default": "http"
+    }
+  },
+  "required": [
+    "geminiAiKey"
+  ],
+  "additionalProperties": false
+}

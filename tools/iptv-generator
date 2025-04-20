@@ -1,0 +1,25 @@
+#!/bin/bash
+prompt="Pick an option:"
+
+media=""
+
+echo "What media ?"
+optionsGenerate=("IPTV" "VOD" "SERIES")
+PS3="$prompt "
+select opt in "${optionsGenerate[@]}"; do
+    case "$REPLY" in
+    1)
+      media=iptv;
+      break;;
+    2)
+      media=vod;
+      break;;
+    3)
+      media=series;
+      break;;
+    *) echo "Invalid option.";continue;;
+    esac
+done
+
+echo "Running script..."
+npm run iptv-generator $media -- "$@"

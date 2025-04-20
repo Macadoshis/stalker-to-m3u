@@ -1,0 +1,45 @@
+{
+  "geminiAiKey": "INSERT_YOUR_OPENAPI_KEY",
+  "geminiAiModel": "gemini-2.0-flash",
+  "languages": [
+    "French",
+    "English"
+  ],
+  "iptv": {
+    "countries": [
+      "France",
+      "Switzerland",
+      "French Canada"
+    ],
+    "excludedGroups": [
+      "Adults",
+      "SD channels",
+      "Sports",
+      "Music"
+    ]
+  },
+  "vod": {
+    "includedCategories": [
+      "All groups of supported languages I requested",
+      "Multi sub"
+    ],
+    "excludedCategories": [
+      "Anime",
+      "Adults",
+      "Rated R",
+      "Romance",
+      "Drama",
+      "Christmas",
+      "Western",
+      "Foreign movies",
+      "Apple"
+    ]
+  },
+  "series": {
+    "includedSeries": [
+      "Black Mirror",
+      "Hellbound"
+    ]
+  },
+  "streamTester": "ffmpeg"
+}

@@ -3,6 +3,10 @@
   "type": "object",
   "description": "Schema for analyzer-config.json file.",
   "properties": {
+    "userAgent": {
+      "type": "string",
+      "description": "User-Agent for HTTP requests"
+    },
     "cache": {
       "type": "boolean",
       "description": "Whether or not to test again a provider if it is already listed either in 'succeeded.json' or 'failed.json' upon subsequent relaunching of the script.",

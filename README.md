@@ -231,7 +231,8 @@ Run the following script :
 
 ### Principles
 
-The script looks for all M3U files in a given location or a single M3U file, and test its stream health to assert or not the global
+The script looks for all M3U files in a given location or a single M3U file, and test its stream health to assert or not
+the global
 health of the M3U file through specific customizable criteria.
 
 The criteria can be configured through config file [m3u-tester-config.json](tools/m3u-tester-config.json).
@@ -243,9 +244,57 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `minSuccess`      | Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1. | [X]      | `1`          |
 | `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | [X]      | `false`      |
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
-| `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                 | [X]      | `false`      |
+| `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                  | [X]      | `false`      |
 | `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
 
 ### Outputs
 
-After the execution of the script, M3U unhealthy file(s) are renamed with a prefix if `renameOnFailure` is set to `true`.
+After the execution of the script, M3U unhealthy file(s) are renamed with a prefix if `renameOnFailure` is set to
+`true`.
+
+## M3U files generator (from analyzer)
+
+**(Experimental)**
+
+Loop through the `tools/succeeded.json` output from [Stalker providers analyzer](#stalker-providers-analyzer) to
+generate a M3U file for each entry.
+The groups are auto-selected from preference criteria by an AI prompt using AI Gemini.
+
+### Prerequisite
+
+File `tools/succeeded.json` must exist.
+
+An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for `gemini-2.0-flash`.
+
+### Script
+
+Run the following script :
+
+- [tools/iptv-generator.bat](./tools/iptv-generator.bat) (_Windows_)
+- [tools/iptv-generator](./tools/iptv-generator) (_Linux / MacOS_)
+
+and answer the prompt to generate for either mode: _iptv_, _vod_ or _series_.
+
+### Principles
+
+The script loops through all entries of file _tools/succeeded.json_ to run `stalker-to-m3u` and apply automatically the
+_groups_ then _m3u_.
+
+The groups are filtered by AI Gemini based on given customizable criteria within configuration
+file [generator-config.json](tools/generator-config.json).
+
+| Property                 | Description                                                                                              | Optional | Default            | Examples                     |
+|--------------------------|----------------------------------------------------------------------------------------------------------|----------|--------------------|------------------------------|
+| `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                    |                              |
+| `geminiAiModel`          | Google GEMINI AI model (supported by your key).                                                          | [X]      | `gemini-2.0-flash` |                              |
+| `languages`              | Array of languages to support criteria. Not applied if unset.                                            | [X]      | `[]`               | "English"                    |
+| `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                    | "UK", "US", "Canada"         |
+| `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | [X]      | `[]`               | "Adults", "Reality", "Music" |
+| `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                    | "Comedy", "Horror"           |
+| `vod/excludedCategories` | List of categories of VOD to exclude. They need to be spelled in English. Not applied if unset.          | [X]      | `[]`               | "Netflix", "Adults", "Apple" |
+| `series/includedSeries`  | List of series or themes of series to fetch. They need to be spelled in English.                         |          |                    | "Breaking Bad"               |
+| `series/excludedSeries`  | List of series or themes of series to exclude. They need to be spelled in English. Not applied if unset. | [X]      | `[]`               | "Season 1", "Season 2"       |
+
+### Outputs
+
+After the execution of the script, M3U file(s) are generated for each provider and requested mode.

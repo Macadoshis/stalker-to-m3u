@@ -19,7 +19,7 @@ if /I "!doWhat!" == "2" (
 )
 goto :whileDoWhat
 
-@REM Select for which media (vod or iptv)
+@REM Select for which media (iptv or vod or series)
 
 :whileChooseTarget
 echo What media ?
