@@ -133,7 +133,7 @@ function getGeminiPrompt(): string {
 
 console.log(chalk.gray(`Gemini prompt:\n`));
 console.log(chalk.gray('-----------------\n'));
-console.log(chalk.gray(`${getGeminiPrompt()}\n`));
+console.log(chalk.gray(`${getFullPrompt(getGeminiPrompt(), ['Example group 1', 'Example group 2'])}\n`));
 console.log(chalk.gray('-----------------\n'));
 
 forkJoin(succeeded.map(r => of(r)))
@@ -173,8 +173,10 @@ forkJoin(succeeded.map(r => of(r)))
                         .split('\n')
                         .map((line: string) => line.trim())
                         .filter((line: string) => line.length > 0);
-                    return askGemini(getGeminiPrompt(),
-                        groups)
+                    if (!groups || groups.length === 0) {
+                        return Promise.resolve(false);
+                    }
+                    return askGemini(getGeminiPrompt(), groups)
                         .then(filtered => {
                             console.log('Original groups:', groups)
                             console.log('Filtered groups:', filtered);
@@ -233,14 +235,15 @@ forkJoin(succeeded.map(r => of(r)))
         }
     });
 
+function getFullPrompt(prompt: string, groups: string[]): string {
+    return `You are an IPTV filtering assistant.\n\n${prompt}\n\nHere is the list of groups:\n${groups.map(group => `'${group}'`).join(',\n')}\n\nProvide the valid matches in JSON array format, without any surrounding code blocks. Keep as is each given group, do not modify groups or add new groups.`;
+}
+
 export async function askGemini(prompt: string, groups: string[]): Promise<string[]> {
-    const fullPrompt = groups
-        ? `${prompt}\n\nYou are an IPTV filtering assistant. Provide the valid matches in JSON array format, without any surrounding code blocks. Keep as is each given group, do not modify groups or add new groups. Here is the list of groups:\n${groups.join('\n')}.`
-        : prompt;
 
     const body = {
         contents: [{
-            parts: [{text: fullPrompt}]
+            parts: [{text: getFullPrompt(prompt, groups)}]
         }]
     };
 
