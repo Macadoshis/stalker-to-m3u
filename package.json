@@ -1,6 +1,6 @@
 {
   "name": "stalker-to-m3u",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "scripts": {
     "compile": "tsc --noEmit --pretty false",
     "pregroups": "tsc --sourceMap --strict --target ES2021 --module commonjs types.ts common.ts",
