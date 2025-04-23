@@ -204,6 +204,21 @@ function fetchAllUrls(urls: string[]): void {
             }),
             concatMap(urls => {
                     const items: UrlAndMac[] = [];
+
+                    if (config.retestSuccess) {
+
+                        const succeededToReplay: UrlConfig[] = [];
+                        succeededToReplay.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[])
+
+                        succeededToReplay.forEach((value) => {
+                            const url: string = `http://${value.hostname}:${value.port}${value.contextPath ? '/' + value.contextPath : ''}/c/`;
+                            items.push({url, mac: value.mac!});
+                        });
+
+                        // Clear success file
+                        fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
+                    }
+
                     urls.forEach((macs, url) => {
                         macs.forEach(mac => {
                             const urlAndMac: UrlAndMac = {url, mac};
@@ -220,20 +235,6 @@ function fetchAllUrls(urls: string[]): void {
                             items.push(urlAndMac);
                         });
                     });
-
-                    if (config.retestSuccess) {
-
-                        const succeededToReplay: UrlConfig[] = [];
-                        succeededToReplay.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[])
-
-                        succeededToReplay.forEach((value) => {
-                            const url: string = `http://${value.hostname}:${value.port}${value.contextPath ? '/' + value.contextPath : ''}/c/`;
-                            items.push({url, mac: value.mac!});
-                        });
-
-                        // Clear success file
-                        fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
-                    }
 
                     return items;
                 }
