@@ -282,7 +282,7 @@ function fetchAllUrls(urls: string[]): void {
                                     }));
                             })
                         ).pipe(
-                            // defaultIfEmpty(<Channel[][]>[]),
+                            defaultIfEmpty(<Channel[][]>[]),
                             map(results => results.flat()),
                             // (do not test channels separator likely starting with '#')
                             map(channels => {
@@ -311,7 +311,7 @@ function fetchAllUrls(urls: string[]): void {
                                 )
                             })
                         ).pipe(
-                            // defaultIfEmpty(<(string | undefined)[]>[]),
+                            defaultIfEmpty(<(string | undefined)[]>[]),
                             map(results => results.flat())
                         )
                     ),
