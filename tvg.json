@@ -13,7 +13,8 @@
     "2M"
   ],
   "6ter.fr": [
-    "6ter"
+    "6ter",
+    "6 ter"
   ],
   "8MontBlanc.fr": [
     "MontBlanc",
@@ -124,7 +125,7 @@
     "BFM Paris"
   ],
   "BFMTV.fr": [
-    "BFM TV"
+    "BFM"
   ],
   "BipTV(src01).fr": [
     "Bip TV"
@@ -205,8 +206,12 @@
   "Cartoonito.fr": [
     "Cartoonito"
   ],
+  "CGTNFrancais.fr": [
+    "CGTN"
+  ],
   "ChasseetPeche.fr": [
     "Chasse et Peche",
+    "Chasse Peche",
     "Chasse & Peche"
   ],
   "Cheddar.fr": [
@@ -266,6 +271,7 @@
   "CineplusFrisson.fr": [
     "Cineplus Frisson",
     "Cine+ Frisson",
+    "Cine+Frisson",
     "Cine + Frisson",
     "CINE FRISSON"
   ],
@@ -492,11 +498,9 @@
   "IDF1(src01).fr": [
     "IDF1"
   ],
-  "Infosport.fr": [
-    "Infosport"
-  ],
   "infosportplus.fr": [
     "infosport",
+    "infosport+",
     "info sport"
   ],
   "IQRATV(English).fr": [
@@ -610,6 +614,9 @@
   ],
   "NollywoodTV.fr": [
     "Nollywood"
+  ],
+  "NovelasTV(src01).fr": [
+    "NOVELAS"
   ],
   "NRJ12.fr": [
     "NRJ 12",
@@ -910,9 +917,13 @@
   "TV8MONTBLANC(src01).fr": [
     "TV8 MONT BLANC"
   ],
+  "TVM3(French).ch": [
+    "TVM3",
+    "TVM 3"
+  ],
   "UshuaiaTV.fr": [
     "Ushuaia"
-  ],
+  ]
   "W9.fr": [
     "W9"
   ],
@@ -2744,6 +2755,10 @@
   "MuseumTV(French).ca": [
     "MuseumTV"
   ],
+  "MyCuisine(French).ch": [
+    "My cuisine",
+    "Mycuisine"
+  ],
   "NASATV(English).ca": [
     "NASA TV"
   ],
@@ -3397,7 +3412,8 @@
     "Sanjha TV"
   ],
   "SavoirMedia(src01).ca": [
-    "Savoir Media"
+    "Savoir Media",
+    "Canal Savoir"
   ],
   "Savoirmedia(French-English).ca": [
     "Savoir media (French, English)"
@@ -3600,6 +3616,7 @@
   "TeleQuebec(CIVM)Montreal(src01).ca": [
     "TeleQuebec (CIVM) Montreal",
     "TeleQuebec",
+    "Tele-Quebec",
     "Tele Quebec"
   ],
   "Teleritmo(Spanish).ca": [
@@ -4089,6 +4106,41 @@
   "Zoom(English).ca": [
     "Zoom"
   ],
+  "CanalAlpha(Jura)(French).ch": [
+    "CANAL ALPHA"
+  ],
+  "MySports1F(src01).ch": [
+    "Mysports 1",
+    "My sports 1"
+  ],
+  "MySports2F(src01).ch": [
+    "Mysports 2",
+    "My sports 2"
+  ],
+  "MySports3F(src01).ch": [
+    "Mysports 3",
+    "My sports 3"
+  ],
+  "MySports4F(src01).ch": [
+    "Mysports 4",
+    "My sports 4"
+  ],
+  "MySports5F(src01).ch": [
+    "Mysports 5",
+    "My sports 5"
+  ],
+  "MySports6F(src01).ch": [
+    "Mysports 6",
+    "My sports 6"
+  ],
+  "MySports7F(src01).ch": [
+    "Mysports 7",
+    "My sports 7"
+  ],
+  "MySports8(French).ch": [
+    "Mysports 8",
+    "My sports 8"
+  ],
   "RTSDeux(src01).ch": [
     "RTS Deux",
     "RTS 2",
@@ -4098,5 +4150,8 @@
     "RTS Un",
     "RTS 1",
     "RTS1"
+  ],
+  "Voyage(French).ch": [
+    "Voyage"
   ]
 }
