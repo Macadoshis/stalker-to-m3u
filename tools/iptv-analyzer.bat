@@ -1,3 +1,3 @@
 @echo off
 @REM run script
-npm run iptv-analyzer
+npm run iptv-analyzer -- %*
