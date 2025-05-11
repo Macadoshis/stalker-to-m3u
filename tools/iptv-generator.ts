@@ -167,6 +167,10 @@ forkJoin(succeeded.map(r => of(r)))
                             reject(false);
                         }
                     });
+                    child.on('error', (err: Error) => {
+                        console.log(`Script exited with error: ${err}`);
+                        reject(false);
+                    });
                 }).then(() => {
                     // Call AI to filter groups.txt content
                     const groups: string[] = fs.readFileSync(GROUP_FILE, READ_OPTIONS)
@@ -206,6 +210,10 @@ forkJoin(succeeded.map(r => of(r)))
                                     console.error(`Error generating m3u of ${JSON.stringify(succ)}:`)
                                     reject(false);
                                 }
+                            });
+                            child.on('error', (err: Error) => {
+                                console.log(`Script exited with error: ${err}`);
+                                reject(false);
                             });
                         });
                     }
