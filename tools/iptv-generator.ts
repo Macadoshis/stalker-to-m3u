@@ -144,6 +144,12 @@ forkJoin(succeeded.map(r => of(r)))
         ),
         mergeMap((succ: UrlConfig) => {
 
+            // Skip if target file exists
+            if (fs.existsSync(`${generationKind}-${succ.hostname}.m3u`)) {
+                console.info(chalk.keyword('orange')(`File already exists. Skipping generation for ${succ.hostname} [${succ.mac}].`));
+                return of(true);
+            }
+
             // Run groups generation
             if (fs.existsSync(GROUP_FILE)) {
                 fs.rmSync(GROUP_FILE);
