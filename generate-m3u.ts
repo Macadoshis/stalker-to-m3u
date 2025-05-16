@@ -299,12 +299,11 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(chalk.bold(`Creating file ${filename}`));
-            fs.writeFileSync(filename, new M3U(m3u).print(config));
+            fs.writeFileSync(config.outputDir + '/' + filename, new M3U(m3u).print(config));
 
             // Test m3u file
             if (config.testM3uFile) {
-                return firstValueFrom(checkM3u(filename, <M3uTesterConfig>{
-                        m3uLocation: filename,
+                return firstValueFrom(checkM3u(config.outputDir + '/' + filename, <M3uTesterConfig>{
                         minSuccess: 1,
                         maxFailures: 25,
                         renameOnFailure: false,

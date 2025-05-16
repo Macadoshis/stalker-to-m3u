@@ -24,6 +24,11 @@
       "type": "string",
       "description": "Full mac address as in '00:1F:BD:12:34:56'."
     },
+    "outputDir": {
+      "type": "string",
+      "description": "Output directory of generated M3U files",
+      "default": "."
+    },
     "deviceId1": {
       "type": "string",
       "description": "Device ID 1.",

@@ -8,6 +8,7 @@ export interface Config extends BaseConfig {
     contextPath?: string;
     port: number;
     mac: string;
+    outputDir?: string;
     deviceId1?: string;
     deviceId2?: string;
     serialNumber?: string;

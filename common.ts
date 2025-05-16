@@ -97,6 +97,13 @@ export function getConfig(): Readonly<Config> {
     if (config.testM3uFile === undefined) {
         config.testM3uFile = true;
     }
+    if (config.outputDir === undefined) {
+        config.outputDir = ".";
+    }
+    if (!fs.existsSync(config.outputDir)) {
+        console.info(`Directory ${config.outputDir} not found.`);
+        process.exit(1);
+    }
 
     if (!config.deviceId1) {
         config.deviceId1 = randomDeviceId();

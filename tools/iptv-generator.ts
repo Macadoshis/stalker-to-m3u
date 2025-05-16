@@ -17,6 +17,7 @@ const SUCCEEDED_FILE: string = './tools/succeeded.json';
 interface GeneratorConfig extends BaseConfig {
     geminiAiKey: string;
     geminiAiModel: string;
+    outputDir?: string;
     languages?: string[];
     iptv?: IptvGeneratorConfig;
     vod?: VodGeneratorConfig;
@@ -59,6 +60,13 @@ function getConfig(): Readonly<GeneratorConfig> {
     }
     if (config.streamTester === undefined) {
         config.streamTester = "http";
+    }
+    if (config.outputDir === undefined) {
+        config.outputDir = ".";
+    }
+    if (!fs.existsSync(config.outputDir)) {
+        console.info(`Directory ${config.outputDir} not found.`);
+        process.exit(1);
     }
 
     switch (generationKind) {
@@ -145,7 +153,7 @@ forkJoin(succeeded.map(r => of(r)))
         mergeMap((succ: UrlConfig) => {
 
             // Skip if target file exists
-            if (fs.existsSync(`${generationKind}-${succ.hostname}.m3u`)) {
+            if (fs.existsSync(`${config.outputDir}/${generationKind}-${succ.hostname}.m3u`)) {
                 console.info(chalk.keyword('orange')(`File already exists. Skipping generation for ${succ.hostname} [${succ.mac}].`));
                 return of(true);
             }

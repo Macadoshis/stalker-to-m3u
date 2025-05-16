@@ -17,6 +17,11 @@
       "description": "Google GEMINI AI model (supported by your key)",
       "default": "gemini-2.0-flash"
     },
+    "outputDir": {
+      "type": "string",
+      "description": "Output directory of generated M3U files",
+      "default": "."
+    },
     "languages": {
       "type": "array",
       "items": {
