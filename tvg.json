@@ -3,7 +3,8 @@
     "A la carte",
     "Amazon prime",
     "DAZN",
-    "CINEMAX"
+    "CINEMAX",
+    "multisport"
   ],
   "13emeRue.fr": [
     "13eme Rue",
@@ -253,9 +254,13 @@
   ],
   "CINEplusFestival.fr": [
     "Cineplus Club",
+    "Cineplus Festival",
     "Cine+ Club",
+    "Cine+ Festival",
     "Cine + Club",
-    "CINE CLUB"
+    "Cine + Festival",
+    "CINE CLUB",
+    "CINE Festival"
   ],
   "CineplusEmotion.fr": [
     "Cineplus Emotion",
@@ -264,9 +269,13 @@
   ],
   "CINEplusFamily.fr": [
     "Cineplus Famiz",
+    "Cineplus Familly",
     "Cine+ Famiz",
+    "Cine+ Familly",
     "Cine + Famiz",
-    "CINE FAMIZ"
+    "Cine + Familly",
+    "CINE FAMIZ",
+    "CINE Familly"
   ],
   "CineplusFrisson.fr": [
     "Cineplus Frisson",
@@ -371,6 +380,7 @@
     "Equipe 21",
     "Equipe21",
     "LEquipe",
+    "L'Equipe",
     "L Equipe"
   ],
   "LuckyJacktv.fr": [
@@ -572,12 +582,15 @@
   "MGGTV.fr": [
     "MGGTV"
   ],
-  "MTV.fr": [
-    "MTV"
-  ],
   "MTVHits.fr": [
     "MTV Hits",
     "MTVHits"
+  ],
+  "MTV80s(English).fr": [
+    "MTV 80"
+  ],
+  "MTV.fr": [
+    "MTV"
   ],
   "MyZentv.fr": [
     "MyZentv"
@@ -709,6 +722,14 @@
   "RMCDecouverte.fr": [
     "RMC Decouverte"
   ],
+  "RMCWOW(src01).fr": [
+    "RMC WOW",
+    "RMCWOW"
+  ],
+  "RMCMecanic(src01).fr": [
+    "RMC Mechanic",
+    "RMCMechanic"
+  ],
   "RMCMystere(src01).fr": [
     "RMC Mystere"
   ],
@@ -818,7 +839,7 @@
   "Teva.fr": [
     "Teva"
   ],
-  "TF1plus1.fr": [
+  "TF1plus1(src01).fr": [
     "TF1 plus1",
     "TF 1 plus 1",
     "TF1+1",
@@ -888,7 +909,8 @@
     "Mziki"
   ],
   "TRACESportStars.fr": [
-    "TRACE Sport Stars"
+    "TRACE Sport",
+    "TRACE Sports"
   ],
   "TraceTropical(src01).fr": [
     "Trace Tropical"
