@@ -19,7 +19,7 @@
   },
   "private": false,
   "devDependencies": {
-    "@types/node": "^12.11.1",
+    "@types/node": "^22.15.17",
     "@types/object-hash": "latest",
     "ajv": "latest",
     "async-mutex": "latest",
