@@ -16,21 +16,26 @@ fetchData<ArrayData<Genre>>('/server/load.php?'
 
         if (generationKind === 'series') {
             // Look for movies for each category
-            fetchSeries(r.js).then(genreSeries => {
+            return fetchSeries(r.js).then(genreSeries => {
                 fs.writeFileSync(GROUP_FILE, genreSeries
                     .map(t => t.toString())
                     .filter(t => t !== 'All')
                     .join('\r\n'));
+                return Promise.resolve();
             });
         } else {
             fs.writeFileSync(GROUP_FILE, (r.js ?? [])
                 .map(t => t.title)
                 .filter(t => t !== 'All')
                 .join('\r\n'));
+            return Promise.resolve();
         }
     }, err => {
         process.exit(1);
     })
     .then(() => {
+        if (!fs.existsSync(GROUP_FILE)) {
+            process.exit(1);
+        }
         console.info(chalk.bold(`File ${GROUP_FILE} successfully created`));
     });

@@ -19,6 +19,7 @@
   },
   "private": false,
   "devDependencies": {
+    "@google/genai": "latest",
     "@types/node": "^12.11.1",
     "@types/object-hash": "latest",
     "ajv": "latest",

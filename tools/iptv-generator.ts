@@ -4,11 +4,12 @@ import { BaseConfig, GenerationKind, UrlConfig } from '../types';
 import { catchError, forkJoin, from, of } from 'rxjs';
 import { concatMap, mergeMap } from "rxjs/operators";
 import * as process from "process";
-
+import { createPartFromUri, createUserContent, GoogleGenAI } from '@google/genai';
 import { spawn } from 'child_process';
 
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
 
@@ -100,7 +101,7 @@ logConfig(config);
 /** Start time */
 const startTime = process.hrtime();
 
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${config.geminiAiModel}:generateContent?key=${config.geminiAiKey}`;
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta`;
 
 if (!fs.existsSync(SUCCEEDED_FILE)) {
     console.error(chalk.red(`${SUCCEEDED_FILE} file does not exist`));
@@ -139,9 +140,9 @@ function getGeminiPrompt(): string {
     return prompt;
 }
 
-console.log(chalk.gray(`Gemini prompt:\n`));
+console.log(chalk.gray(`Gemini AI prompt:\n`));
 console.log(chalk.gray('-----------------\n'));
-console.log(chalk.gray(`${getFullPrompt(getGeminiPrompt(), ['Example group 1', 'Example group 2'])}\n`));
+console.log(chalk.gray(`${getFullPrompt(getGeminiPrompt())}\n`));
 console.log(chalk.gray('-----------------\n'));
 
 forkJoin(succeeded.map(r => of(r)))
@@ -194,7 +195,7 @@ forkJoin(succeeded.map(r => of(r)))
                     if (!groups || groups.length === 0) {
                         return Promise.resolve(false);
                     }
-                    return askGemini(getGeminiPrompt(), groups)
+                    return askGemini(getGeminiPrompt())
                         .then(filtered => {
                             console.log('Original groups:', groups)
                             console.log('Filtered groups:', filtered);
@@ -257,33 +258,38 @@ forkJoin(succeeded.map(r => of(r)))
         }
     });
 
-function getFullPrompt(prompt: string, groups: string[]): string {
-    return `You are an IPTV filtering assistant.\n\n${prompt}\n\nHere is the list of groups:\n${groups.map(group => `'${group}'`).join(',\n')}\n\nProvide the valid matches in JSON array format, without any surrounding code blocks. Keep as is each given group, do not modify groups or add new groups.`;
+function getFullPrompt(prompt: string): string {
+    return `You are an IPTV filtering assistant.\n\n${prompt}\n\nAttached text file is the list of groups (one per line).\n\nProvide the matches in attached file in JSON array format. Keep as given each group from attached file (one group per line). Only filter the rows matching the prompt. Do not edit, modify or add a line from attached groups. Please read proof your filtered matches to be sure each is indeed a row in attached file without any modification.`;
 }
 
-export async function askGemini(prompt: string, groups: string[]): Promise<string[]> {
+export async function askGemini(prompt: string): Promise<string[]> {
 
-    const body = {
-        contents: [{
-            parts: [{text: getFullPrompt(prompt, groups)}]
-        }]
-    };
+    const ai = new GoogleGenAI({apiKey: config.geminiAiKey});
 
     try {
-        const response = await axios.post(GEMINI_API_URL, body, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        // Upload groups file to gemini
+        const groupsFile = await ai.files.upload({
+            file: GROUP_FILE,
+            config: {mimeType: "text/plain"},
         });
 
-        const result = response.data?.candidates?.[0]?.content?.parts?.[0]?.text.trim();
-        if (!result) {
-            throw new Error(`No response received. ${response.status} ${response.statusText}`);
+        // Ask gemini with prompt and attached groups file
+        const result = await ai.models.generateContent({
+            model: config.geminiAiModel,
+            contents: createUserContent([
+                createPartFromUri(groupsFile.uri!, groupsFile.mimeType!),
+                "\n\n",
+                getFullPrompt(prompt),
+            ]),
+        });
+
+        if (!result || !result.text) {
+            throw new Error(`No response received. ${result.codeExecutionResult} ${result.responseId}`);
         }
-        if (result.startsWith("```json") && result.endsWith("```")) {
-            return JSON.parse(result.substring("```json".length, result.length - "```".length).trim());
-        } else if (result.startsWith("[") && result.endsWith("]")) {
-            return JSON.parse(result);
+        if (result.text!.startsWith("```json") && result.text!.endsWith("```")) {
+            return JSON.parse(result.text!.substring("```json".length, result.text!.length - "```".length).trim());
+        } else if (result.text!.startsWith("[") && result.text!.endsWith("]")) {
+            return JSON.parse(result.text);
         }
         throw new Error('Unexpected response format:|' + result + '|');
     } catch (err: any) {

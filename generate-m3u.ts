@@ -180,11 +180,15 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         .filter(group => group && group.trim().length > 0)
                         .map(group => {
                             return genreSeries.find(r => r.toString() === group)!;
-                        }).reduce((accPrograms, nextGenre, i) => {
-                        return accPrograms.then(val => {
-                            return fetchSeasonItems(nextGenre.serie, 1, m3u);
-                        });
-                    }, Promise.resolve(true))
+                        })
+                        .reduce((accPrograms, nextGenre, i) => {
+                            if (!nextGenre) {
+                                return Promise.resolve(false);
+                            }
+                            return accPrograms.then(val => {
+                                return fetchSeasonItems(nextGenre.serie, 1, m3u);
+                            });
+                        }, Promise.resolve(true))
                         .then(() => {
                             res(null);
                         });

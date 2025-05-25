@@ -69,7 +69,7 @@ if (fs.statSync(config.m3uLocation).isDirectory()) {
 
     runner = from(m3uFiles)
         .pipe(
-            mergeMap(file => checkM3u(file, config), 1),
+            mergeMap(file => checkM3u(file, config), 5),
             scan((acc, result) => {
                 return [...acc, result];
             }, [] as M3uResult[]),

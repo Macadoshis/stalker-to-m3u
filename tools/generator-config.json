@@ -1,6 +1,6 @@
 {
   "geminiAiKey": "INSERT_YOUR_OPENAPI_KEY",
-  "geminiAiModel": "gemini-2.0-flash",
+  "geminiAiModel": "gemini-2.5-flash-preview-05-20",
   "languages": [
     "French",
     "English"
