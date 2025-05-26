@@ -73,7 +73,8 @@ export const randomSerialNumber: () => string = () => Array.from({length: 13}, (
 
 export const READ_OPTIONS = {encoding: 'utf8', flag: 'r'};
 
-export const GROUP_FILE: string = './groups.txt';
+export const GROUP_FILE: (kind: GenerationKind) => string
+    = kind => `./groups-${kind}.txt`;
 
 export function getConfig(): Readonly<Config> {
     const configData: string = fs.readFileSync('./config.json', READ_OPTIONS);

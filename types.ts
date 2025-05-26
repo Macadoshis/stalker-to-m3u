@@ -28,7 +28,6 @@ export type StreamTester = 'http' | 'ffmpeg';
 
 export type GenerationKind = 'iptv' | 'vod' | 'series';
 export const generationKindNames = ['iptv', 'vod', 'series'] as string[];
-export type GenerationKindType = typeof generationKindNames[number];
 
 export interface Data<T> {
     js: T;

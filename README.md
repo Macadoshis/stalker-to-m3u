@@ -110,11 +110,11 @@ It is the responsibility of the user to use legal stalker portal sources.
 
 #### 1 - categories
 
-**Categories listing** outputs all groups per media chosen, to the file `groups.txt`.
+**Categories listing** outputs all groups per media chosen, to the file `groups-<mode>.txt` (ex. `groups-iptv.txt`).
 
 Use this file to remove unwanted categories to be excluded from m3u generation.
 
-Only delete undesired lines. Do not manually edit or add entries in the file `groups.txt`.
+Only delete undesired lines. Do not manually edit or add entries in the file `groups-<mode>.txt`.
 
 #### 2 - m3u
 
@@ -265,7 +265,7 @@ The groups are auto-selected from preference criteria by an AI prompt using AI G
 
 File `tools/succeeded.json` must exist.
 
-An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for `gemini-2.0-flash`.
+An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for `gemini-2.5-flash-preview-05-20` (the model can be changed).
 
 ### Script
 
@@ -284,18 +284,18 @@ _groups_ then _m3u_.
 The groups are filtered by AI Gemini based on given customizable criteria within configuration
 file [generator-config.json](tools/generator-config.json).
 
-| Property                 | Description                                                                                              | Optional | Default            | Examples                     |
-|--------------------------|----------------------------------------------------------------------------------------------------------|----------|--------------------|------------------------------|
-| `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                    |                              |
-| `geminiAiModel`          | Google GEMINI AI model (supported by your key).                                                          | [X]      | `gemini-2.0-flash` |                              |
-| `outputDir`              | Output directory of generated M3U files                                                                  | [X]      | `.`                |                              |
-| `languages`              | Array of languages to support criteria. Not applied if unset.                                            | [X]      | `[]`               | "English"                    |
-| `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                    | "UK", "US", "Canada"         |
-| `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | [X]      | `[]`               | "Adults", "Reality", "Music" |
-| `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                    | "Comedy", "Horror"           |
-| `vod/excludedCategories` | List of categories of VOD to exclude. They need to be spelled in English. Not applied if unset.          | [X]      | `[]`               | "Netflix", "Adults", "Apple" |
-| `series/includedSeries`  | List of series or themes of series to fetch. They need to be spelled in English.                         |          |                    | "Breaking Bad"               |
-| `series/excludedSeries`  | List of series or themes of series to exclude. They need to be spelled in English. Not applied if unset. | [X]      | `[]`               | "Season 1", "Season 2"       |
+| Property                 | Description                                                                                              | Optional | Default                          | Examples                     |
+|--------------------------|----------------------------------------------------------------------------------------------------------|----------|----------------------------------|------------------------------|
+| `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                                  |                              |
+| `geminiAiModel`          | Google GEMINI AI model (supported by your key).                                                          | [X]      | `gemini-2.5-flash-preview-05-20` |                              |
+| `outputDir`              | Output directory of generated M3U files                                                                  | [X]      | `.`                              |                              |
+| `languages`              | Array of languages to support criteria. Not applied if unset.                                            | [X]      | `[]`                             | "English"                    |
+| `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                                  | "UK", "US", "Canada"         |
+| `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | [X]      | `[]`                             | "Adults", "Reality", "Music" |
+| `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                                  | "Comedy", "Horror"           |
+| `vod/excludedCategories` | List of categories of VOD to exclude. They need to be spelled in English. Not applied if unset.          | [X]      | `[]`                             | "Netflix", "Adults", "Apple" |
+| `series/includedSeries`  | List of series or themes of series to fetch. They need to be spelled in English.                         |          |                                  | "Breaking Bad"               |
+| `series/excludedSeries`  | List of series or themes of series to exclude. They need to be spelled in English. Not applied if unset. | [X]      | `[]`                             | "Season 1", "Season 2"       |
 
 ### Outputs
 

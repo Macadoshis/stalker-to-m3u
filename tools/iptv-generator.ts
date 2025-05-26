@@ -145,6 +145,8 @@ console.log(chalk.gray('-----------------\n'));
 console.log(chalk.gray(`${getFullPrompt(getGeminiPrompt())}\n`));
 console.log(chalk.gray('-----------------\n'));
 
+let nbProcessed: number = 0;
+
 forkJoin(succeeded.map(r => of(r)))
     .pipe(
         concatMap(succ => {
@@ -153,6 +155,8 @@ forkJoin(succeeded.map(r => of(r)))
         ),
         mergeMap((succ: UrlConfig) => {
 
+            console.info(chalk.bgGreen.black.bold(`[ PROCESSING ] ${++nbProcessed} / ${succeeded.length}`));
+
             // Skip if target file exists
             if (fs.existsSync(`${config.outputDir}/${generationKind}-${succ.hostname}.m3u`)) {
                 console.info(chalk.keyword('orange')(`File already exists. Skipping generation for ${succ.hostname} [${succ.mac}].`));
@@ -160,8 +164,8 @@ forkJoin(succeeded.map(r => of(r)))
             }
 
             // Run groups generation
-            if (fs.existsSync(GROUP_FILE)) {
-                fs.rmSync(GROUP_FILE);
+            if (fs.existsSync(GROUP_FILE(generationKind))) {
+                fs.rmSync(GROUP_FILE(generationKind));
             }
             const child = spawn('npm', ['run', 'groups', `-- ${generationKind}`,
                     `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
@@ -188,7 +192,7 @@ forkJoin(succeeded.map(r => of(r)))
                     });
                 }).then(() => {
                     // Call AI to filter groups.txt content
-                    const groups: string[] = fs.readFileSync(GROUP_FILE, READ_OPTIONS)
+                    const groups: string[] = fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS)
                         .split('\n')
                         .map((line: string) => line.trim())
                         .filter((line: string) => line.length > 0);
@@ -199,7 +203,7 @@ forkJoin(succeeded.map(r => of(r)))
                         .then(filtered => {
                             console.log('Original groups:', groups)
                             console.log('Filtered groups:', filtered);
-                            fs.writeFileSync(GROUP_FILE, filtered.join('\n'), null, 2);
+                            fs.writeFileSync(GROUP_FILE(generationKind), filtered.join('\n'), null, 2);
                             return filtered.length > 0;
                         });
                 }).then((res) => {
@@ -266,10 +270,12 @@ export async function askGemini(prompt: string): Promise<string[]> {
 
     const ai = new GoogleGenAI({apiKey: config.geminiAiKey});
 
+    console.info(chalk.gray(`Asking Gemini AI to filter ${path.basename(GROUP_FILE(generationKind))} file...`));
+
     try {
         // Upload groups file to gemini
         const groupsFile = await ai.files.upload({
-            file: GROUP_FILE,
+            file: GROUP_FILE(generationKind),
             config: {mimeType: "text/plain"},
         });
 

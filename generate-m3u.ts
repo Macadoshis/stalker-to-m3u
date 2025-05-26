@@ -37,8 +37,10 @@ const startTime = process.hrtime();
 const fs = require('fs');
 const chalk = require('chalk');
 
-if (!fs.existsSync(GROUP_FILE)) {
-    console.error(`File ${GROUP_FILE} does not exist.`);
+const generationKind: GenerationKind = getGenerationKind();
+
+if (!fs.existsSync(GROUP_FILE(generationKind))) {
+    console.error(`File ${GROUP_FILE(generationKind)} does not exist.`);
     process.exit(1);
 }
 
@@ -123,9 +125,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
 }
 
 // Load groups
-const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE, READ_OPTIONS));
-
-const generationKind: GenerationKind = getGenerationKind();
+const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS));
 
 fetchData<ArrayData<Genre>>('/server/load.php?' +
     iswitch(generationKind, ['iptv', () => 'type=itv&action=get_genres'],
@@ -179,7 +179,11 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     groups
                         .filter(group => group && group.trim().length > 0)
                         .map(group => {
-                            return genreSeries.find(r => r.toString() === group)!;
+                            const genreSerie = genreSeries.find(r => r.toString() === group)!;
+                            if (!genreSerie) {
+                                console.error(chalk.red(`No matching group for "${group}"`));
+                            }
+                            return genreSerie;
                         })
                         .reduce((accPrograms, nextGenre, i) => {
                             if (!nextGenre) {

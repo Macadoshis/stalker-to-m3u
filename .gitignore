@@ -7,7 +7,7 @@
 *.js
 *.js.map
 ./*.m3u
-groups.txt
+groups*.txt
 tools/succeeded.json
 tools/failed.json
 tools/sources.txt
