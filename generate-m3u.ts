@@ -363,7 +363,12 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
         }>>(`/server/load.php?type=${type}&action=create_link&cmd=${encodeURI(m3uLine.command!)}&series=${m3uLine.episode ?? ''}&forced_storage=undefined&disable_ad=0&download=0&JsHttpRequest=1-xml`, true)
             .then(urlLink => {
                 if (urlLink?.js?.cmd) {
-                    m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+                    try {
+                        m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
+                    } catch (e) {
+                        console.error(`Error reading media URL for '${m3uLine.header} of ${urlLink.js.cmd}'`);
+                        m3uLine.url = undefined;
+                    }
                 } else {
                     console.error(`Error fetching media URL for '${m3uLine.header}'`);
                     m3uLine.url = undefined;
