@@ -203,6 +203,15 @@ forkJoin(succeeded.map(r => of(r)))
                         .then(filtered => {
                             console.log('Original groups:', groups)
                             console.log('Filtered groups:', filtered);
+
+                            filtered = filtered.filter(group => {
+                                if (!groups.includes(group)) {
+                                    console.warn(chalk.keyword('orange')(`Excluding filtered group "${group}". Wrong matching result computed by Gemini AI.`));
+                                    return false;
+                                }
+                                return true;
+                            });
+
                             fs.writeFileSync(GROUP_FILE(generationKind), filtered.join('\n'), null, 2);
                             return filtered.length > 0;
                         });
