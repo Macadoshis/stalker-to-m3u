@@ -10,14 +10,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # GitHub-hosted runner
+    environment: CI
     steps:
       - uses: actions/checkout@v3
 
       - name: Configure NODE
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ vars.NODE_VERSION }}
       - name: Download NPM dependencies
-        run: npm install
+        run: npm install && echo ${{ vars.NODE_VERSION }}
       - name: Compile TS files
         run: npm run compile
