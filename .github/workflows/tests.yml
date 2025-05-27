@@ -10,13 +10,14 @@ on:
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    environment: CI
     steps:
       - uses: actions/checkout@v3
 
       - name: Configure NODE
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ vars.NODE_VERSION }}
       - name: Download NPM dependencies
         run: |
           npm config set loglevel info
@@ -32,6 +33,7 @@ jobs:
 
   m3u-tester-http:
     runs-on: ubuntu-latest
+    environment: CI
     needs: prepare
     strategy:
       matrix:
@@ -42,6 +44,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Configure NODE
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
 
       - name: Restore Cached Node Modules
         uses: actions/cache@v4
@@ -96,10 +103,18 @@ jobs:
 
   m3u-tester-ffmpeg:
     runs-on: windows-latest
+    environment: CI
     needs: prepare
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Configure NODE
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+      - name: Upgrade npm to latest
+        run: npm install -g npm@latest
 
       - name: Restore Cached Node Modules
         uses: actions/cache@v4
@@ -115,11 +130,17 @@ jobs:
 
   iptv-analyzer:
     runs-on: ubuntu-latest
+    environment: CI
     needs: prepare
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Configure NODE
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
 
       - name: Restore Cached Node Modules
         uses: actions/cache@v4

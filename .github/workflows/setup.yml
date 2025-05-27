@@ -8,13 +8,14 @@ on:
 jobs:
   configure-windows:
     runs-on: windows-latest
+    environment: CI
     steps:
       - uses: actions/checkout@v3
 
       - name: Configure NODE
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ vars.NODE_VERSION }}
       - name: Install (cmd)
         shell: cmd
         run: ./configure.bat
@@ -39,13 +40,14 @@ jobs:
 
   configure-linux:
     runs-on: ubuntu-latest
+    environment: CI
     steps:
       - uses: actions/checkout@v3
 
       - name: Configure NODE
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ vars.NODE_VERSION }}
       - name: Install
         run: |
           chmod u+x configure
@@ -58,13 +60,14 @@ jobs:
 
   configure-macos:
     runs-on: macos-latest
+    environment: CI
     steps:
       - uses: actions/checkout@v3
 
       - name: Configure NODE
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ vars.NODE_VERSION }}
       - name: Install
         run: |
           chmod u+x configure
