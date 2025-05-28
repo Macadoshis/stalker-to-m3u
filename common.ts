@@ -19,6 +19,7 @@ import Ajv from "ajv";
 
 import {
     catchError,
+    defer,
     finalize,
     firstValueFrom,
     forkJoin,
@@ -34,6 +35,8 @@ import {
 } from 'rxjs';
 import { Playlist } from "iptv-playlist-parser";
 import { mergeMap } from "rxjs/operators";
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from "axios";
+import { AxiosRetry, IAxiosRetryConfig } from "axios-retry/dist/cjs";
 
 // Override console methods to prepend the current datetime
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
@@ -49,17 +52,20 @@ import { mergeMap } from "rxjs/operators";
     };
 });
 
+const AXIOS_RETRY_COUNT: number = 3; // should be >= 1
+if (!AXIOS_RETRY_COUNT || AXIOS_RETRY_COUNT <= 0) {
+    throw new Error("Retry count should be set");
+}
+
 const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
 
-const version: string = require('./package.json').version;
+const TEST_STREAM_REQUEST_TIMEOUT: number = 10_000 * AXIOS_RETRY_COUNT;
 
-const TEST_STREAM_REQUEST_TIMEOUT: number = 10000;
-
-const http = require('follow-redirects').http;
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
 const axios = require('axios');
+const axiosRetry = require('axios-retry').default;
 const path = require('path');
 const parser = require('iptv-playlist-parser');
 const ffmpeg = require('fluent-ffmpeg');
@@ -135,6 +141,23 @@ export function getConfig(): Readonly<Config> {
     return config;
 }
 
+export function configureRetry(axiosRetry: AxiosRetry, axiosInstance: AxiosStatic | AxiosInstance, axiosRetryConfig?: IAxiosRetryConfig): void {
+
+    axiosRetryConfig = axiosRetryConfig || {
+        retries: AXIOS_RETRY_COUNT,
+        retryDelay: (retryCount: number, error: AxiosError) => axiosRetry.exponentialDelay(retryCount, error, 500),
+        retryCondition(error: AxiosError) {
+            return axiosRetry.isNetworkOrIdempotentRequestError(error);
+        },
+        onRetry: (retryCount: number, error: AxiosError, requestConfig: AxiosRequestConfig) => {
+            console.log(chalk.gray(`...Retrying ${requestConfig.url} [${retryCount}]`));
+        },
+        shouldResetTimeout: true
+    };
+
+    axiosRetry(axiosInstance, axiosRetryConfig);
+}
+
 export function getGenerationKind(): GenerationKind {
     const arg: unknown = process.argv[2] as unknown;
     if (typeof arg !== 'string' || !generationKindNames.includes(arg)) {
@@ -144,6 +167,8 @@ export function getGenerationKind(): GenerationKind {
 }
 
 const config: Config = getConfig();
+
+configureRetry(axiosRetry, axios);
 
 type Token = {
     token: string;
@@ -202,7 +227,7 @@ function getToken(refresh: boolean = false, cfg: Config = config): Observable<st
 }
 
 /** HTTP timeout (ms) */
-const HTTP_TIMEOUT = 5000;
+const HTTP_TIMEOUT: number = 10_000 * AXIOS_RETRY_COUNT;
 
 export function fetchData<T>(path: string, ignoreError: boolean = false, headers: {
     [key: string]: string
@@ -211,10 +236,11 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
     return new Promise<T>((resp, err) => {
 
         const completePath = (!!cfg.contextPath ? '/' + cfg.contextPath : '') + path;
+        const absoluteUrl: string = `http://${cfg.hostname}:${cfg.port}/${completePath}`;
 
         const onError: (e: any) => void
             = (e) => {
-            console.error(`Error at http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}] (ignore: ${ignoreError})`);
+            console.error(`Error at ${absoluteUrl} [${cfg.mac}] (ignore: ${ignoreError})`);
             if (ignoreError) {
                 resp(<T>{});
             } else {
@@ -231,98 +257,72 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
         }
 
         token$
-            .subscribe((token) => {
-                // console.debug((!!config.contextPath ? '/' + config.contextPath : '') + path);
-                try {
-
-                    if (!headersProvided) {
-                        headers = {
-                            'Accept': 'application/json',
-                            'User-Agent': getUserAgent(cfg),
-                            'X-User-Agent': getUserAgent(cfg),
-                            'Cookie': `mac=${cfg.mac}; stb_lang=en`,
-                            'SN': cfg.serialNumber!
-                        };
-                        if (!!token) {
-                            headers['Authorization'] = `Bearer ${token}`;
-                        }
-                    }
-
-                    const req = http.get({
-                        hostname: cfg.hostname,
-                        port: cfg.port,
-                        path: completePath,
-                        method: 'GET',
-                        headers: headers,
-                        timeout: HTTP_TIMEOUT
-                    }, (res: any) => {
-
-                        if (res.statusCode !== 200) {
-                            console.error(`Did not get an OK from the server (http://${cfg.hostname}:${cfg.port}${completePath} [${cfg.mac}]). Code: ${res.statusCode}`);
-                            res.resume();
-                            err();
-                        }
-
-                        let data = '';
-
-                        res.on('data', (chunk: any) => {
-                            try {
-                                data += chunk;
-                            } catch (error) {
-                                // console.error('on data error', error);
-                            }
-                        });
-
-                        res.on('close', () => {
-                            // console.debug(`Retrieved data (${data.length} bytes)`);
-                            try {
-                                resp(JSON.parse(!!data ? data : '{}'));
-                            } catch (e) {
-                                //console.error(`Wrong JSON data received: '${data}'`);
-                                //console.debug(data);
-                                err(e);
-                            }
-                        });
-
-                        res.on('error', (e: NodeJS.ErrnoException) => {
-                            console.error(`Response stream error: ${e?.message}`);
-                            onError(e);
-                        });
-
-                        res.on('end', () => {
-                            //console.log('No more data in response.');
-                        });
-                    }, (e: any) => {
-                        onError(e);
-                    });
-
-                    // Catch errors on the request
-
-                    req.on('timeout', () => {
+            .subscribe(
+                {
+                    next: (token) => {
+                        // console.debug((!!config.contextPath ? '/' + config.contextPath : '') + path);
                         try {
-                            onError(`Request timed out after ${HTTP_TIMEOUT} ms`);
-                        } finally {
-                            // Close the request to prevent leaks
-                            req.destroy();
+
+                            if (!headersProvided) {
+                                headers = {
+                                    'Accept': 'application/json',
+                                    'User-Agent': getUserAgent(cfg),
+                                    'X-User-Agent': getUserAgent(cfg),
+                                    'Cookie': `mac=${cfg.mac}; stb_lang=en`,
+                                    'SN': cfg.serialNumber!
+                                };
+                                if (!!token) {
+                                    headers['Authorization'] = `Bearer ${token}`;
+                                }
+                            }
+
+                            const controller = new AbortController();
+                            const timeout = setTimeout(() => controller.abort(), HTTP_TIMEOUT);
+
+                            const req: Observable<AxiosResponse<T>> = defer(() => {
+                                    return from(axios.get(absoluteUrl, {
+                                        method: 'GET',
+                                        headers: headers,
+                                        signal: controller.signal, // Cancels if it exceeds HTTP_TIMEOUT
+                                        timeout: HTTP_TIMEOUT, // Avoid hanging requests
+                                        maxRedirects: 10
+                                    })) as Observable<AxiosResponse<T>>;
+                                }
+                            );
+
+                            req.pipe(
+                                map(res => {
+                                    if (res.status !== 200) {
+                                        console.error(`Did not get an OK from the server (${absoluteUrl} [${cfg.mac}]). Code: ${res.statusText}`);
+                                        err();
+                                    } else {
+                                        try {
+                                            resp(!!res.data ? res.data : {} as T);
+                                        } catch (e) {
+                                            //console.error(`Wrong JSON data received: '${data}'`);
+                                            //console.debug(data);
+                                            err(e);
+                                        }
+                                    }
+                                    return {};
+                                }),
+                                catchError(error => {
+                                    handleRequestError(error, `HTTP failed for ${absoluteUrl}`);
+                                    onError(error);
+                                    return of();
+                                }),
+                                finalize(() => {
+                                    clearTimeout(timeout);
+                                })
+                            ).subscribe();
+
+                        } catch (e) {
+                            onError(e);
                         }
-                    });
-
-                    req.on('error', (e: NodeJS.ErrnoException) => {
-                        if (e.code === 'ECONNRESET') {
-                            console.error('Connection was reset by the remote host.');
-                        } else {
-                            console.error(`Request error: ${e.message}`);
-                        }
-
-                        onError(e);
-                    });
-
-                    req.end();
-
-                } catch (e) {
-                    onError(e);
+                    },
+                    error: onError
                 }
-            }, onError);
+            );
     });
 }
 
@@ -432,7 +432,7 @@ function checkStreamHttp(url: string, userAgent: string): Promise<boolean> {
                 'Accept': 'application/vnd.apple.mpegurl, application/x-mpegURL, text/plain'
             },
             responseType: 'arraybuffer', // Handle binary data
-            signal: controller.signal, // Cancels if it exceeds REQUEST_TIMEOUT
+            signal: controller.signal, // Cancels if it exceeds TEST_STREAM_REQUEST_TIMEOUT
             timeout: TEST_STREAM_REQUEST_TIMEOUT, // Avoid hanging requests
             maxRedirects: 5, // Follow up to 5 redirects
             validateStatus: (status: number) => status < 400 // Consider only 2xx and 3xx as valid
@@ -522,7 +522,7 @@ function checkStreamFfmpeg(url: string): Promise<boolean> {
  * @param {Error} error - The Axios or Node.js error object.
  * @param {string} context - Custom error message context.
  */
-function handleRequestError(error: any, context: string) {
+function handleRequestError(error: any, context: string): void {
     if (error.response) {
         console.error(`${context}: Server responded with HTTP ${error.response.status}`);
     } else if (error.request) {

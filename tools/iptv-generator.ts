@@ -7,7 +7,6 @@ import * as process from "process";
 import { createPartFromUri, createUserContent, GoogleGenAI } from '@google/genai';
 import { spawn } from 'child_process';
 
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');

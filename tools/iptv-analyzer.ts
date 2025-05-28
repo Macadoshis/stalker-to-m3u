@@ -3,6 +3,7 @@ import { forkJoin, from, Observable, of } from 'rxjs';
 import { catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import {
     checkStream,
+    configureRetry,
     fetchData,
     logConfig,
     randomDeviceId,
@@ -16,6 +17,7 @@ import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs, UrlConfi
 import { sha1 } from "object-hash";
 
 const axios = require('axios');
+const axiosRetry = require('axios-retry').default;
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
@@ -60,6 +62,8 @@ const failed: UrlAndMac[] = [];
 
 const config: AnalyzerConfig = getConfig();
 logConfig(config);
+
+configureRetry(axiosRetry, axios);
 
 /** Start time */
 const startTime = process.hrtime();

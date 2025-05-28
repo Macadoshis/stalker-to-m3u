@@ -67,7 +67,7 @@ jobs:
             "0-10-success.m3u:10:0") echo 1 ;;
             "0-10-success.m3u:1:-1") echo 1 ;;
             "0-10-success.m3u:10:1") echo 1 ;;
-            "5-5-success.m3u:1:0") echo 0 ;;
+            "5-5-success.m3u:1:0") echo 2 ;;
             "5-5-success.m3u:10:-1") echo 1 ;;
             "5-5-success.m3u:1:1") echo 2 ;;
             "5-5-success.m3u:10:0") echo 1 ;;
