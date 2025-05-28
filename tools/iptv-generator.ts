@@ -60,7 +60,7 @@ function getConfig(): Readonly<GeneratorConfig> {
         config.geminiAiModel = 'gemini-2.0-flash';
     }
     if (config.streamTester === undefined) {
-        config.streamTester = "http";
+        config.streamTester = "ffmpeg";
     }
     if (config.outputDir === undefined) {
         config.outputDir = ".";

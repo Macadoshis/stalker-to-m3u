@@ -120,7 +120,7 @@ function getConfig(): Readonly<AnalyzerConfig> {
         config.cache = false;
     }
     if (config.streamTester === undefined) {
-        config.streamTester = "http";
+        config.streamTester = "ffmpeg";
     }
     if (config.retestSuccess === undefined) {
         config.retestSuccess = false;

@@ -84,7 +84,7 @@ jobs:
           }
 
           set +e
-          npm run m3u-tester -- --m3uLocation=test/m3u-tester/${{ matrix.file }} --minSuccess=${{ matrix.minSuccess }} --maxFailures=${{ matrix.maxFailures }}
+          npm run m3u-tester -- --m3uLocation=test/m3u-tester/${{ matrix.file }} --minSuccess=${{ matrix.minSuccess }} --maxFailures=${{ matrix.maxFailures }} --streamTester=http
           exit_code=$?
           set -e
           

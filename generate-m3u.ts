@@ -314,7 +314,8 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                 return firstValueFrom(checkM3u(config.outputDir + '/' + filename, <M3uTesterConfig>{
                         minSuccess: 1,
                         maxFailures: 25,
-                        renameOnFailure: false,
+                        renameOnFailure: true,
+                        renamePrefix: 'UNHEALTHY_',
                         streamTester: config.streamTester
                     }
                 )).then(x => {

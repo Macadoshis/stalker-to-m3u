@@ -101,6 +101,9 @@ export function getConfig(): Readonly<Config> {
     if (config.outputDir === undefined) {
         config.outputDir = ".";
     }
+    if (config.streamTester === undefined) {
+        config.streamTester = "ffmpeg";
+    }
     if (!fs.existsSync(config.outputDir)) {
         console.info(`Directory ${config.outputDir} not found.`);
         process.exit(1);
@@ -397,7 +400,7 @@ export function splitLines(lines: string): string[] {
  */
 export function checkStream(url: string, config: Pick<Config, 'streamTester' | 'userAgent'>): Promise<boolean> {
 
-    const streamTester: StreamTester = config.streamTester !== undefined ? config.streamTester : 'http';
+    const streamTester: StreamTester = config.streamTester !== undefined ? config.streamTester : 'ffmpeg';
 
     console.log(`...Checking stream [${streamTester}]: ${url}`);
 

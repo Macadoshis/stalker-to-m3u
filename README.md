@@ -88,8 +88,8 @@ Run configuration script at first execution only (only to be done once or after 
 The `configure` script performs in that order :
 
 - download the dependencies for NodeJS to `node_modules` directory.
-- download the ffmpeg binaries (`ffmpeg` and `ffprobe`). Note that a failure at this point does not prevent to use the
-  tool, only to set the `streamTester` option to `ffmpeg` (default value is `http`).
+- download the ffmpeg binaries (`ffmpeg` and `ffprobe`). Note that a failure at this point will prevent from using the
+  tools with config by default, in that case set the `streamTester` option to `http` (default value is `ffmpeg`).
 
 ### Main entry
 
@@ -161,7 +161,7 @@ Considering following stalker provider :
 | `vodIncludeRating`          | Include IMDB rating in the title of each VOD (if provided).                                                                                                                                                                                                                                         | [X]      | `true`                                        |
 | `vodOrdering`               | Indicate the sorting of each VOD item.<br/> Possible values are `none` (as given by provider), `alphabetic` (by VOD title) or `rating` (by IMDB rating where provided, _alphabetically_ for items with no rating).                                                                                  | [X]      | `alphabetic`                                  |
 | `maxNumberOfChannelsToTest` | (Only if `computeUrlLink` is enabled.)<br/>Max number of channels to be picked up randomly among selected groups, and to test if streams are resolvable. If none responds successfully, the generation is aborted. Set `maxNumberOfChannelsToTest` to `0` to disable this test and always generate. | [X]      | `5`                                           |
-| `streamTester`              | (Only if `maxNumberOfChannelsToTest` is greater than 0)<br/>Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                                                                                    | [X]      | `http`                                        |
+| `streamTester`              | (Only if `maxNumberOfChannelsToTest` is greater than 0)<br/>Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                                                                                    | [X]      | `ffmpeg`                                      |
 | `testM3uFile`               | Whether to test the M3U file after generation.                                                                                                                                                                                                                                                      | [X]      | `true`                                        |
 
 ### Options from command line
@@ -197,12 +197,12 @@ _N_ random groups and _N_ random channels.
 The number of groups and channels to fetch against can be configured through config
 file [tools/analyzer-config.json](./tools/analyzer-config.json).
 
-| Property         | Description                                                                                                                                                         | Optional | Default |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
-| `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | [X]      | `false` |
-| `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | [X]      | `1`     |
-| `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | [X]      | `1`     |
-| `streamTester`   | Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                | [X]      | `http`  |
+| Property         | Description                                                                                                                                                         | Optional | Default  |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------|
+| `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | [X]      | `false`  |
+| `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | [X]      | `1`      |
+| `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | [X]      | `1`      |
+| `streamTester`   | Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                | [X]      | `ffmpeg` |
 
 A provider is considered live if at least ONE channel stream resolves successfully.
 
@@ -247,7 +247,7 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
 | `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                  | [X]      | `false`      |
 | `threadsCount`    | Number of M3U to process in parallel.                                                                             | [X]      | `1`          |
-| `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
+| `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `ffmpeg`     |
 
 ### Outputs
 

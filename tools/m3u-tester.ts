@@ -29,7 +29,7 @@ export function getConfig(): Readonly<M3uTesterConfig> {
     // Fill in default values if unset
 
     if (config.streamTester === undefined) {
-        config.streamTester = "http";
+        config.streamTester = "ffmpeg";
     }
     if (!config.renamePrefix) {
         config.renamePrefix = "UNHEALTHY_";
