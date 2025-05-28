@@ -126,6 +126,7 @@ export interface M3uTesterConfig extends BaseConfig {
     minSuccess: number;
     renameOnFailure?: boolean;
     renamePrefix?: string;
+    threadsCount?: number
 }
 
 export interface M3uResultStream {

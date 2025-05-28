@@ -46,6 +46,11 @@
         }
       ],
       "default": "http"
+    },
+    "threadsCount": {
+      "type": "number",
+      "description": "Number of M3U to process in parallel",
+      "default": 1
     }
   },
   "required": [

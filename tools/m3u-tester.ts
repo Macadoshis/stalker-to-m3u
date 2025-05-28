@@ -1,9 +1,9 @@
-import {M3uResult, M3uTesterConfig} from "../types";
-import {checkM3u, logConfig, READ_OPTIONS} from "../common";
+import { M3uResult, M3uTesterConfig } from "../types";
+import { checkM3u, logConfig, READ_OPTIONS } from "../common";
 import Ajv from "ajv";
-import {basename, dirname, extname, join} from "path";
-import {from, last, map, Observable, of, scan} from "rxjs";
-import {mergeMap} from "rxjs/operators";
+import { basename, dirname, extname, join } from "path";
+import { from, last, map, Observable, of, scan } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 import * as process from "process";
 
 const fs = require('fs');
@@ -36,6 +36,7 @@ export function getConfig(): Readonly<M3uTesterConfig> {
     }
     config.maxFailures = config.maxFailures ?? 1;
     config.minSuccess = config.minSuccess ?? 1;
+    config.threadsCount = config.threadsCount ?? 1;
     config.renameOnFailure = config.renameOnFailure === undefined ? false : config.renameOnFailure;
 
     // Override with command line additional arguments
@@ -69,7 +70,7 @@ if (fs.statSync(config.m3uLocation).isDirectory()) {
 
     runner = from(m3uFiles)
         .pipe(
-            mergeMap(file => checkM3u(file, config), 5),
+            mergeMap(file => checkM3u(file, config), config.threadsCount),
             scan((acc, result) => {
                 return [...acc, result];
             }, [] as M3uResult[]),

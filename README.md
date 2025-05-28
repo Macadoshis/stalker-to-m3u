@@ -246,6 +246,7 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | [X]      | `false`      |
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | [X]      | `UNHEALTHY_` |
 | `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                  | [X]      | `false`      |
+| `threadsCount`    | Number of M3U to process in parallel.                                                                             | [X]      | `1`          |
 | `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | [X]      | `http`       |
 
 ### Outputs
