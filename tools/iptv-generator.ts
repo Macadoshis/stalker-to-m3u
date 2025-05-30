@@ -305,7 +305,7 @@ export async function askGemini(prompt: string): Promise<string[]> {
         } else if (result.text!.startsWith("[") && result.text!.endsWith("]")) {
             return JSON.parse(result.text);
         }
-        throw new Error('Unexpected response format:|' + result + '|');
+        throw new Error('Unexpected response format:|' + result?.text || result?.data + '|');
     } catch (err: any) {
         console.error('Error calling Gemini:', err.response?.data || err.message);
         throw new Error('Error from Gemini');
