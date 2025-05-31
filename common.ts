@@ -586,9 +586,9 @@ export function logConfig<T extends object>(config: T, indent: string = ''): voi
 
         if (typeof value !== 'object') {
             if (Array.isArray(config) && (typeof value !== 'object')) {
-                console.log(chalk.blueBright(`${indent}${value}`));
+                console.log(chalk.blueBright(`${indent}${chalk.keyword('orange')(value)}`));
             } else {
-                console.log(chalk.blueBright(`${indent}"${chalk.bold(key)}": ${value}`));
+                console.log(chalk.blueBright(`${indent}"${chalk.bold(key)}": ${chalk.keyword('orange')(value)}`));
             }
         } else {
             console.log(chalk.blueBright(`${indent}"${chalk.bold(key)}":`));

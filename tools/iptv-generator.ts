@@ -217,7 +217,7 @@ forkJoin(succeeded.map(r => of(r)))
                 }).then((res) => {
 
                     if (!res) {
-                        console.warn(`No group found !`);
+                        console.warn(chalk.keyword('orange')(`No matching group found !`));
                         return false;
                     } else {
                         const child = spawn('npm', ['run', 'm3u', `-- ${generationKind}`,
