@@ -326,28 +326,34 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
     });
 }
 
-function fetchSeriesItems(genre: Genre, page: number, series: Serie[]): Promise<boolean> {
+function fetchSeriesItems(genre: Genre, page: number, series: Serie[], maxPage?: number): Promise<boolean> {
     return new Promise<boolean>((res, err) => {
 
         fetchData<Data<Programs<Serie>>>(`/server/load.php?type=series&action=get_ordered_list&sortby=added&p=${page}&category=${genre.id}`, true)
             .then(allPrograms => {
 
-                if (!allPrograms?.js) {
+                if (!allPrograms?.js || !allPrograms.js.data) {
                     console.error(`Error fetching page ${page} of genre '${genre.title}'`);
-                    res(fetchSeriesItems(genre, page + 1, series));
-                }
+                    if (maxPage && page + 1 <= maxPage) {
+                        res(fetchSeriesItems(genre, page + 1, series, maxPage));
+                    } else {
+                        res(true);
+                    }
+                } else if (allPrograms.js.data.length > 0) {
+                    const maxPage: number = Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items);
+                    console.info(`Fetched page ${page}/${maxPage} of genre '${genre.title}'`);
 
-                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
-                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
-                }
+                    for (var serie of allPrograms.js.data) {
+                        series.push(serie);
+                    }
 
-                for (var serie of allPrograms.js.data) {
-                    series.push(serie);
-                }
-
-                if (allPrograms.js.data.length > 0) {
-                    res(fetchSeriesItems(genre, page + 1, series));
+                    if (allPrograms.js.data && allPrograms.js.data.length > 0) {
+                        res(fetchSeriesItems(genre, page + 1, series, maxPage));
+                    } else {
+                        res(true);
+                    }
                 } else {
+                    // Last page reached
                     res(true);
                 }
             }, err => {
@@ -366,7 +372,9 @@ export function fetchSeries(genres: Array<Genre>): Promise<GenreSerie[]> {
                         series[genre.id] = [];
                         return from(fetchSeriesItems(genre, 1, series[genre.id]))
                             .pipe(
-                                map(x => <GenreSeries>{genre: genre, series: series[genre.id]})
+                                map(x => {
+                                    return <GenreSeries>{genre: genre, series: series[genre.id]};
+                                })
                             );
                     }
                 )
