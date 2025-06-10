@@ -10,7 +10,6 @@ on:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    environment: CI
     steps:
       - uses: actions/checkout@v3
 
@@ -33,7 +32,6 @@ jobs:
 
   m3u-tester-http:
     runs-on: ubuntu-latest
-    environment: CI
     needs: prepare
     strategy:
       matrix:
@@ -106,7 +104,6 @@ jobs:
 
   m3u-tester-ffmpeg:
     runs-on: windows-latest
-    environment: CI
     needs: prepare
     steps:
       - name: Checkout Repository
@@ -133,7 +130,6 @@ jobs:
 
   iptv-analyzer:
     runs-on: ubuntu-latest
-    environment: CI
     needs: prepare
 
     steps:
