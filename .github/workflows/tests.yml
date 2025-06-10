@@ -102,7 +102,7 @@ jobs:
             exit 1
           fi
 
-  m3u-tester-ffmpeg:
+  m3u-tester-ffmpeg-win:
     runs-on: windows-latest
     needs: prepare
     steps:
@@ -125,6 +125,37 @@ jobs:
       - name: Install (powershell)
         shell: pwsh
         run: ./configure.bat
+      - name: Run [m3u-tester] on test/m3u-tester/10-0-success.m3u with minSuccess=10 and maxFailures=0 [ffmpeg]
+        run: npm run m3u-tester -- --m3uLocation=test/m3u-tester/10-0-success.m3u --minSuccess=10 --maxFailures=0 --streamTester=ffmpeg
+
+  m3u-tester-ffmpeg-ubuntu:
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Required because each job gets a fresh VM
+
+      - name: Configure NODE
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+      - name: Upgrade npm to latest
+        run: npm install -g npm@^10.0.0 && npm -v
+
+      - name: Restore Cached Node Modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+
+      - name: Install ffmpeg ffprobe
+        run: |
+          sudo add-apt-repository ppa:savoury1/ffmpeg4
+          sudo apt update
+          sudo apt install ffmpeg
+          rm -rf ffmpeg ffprobe || echo "no ffmpeg ffprobe"
+          ln -s "$(which ffmpeg)" ./ffmpeg
+          ln -s "$(which ffprobe)" ./ffprobe
       - name: Run [m3u-tester] on test/m3u-tester/10-0-success.m3u with minSuccess=10 and maxFailures=0 [ffmpeg]
         run: npm run m3u-tester -- --m3uLocation=test/m3u-tester/10-0-success.m3u --minSuccess=10 --maxFailures=0 --streamTester=ffmpeg
 
@@ -163,7 +194,7 @@ jobs:
 
   end:
     runs-on: ubuntu-latest
-    needs: [ m3u-tester-http, m3u-tester-ffmpeg, iptv-analyzer ]
+    needs: [ m3u-tester-http, m3u-tester-ffmpeg-win, iptv-analyzer ]
     steps:
       - name: Success
         run: echo "Success"
