@@ -38,14 +38,12 @@ interface AnalyzerConfig extends BaseConfig {
     groupsToTest?: number;
     channelsToTest?: number;
     retestSuccess?: boolean;
+    threadsCount?: number;
 }
 
 const SOURCES_FILE: string = './tools/sources.txt';
 const SUCCEEDED_FILE: string = './tools/succeeded.json';
 const FAILED_FILE: string = './tools/failed.json';
-
-/** Number of threads for analyze process */
-const NB_THREADS = 10;
 
 /** Number of items to store in cache before tailing in output files */
 const NB_ITEMS_TO_TAIL = 10;
@@ -128,6 +126,10 @@ function getConfig(): Readonly<AnalyzerConfig> {
     }
     if (config.retestSuccess === undefined) {
         config.retestSuccess = false;
+    }
+    if (config.threadsCount === undefined) {
+        // Number of threads for analyze process
+        config.threadsCount = 10;
     }
     config.groupsToTest = config.groupsToTest ?? 1;
     config.channelsToTest = config.channelsToTest ?? 1;
@@ -379,7 +381,7 @@ function fetchAllUrls(urls: string[]): void {
                         return of({});
                     })
                 );
-            }, NB_THREADS)
+            }, config.threadsCount)
             //defaultIfEmpty({})
         )
         .subscribe({

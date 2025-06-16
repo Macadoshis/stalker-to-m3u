@@ -41,6 +41,11 @@
         }
       ],
       "default": "ffmpeg"
+    },
+    "threadsCount": {
+      "type": "number",
+      "description": "Number of providers to analyze in parallel",
+      "default": 10
     }
   },
   "additionalProperties": false

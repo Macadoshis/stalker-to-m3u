@@ -202,6 +202,7 @@ file [tools/analyzer-config.json](./tools/analyzer-config.json).
 | `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | [X]      | `false`  |
 | `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | [X]      | `1`      |
 | `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | [X]      | `1`      |
+| `threadsCount`   | Number of providers to analyze in parallel.                                                                                                                         | [X]      | `10`     |
 | `streamTester`   | Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                | [X]      | `ffmpeg` |
 
 A provider is considered live if at least ONE channel stream resolves successfully.
