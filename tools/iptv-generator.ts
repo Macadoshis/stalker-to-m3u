@@ -168,7 +168,7 @@ forkJoin(succeeded.map(r => of(r)))
             }
             const child = spawn('npm', ['run', 'groups', `-- ${generationKind}`,
                     `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
-                    `--streamTester=${config.streamTester}`],
+                    `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`],
                 {
                     stdio: 'inherit',
                     shell: true,
@@ -222,7 +222,7 @@ forkJoin(succeeded.map(r => of(r)))
                     } else {
                         const child = spawn('npm', ['run', 'm3u', `-- ${generationKind}`,
                                 `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
-                                `--streamTester=${config.streamTester}`],
+                                `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`],
                             {
                                 stdio: 'inherit',
                                 shell: true,
