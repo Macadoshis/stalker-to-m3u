@@ -30,6 +30,11 @@
       "description": "List of languages to support criteria. Not applied if unset.",
       "default": []
     },
+    "maxOutputs": {
+      "type": "number",
+      "description": "Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.",
+      "default": -1
+    },
     "iptv": {
       "type": "object",
       "properties": {

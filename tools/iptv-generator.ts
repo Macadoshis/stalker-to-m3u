@@ -19,6 +19,7 @@ interface GeneratorConfig extends BaseConfig {
     geminiAiModel: string;
     outputDir?: string;
     languages?: string[];
+    maxOutputs?: number;
     iptv?: IptvGeneratorConfig;
     vod?: VodGeneratorConfig;
     series?: SeriesGeneratorConfig;
@@ -40,6 +41,8 @@ interface SeriesGeneratorConfig {
 }
 
 const generationKind: GenerationKind = getGenerationKind();
+
+const MAX_OUTPUTS_MSG = 'MAX_OUTPUTS';
 
 function getConfig(): Readonly<GeneratorConfig> {
     const configData: string = fs.readFileSync('./tools/generator-config.json', READ_OPTIONS);
@@ -63,6 +66,9 @@ function getConfig(): Readonly<GeneratorConfig> {
     }
     if (config.outputDir === undefined) {
         config.outputDir = ".";
+    }
+    if (config.maxOutputs === undefined) {
+        config.maxOutputs = -1;
     }
     if (!fs.existsSync(config.outputDir)) {
         console.info(`Directory ${config.outputDir} not found.`);
@@ -145,6 +151,7 @@ console.log(chalk.gray(`${getFullPrompt(getGeminiPrompt())}\n`));
 console.log(chalk.gray('-----------------\n'));
 
 let nbProcessed: number = 0;
+let nbOutputs: number = 0;
 
 forkJoin(succeeded.map(r => of(r)))
     .pipe(
@@ -155,6 +162,12 @@ forkJoin(succeeded.map(r => of(r)))
         mergeMap((succ: UrlConfig) => {
 
             console.info(chalk.bgGreen.black.bold(`[ PROCESSING ] ${++nbProcessed} / ${succeeded.length}`));
+
+            // Skip if max outputs is reached
+            if (config.maxOutputs! > 0 && nbOutputs >= config.maxOutputs!) {
+                console.info(`Max number of outputs reached: ${config.maxOutputs}.`)
+                throw new RangeError(MAX_OUTPUTS_MSG);
+            }
 
             // Skip if target file exists
             if (fs.existsSync(`${config.outputDir}/${generationKind}-${succ.hostname}.m3u`)) {
@@ -168,7 +181,8 @@ forkJoin(succeeded.map(r => of(r)))
             }
             const child = spawn('npm', ['run', 'groups', `-- ${generationKind}`,
                     `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
-                    `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`],
+                    `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`,
+                    `--outputDir=${config.outputDir}`],
                 {
                     stdio: 'inherit',
                     shell: true,
@@ -222,7 +236,8 @@ forkJoin(succeeded.map(r => of(r)))
                     } else {
                         const child = spawn('npm', ['run', 'm3u', `-- ${generationKind}`,
                                 `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
-                                `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`],
+                                `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`,
+                                `--outputDir=${config.outputDir}`],
                             {
                                 stdio: 'inherit',
                                 shell: true,
@@ -232,6 +247,7 @@ forkJoin(succeeded.map(r => of(r)))
                             child.on('exit', (code: number) => {
                                 console.log(`Script exited with code ${code}`);
                                 if (code === 0) {
+                                    nbOutputs++;
                                     resolve(true);
                                 } else {
                                     console.error(`Error generating m3u of ${JSON.stringify(succ)}:`)
@@ -253,7 +269,9 @@ forkJoin(succeeded.map(r => of(r)))
             );
         }, 1),
         catchError((err) => {
-            console.error('Unexpected error occurred:', err);
+            if (!(err instanceof RangeError)) {
+                console.error('Unexpected error occurred:', err);
+            }
             return of(false);
         })
     )

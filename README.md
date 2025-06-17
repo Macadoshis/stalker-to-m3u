@@ -292,6 +292,7 @@ file [generator-config.json](tools/generator-config.json).
 | `geminiAiModel`          | Google GEMINI AI model (supported by your key).                                                          | [X]      | `gemini-2.5-flash-preview-05-20` |                              |
 | `outputDir`              | Output directory of generated M3U files                                                                  | [X]      | `.`                              |                              |
 | `languages`              | Array of languages to support criteria. Not applied if unset.                                            | [X]      | `[]`                             | "English"                    |
+| `maxOutputs`             | Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.              | [X]      | `-1`                             |                              |
 | `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                                  | "UK", "US", "Canada"         |
 | `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | [X]      | `[]`                             | "Adults", "Reality", "Music" |
 | `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                                  | "Comedy", "Horror"           |
