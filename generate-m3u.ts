@@ -301,8 +301,10 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             });
 
         }).then(() => {
-            process.stdout.clearLine(0);
-            process.stdout.cursorTo(0);
+            if (process.stdout.isTTY) {
+                process.stdout.clearLine(0);
+                process.stdout.cursorTo(0);
+            }
 
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
@@ -445,8 +447,10 @@ function fetchSeasonItems(serie: Serie, page: number, m3u: M3ULine[]): Promise<b
 
 function printProgress(idx: number, total: number): void {
     if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
-        process.stdout.clearLine(0);
-        process.stdout.cursorTo(0);
+        if (process.stdout.isTTY) {
+            process.stdout.clearLine(0);
+            process.stdout.cursorTo(0);
+        }
         const percentage = Math.ceil(idx * 100 / total);
         const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
         process.stdout.write(
