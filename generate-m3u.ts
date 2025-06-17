@@ -453,8 +453,12 @@ function printProgress(idx: number, total: number): void {
         }
         const percentage = Math.ceil(idx * 100 / total);
         const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
-        process.stdout.write(
-            chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...generating (${percentage}%)`));
+        if (process.stdout.isTTY) {
+            process.stdout.write(
+                chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...generating (${percentage}%)`));
+        } else {
+            console.info(`...generating (${percentage}%)`);
+        }
     }
 }
 
