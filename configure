@@ -37,3 +37,5 @@ chmod +x ./ffmpeg ./ffprobe
 
 echo "Ffmpeg binaries successfully installed in $(pwd)"
 
+set +e
+
