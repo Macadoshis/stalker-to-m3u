@@ -212,10 +212,10 @@ forkJoin(succeeded.map(r => of(r)))
                     if (!groups || groups.length === 0) {
                         return Promise.resolve(false);
                     }
+                    console.log('\u27A1 Original groups:', groups)
                     return askGemini(getGeminiPrompt())
                         .then(filtered => {
-                            console.log('Original groups:', groups)
-                            console.log('Filtered groups:', filtered);
+                            console.log('\u1FA84 Filtered groups:', filtered);
 
                             filtered = filtered.filter(group => {
                                 if (!groups.includes(group)) {
