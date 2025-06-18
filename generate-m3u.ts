@@ -321,21 +321,28 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         streamTester: config.streamTester
                     }
                 )).then(x => {
-                    if (!!x.status) {
+                    if (x.status) {
                         console.info(chalk.bold.greenBright(`M3U file has been tested successfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                        return true;
                     } else {
                         console.info(chalk.bold.redBright(`M3U file has been tested unsuccessfully (success: ${x.succeededStreams.length}, failures: ${x.failedStreams.length})`));
+                        return false;
                     }
                 });
+            } else {
+                return Promise.resolve(true);
             }
-            return Promise.resolve();
-        }).then(() => {
+        }).then((result: boolean) => {
             const endTime = process.hrtime(startTime);
 
             // Calculate total execution time
             const durationInSeconds = endTime[0];
 
             console.log(`Execution time: ${durationInSeconds} seconds`);
+
+            if (!result) {
+                process.exit(1);
+            }
         });
     });
 

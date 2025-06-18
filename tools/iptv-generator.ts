@@ -237,7 +237,7 @@ forkJoin(succeeded.map(r => of(r)))
                         const child = spawn('npm', ['run', 'm3u', `-- ${generationKind}`,
                                 `--hostname=${succ.hostname}`, `--port=${succ.port}`, `--mac=${succ.mac}`,
                                 `--contextPath=${succ.contextPath ?? ''}`, `--streamTester=${config.streamTester}`,
-                                `--outputDir=${config.outputDir}`],
+                                `--outputDir=${config.outputDir}`, '--testM3uFile=true'],
                             {
                                 stdio: 'inherit',
                                 shell: true,
