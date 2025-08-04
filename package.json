@@ -26,7 +26,7 @@
     "async-mutex": "latest",
     "axios": "latest",
     "axios-retry": "latest",
-    "chalk": "^4.1.2",
+    "chalk": "^5.5.0",
     "fs": "latest",
     "fluent-ffmpeg": "latest",
     "http": "latest",
