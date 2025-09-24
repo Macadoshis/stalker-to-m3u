@@ -292,7 +292,7 @@ function fetchAllUrls(urls: string[]): void {
                             map(results => results.flat()),
                             // (do not test channels separator likely starting with '#')
                             map(channels => {
-                                return channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, config.channelsToTest ?? 1);
+                                return channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, Math.min(config.channelsToTest ?? 1, channels.length));
                             })
                         )
                     ),
