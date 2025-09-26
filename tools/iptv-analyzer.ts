@@ -1,6 +1,6 @@
 import Ajv from "ajv";
-import { forkJoin, from, Observable, of } from 'rxjs';
-import { catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { forkJoin, from, last, Observable, of, tap } from 'rxjs';
+import { catchError, concatMap, defaultIfEmpty, filter, map, mergeMap, toArray } from 'rxjs/operators';
 import {
     checkStream,
     configureRetry,
@@ -15,12 +15,15 @@ import {
 import { Mutex } from 'async-mutex';
 import { ArrayData, BaseConfig, Channel, Config, Data, Genre, Programs, UrlConfig } from '../types';
 import { sha1 } from "object-hash";
+import { ReadStream } from "node:fs";
+import { fromPromise } from "rxjs/internal/observable/innerFrom";
 
 const axios = require('axios');
 const axiosRetry = require('axios-retry').default;
 const fs = require('fs');
 const chalk = require('chalk');
 const yargsParser = require('yargs-parser');
+const JSONStream = require('JSONStream');
 
 const mutex = new Mutex();
 
@@ -75,33 +78,54 @@ const cacheSuccessUrlAndMac: Set<String> = new Set<String>();
 /** SHA1 cache of failed url and mac (stored shorten to SHA1 for memory issues) */
 const cacheFailedUrlAndMac: Set<String> = new Set<String>();
 
-// Create input and output files
-if (!!config.cache) {
-    if (!config.retestSuccess && fs.existsSync(SUCCEEDED_FILE)) {
-        succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
-    }
-    if (fs.existsSync(FAILED_FILE)) {
-        failed.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[])
-    }
-    totalProcessed = succeeded.length + failed.length;
-} else {
-    // Clear files
-    fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
-    fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
+function readFileAsync<T>(data: T[], file: string, res: () => void, rej: (reason?: any) => void): void {
+    const stream: ReadStream = fs.createReadStream(file, READ_OPTIONS);
+    stream.pipe(JSONStream.parse('*'))
+        .on('data', (item: T) => {
+            data.push(item);
+        })
+        .on('end', () => {
+            // console.debug(`Finished processing file ${file}`);
+        })
+        .on('close', () => {
+            res();
+        })
+        .on('error', (err: any) => {
+            console.error('An error occurred:', err);
+            rej();
+        });
 }
 
-// Fill cache of processed items
-succeeded.forEach((element) => {
-    cacheSuccessUrlAndMac.add(sha1(element))
-});
-failed.forEach((element) => {
-    cacheFailedUrlAndMac.add(sha1(element))
-});
-console.info(chalk.blackBright(`Loaded cache of ${cacheSuccessUrlAndMac.size} success and ${cacheFailedUrlAndMac.size} failed entries`));
-
-// Empty lists
-succeeded.splice(0);
-failed.splice(0);
+async function initFiles(): Promise<void> {
+    await new Promise<void>((res, rej) => {
+        // Create input and output files
+        if (!!config.cache) {
+            if (!config.retestSuccess && fs.existsSync(SUCCEEDED_FILE)) {
+                succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
+            }
+            if (fs.existsSync(FAILED_FILE)) {
+                readFileAsync(failed, FAILED_FILE, res, rej);
+            }
+        } else {
+            // Clear files
+            fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
+            fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
+            res();
+        }
+    });
+    totalProcessed = succeeded.length + failed.length;
+    // Fill cache of processed items
+    succeeded.forEach((element) => {
+        cacheSuccessUrlAndMac.add(sha1(element));
+    });
+    failed.forEach((element_1) => {
+        cacheFailedUrlAndMac.add(sha1(element_1));
+    });
+    console.info(chalk.blackBright(`Loaded cache of ${cacheSuccessUrlAndMac.size} success and ${cacheFailedUrlAndMac.size} failed entries`));
+    // Empty lists
+    succeeded.splice(0);
+    failed.splice(0);
+}
 
 function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
@@ -343,7 +367,7 @@ function fetchAllUrls(urls: string[]): void {
                             defaultIfEmpty(<boolean[]>[])
                         );
                     }),
-                    tap(fetched => {
+                    mergeMap(fetched => {
 
                         // If there is at least one success, the source is considered trustful
                         if (fetched.some(r => !!r)) {
@@ -359,10 +383,13 @@ function fetchAllUrls(urls: string[]): void {
                             cacheFailedUrlAndMac.add(sha1(urlAndMac));
                         }
 
-                        mutex.runExclusive(() => {
+                        return fromPromise(mutex.runExclusive(() => {
                             totalProcessed++;
-                            outputFiles();
-                        });
+                            return outputFiles();
+                        })).pipe(
+                            map(x => {
+                            })
+                        );
                     }),
                     //map((r: boolean[]) => of({})),
                     //defaultIfEmpty({}),
@@ -373,21 +400,25 @@ function fetchAllUrls(urls: string[]): void {
                         failed.push(urlAndMac);
                         cacheFailedUrlAndMac.add(sha1(urlAndMac));
 
-                        mutex.runExclusive(() => {
+                        return fromPromise(mutex.runExclusive(() => {
                             totalProcessed++;
-                            outputFiles();
-                        });
-
-                        return of({});
+                            return outputFiles();
+                        })).pipe(
+                            map(x => {
+                            })
+                        );
                     })
                 );
-            }, config.threadsCount)
-            //defaultIfEmpty({})
+            }, config.threadsCount),
+            defaultIfEmpty({})
         )
-        .subscribe({
-            error: err => console.error('UNEXPECTED ERROR:', err),
-            complete: () => {
-
+        .pipe(
+            last(),
+            mergeMap(r => {
+                // Output all remaining processed items
+                return outputFiles(true);
+            }),
+            mergeMap(r => {
                 const endTime = process.hrtime(startTime);
 
                 // Calculate total execution time
@@ -395,26 +426,34 @@ function fetchAllUrls(urls: string[]): void {
 
                 console.debug(chalk.bold(`[COMPLETE] All entries processed. Execution time: ${durationInSeconds} seconds.`));
 
-                // Output all remaining processed items
-                outputFiles(true);
-
                 // Order file content
                 succeeded.splice(0);
                 succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
 
-                failed.splice(0);
-                failed.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[])
-
-                succeeded.sort((a, b) => {
-                    return a.hostname.localeCompare(b.hostname)
-                        || (a.contextPath ?? '').localeCompare((b.contextPath ?? ''))
-                        || a.port - b.port
-                        || (a.mac ?? '').localeCompare((b.mac ?? ''))
-                });
-                failed.sort((a, b) => {
-                    return a.url.localeCompare(b.url)
-                        || a.mac.localeCompare(b.mac);
-                });
+                return fromPromise(new Promise<void>((res, rej) => {
+                    failed.splice(0);
+                    readFileAsync(failed, FAILED_FILE, res, rej);
+                })).pipe(
+                    tap(() => {
+                        succeeded.sort((a, b) => {
+                            return a.hostname.localeCompare(b.hostname)
+                                || (a.contextPath ?? '').localeCompare((b.contextPath ?? ''))
+                                || a.port - b.port
+                                || (a.mac ?? '').localeCompare((b.mac ?? ''))
+                        });
+                        failed.sort((a, b) => {
+                            return a.url.localeCompare(b.url)
+                                || a.mac.localeCompare(b.mac);
+                        });
+                    }),
+                    map(x => {
+                    })
+                );
+            })
+        )
+        .subscribe({
+            error: err => console.error('UNEXPECTED ERROR:', err),
+            complete: () => {
                 // Output files (ordered)
                 fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeeded, null, 2));
                 fs.writeFileSync(FAILED_FILE, JSON.stringify(failed, null, 2));
@@ -422,18 +461,21 @@ function fetchAllUrls(urls: string[]): void {
         });
 }
 
-function outputFiles(force: boolean = false): void {
+async function outputFiles(force: boolean = false): Promise<void> {
     if (force || totalProcessed % NB_ITEMS_TO_TAIL === 0) {
-        // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
         const succeededToWrite: UrlConfig[] = [];
         const failedToWrite: UrlAndMac[] = [];
-        if (fs.existsSync(SUCCEEDED_FILE)) {
-            succeededToWrite.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
-        }
-        succeededToWrite.push(...succeeded);
-        if (fs.existsSync(FAILED_FILE)) {
-            failedToWrite.push(...JSON.parse(fs.readFileSync(FAILED_FILE, READ_OPTIONS)) as UrlAndMac[]);
-        }
+        await new Promise<void>((res, rej) => {
+            // Writes progression to output files (for performance issues the in-memory list should remain as short as possible)
+
+            if (fs.existsSync(SUCCEEDED_FILE)) {
+                succeededToWrite.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
+            }
+            succeededToWrite.push(...succeeded);
+            if (fs.existsSync(FAILED_FILE)) {
+                readFileAsync(failedToWrite, FAILED_FILE, res, rej);
+            }
+        });
         failedToWrite.push(...failed);
 
         console.info(chalk.blackBright(`Adding to output files... ${succeeded.length} success and ${failed.length} failed entries`));
@@ -450,6 +492,8 @@ function outputFiles(force: boolean = false): void {
         } else {
             // console.warn('Garbage collection is not exposed. Run with --expose-gc.');
         }
+    } else {
+        return Promise.resolve();
     }
 }
 
@@ -518,4 +562,8 @@ function extractUrlsAndMacs(text: string): UrlToMacMap {
 }
 
 // Run main process
-fetchAllUrls(sources);
+(async () => {
+    await initFiles();
+    fetchAllUrls(sources);
+})();
+
