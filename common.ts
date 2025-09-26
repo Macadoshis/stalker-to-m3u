@@ -683,3 +683,17 @@ function shuffleItems<T>(array: T[]): T[] {
     }
     return shuffled;
 }
+
+export function getRGBFromPercentage(value: number): [number, number, number] {
+    // Ensure the input is within bounds
+    const percentage = Math.max(0, Math.min(100, value));
+
+    // Calculate red and green components based on the percentage
+    const red = Math.round((100 - percentage) * 255 / 100); // Decreases as percentage increases
+    const green = Math.round(percentage * 255 / 100);       // Increases as percentage increases
+
+    // Blue is always 0 in this gradient
+    const blue = 0;
+
+    return [red, green, blue];
+}

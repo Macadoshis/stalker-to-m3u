@@ -5,6 +5,7 @@ import {
     checkStream,
     configureRetry,
     fetchData,
+    getRGBFromPercentage,
     logConfig,
     randomDeviceId,
     randomSerialNumber,
@@ -71,6 +72,13 @@ const startTime = process.hrtime();
 
 /** Total number of items processed */
 let totalProcessed = 0;
+
+
+/** Number of items processed (progression numerator) */
+let proceeding = 0;
+
+/** Number of items to process (progression denominator) */
+let proceedingCount = 0;
 
 /** SHA1 cache of successed url and mac (stored shorten to SHA1 for memory issues) */
 const cacheSuccessUrlAndMac: Set<String> = new Set<String>();
@@ -253,6 +261,8 @@ function fetchAllUrls(urls: string[]): void {
                         macs.forEach(mac => {
                             const urlAndMac: UrlAndMac = {url, mac};
 
+                            proceedingCount++;
+
                             if (cacheFailedUrlAndMac.has(sha1(urlAndMac))) {
                                 console.info(chalk.red(`${urlAndMac.url} [${urlAndMac.mac}] is cached from failed streams.`));
                                 return;
@@ -383,6 +393,8 @@ function fetchAllUrls(urls: string[]): void {
                             cacheFailedUrlAndMac.add(sha1(urlAndMac));
                         }
 
+                        proceeding++;
+
                         return fromPromise(mutex.runExclusive(() => {
                             totalProcessed++;
                             return outputFiles();
@@ -394,6 +406,8 @@ function fetchAllUrls(urls: string[]): void {
                     //map((r: boolean[]) => of({})),
                     //defaultIfEmpty({}),
                     catchError(err => {
+
+                        proceeding++;
 
                         // console.warn(`CatchError ${JSON.stringify(urlAndMac)}`);
 
@@ -478,7 +492,9 @@ async function outputFiles(force: boolean = false): Promise<void> {
         });
         failedToWrite.push(...failed);
 
-        console.info(chalk.blackBright(`Adding to output files... ${succeeded.length} success and ${failed.length} failed entries`));
+        const progress: number = Math.floor(force ? 100 : proceeding / proceedingCount * 100);
+        const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(progress);
+        console.info(chalk.blackBright(`Adding to output files... ${succeeded.length} success and ${failed.length} failed entries (${chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(progress + '%')})`));
 
         fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify(succeededToWrite, null, 2));
         fs.writeFileSync(FAILED_FILE, JSON.stringify(failedToWrite, null, 2));
