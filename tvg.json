@@ -631,7 +631,9 @@
   "NovelasTV(src01).fr": [
     "NOVELAS"
   ],
-  "NRJ12.fr": [
+  "T18.fr": [
+    "T18",
+    "T 18",
     "NRJ 12",
     "NRJ12"
   ],
@@ -1088,6 +1090,9 @@
   ],
   "AquariumChannelTV(English).ca": [
     "Aquarium Channel TV"
+  ],
+  "APTNLanguages(English-French).ca": [
+    "APTN"
   ],
   "ArtAmerica(English).ca": [
     "Art America"
@@ -4084,7 +4089,7 @@
     "YTVP"
   ],
   "Z(French).ca": [
-    "Z"
+    "Z media"
   ],
   "ZeeBangla(English).ca": [
     "Zee Bangla"
@@ -4128,6 +4133,14 @@
   "Zoom(English).ca": [
     "Zoom"
   ],
+  "blueSports1(src01).ch": [
+    "Blue sport 1",
+    "Blue sports 1"
+  ],
+  "blueSports2(src01).ch": [
+    "Blue sport 2",
+    "Blue sports 2"
+  ],
   "CanalAlpha(Jura)(French).ch": [
     "CANAL ALPHA"
   ],
@@ -4163,6 +4176,12 @@
     "Mysports 8",
     "My sports 8"
   ],
+  "RSILa1(src01).ch": [
+    "RSI La 1"
+  ],
+  "RSILa2(src01).ch": [
+    "RSI La 2"
+  ],
   "RTSDeux(src01).ch": [
     "RTS Deux",
     "RTS 2",
@@ -4172,6 +4191,14 @@
     "RTS Un",
     "RTS 1",
     "RTS1"
+  ],
+  "SRF1(src01).ch": [
+    "SRF 1",
+    "SRF Ein"
+  ],
+  "SRFzwei(German).ch": [
+    "SRF 2",
+    "SRF zwei"
   ],
   "Voyage(French).ch": [
     "Voyage"
