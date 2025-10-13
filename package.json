@@ -20,7 +20,7 @@
   "private": false,
   "devDependencies": {
     "@google/genai": "~1.4.0",
-    "@types/node": "^22.15.21",
+    "@types/node": "^24.7.2",
     "@types/object-hash": "latest",
     "ajv": "latest",
     "async-mutex": "latest",
