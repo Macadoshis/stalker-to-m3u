@@ -1,8 +1,12 @@
-# General
-
 [![BUILD](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml)
 [![SETUP](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml)
 [![TESTS](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml)
+
+<a href="https://www.buymeacoffee.com/macadoshis" target="_blank" rel="noopener">
+<img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="27" width="116">
+</a>
+
+# General
 
 This script is used to generate M3U format files from Stalker portal streams.
 
@@ -267,7 +271,8 @@ The groups are auto-selected from preference criteria by an AI prompt using AI G
 
 File `tools/succeeded.json` must exist.
 
-An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for `gemini-2.5-flash-preview-05-20` (the model can be changed).
+An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for
+`gemini-2.5-flash-preview-05-20` (the model can be changed).
 
 ### Script
 
