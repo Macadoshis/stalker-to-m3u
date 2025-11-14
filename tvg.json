@@ -1,10 +1,15 @@
 {
   "": [
     "A la carte",
-    "Amazon prime",
+    "Amazon",
     "DAZN",
     "CINEMAX",
-    "multisport"
+    "multi",
+    "PPV",
+    "LIVE",
+    "##",
+    "Netflix",
+    "Prime"
   ],
   "13emeRue.fr": [
     "13eme Rue",
@@ -4203,4 +4208,5 @@
   "Voyage(French).ch": [
     "Voyage"
   ]
+
 }
