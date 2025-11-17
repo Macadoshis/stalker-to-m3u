@@ -20,6 +20,7 @@ interface GeneratorConfig extends BaseConfig {
     outputDir?: string;
     languages?: string[];
     maxOutputs?: number;
+    shuffle?: boolean;
     iptv?: IptvGeneratorConfig;
     vod?: VodGeneratorConfig;
     series?: SeriesGeneratorConfig;
@@ -153,7 +154,7 @@ console.log(chalk.gray('-----------------\n'));
 let nbProcessed: number = 0;
 let nbOutputs: number = 0;
 
-forkJoin(succeeded.map(r => of(r)))
+forkJoin(succeeded.sort(() => !!config.shuffle ? Math.random() - 0.5 : 0).map(r => of(r)))
     .pipe(
         concatMap(succ => {
                 return succ;

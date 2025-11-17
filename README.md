@@ -298,6 +298,7 @@ file [generator-config.json](tools/generator-config.json).
 | `outputDir`              | Output directory of generated M3U files                                                                  | &#x2713; | `.`                              |                              |
 | `languages`              | Array of languages to support criteria. Not applied if unset.                                            | &#x2713; | `[]`                             | "English"                    |
 | `maxOutputs`             | Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.              | &#x2713; | `-1`                             |                              |
+| `shuffle`                | Shuffle succeeded.json entries to read from                                                              | &#x2713; | `false`                          |                              |
 | `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                                  | "UK", "US", "Canada"         |
 | `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | &#x2713; | `[]`                             | "Adults", "Reality", "Music" |
 | `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                                  | "Comedy", "Horror"           |
