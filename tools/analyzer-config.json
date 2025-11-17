@@ -1,5 +1,6 @@
 {
   "cache": false,
   "groupsToTest": 1,
-  "channelsToTest": 1
+  "channelsToTest": 1,
+  "streamTester": "ffmpeg"
 }

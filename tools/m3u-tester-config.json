@@ -3,5 +3,6 @@
   "maxFailures": 10,
   "minSuccess": 5,
   "renameOnFailure": false,
-  "renamePrefix": "_"
+  "renamePrefix": "_",
+  "streamTester": "ffmpeg"
 }
