@@ -35,6 +35,10 @@
       "description": "Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.",
       "default": -1
     },
+    "host": {
+      "type": "string",
+      "description": "Host to replay. If set, filters succeeded.json to given host."
+    },
     "shuffle": {
       "type": "boolean",
       "description": "Shuffle succeeded.json entries to read from",

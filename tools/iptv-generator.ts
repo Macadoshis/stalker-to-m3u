@@ -21,6 +21,7 @@ interface GeneratorConfig extends BaseConfig {
     languages?: string[];
     maxOutputs?: number;
     shuffle?: boolean;
+    host?: string;
     iptv?: IptvGeneratorConfig;
     vod?: VodGeneratorConfig;
     series?: SeriesGeneratorConfig;
@@ -107,8 +108,6 @@ logConfig(config);
 /** Start time */
 const startTime = process.hrtime();
 
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta`;
-
 if (!fs.existsSync(SUCCEEDED_FILE)) {
     console.error(chalk.red(`${SUCCEEDED_FILE} file does not exist`));
 }
@@ -154,7 +153,21 @@ console.log(chalk.gray('-----------------\n'));
 let nbProcessed: number = 0;
 let nbOutputs: number = 0;
 
-forkJoin(succeeded.sort(() => !!config.shuffle ? Math.random() - 0.5 : 0).map(r => of(r)))
+if (!!config.host) {
+    const m3uFileName: string = `${config.outputDir}/${generationKind}-${config.host}.m3u`;
+    fs.rmSync(m3uFileName, {force: true});
+    console.info(chalk.keyword('orange')(`File ${m3uFileName} deleted.`));
+}
+
+forkJoin(succeeded
+    .filter(x => {
+        if (!!config.host) {
+            return x.hostname === config.host;
+        }
+        return true;
+    })
+    .sort(() => !!config.shuffle ? Math.random() - 0.5 : 0)
+    .map(r => of(r)))
     .pipe(
         concatMap(succ => {
                 return succ;
