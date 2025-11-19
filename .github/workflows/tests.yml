@@ -151,7 +151,7 @@ jobs:
       - name: Install ffmpeg ffprobe
         run: |
           sudo add-apt-repository ppa:savoury1/ffmpeg4
-          sudo apt update
+          # sudo apt update
           sudo apt install ffmpeg
           rm -rf ffmpeg ffprobe || echo "no ffmpeg ffprobe"
           ln -s "$(which ffmpeg)" ./ffmpeg
