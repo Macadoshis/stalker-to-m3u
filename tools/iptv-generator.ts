@@ -112,7 +112,13 @@ if (!fs.existsSync(SUCCEEDED_FILE)) {
     console.error(chalk.red(`${SUCCEEDED_FILE} file does not exist`));
 }
 
-const succeeded: UrlConfig[] = JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[];
+const succeeded: UrlConfig[] = (JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[])
+    .filter(x => {
+        if (!!config.host) {
+            return x.hostname === config.host;
+        }
+        return true;
+    });
 
 function getGeminiPrompt(): string {
     let prompt: string = '';
@@ -160,12 +166,6 @@ if (!!config.host) {
 }
 
 forkJoin(succeeded
-    .filter(x => {
-        if (!!config.host) {
-            return x.hostname === config.host;
-        }
-        return true;
-    })
     .sort(() => !!config.shuffle ? Math.random() - 0.5 : 0)
     .map(r => of(r)))
     .pipe(
