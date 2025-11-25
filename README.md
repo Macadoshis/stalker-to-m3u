@@ -272,7 +272,7 @@ The groups are auto-selected from preference criteria by an AI prompt using AI G
 File `tools/succeeded.json` must exist.
 
 An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for
-`gemini-2.5-flash-preview-05-20` (the model can be changed).
+`gemini-2.5-flash-preview-09-2025` (the model can be updated).
 
 ### Script
 
@@ -294,7 +294,7 @@ file [generator-config.json](tools/generator-config.json).
 | Property                 | Description                                                                                              | Optional | Default                          | Examples                     |
 |--------------------------|----------------------------------------------------------------------------------------------------------|----------|----------------------------------|------------------------------|
 | `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                                  |                              |
-| `geminiAiModel`          | Google GEMINI AI model (supported by your key).                                                          | &#x2713; | `gemini-2.5-flash-preview-05-20` |                              |
+| `geminiAiModel`          | Google GEMINI AI model (should be supported by your key).                                                | &#x2713; | `gemini-2.5-flash-preview-09-2025` |                            |
 | `outputDir`              | Output directory of generated M3U files                                                                  | &#x2713; | `.`                              |                              |
 | `languages`              | Array of languages to support criteria. Not applied if unset.                                            | &#x2713; | `[]`                             | "English"                    |
 | `maxOutputs`             | Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.              | &#x2713; | `-1`                             |                              |
