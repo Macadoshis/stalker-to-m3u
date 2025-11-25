@@ -1,6 +1,7 @@
 [![BUILD](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/ci.yml)
 [![SETUP](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/setup.yml)
 [![TESTS](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/tests.yml)
+[![DEPENDABOT](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Macadoshis/stalker-to-m3u/actions/workflows/dependabot/dependabot-updates)
 
 <a href="https://www.buymeacoffee.com/macadoshis" target="_blank" rel="noopener">
 <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="27" width="116">
