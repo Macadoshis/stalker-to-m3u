@@ -17,6 +17,7 @@ export interface Config extends BaseConfig {
     delayBetweenUrlGeneration?: number;
     computeUrlLink?: boolean;
     maxNumberOfChannelsToTest?: number;
+    generatorThreads?: number;
     vodMaxPagePerGenre?: number;
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;

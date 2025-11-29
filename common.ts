@@ -110,6 +110,9 @@ export function getConfig(): Readonly<Config> {
     if (config.streamTester === undefined) {
         config.streamTester = "ffmpeg";
     }
+    if (config.generatorThreads === undefined) {
+        config.generatorThreads = 10;
+    }
     if (!fs.existsSync(config.outputDir)) {
         console.info(`Directory ${config.outputDir} not found.`);
         process.exit(1);

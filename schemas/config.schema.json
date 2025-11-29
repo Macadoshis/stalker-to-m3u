@@ -69,6 +69,11 @@
       "description": "Only if 'computeUrlLink' is enabled. Max number of channels to be picked up randomly among selected groups, and to test if streams are resolvable. If none responds successfully, the generation is aborted. Set 'maxNumberOfChannelsToTest' to '0' to disable this test and always generate.",
       "default": "5"
     },
+    "generatorThreads": {
+      "type": "number",
+      "description": "Number of threads for the generator phase",
+      "default": "10"
+    },
     "vodMaxPagePerGenre": {
       "type": "number",
       "description": "Max number of pages per category to fetch the videos from. The more pages per genre are set, the longer the generation will take.",

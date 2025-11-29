@@ -28,7 +28,8 @@ import {
 } from "./types";
 
 import { iswitch } from 'iswitch';
-import { firstValueFrom } from "rxjs";
+import { firstValueFrom, from, lastValueFrom, tap } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -286,13 +287,15 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     }
                 }).then((testedOk: boolean) => {
                     if (testedOk) {
-                        res(m3u.reduce((acc, next, idx) => {
-                            return acc.then(() => {
-                                return resolveUrlLink(next).then(() => {
-                                    printProgress(idx, m3u.length);
-                                });
-                            });
-                        }, Promise.resolve()));
+                        lastValueFrom(from(m3u).pipe(
+                            mergeMap(
+                                (line, idx) =>
+                                    from(resolveUrlLink(line)).pipe(
+                                        tap(() => printProgress(idx, m3u.length))
+                                    ),
+                                config.generatorThreads
+                            )
+                        )).then(res);
                     } else {
                         console.error(chalk.rgb(255, 165, 0)("Aborting M3U generation"));
                         process.exit(1);
