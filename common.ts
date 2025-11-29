@@ -239,7 +239,7 @@ export function fetchData<T>(path: string, ignoreError: boolean = false, headers
     return new Promise<T>((resp, err) => {
 
         const completePath = (!!cfg.contextPath ? '/' + cfg.contextPath : '') + path;
-        const absoluteUrl: string = `http://${cfg.hostname}:${cfg.port}/${completePath}`;
+        const absoluteUrl: string = `http://${cfg.hostname}:${cfg.port}${completePath}`;
 
         const onError: (e: any) => void
             = (e) => {
