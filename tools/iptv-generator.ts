@@ -125,21 +125,21 @@ function getGeminiPrompt(): string {
 
     switch (generationKind) {
         case 'iptv':
-            prompt += `Filter the IPTV groups that correspond to following countries: ${config.iptv!.countries.join(', ')}.`;
+            prompt += `Filter the IPTV groups that ONLY match the following countries (or regions): ${config.iptv!.countries.join(', ')}. Do not consider ANY others.`;
             if (config.iptv!.excludedGroups && config.iptv!.excludedGroups.length > 0) {
-                prompt += ` But exclude following IPTV groups: ${config.iptv!.excludedGroups.join(', ')}.`;
+                prompt += ` And exclude following IPTV groups from the results: ${config.iptv!.excludedGroups.join(', ')}.`;
             }
             break;
         case "vod":
             prompt += `Filter the VOD groups that correspond to following categories: ${config.vod!.includedCategories.join(', ')}.`;
             if (config.vod!.excludedCategories && config.vod!.excludedCategories.length > 0) {
-                prompt += ` But exclude following VOD groups: ${config.vod!.excludedCategories.join(', ')}.`;
+                prompt += ` And exclude following VOD groups from the results: ${config.vod!.excludedCategories.join(', ')}.`;
             }
             break;
         case "series":
             prompt += `Filter the SERIES groups of following series, tv shows or categories of tv shows: ${config.series!.includedSeries.join(', ')}.`;
             if (config.series!.excludedSeries && config.series!.excludedSeries.length > 0) {
-                prompt += ` But exclude following series, tv shows or categories of tv shows: ${config.series!.excludedSeries.join(', ')}.`;
+                prompt += ` And exclude following series, tv shows or categories of tv shows from the results: ${config.series!.excludedSeries.join(', ')}.`;
             }
             break;
     }
