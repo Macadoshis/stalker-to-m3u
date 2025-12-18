@@ -125,27 +125,27 @@ function getGeminiPrompt(): string {
 
     switch (generationKind) {
         case 'iptv':
-            prompt += `Filter the IPTV groups that ONLY match the following countries (or regions): ${config.iptv!.countries.join(', ')}. Do not consider ANY others.`;
+            prompt += `Filter the IPTV groups that ONLY match the following countries (or regions): [${config.iptv!.countries.join(', ')}]. Do not consider ANY others.`;
             if (config.iptv!.excludedGroups && config.iptv!.excludedGroups.length > 0) {
-                prompt += ` And exclude following IPTV groups from the results: ${config.iptv!.excludedGroups.join(', ')}.`;
+                prompt += ` Exclude following IPTV groups from the results: [${config.iptv!.excludedGroups.join(', ')}].`;
             }
             break;
         case "vod":
-            prompt += `Filter the VOD groups that correspond to following categories: ${config.vod!.includedCategories.join(', ')}.`;
+            prompt += `Filter the VOD groups that correspond to following categories: [${config.vod!.includedCategories.join(', ')}].`;
             if (config.vod!.excludedCategories && config.vod!.excludedCategories.length > 0) {
-                prompt += ` And exclude following VOD groups from the results: ${config.vod!.excludedCategories.join(', ')}.`;
+                prompt += ` Exclude following VOD groups from the results: [${config.vod!.excludedCategories.join(', ')}].`;
             }
             break;
         case "series":
-            prompt += `Filter the SERIES groups of following series, tv shows or categories of tv shows: ${config.series!.includedSeries.join(', ')}.`;
+            prompt += `Filter the SERIES groups of following series, tv shows or categories of tv shows: [${config.series!.includedSeries.join(', ')}].`;
             if (config.series!.excludedSeries && config.series!.excludedSeries.length > 0) {
-                prompt += ` And exclude following series, tv shows or categories of tv shows from the results: ${config.series!.excludedSeries.join(', ')}.`;
+                prompt += ` Exclude following series, tv shows or categories of tv shows from the results: [${config.series!.excludedSeries.join(', ')}].`;
             }
             break;
     }
 
     if (config.languages && config.languages.length > 0) {
-        prompt += ` Also only consider results of following languages: ${config.languages.join(', ')}.`;
+        prompt += `\n\nInclude only groups for following languages: [${config.languages.join(', ')}].`;
     }
 
     return prompt;
@@ -303,7 +303,20 @@ forkJoin(succeeded
     });
 
 function getFullPrompt(prompt: string): string {
-    return `You are an IPTV filtering assistant.\n\n${prompt}\n\nAttached text file is the list of groups (one per line).\n\nProvide the matches in attached file in JSON array format. Keep as given each group from attached file (one group per line). Only filter the rows matching the prompt. Do not edit, modify or add a line from attached groups. Please read proof your filtered matches to be sure each is indeed a row in attached file without any modification.`;
+    return `- SYSTEM INSTRUCTION:
+You are an IPTV data extraction tool. Your ONLY output must be a valid JSON array of strings. 
+No conversational text, no explanations, no reasoning, and no markdown formatting outside of the JSON block.
+- FORMAT: JSON array of strings. 
+- CONSTRAINT: Use exact strings from the file. No modifications. No preamble.
+Attached text file is the list of groups (one per line).
+
+- ANSWER INSTRUCTION:
+Provide the matches in attached file in JSON array format. Keep as given each group from attached file (one group per line). Only filter the rows matching the prompt. Do not edit, modify or add a line from attached groups. Please read proof your filtered matches to be sure each is indeed a row in attached file without any modification.
+Filter the attached IPTV list (one per line).
+
+- USER PROMPT:
+${prompt}
+`;
 }
 
 export async function askGemini(prompt: string): Promise<string[]> {
@@ -343,7 +356,7 @@ export async function askGemini(prompt: string): Promise<string[]> {
         });
 
         if (!result || !result.text) {
-            throw new Error(`No response received. ${result.codeExecutionResult} ${result.responseId}`);
+            throw new Error(`(${result.modelVersion}) No response received. ${result.codeExecutionResult} ${result.responseId}`);
         }
         if (result.text!.startsWith("```json") && result.text!.endsWith("```")) {
             return JSON.parse(result.text!.substring("```json".length, result.text!.length - "```".length).trim());
@@ -353,7 +366,7 @@ export async function askGemini(prompt: string): Promise<string[]> {
             try {
                 return JSON.parse(result.text);
             } catch (e) {
-                throw new Error('Unexpected response format:|' + result?.text || result?.data + '|');
+                throw new Error(`(${result.modelVersion}) Unexpected response format:|${result?.text}` || result?.data + '|');
             }
         }
     } catch (err: any) {
