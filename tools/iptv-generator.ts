@@ -61,7 +61,7 @@ function getConfig(): Readonly<GeneratorConfig> {
 
     // Fill in default values if unset
     if (!config.geminiAiModel) {
-        config.geminiAiModel = 'gemini-2.0-flash';
+        config.geminiAiModel = 'gemini-2.5-flash';
     }
     if (config.streamTester === undefined) {
         config.streamTester = "ffmpeg";
@@ -328,11 +328,11 @@ export async function askGemini(prompt: string): Promise<string[]> {
                 getFullPrompt(prompt),
             ]),
             config: {
-              thinkingConfig: {
-                thinkingLevel: "medium",  // Options: 'minimal', 'low', 'medium', 'high'
-                includeThoughts: false    // Optional: returns the 'thoughts' in response
-              }
-            } as any
+                thinkingConfig: {
+                    // thinkingLevel: "low",  // (for GEMINI-3 only) Options: 'minimal', 'low', 'medium', 'high'
+                    includeThoughts: false    // Optional: returns the 'thoughts' in response
+                }
+            }
         });
 
         if (!result || !result.text) {
