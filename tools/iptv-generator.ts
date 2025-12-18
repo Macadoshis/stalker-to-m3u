@@ -4,7 +4,7 @@ import { BaseConfig, GenerationKind, UrlConfig } from '../types';
 import { catchError, forkJoin, from, of } from 'rxjs';
 import { concatMap, mergeMap } from "rxjs/operators";
 import * as process from "process";
-import { createPartFromUri, createUserContent, GoogleGenAI } from '@google/genai';
+import { createPartFromText, createPartFromUri, GoogleGenAI } from '@google/genai';
 import { spawn } from 'child_process';
 
 const fs = require('fs');
@@ -322,16 +322,23 @@ export async function askGemini(prompt: string): Promise<string[]> {
         // Ask gemini with prompt and attached groups file
         const result = await ai.models.generateContent({
             model: config.geminiAiModel,
-            contents: createUserContent([
-                createPartFromUri(groupsFile.uri!, groupsFile.mimeType!),
-                "\n\n",
-                getFullPrompt(prompt),
-            ]),
+            contents: [
+                {
+                    role: "user",
+                    parts: [
+                        createPartFromUri(groupsFile.uri!, groupsFile.mimeType!),
+                        createPartFromText(getFullPrompt(prompt)),
+                    ]
+                }
+            ],
             config: {
                 thinkingConfig: {
                     // thinkingLevel: "low",  // (for GEMINI-3 only) Options: 'minimal', 'low', 'medium', 'high'
-                    includeThoughts: false    // Optional: returns the 'thoughts' in response
-                }
+                    includeThoughts: false,    // Optional: returns the 'thoughts' in response
+                    thinkingBudget: 0
+                },
+                temperature: 0,
+                responseMimeType: "application/json"
             }
         });
 
@@ -342,8 +349,13 @@ export async function askGemini(prompt: string): Promise<string[]> {
             return JSON.parse(result.text!.substring("```json".length, result.text!.length - "```".length).trim());
         } else if (result.text!.startsWith("[") && result.text!.endsWith("]")) {
             return JSON.parse(result.text);
+        } else {
+            try {
+                return JSON.parse(result.text);
+            } catch (e) {
+                throw new Error('Unexpected response format:|' + result?.text || result?.data + '|');
+            }
         }
-        throw new Error('Unexpected response format:|' + result?.text || result?.data + '|');
     } catch (err: any) {
         console.error('Error calling Gemini:', err.response?.data || err.message);
         throw new Error('Error from Gemini');
