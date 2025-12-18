@@ -108,6 +108,9 @@ logConfig(config);
 /** Start time */
 const startTime = process.hrtime();
 
+/** Quota exceeded pointer (to stop the process) */
+let aiQuotaExceeded: boolean = false;
+
 if (!fs.existsSync(SUCCEEDED_FILE)) {
     console.error(chalk.red(`${SUCCEEDED_FILE} file does not exist`));
 }
@@ -181,6 +184,12 @@ forkJoin(succeeded
             if (config.maxOutputs! > 0 && nbOutputs >= config.maxOutputs!) {
                 console.info(`Max number of outputs reached: ${config.maxOutputs}.`)
                 throw new RangeError(MAX_OUTPUTS_MSG);
+            }
+
+            // Skip of AI quota exceeded
+            if (aiQuotaExceeded) {
+                console.info(`Max AI quota exceeded.`)
+                throw new RangeError(`Max AI quota exceeded.`);
             }
 
             // Skip if target file exists
@@ -371,6 +380,13 @@ export async function askGemini(prompt: string): Promise<string[]> {
         }
     } catch (err: any) {
         console.error('Error calling Gemini:', err.response?.data || err.message);
+        if (err.response?.data?.error?.code === 429
+            || err.message?.includes('429')
+            || err.message?.includes('RESOURCE_EXHAUSTED')
+            || err.status === 429) {
+            // Quota exceeded
+            aiQuotaExceeded = true;
+        }
         throw new Error('Error from Gemini');
     }
 }
