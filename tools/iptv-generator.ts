@@ -328,9 +328,11 @@ export async function askGemini(prompt: string): Promise<string[]> {
                 getFullPrompt(prompt),
             ]),
             config: {
-                // OPTIONS: 'minimal', 'low', 'medium', 'high'
-                thinkingLevel: "medium"
-            }
+              thinkingConfig: {
+                thinkingLevel: "medium",  // Options: 'minimal', 'low', 'medium', 'high'
+                includeThoughts: false    // Optional: returns the 'thoughts' in response
+              }
+            } as any
         });
 
         if (!result || !result.text) {
