@@ -370,6 +370,11 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
         type = '';
     }
 
+    const applyBrokenLink: (m3uLine: M3ULine) => void = (m3uLine) => {
+        m3uLine.url = undefined;
+        m3uLine.name += ' (BROKEN LINK)';
+    };
+
     return new Promise<void>(function (res, err) {
 
         fetchData<Data<{
@@ -381,16 +386,16 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
                         m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
                     } catch (e) {
                         console.error(`Error reading media URL for '${m3uLine.header} of ${urlLink.js.cmd}'`);
-                        m3uLine.url = undefined;
+                        applyBrokenLink(m3uLine);
                     }
                 } else {
                     console.error(`Error fetching media URL for '${m3uLine.header}'`);
-                    m3uLine.url = undefined;
+                    applyBrokenLink(m3uLine);
                 }
                 res();
             }, err => {
                 console.error(`Error generating stream url for entry '${m3uLine.header}'`, err);
-                m3uLine.url = undefined;
+                applyBrokenLink(m3uLine);
                 res();
             });
     }).then(x => new Promise<void>((resolve) => {
