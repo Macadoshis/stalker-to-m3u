@@ -18,6 +18,7 @@ import {
     Data,
     GenerationKind,
     Genre,
+    GenreSerie,
     M3U,
     M3ULine,
     M3uTesterConfig,
@@ -157,19 +158,24 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         res(null);
                     });
             } else if (generationKind === "vod") {
-
-                groups
+                const filteredGenres: Genre[] = groups
                     .filter(group => group && group.trim().length > 0)
                     .map(group => {
                         return genres.find(r => r.title === group)!;
-                    }).reduce((accPrograms, nextGenre, i) => {
-                    return accPrograms.then(val => {
-                        return fetchVodItems(nextGenre, 1, m3u);
                     });
-                }, Promise.resolve(true))
-                    .then(() => {
-                        res(null);
-                    });
+                from(filteredGenres)
+                    .pipe(
+                        mergeMap(
+                            (genre: Genre) => from([genre].reduce((accPrograms, nextGenre, i) => {
+                                return accPrograms.then(val => {
+                                    return fetchVodItems(nextGenre, 1, m3u);
+                                });
+                            }, Promise.resolve(true))),
+                            config.generatorThreads
+                        )
+                    ).subscribe({
+                    complete: () => res(null)
+                });
             } else if (generationKind === "series") {
                 // Filter genres
                 genres = genres
@@ -178,7 +184,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     });
 
                 fetchSeries(genres).then(genreSeries => {
-                    groups
+                    const filteredGenres: GenreSerie[] = groups
                         .filter(group => group && group.trim().length > 0)
                         .map(group => {
                             const genreSerie = genreSeries.find(r => r.toString() === group)!;
@@ -186,18 +192,24 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                 console.error(chalk.red(`No matching group for "${group}"`));
                             }
                             return genreSerie;
-                        })
-                        .reduce((accPrograms, nextGenre, i) => {
-                            if (!nextGenre) {
-                                return Promise.resolve(false);
-                            }
-                            return accPrograms.then(val => {
-                                return fetchSeasonItems(nextGenre.serie, 1, m3u);
-                            });
-                        }, Promise.resolve(true))
-                        .then(() => {
-                            res(null);
                         });
+
+                    from(filteredGenres)
+                        .pipe(
+                            mergeMap(
+                                (genre: GenreSerie) => from([genre].reduce((accPrograms, nextGenre, i) => {
+                                    if (!nextGenre) {
+                                        return Promise.resolve(false);
+                                    }
+                                    return accPrograms.then(val => {
+                                        return fetchSeasonItems(nextGenre.serie, 1, m3u);
+                                    });
+                                }, Promise.resolve(true))),
+                                config.generatorThreads
+                            )
+                        ).subscribe({
+                        complete: () => res(null)
+                    });
                 });
             }
         });
