@@ -5,10 +5,11 @@ import {
     fetchSeries,
     getConfig,
     getGenerationKind,
-    getRGBFromPercentage,
     GROUP_FILE,
     logConfig,
+    printProgress,
     READ_OPTIONS,
+    resolveMetaInfo,
     splitLines
 } from "./common";
 import {
@@ -106,7 +107,6 @@ function videoToM3u(video: Video, group: string): M3ULine {
         lines.data = isFinite(parseFloat(video.rating_imdb)) ? parseFloat(video.rating_imdb) : undefined;
     }
 
-
     return lines;
 }
 
@@ -116,8 +116,9 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
         const lines: M3ULine = <M3ULine>{};
 
         lines.title = `SERIE - ${serie.name}`;
+        lines.screenshotUri = decodeURI(season.screenshot_uri);
         lines.name = `${season.name} E${String(episode).padStart(2, '0')}`;
-        lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${season.name} - E${String(episode).padStart(2, '0')}" tvg-logo="${decodeURI(season.screenshot_uri)}" group-title="${lines.title}",${lines.name}`;
+        lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${lines.name}" tvg-logo="${lines.screenshotUri}" group-title="${lines.title}",${lines.name}`;
         lines.command = decodeURI(season.cmd);
         lines.episode = episode;
 
@@ -307,7 +308,31 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                     ),
                                 config.generatorThreads
                             )
-                        )).then(res);
+                        )).then(() => {
+
+                            if (process.stdout.isTTY) {
+                                process.stdout.clearLine(0);
+                                process.stdout.cursorTo(0);
+                            }
+
+                            if (generationKind === 'series' && config.seriesResolveTitle) {
+                                // Resolve titles
+                                console.info("Resolving streams metainfo (duration, title, ...)");
+                                resolveMetaInfo(m3u,
+                                    (m3ULine) => {
+                                        m3ULine.header = `#EXTINF:${m3ULine.duration} tvg-id="" tvg-name="${m3ULine.name}" tvg-logo="${m3ULine.screenshotUri}" group-title="${m3ULine.title}",${m3ULine.name}`
+                                    },
+                                    {
+                                        concurrency: 5,
+                                        replaceTitle: false
+                                    }
+                                ).subscribe({
+                                    complete: () => res()
+                                });
+                            } else {
+                                res();
+                            }
+                        });
                     } else {
                         console.error(chalk.rgb(255, 165, 0)("Aborting M3U generation"));
                         process.exit(1);
@@ -317,10 +342,6 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             });
 
         }).then(() => {
-            if (process.stdout.isTTY) {
-                process.stdout.clearLine(0);
-                process.stdout.cursorTo(0);
-            }
 
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
@@ -471,21 +492,4 @@ function fetchSeasonItems(serie: Serie, page: number, m3u: M3ULine[]): Promise<b
                 }
             });
     });
-}
-
-function printProgress(idx: number, total: number): void {
-    if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
-        if (process.stdout.isTTY) {
-            process.stdout.clearLine(0);
-            process.stdout.cursorTo(0);
-        }
-        const percentage = Math.ceil(idx * 100 / total);
-        const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
-        if (process.stdout.isTTY) {
-            process.stdout.write(
-                chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...generating (${percentage}%)`));
-        } else {
-            console.info(`...generating (${percentage}%)`);
-        }
-    }
 }

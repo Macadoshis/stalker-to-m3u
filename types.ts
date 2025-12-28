@@ -21,6 +21,7 @@ export interface Config extends BaseConfig {
     vodMaxPagePerGenre?: number;
     vodIncludeRating?: boolean;
     vodOrdering?: VodOrdering;
+    seriesResolveTitle?: boolean;
     testM3uFile?: boolean
 }
 
@@ -79,6 +80,8 @@ export interface M3ULine {
     header: string;
     title: string;
     name: string;
+    duration?: number;
+    screenshotUri?: string;
     command?: string;
     url?: string;
     testResult?: boolean;
@@ -143,3 +146,15 @@ export interface M3uResult {
 }
 
 export type UrlConfig = Pick<Omit<Config, 'mac'>, 'hostname' | 'port' | 'contextPath'> & Partial<Pick<Config, 'mac'>>;
+
+export interface MetainfoResolverOptions {
+    concurrency?: number;
+    timeoutMs?: number;
+    replaceTitle?: boolean;
+}
+
+export interface MetainfoResult {
+    duration?: number;
+    title?: string;
+    success: boolean;
+}
