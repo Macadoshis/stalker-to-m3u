@@ -300,11 +300,12 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     }
                 }).then((testedOk: boolean) => {
                     if (testedOk) {
+                        let idx: number = 0;
                         lastValueFrom(from(m3u).pipe(
                             mergeMap(
-                                (line, idx) =>
+                                (line) =>
                                     from(resolveUrlLink(line)).pipe(
-                                        tap(() => printProgress(idx, m3u.length))
+                                        tap(() => printProgress(++idx, m3u.length))
                                     ),
                                 config.generatorThreads
                             )
