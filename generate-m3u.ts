@@ -29,9 +29,9 @@ import {
     VodOrdering
 } from "./types";
 
-import { iswitch } from 'iswitch';
-import { firstValueFrom, from, lastValueFrom, tap } from "rxjs";
-import { mergeMap } from "rxjs/operators";
+import {iswitch} from 'iswitch';
+import {firstValueFrom, from, lastValueFrom, tap} from "rxjs";
+import {mergeMap} from "rxjs/operators";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -348,6 +348,19 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(chalk.bold(`Creating file ${filename}`));
             fs.writeFileSync(config.outputDir + '/' + filename, new M3U(m3u).print(config));
+
+            // Outputs summary
+            const titleCounts: Record<string, number> = m3u.reduce((acc: Record<string, number>, line: M3ULine) => {
+                const title = line.title;
+                acc[title] = (acc[title] || 0) + 1;
+                return acc;
+            }, {});
+            console.info(chalk.bold.gray(`=== Summary ===`));
+            for (const [title, count] of Object.entries(titleCounts)) {
+                console.info(chalk.gray(`${title} | Count: ${count}`));
+            }
+
+            console.info(chalk.bold(`Creating file ${filename}`));
 
             // Test m3u file
             if (config.testM3uFile) {
