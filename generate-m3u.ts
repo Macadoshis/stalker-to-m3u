@@ -129,7 +129,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
 }
 
 // Load groups
-const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS));
+const groups: string[] = [...new Set(splitLines(fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS)))];
 
 fetchData<ArrayData<Genre>>('/server/load.php?' +
     iswitch(generationKind, ['iptv', () => 'type=itv&action=get_genres'],
