@@ -148,7 +148,7 @@ function getGeminiPrompt(): string {
     }
 
     if (config.languages && config.languages.length > 0) {
-        prompt += `\n\nInclude only groups for following languages: [${config.languages.join(', ')}].`;
+        prompt += `\n\nInclude only results for following languages: [${config.languages.join(', ')}].`;
     }
 
     return prompt;
