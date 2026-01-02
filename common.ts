@@ -7,9 +7,12 @@ import {
     Genre,
     GenreSerie,
     GenreSeries,
+    M3ULine,
     M3uResult,
     M3uResultStream,
     M3uTesterConfig,
+    MetainfoResolverOptions,
+    MetainfoResult,
     Programs,
     Serie,
     StreamTester
@@ -24,6 +27,7 @@ import {
     firstValueFrom,
     forkJoin,
     from,
+    ignoreElements,
     last,
     map,
     Observable,
@@ -31,7 +35,8 @@ import {
     scan,
     switchMap,
     takeWhile,
-    tap
+    tap,
+    timeout
 } from 'rxjs';
 import { Playlist } from "iptv-playlist-parser";
 import { mergeMap } from "rxjs/operators";
@@ -139,6 +144,9 @@ export function getConfig(): Readonly<Config> {
     }
     if (typeof config.testM3uFile !== "boolean") {
         config.testM3uFile = config.testM3uFile as any === "true";
+    }
+    if (typeof config.seriesResolveTitle !== "boolean") {
+        config.seriesResolveTitle = config.seriesResolveTitle as any === "true";
     }
 
     return config;
@@ -699,4 +707,123 @@ export function getRGBFromPercentage(value: number): [number, number, number] {
     const blue = 0;
 
     return [red, green, blue];
+}
+
+export function printProgress(idx: number, total: number,
+                              label: (pct: number) => string = pct => `...generating (${pct}%)`)
+    : void {
+    if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
+        if (process.stdout.isTTY) {
+            process.stdout.clearLine(0);
+            process.stdout.cursorTo(0);
+        }
+        const percentage = Math.ceil(idx * 100 / total);
+        const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
+        if (process.stdout.isTTY) {
+            process.stdout.write(
+                chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(label(percentage)));
+        } else {
+            console.info(label(percentage));
+        }
+    }
+}
+
+export function resolveMetaInfo(
+    urls: M3ULine[],
+    enrichM3uLine: (m3ULine: M3ULine) => void = (m3ULine) => {
+    },
+    options: MetainfoResolverOptions = {}
+): Observable<void> {
+    const {
+        concurrency = 5,
+        timeoutMs = 10_000,
+        replaceTitle = false
+    } = options;
+
+    let completed = 0;
+
+    return from(urls)
+        .pipe(
+            mergeMap(
+                url =>
+                    defer(() =>
+                        from(resolveMetaInfoFfprobe(url, timeoutMs))
+                            .pipe(
+                                catchError(x => {
+                                    // console.error("Error", x);
+                                    return of(<MetainfoResult>{success: false});
+                                })
+                            )
+                    ).pipe(
+                        timeout(timeoutMs + 200), // extra guard
+                        tap(meta => {
+                            if (meta.success && meta.title) {
+                                if (replaceTitle) {
+                                    url.name = meta.title!;
+                                } else {
+                                    url.name += ' - ' + meta.title!;
+                                }
+                                url.duration = Math.floor(meta.duration ?? -1);
+                                enrichM3uLine(url);
+                            }
+                        })
+                    ),
+                concurrency
+            ),
+            tap(() => {
+                completed++;
+                printProgress(completed, urls.length, (pct) => `...processing metainfo (${pct}%)`);
+            }),
+            last(),
+            tap(() => {
+                if (process.stdout.isTTY && completed > 0) {
+                    process.stdout.clearLine(0);
+                    process.stdout.cursorTo(0);
+                }
+            }),
+            ignoreElements()
+        );
+}
+
+function resolveMetaInfoFfprobe(
+    m3uLine: M3ULine,
+    timeoutMs: number
+): Promise<MetainfoResult> {
+
+    if (!m3uLine.url) {
+        return Promise.reject({});
+    }
+
+    return new Promise((resolve, reject) => {
+        let settled = false;
+
+        const timer = setTimeout(() => {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            reject(new Error("ffprobe timeout"));
+        }, timeoutMs);
+
+        ffmpeg.ffprobe(
+            m3uLine.url,
+            (err: any, data: any) => {
+                if (settled) {
+                    return;
+                }
+                settled = true;
+                clearTimeout(timer);
+
+                if (err) {
+                    return reject(err);
+                }
+
+                resolve({
+                    duration: data.format?.duration,
+                    title: data.format?.tags?.title,
+                    success: true
+                });
+            }
+        );
+    });
 }

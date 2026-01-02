@@ -5,10 +5,11 @@ import {
     fetchSeries,
     getConfig,
     getGenerationKind,
-    getRGBFromPercentage,
     GROUP_FILE,
     logConfig,
+    printProgress,
     READ_OPTIONS,
+    resolveMetaInfo,
     splitLines
 } from "./common";
 import {
@@ -18,6 +19,7 @@ import {
     Data,
     GenerationKind,
     Genre,
+    GenreSerie,
     M3U,
     M3ULine,
     M3uTesterConfig,
@@ -27,9 +29,9 @@ import {
     VodOrdering
 } from "./types";
 
-import { iswitch } from 'iswitch';
-import { firstValueFrom, from, lastValueFrom, tap } from "rxjs";
-import { mergeMap } from "rxjs/operators";
+import {iswitch} from 'iswitch';
+import {firstValueFrom, from, lastValueFrom, tap} from "rxjs";
+import {mergeMap} from "rxjs/operators";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -105,7 +107,6 @@ function videoToM3u(video: Video, group: string): M3ULine {
         lines.data = isFinite(parseFloat(video.rating_imdb)) ? parseFloat(video.rating_imdb) : undefined;
     }
 
-
     return lines;
 }
 
@@ -115,8 +116,9 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
         const lines: M3ULine = <M3ULine>{};
 
         lines.title = `SERIE - ${serie.name}`;
+        lines.screenshotUri = decodeURI(season.screenshot_uri);
         lines.name = `${season.name} E${String(episode).padStart(2, '0')}`;
-        lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${season.name} - E${String(episode).padStart(2, '0')}" tvg-logo="${decodeURI(season.screenshot_uri)}" group-title="${lines.title}",${lines.name}`;
+        lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${lines.name}" tvg-logo="${lines.screenshotUri}" group-title="${lines.title}",${lines.name}`;
         lines.command = decodeURI(season.cmd);
         lines.episode = episode;
 
@@ -127,7 +129,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
 }
 
 // Load groups
-const groups: string[] = splitLines(fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS));
+const groups: string[] = [...new Set(splitLines(fs.readFileSync(GROUP_FILE(generationKind), READ_OPTIONS)))];
 
 fetchData<ArrayData<Genre>>('/server/load.php?' +
     iswitch(generationKind, ['iptv', () => 'type=itv&action=get_genres'],
@@ -157,19 +159,24 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                         res(null);
                     });
             } else if (generationKind === "vod") {
-
-                groups
+                const filteredGenres: Genre[] = groups
                     .filter(group => group && group.trim().length > 0)
                     .map(group => {
                         return genres.find(r => r.title === group)!;
-                    }).reduce((accPrograms, nextGenre, i) => {
-                    return accPrograms.then(val => {
-                        return fetchVodItems(nextGenre, 1, m3u);
                     });
-                }, Promise.resolve(true))
-                    .then(() => {
-                        res(null);
-                    });
+                from(filteredGenres)
+                    .pipe(
+                        mergeMap(
+                            (genre: Genre) => from([genre].reduce((accPrograms, nextGenre, i) => {
+                                return accPrograms.then(val => {
+                                    return fetchVodItems(nextGenre, 1, m3u);
+                                });
+                            }, Promise.resolve(true))),
+                            config.generatorThreads
+                        )
+                    ).subscribe({
+                    complete: () => res(null)
+                });
             } else if (generationKind === "series") {
                 // Filter genres
                 genres = genres
@@ -178,7 +185,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     });
 
                 fetchSeries(genres).then(genreSeries => {
-                    groups
+                    const filteredGenres: GenreSerie[] = groups
                         .filter(group => group && group.trim().length > 0)
                         .map(group => {
                             const genreSerie = genreSeries.find(r => r.toString() === group)!;
@@ -186,18 +193,24 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                                 console.error(chalk.red(`No matching group for "${group}"`));
                             }
                             return genreSerie;
-                        })
-                        .reduce((accPrograms, nextGenre, i) => {
-                            if (!nextGenre) {
-                                return Promise.resolve(false);
-                            }
-                            return accPrograms.then(val => {
-                                return fetchSeasonItems(nextGenre.serie, 1, m3u);
-                            });
-                        }, Promise.resolve(true))
-                        .then(() => {
-                            res(null);
                         });
+
+                    from(filteredGenres)
+                        .pipe(
+                            mergeMap(
+                                (genre: GenreSerie) => from([genre].reduce((accPrograms, nextGenre, i) => {
+                                    if (!nextGenre) {
+                                        return Promise.resolve(false);
+                                    }
+                                    return accPrograms.then(val => {
+                                        return fetchSeasonItems(nextGenre.serie, 1, m3u);
+                                    });
+                                }, Promise.resolve(true))),
+                                config.generatorThreads
+                            )
+                        ).subscribe({
+                        complete: () => res(null)
+                    });
                 });
             }
         });
@@ -287,15 +300,40 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
                     }
                 }).then((testedOk: boolean) => {
                     if (testedOk) {
+                        let idx: number = 0;
                         lastValueFrom(from(m3u).pipe(
                             mergeMap(
-                                (line, idx) =>
+                                (line) =>
                                     from(resolveUrlLink(line)).pipe(
-                                        tap(() => printProgress(idx, m3u.length))
+                                        tap(() => printProgress(++idx, m3u.length))
                                     ),
                                 config.generatorThreads
                             )
-                        )).then(res);
+                        )).then(() => {
+
+                            if (process.stdout.isTTY) {
+                                process.stdout.clearLine(0);
+                                process.stdout.cursorTo(0);
+                            }
+
+                            if (generationKind === 'series' && config.seriesResolveTitle) {
+                                // Resolve titles
+                                console.info("Resolving streams metainfo (duration, title, ...)");
+                                resolveMetaInfo(m3u,
+                                    (m3ULine) => {
+                                        m3ULine.header = `#EXTINF:${m3ULine.duration} tvg-id="" tvg-name="${m3ULine.name}" tvg-logo="${m3ULine.screenshotUri}" group-title="${m3ULine.title}",${m3ULine.name}`
+                                    },
+                                    {
+                                        concurrency: 5,
+                                        replaceTitle: false
+                                    }
+                                ).subscribe({
+                                    complete: () => res()
+                                });
+                            } else {
+                                res();
+                            }
+                        });
                     } else {
                         console.error(chalk.rgb(255, 165, 0)("Aborting M3U generation"));
                         process.exit(1);
@@ -305,15 +343,24 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             });
 
         }).then(() => {
-            if (process.stdout.isTTY) {
-                process.stdout.clearLine(0);
-                process.stdout.cursorTo(0);
-            }
 
             // Outputs m3u
             const filename: string = `${generationKind}-${config.hostname}.m3u`;
             console.info(chalk.bold(`Creating file ${filename}`));
             fs.writeFileSync(config.outputDir + '/' + filename, new M3U(m3u).print(config));
+
+            // Outputs summary
+            const titleCounts: Record<string, number> = m3u.reduce((acc: Record<string, number>, line: M3ULine) => {
+                const title = line.title;
+                acc[title] = (acc[title] || 0) + 1;
+                return acc;
+            }, {});
+            console.info(chalk.bold.gray(`=== Summary ===`));
+            for (const [title, count] of Object.entries(titleCounts)) {
+                console.info(chalk.gray(`${title} | Count: ${count}`));
+            }
+
+            console.info(chalk.bold(`Creating file ${filename}`));
 
             // Test m3u file
             if (config.testM3uFile) {
@@ -370,6 +417,11 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
         type = '';
     }
 
+    const applyBrokenLink: (m3uLine: M3ULine) => void = (m3uLine) => {
+        m3uLine.url = undefined;
+        m3uLine.name += ' (BROKEN LINK)';
+    };
+
     return new Promise<void>(function (res, err) {
 
         fetchData<Data<{
@@ -381,16 +433,16 @@ function resolveUrlLink(m3uLine: M3ULine): Promise<void> {
                         m3uLine.url = decodeURI(urlLink.js.cmd.match(/[^http]?(http.*)/g)![0].trim());
                     } catch (e) {
                         console.error(`Error reading media URL for '${m3uLine.header} of ${urlLink.js.cmd}'`);
-                        m3uLine.url = undefined;
+                        applyBrokenLink(m3uLine);
                     }
                 } else {
                     console.error(`Error fetching media URL for '${m3uLine.header}'`);
-                    m3uLine.url = undefined;
+                    applyBrokenLink(m3uLine);
                 }
                 res();
             }, err => {
                 console.error(`Error generating stream url for entry '${m3uLine.header}'`, err);
-                m3uLine.url = undefined;
+                applyBrokenLink(m3uLine);
                 res();
             });
     }).then(x => new Promise<void>((resolve) => {
@@ -454,21 +506,4 @@ function fetchSeasonItems(serie: Serie, page: number, m3u: M3ULine[]): Promise<b
                 }
             });
     });
-}
-
-function printProgress(idx: number, total: number): void {
-    if (Math.ceil((idx - 1) / total * 100) !== Math.ceil(idx / total * 100)) {
-        if (process.stdout.isTTY) {
-            process.stdout.clearLine(0);
-            process.stdout.cursorTo(0);
-        }
-        const percentage = Math.ceil(idx * 100 / total);
-        const rgbFromPercentage: [number, number, number] = getRGBFromPercentage(percentage);
-        if (process.stdout.isTTY) {
-            process.stdout.write(
-                chalk.rgb(rgbFromPercentage[0], rgbFromPercentage[1], rgbFromPercentage[2])(`...generating (${percentage}%)`));
-        } else {
-            console.info(`...generating (${percentage}%)`);
-        }
-    }
 }

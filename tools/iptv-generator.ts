@@ -4,7 +4,7 @@ import { BaseConfig, GenerationKind, UrlConfig } from '../types';
 import { catchError, forkJoin, from, of } from 'rxjs';
 import { concatMap, mergeMap } from "rxjs/operators";
 import * as process from "process";
-import { createPartFromUri, createUserContent, GoogleGenAI } from '@google/genai';
+import { createPartFromText, createPartFromUri, GoogleGenAI } from '@google/genai';
 import { spawn } from 'child_process';
 
 const fs = require('fs');
@@ -61,7 +61,7 @@ function getConfig(): Readonly<GeneratorConfig> {
 
     // Fill in default values if unset
     if (!config.geminiAiModel) {
-        config.geminiAiModel = 'gemini-2.0-flash';
+        config.geminiAiModel = 'gemini-2.5-flash';
     }
     if (config.streamTester === undefined) {
         config.streamTester = "ffmpeg";
@@ -108,6 +108,9 @@ logConfig(config);
 /** Start time */
 const startTime = process.hrtime();
 
+/** Quota exceeded pointer (to stop the process) */
+let aiQuotaExceeded: boolean = false;
+
 if (!fs.existsSync(SUCCEEDED_FILE)) {
     console.error(chalk.red(`${SUCCEEDED_FILE} file does not exist`));
 }
@@ -125,27 +128,27 @@ function getGeminiPrompt(): string {
 
     switch (generationKind) {
         case 'iptv':
-            prompt += `Filter the IPTV groups that correspond to following countries: ${config.iptv!.countries.join(', ')}.`;
+            prompt += `Filter the IPTV groups that ONLY match the following countries or regions (TARGET LIST): [${config.iptv!.countries.join(', ')}]. Do not consider ANY others.`;
             if (config.iptv!.excludedGroups && config.iptv!.excludedGroups.length > 0) {
-                prompt += ` But exclude following IPTV groups: ${config.iptv!.excludedGroups.join(', ')}.`;
+                prompt += ` Exclude following IPTV groups from the results: [${config.iptv!.excludedGroups.join(', ')}].`;
             }
             break;
         case "vod":
-            prompt += `Filter the VOD groups that correspond to following categories: ${config.vod!.includedCategories.join(', ')}.`;
+            prompt += `Filter the VOD groups that correspond to following categories (TARGET LIST): [${config.vod!.includedCategories.join(', ')}].`;
             if (config.vod!.excludedCategories && config.vod!.excludedCategories.length > 0) {
-                prompt += ` But exclude following VOD groups: ${config.vod!.excludedCategories.join(', ')}.`;
+                prompt += ` Exclude following VOD groups from the results: [${config.vod!.excludedCategories.join(', ')}].`;
             }
             break;
         case "series":
-            prompt += `Filter the SERIES groups of following series, tv shows or categories of tv shows: ${config.series!.includedSeries.join(', ')}.`;
+            prompt += `Filter the SERIES groups of following series, tv shows or categories of tv shows (TARGET LIST): [${config.series!.includedSeries.join(', ')}].`;
             if (config.series!.excludedSeries && config.series!.excludedSeries.length > 0) {
-                prompt += ` But exclude following series, tv shows or categories of tv shows: ${config.series!.excludedSeries.join(', ')}.`;
+                prompt += ` Exclude following series, tv shows or categories of tv shows from the results: [${config.series!.excludedSeries.join(', ')}].`;
             }
             break;
     }
 
     if (config.languages && config.languages.length > 0) {
-        prompt += ` Also only consider results of following languages: ${config.languages.join(', ')}.`;
+        prompt += `\n\nSTRICT RULE 2: The groups must be available in: [${config.languages.join(', ')}].`;
     }
 
     return prompt;
@@ -181,6 +184,12 @@ forkJoin(succeeded
             if (config.maxOutputs! > 0 && nbOutputs >= config.maxOutputs!) {
                 console.info(`Max number of outputs reached: ${config.maxOutputs}.`)
                 throw new RangeError(MAX_OUTPUTS_MSG);
+            }
+
+            // Skip of AI quota exceeded
+            if (aiQuotaExceeded) {
+                console.info(`Max AI quota exceeded.`)
+                throw new RangeError(`Max AI quota exceeded.`);
             }
 
             // Skip if target file exists
@@ -303,7 +312,25 @@ forkJoin(succeeded
     });
 
 function getFullPrompt(prompt: string): string {
-    return `You are an IPTV filtering assistant.\n\n${prompt}\n\nAttached text file is the list of groups (one per line).\n\nProvide the matches in attached file in JSON array format. Keep as given each group from attached file (one group per line). Only filter the rows matching the prompt. Do not edit, modify or add a line from attached groups. Please read proof your filtered matches to be sure each is indeed a row in attached file without any modification.`;
+    return `- SYSTEM INSTRUCTION:
+You are a precise IPTV data extraction tool. Your ONLY output must be a valid JSON array of strings. 
+No conversational text, no explanations, no reasoning, and no markdown formatting outside of the JSON block.
+- FORMAT: JSON array of strings. 
+- CONSTRAINT: Use exact strings from the file. No modifications. No preamble.
+
+STRICT RULE 1: If the group name does not contain one of the [TARGET LIST] titles, it must be ignored.
+
+Attached text file is the list of groups (one per line).
+
+- USER PROMPT:
+${prompt}
+
+- ANSWER INSTRUCTION:
+Provide the matches in attached file in JSON array format. Keep as given each group from attached file (one group per line). Only filter the rows matching the prompt. Do not edit, modify or add a line from attached groups. Please read proof your filtered matches to be sure each is indeed a row in attached file without any modification.
+
+- FINAL COMMAND:
+Using the rules above, scan every line of the INPUT DATA. Extract the matches now.
+`;
 }
 
 export async function askGemini(prompt: string): Promise<string[]> {
@@ -322,24 +349,49 @@ export async function askGemini(prompt: string): Promise<string[]> {
         // Ask gemini with prompt and attached groups file
         const result = await ai.models.generateContent({
             model: config.geminiAiModel,
-            contents: createUserContent([
-                createPartFromUri(groupsFile.uri!, groupsFile.mimeType!),
-                "\n\n",
-                getFullPrompt(prompt),
-            ]),
+            contents: [
+                {
+                    role: "user",
+                    parts: [
+                        createPartFromUri(groupsFile.uri!, groupsFile.mimeType!),
+                        createPartFromText(getFullPrompt(prompt)),
+                    ]
+                }
+            ],
+            config: {
+                thinkingConfig: {
+                    // thinkingLevel: "low",  // (for GEMINI-3 only) Options: 'minimal', 'low', 'medium', 'high'
+                    includeThoughts: false,    // Optional: returns the 'thoughts' in response
+                    thinkingBudget: 0
+                },
+                temperature: 0,
+                responseMimeType: "application/json"
+            }
         });
 
         if (!result || !result.text) {
-            throw new Error(`No response received. ${result.codeExecutionResult} ${result.responseId}`);
+            throw new Error(`(${result.modelVersion}) No response received. ${result.codeExecutionResult} ${result.responseId}`);
         }
         if (result.text!.startsWith("```json") && result.text!.endsWith("```")) {
             return JSON.parse(result.text!.substring("```json".length, result.text!.length - "```".length).trim());
         } else if (result.text!.startsWith("[") && result.text!.endsWith("]")) {
             return JSON.parse(result.text);
+        } else {
+            try {
+                return JSON.parse(result.text);
+            } catch (e) {
+                throw new Error(`(${result.modelVersion}) Unexpected response format:|${result?.text}` || result?.data + '|');
+            }
         }
-        throw new Error('Unexpected response format:|' + result?.text || result?.data + '|');
     } catch (err: any) {
         console.error('Error calling Gemini:', err.response?.data || err.message);
+        if (err.response?.data?.error?.code === 429
+            || err.message?.includes('429')
+            || err.message?.includes('RESOURCE_EXHAUSTED')
+            || err.status === 429) {
+            // Quota exceeded
+            aiQuotaExceeded = true;
+        }
         throw new Error('Error from Gemini');
     }
 }
