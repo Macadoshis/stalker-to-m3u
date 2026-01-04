@@ -86,6 +86,7 @@ export interface M3ULine {
     url?: string;
     testResult?: boolean;
     episode?: number;
+    season?: string;
     data?: any;
 }
 

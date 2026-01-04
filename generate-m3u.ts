@@ -121,6 +121,7 @@ function serieToM3u(serie: Serie, season: Serie, group: string): M3ULine[] {
         lines.header = `#EXTINF:-1 tvg-id="" tvg-name="${lines.name}" tvg-logo="${lines.screenshotUri}" group-title="${lines.title}",${lines.name}`;
         lines.command = decodeURI(season.cmd);
         lines.episode = episode;
+        lines.season = season.name;
 
         linesArray.push(lines);
     });
@@ -352,7 +353,8 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             // Outputs summary
             const titleCounts: Record<string, number> = m3u.reduce((acc: Record<string, number>, line: M3ULine) => {
                 const title = line.title;
-                acc[title] = (acc[title] || 0) + 1;
+                const season = line.season ? ` (${line.season})` : '';
+                acc[title + season] = (acc[title + season] || 0) + 1;
                 return acc;
             }, {});
             console.info(chalk.bold.gray(`=== Summary ===`));
