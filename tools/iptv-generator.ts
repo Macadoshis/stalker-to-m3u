@@ -148,7 +148,7 @@ function getGeminiPrompt(): string {
     }
 
     if (config.languages && config.languages.length > 0) {
-        prompt += `\n\nSTRICT RULE 2: The groups must be available in: [${config.languages.join(', ')}].`;
+        prompt += `\n\nSTRICT RULE 2: The groups must be available ONLY in languages: [${config.languages.join(', ')}].`;
     }
 
     return prompt;
