@@ -240,11 +240,9 @@ forkJoin(succeeded
                     if (!groups || groups.length === 0) {
                         return Promise.resolve(false);
                     }
-                    console.log('\u27A1 Original groups:', groups)
+                    console.log(`\u27A1 Original groups (${groups.length}) :`, groups)
                     return askGemini(getGeminiPrompt())
                         .then(filtered => {
-                            console.log('\u1FA84 Filtered groups:', filtered);
-
                             filtered = filtered.filter(group => {
                                 if (!groups.includes(group)) {
                                     console.warn(chalk.keyword('orange')(`Excluding filtered group "${group}". Wrong matching result computed by Gemini AI.`));
@@ -252,6 +250,8 @@ forkJoin(succeeded
                                 }
                                 return true;
                             });
+
+                            console.log(`\u1FA84 Filtered groups (${filtered.length}) :`, filtered);
 
                             fs.writeFileSync(GROUP_FILE(generationKind), filtered.join('\n'), null, 2);
                             return filtered.length > 0;
