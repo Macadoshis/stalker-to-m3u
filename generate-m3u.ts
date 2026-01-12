@@ -361,6 +361,7 @@ fetchData<ArrayData<Genre>>('/server/load.php?' +
             for (const [title, count] of Object.entries(titleCounts)) {
                 console.info(chalk.gray(`${title} | Count: ${count}`));
             }
+            console.info(chalk.bold.gray(`===============`))
 
             console.info(chalk.bold(`Creating file ${filename}`));
 
