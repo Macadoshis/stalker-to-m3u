@@ -294,20 +294,22 @@ _groups_ then _m3u_.
 The groups are filtered by AI Gemini based on given customizable criteria within configuration
 file [generator-config.json](tools/generator-config.json).
 
-| Property                 | Description                                                                                              | Optional | Default                          | Examples                     |
-|--------------------------|----------------------------------------------------------------------------------------------------------|----------|----------------------------------|------------------------------|
-| `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                                  |                              |
-| `geminiAiModel`          | Google GEMINI AI model (should be supported by your key).                                                | &#x2713; | `gemini-2.5-flash-preview-09-2025` |                            |
-| `outputDir`              | Output directory of generated M3U files                                                                  | &#x2713; | `.`                              |                              |
-| `languages`              | Array of languages to support criteria. Not applied if unset.                                            | &#x2713; | `[]`                             | "English"                    |
-| `maxOutputs`             | Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.              | &#x2713; | `-1`                             |                              |
-| `shuffle`                | Shuffle succeeded.json entries to read from                                                              | &#x2713; | `false`                          |                              |
-| `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                                  | "UK", "US", "Canada"         |
-| `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | &#x2713; | `[]`                             | "Adults", "Reality", "Music" |
-| `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                                  | "Comedy", "Horror"           |
-| `vod/excludedCategories` | List of categories of VOD to exclude. They need to be spelled in English. Not applied if unset.          | &#x2713; | `[]`                             | "Netflix", "Adults", "Apple" |
-| `series/includedSeries`  | List of series or themes of series to fetch. They need to be spelled in English.                         |          |                                  | "Breaking Bad"               |
-| `series/excludedSeries`  | List of series or themes of series to exclude. They need to be spelled in English. Not applied if unset. | &#x2713; | `[]`                             | "Season 1", "Season 2"       |
+| Property                 | Description                                                                                              | Optional | Default                            | Examples                     |
+|--------------------------|----------------------------------------------------------------------------------------------------------|----------|------------------------------------|------------------------------|
+| `geminiAiKey`            | Google GEMINI AI key.                                                                                    |          |                                    |                              |
+| `geminiAiModel`          | Google GEMINI AI model (should be supported by your key).                                                | &#x2713; | `gemini-2.5-flash-preview-09-2025` |                              |
+| `outputDir`              | Output directory of generated M3U files                                                                  | &#x2713; | `.`                                |                              |
+| `languages`              | Array of languages to support criteria. Not applied if unset.                                            | &#x2713; | `[]`                               | "English"                    |
+| `maxOutputs`             | Max entries to generate from succeeded.json. Skipped existing m3u files are not considered.              | &#x2713; | `-1`                               |                              |
+| `shuffle`                | Shuffle succeeded.json entries to read from                                                              | &#x2713; | `false`                            |                              |
+| `host`                   | Host to replay. If set, filters succeeded.json to given host.                                            | &#x2713; |                                    |                              |
+| `mac`                    | MAC to replay. If set, filters succeeded.json to given MAC.                                              | &#x2713; |                                    |                              |
+| `iptv/countries`         | List of countries for which to fetch channels for. They need to be spelled in English.                   |          |                                    | "UK", "US", "Canada"         |
+| `iptv/excludedGroups`    | List of channels groups to exclude. They need to be spelled in English. Not applied if unset.            | &#x2713; | `[]`                               | "Adults", "Reality", "Music" |
+| `vod/includedCategories` | List of categories of VOD for which to fetch movies for. They need to be spelled in English.             |          |                                    | "Comedy", "Horror"           |
+| `vod/excludedCategories` | List of categories of VOD to exclude. They need to be spelled in English. Not applied if unset.          | &#x2713; | `[]`                               | "Netflix", "Adults", "Apple" |
+| `series/includedSeries`  | List of series or themes of series to fetch. They need to be spelled in English.                         |          |                                    | "Breaking Bad"               |
+| `series/excludedSeries`  | List of series or themes of series to exclude. They need to be spelled in English. Not applied if unset. | &#x2713; | `[]`                               | "Season 1", "Season 2"       |
 
 ### Outputs
 

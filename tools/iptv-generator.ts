@@ -22,6 +22,7 @@ interface GeneratorConfig extends BaseConfig {
     maxOutputs?: number;
     shuffle?: boolean;
     host?: string;
+    mac?: string;
     iptv?: IptvGeneratorConfig;
     vod?: VodGeneratorConfig;
     series?: SeriesGeneratorConfig;
@@ -117,10 +118,14 @@ if (!fs.existsSync(SUCCEEDED_FILE)) {
 
 const succeeded: UrlConfig[] = (JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[])
     .filter(x => {
+        let ret: boolean = true;
         if (!!config.host) {
-            return x.hostname === config.host;
+            ret = ret && (x.hostname === config.host.trim());
         }
-        return true;
+        if (!!config.mac) {
+            ret = ret && (x.mac === config.mac.trim());
+        }
+        return ret;
     });
 
 function getGeminiPrompt(): string {

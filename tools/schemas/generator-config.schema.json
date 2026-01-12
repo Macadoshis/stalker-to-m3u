@@ -39,6 +39,10 @@
       "type": "string",
       "description": "Host to replay. If set, filters succeeded.json to given host."
     },
+    "mac": {
+      "type": "string",
+      "description": "MAC to replay. If set, filters succeeded.json to given MAC."
+    },
     "shuffle": {
       "type": "boolean",
       "description": "Shuffle succeeded.json entries to read from",
