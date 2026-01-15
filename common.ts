@@ -42,6 +42,7 @@ import { Playlist } from "iptv-playlist-parser";
 import { mergeMap } from "rxjs/operators";
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from "axios";
 import { AxiosRetry, IAxiosRetryConfig } from "axios-retry/dist/cjs";
+import { FfprobeData } from "fluent-ffmpeg";
 
 // Override console methods to prepend the current datetime
 ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
@@ -807,7 +808,7 @@ function resolveMetaInfoFfprobe(
 
         ffmpeg.ffprobe(
             m3uLine.url,
-            (err: any, data: any) => {
+            (err: any, data: FfprobeData) => {
                 if (settled) {
                     return;
                 }
@@ -820,7 +821,7 @@ function resolveMetaInfoFfprobe(
 
                 resolve({
                     duration: data.format?.duration,
-                    title: data.format?.tags?.title,
+                    title: data.format?.tags?.title as string,
                     success: true
                 });
             }

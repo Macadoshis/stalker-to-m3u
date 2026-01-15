@@ -20,6 +20,7 @@
   "private": false,
   "devDependencies": {
     "@google/genai": "~1.34.0",
+    "@types/fluent-ffmpeg": "latest",
     "@types/node": "^22.15.21",
     "@types/object-hash": "latest",
     "ajv": "latest",
