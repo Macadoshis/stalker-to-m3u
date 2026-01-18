@@ -112,7 +112,7 @@
           "title": "Check the stream liveness with FFMPEG"
         }
       ],
-      "default": "http"
+      "default": "ffmpeg"
     },
     "testM3uFile": {
       "type": "boolean",
