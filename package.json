@@ -25,7 +25,7 @@
     "@types/object-hash": "latest",
     "ajv": "latest",
     "async-mutex": "latest",
-    "axios": "1.13.2",
+    "axios": "1.13.5",
     "axios-retry": "latest",
     "chalk": "^4.1.2",
     "fluent-ffmpeg": "latest",
