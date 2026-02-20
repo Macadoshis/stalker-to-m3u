@@ -62,7 +62,7 @@ function getConfig(): Readonly<GeneratorConfig> {
 
     // Fill in default values if unset
     if (!config.geminiAiModel) {
-        config.geminiAiModel = 'gemini-2.5-flash';
+        config.geminiAiModel = 'gemini-3-flash-preview';
     }
     if (config.streamTester === undefined) {
         config.streamTester = "ffmpeg";
