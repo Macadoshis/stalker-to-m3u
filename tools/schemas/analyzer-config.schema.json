@@ -27,6 +27,11 @@
       "description": "Whether to test again the success.json content (if file exists)",
       "default": false
     },
+    "retestFailed": {
+      "type": "boolean",
+      "description": "Whether to test again the failed.json content (if file exists)",
+      "default": false
+    },
     "streamTester": {
       "type": "string",
       "description": "Stream tester mode",

@@ -42,6 +42,7 @@ interface AnalyzerConfig extends BaseConfig {
     groupsToTest?: number;
     channelsToTest?: number;
     retestSuccess?: boolean;
+    retestFailed?: boolean;
     threadsCount?: number;
 }
 
@@ -111,7 +112,7 @@ async function initFiles(): Promise<void> {
             if (!config.retestSuccess && fs.existsSync(SUCCEEDED_FILE)) {
                 succeeded.push(...JSON.parse(fs.readFileSync(SUCCEEDED_FILE, READ_OPTIONS)) as UrlConfig[]);
             }
-            if (fs.existsSync(FAILED_FILE)) {
+            if (!config.retestFailed && fs.existsSync(FAILED_FILE)) {
                 readFileAsync(failed, FAILED_FILE, res, rej);
             }
         } else {
@@ -241,6 +242,29 @@ function fetchAllUrls(urls: string[]): void {
                 return urls;
             }),
             concatMap(urls => {
+                const failedToReplay: UrlAndMac[] = [];
+                return new Promise<void>((res, rej) => {
+                    if (config.retestFailed) {
+                        readFileAsync(failedToReplay, FAILED_FILE, res, rej);
+
+                        // Clear failed file
+                        fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
+                    } else {
+                        res();
+                    }
+                }).then(x => {
+
+                    failedToReplay.forEach((value) => {
+                        if (!urls.has(value.url)) {
+                            urls.set(value.url, new Set());
+                        }
+                        urls.set(value.url, new Set([...urls.get(value.url)!, ...value.mac]));
+                    });
+
+                    return Promise.resolve(urls);
+                });
+            }),
+            concatMap(urls => {
                     const items: UrlAndMac[] = [];
 
                     if (config.retestSuccess) {
@@ -256,7 +280,6 @@ function fetchAllUrls(urls: string[]): void {
                         // Clear success file
                         fs.writeFileSync(SUCCEEDED_FILE, JSON.stringify([], null, 2));
                     }
-
                     urls.forEach((macs, url) => {
                         macs.forEach(mac => {
                             const urlAndMac: UrlAndMac = {url, mac};
