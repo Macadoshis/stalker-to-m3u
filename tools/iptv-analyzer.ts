@@ -114,6 +114,8 @@ async function initFiles(): Promise<void> {
             }
             if (!config.retestFailed && fs.existsSync(FAILED_FILE)) {
                 readFileAsync(failed, FAILED_FILE, res, rej);
+            } else {
+                res();
             }
         } else {
             // Clear files
@@ -160,6 +162,9 @@ function getConfig(): Readonly<AnalyzerConfig> {
     if (config.retestSuccess === undefined) {
         config.retestSuccess = false;
     }
+    if (config.retestFailed === undefined) {
+        config.retestFailed = false;
+    }
     if (config.threadsCount === undefined) {
         // Number of threads for analyze process
         config.threadsCount = 10;
@@ -176,6 +181,9 @@ function getConfig(): Readonly<AnalyzerConfig> {
     }
     if (typeof config.retestSuccess !== "boolean") {
         config.retestSuccess = config.retestSuccess as any === "true";
+    }
+    if (typeof config.retestFailed !== "boolean") {
+        config.retestFailed = config.retestFailed as any === "true";
     }
 
     return config;
@@ -210,10 +218,6 @@ function fetchUrl(url: string): Observable<FetchContent> {
 /** Load sources urls */
 function fetchAllUrls(urls: string[]): void {
 
-    if (config.retestSuccess) {
-        urls.push(`file:///${SUCCEEDED_FILE}`);
-    }
-
     const requests = urls
         .filter(url => url.trim().length > 0)
         .filter(url => !url.startsWith('#') && !url.startsWith(';'))
@@ -246,19 +250,19 @@ function fetchAllUrls(urls: string[]): void {
                 return new Promise<void>((res, rej) => {
                     if (config.retestFailed) {
                         readFileAsync(failedToReplay, FAILED_FILE, res, rej);
-
-                        // Clear failed file
-                        fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
                     } else {
                         res();
                     }
                 }).then(x => {
-
+                    if (config.retestFailed) {
+                        // Clear failed file
+                        fs.writeFileSync(FAILED_FILE, JSON.stringify([], null, 2));
+                    }
                     failedToReplay.forEach((value) => {
                         if (!urls.has(value.url)) {
                             urls.set(value.url, new Set());
                         }
-                        urls.set(value.url, new Set([...urls.get(value.url)!, ...value.mac]));
+                        urls.set(value.url, new Set([...urls.get(value.url)!, value.mac]));
                     });
 
                     return Promise.resolve(urls);
