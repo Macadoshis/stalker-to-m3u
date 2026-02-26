@@ -209,6 +209,8 @@ file [tools/analyzer-config.json](./tools/analyzer-config.json).
 | `cache`          | Whether or not to test again a provider if it is already listed either in `succeeded.json` or `failed.json` upon subsequent relaunching of the script.              | &#x2713; | `false`  |
 | `groupsToTest`   | Number of IPTV groups to fetch channels from.<br/>The group(s) are selected randomly among all IPTV genres of the provider.                                         | &#x2713; | `1`      |
 | `channelsToTest` | Number of IPTV channels to check the liveness.<br/>The channel(s) are selected randomly among all channels from the result of selected genres (see `groupsToTest`). | &#x2713; | `1`      |
+| `retestSuccess`  | Whether to test again the `success.json` content (if file exists). Only applicable if `cache` is `true`.                                                            | &#x2713; | `false`  |
+| `retestFailed`   | Whether to test again the `failed.json` content (if file exists). Only applicable if `cache` is `true`.                                                             | &#x2713; | `false`  |
 | `threadsCount`   | Number of providers to analyze in parallel.                                                                                                                         | &#x2713; | `10`     |
 | `streamTester`   | Stream tester mode. One of value `http` or `ffmpeg`.                                                                                                                | &#x2713; | `ffmpeg` |
 
@@ -253,7 +255,6 @@ The criteria can be configured through config file [m3u-tester-config.json](tool
 | `minSuccess`      | Minimal number of failures before marking a M3U file as succeeded. Deactivate testing upon success with value -1. | &#x2713; | `1`          |
 | `renameOnFailure` | Whether to rename a failed M3U by prefixing with 'renamePrefix'.                                                  | &#x2713; | `false`      |
 | `renamePrefix`    | Prefix to rename a failed M3U (only if 'renameOnFailure' is set to true).                                         | &#x2713; | `UNHEALTHY_` |
-| `retestSuccess`   | Whether to test again the success.json content (if file exists).                                                  | &#x2713; | `false`      |
 | `threadsCount`    | Number of M3U to process in parallel.                                                                             | &#x2713; | `1`          |
 | `streamTester`    | Stream tester mode. One of value `http` or `ffmpeg`.                                                              | &#x2713; | `ffmpeg`     |
 
