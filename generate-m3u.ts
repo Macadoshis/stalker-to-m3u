@@ -29,9 +29,9 @@ import {
     VodOrdering
 } from "./types";
 
-import {iswitch} from 'iswitch';
-import {firstValueFrom, from, lastValueFrom, tap} from "rxjs";
-import {mergeMap} from "rxjs/operators";
+import { iswitch } from 'iswitch';
+import { firstValueFrom, from, lastValueFrom, tap } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
 type Tvg = Readonly<Record<string, string[]>>;
 
@@ -461,23 +461,23 @@ function fetchVodItems(genre: Genre, page: number, m3u: M3ULine[]): Promise<bool
         fetchData<Data<Programs<Video>>>(`/server/load.php?type=vod&action=get_ordered_list&sortby=added&p=${page}&genre=${genre.id}`, true)
             .then(allPrograms => {
 
-                if (!allPrograms?.js) {
+                if (!allPrograms?.js || !Array.isArray(allPrograms.js.data)) {
                     console.error(`Error fetching page ${page} of genre '${genre.title}'`);
                     res(fetchVodItems(genre, page + 1, m3u));
-                }
-
-                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
-                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
-                }
-
-                for (const video of allPrograms.js.data) {
-                    m3u.push(videoToM3u(video, genre.title));
-                }
-
-                if (allPrograms.js.data.length > 0 && page < (config.vodMaxPagePerGenre ?? 2)) {
-                    res(fetchVodItems(genre, page + 1, m3u));
                 } else {
-                    res(true);
+                    if (allPrograms.js.data.length > 0) {
+                        console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of genre '${genre.title}'`);
+                    }
+
+                    for (const video of allPrograms.js.data) {
+                        m3u.push(videoToM3u(video, genre.title));
+                    }
+
+                    if (allPrograms.js.data.length > 0 && page < (config.vodMaxPagePerGenre ?? 2)) {
+                        res(fetchVodItems(genre, page + 1, m3u));
+                    } else {
+                        res(true);
+                    }
                 }
             });
     });
@@ -489,23 +489,23 @@ function fetchSeasonItems(serie: Serie, page: number, m3u: M3ULine[]): Promise<b
         fetchData<Data<Programs<Serie>>>(`/server/load.php?type=series&action=get_ordered_list&movie_id=${encodeURIComponent(serie.id)}&p=${page}&sortby=added`, true)
             .then(allPrograms => {
 
-                if (!allPrograms?.js) {
+                if (!allPrograms?.js || !Array.isArray(allPrograms.js.data)) {
                     console.error(`Error fetching page ${page} of serie '${serie.name}'`);
                     res(fetchSeasonItems(serie, page + 1, m3u));
-                }
-
-                if (!!allPrograms.js.data && allPrograms.js.data.length > 0) {
-                    console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of serie '${serie.name}'`);
-                }
-
-                for (const season of allPrograms.js.data) {
-                    m3u.push(...serieToM3u(serie, season, serie.name));
-                }
-
-                if (allPrograms.js.data.length > 0) {
-                    res(fetchSeasonItems(serie, page + 1, m3u));
                 } else {
-                    res(true);
+                    if (allPrograms.js.data.length > 0) {
+                        console.info(`Fetched page ${page}/${Math.ceil(allPrograms.js.total_items / allPrograms.js.max_page_items)} of serie '${serie.name}'`);
+                    }
+
+                    for (const season of allPrograms.js.data) {
+                        m3u.push(...serieToM3u(serie, season, serie.name));
+                    }
+
+                    if (allPrograms.js.data.length > 0) {
+                        res(fetchSeasonItems(serie, page + 1, m3u));
+                    } else {
+                        res(true);
+                    }
                 }
             });
     });

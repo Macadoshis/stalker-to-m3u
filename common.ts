@@ -63,7 +63,7 @@ if (!AXIOS_RETRY_COUNT || AXIOS_RETRY_COUNT <= 0) {
     throw new Error("Retry count should be set");
 }
 
-const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
+const FFMPEG_TESTER_DURATION_SECONDS: number = 15;
 
 const TEST_STREAM_REQUEST_TIMEOUT: number = 10_000 * AXIOS_RETRY_COUNT;
 
@@ -344,7 +344,7 @@ function fetchSeriesItems(genre: Genre, page: number, series: Serie[], maxPage?:
         fetchData<Data<Programs<Serie>>>(`/server/load.php?type=series&action=get_ordered_list&sortby=added&p=${page}&category=${genre.id}`, true)
             .then(allPrograms => {
 
-                if (!allPrograms?.js || !allPrograms.js.data) {
+                if (!allPrograms?.js || !Array.isArray(allPrograms.js.data)) {
                     console.error(`Error fetching page ${page} of genre '${genre.title}'`);
                     if (maxPage && page + 1 <= maxPage) {
                         res(fetchSeriesItems(genre, page + 1, series, maxPage));
@@ -500,9 +500,9 @@ function checkStreamFfmpeg(url: string): Promise<boolean> {
             }
         })
             .withNoAudio()
-            .inputOptions(`-t ${FFMPEG_TESTER_DURATION_SECONDS}`) // Read stream for N seconds
-            .outputOptions('-f null')
-            .output('null')
+            .inputOptions([`-t ${FFMPEG_TESTER_DURATION_SECONDS}`, '-rw_timeout 10000000']) // Read stream for N seconds
+            .outputOptions(['-f null', '-v error', '-xerror'])
+            .output(process.platform === 'win32' ? 'NUL' : '/dev/null')
             .on("start", (cmd: string) => {
                 // console.debug(`▶️  Running FFmpeg: ${cmd}`);
             })
