@@ -344,7 +344,7 @@ function fetchSeriesItems(genre: Genre, page: number, series: Serie[], maxPage?:
         fetchData<Data<Programs<Serie>>>(`/server/load.php?type=series&action=get_ordered_list&sortby=added&p=${page}&category=${genre.id}`, true)
             .then(allPrograms => {
 
-                if (!allPrograms?.js || !allPrograms.js.data) {
+                if (!allPrograms?.js || !Array.isArray(allPrograms.js.data)) {
                     console.error(`Error fetching page ${page} of genre '${genre.title}'`);
                     if (maxPage && page + 1 <= maxPage) {
                         res(fetchSeriesItems(genre, page + 1, series, maxPage));
