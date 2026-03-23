@@ -63,7 +63,7 @@ if (!AXIOS_RETRY_COUNT || AXIOS_RETRY_COUNT <= 0) {
     throw new Error("Retry count should be set");
 }
 
-const FFMPEG_TESTER_DURATION_SECONDS: number = 15;
+const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
 
 const TEST_STREAM_REQUEST_TIMEOUT: number = 10_000 * AXIOS_RETRY_COUNT;
 
@@ -488,10 +488,22 @@ function checkStreamHttp(url: string, userAgent: string): Promise<boolean> {
 function checkStreamFfmpeg(url: string): Promise<boolean> {
 
     return new Promise<boolean>((resolve) => {
+        let timeout: NodeJS.Timeout | undefined;
+        let settled = false;
+        let streamOpened = false;
 
-        let timeout: any | undefined = undefined;
+        const finish = (ok: boolean): void => {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            resolve(ok);
+        };
 
-        let command = ffmpeg(url, {
+        const command = ffmpeg(url, {
             logger: {
                 debug: (m: any) => console.debug(m),
                 info: (m: any) => console.info(m),
@@ -500,37 +512,43 @@ function checkStreamFfmpeg(url: string): Promise<boolean> {
             }
         })
             .withNoAudio()
-            .inputOptions([`-t ${FFMPEG_TESTER_DURATION_SECONDS}`, '-rw_timeout 10000000']) // Read stream for N seconds
-            .outputOptions(['-f null', '-v error', '-xerror'])
+            .inputOptions([`-t ${FFMPEG_TESTER_DURATION_SECONDS}`, '-rw_timeout 10000000'])
+            .outputOptions(['-f null', '-v warning', '-xerror'])
             .output(process.platform === 'win32' ? 'NUL' : '/dev/null')
-            .on("start", (cmd: string) => {
-                // console.debug(`▶️  Running FFmpeg: ${cmd}`);
+            .on('start', () => {
+                streamOpened = true;
+            })
+            .on('codecData', () => {
+                streamOpened = true;
+            })
+            .on('progress', () => {
+                streamOpened = true;
             })
             .on("error", (err: any, stdout: any, stderr: any) => {
-                clearTimeout(timeout);
                 console.error(chalk.redBright(`❌  Stream failed: ${err.message}`));
                 // console.debug(`📜 FFmpeg stdout: ${stdout}`);
                 // console.debug(`📜 FFmpeg stderr: ${stderr}`);
 
                 // Stream is unreachable
-                resolve(false);
+                finish(false);
             })
             .on("end", () => {
-                clearTimeout(timeout);
+                if (!streamOpened) {
+                    console.error(chalk.redBright(`❌  Stream ended without being opened correctly.`));
+                    finish(false);
+                    return;
+                }
+
                 console.log(chalk.greenBright(`Stream is accessible and playable.`));
-                // Stream is accessible
-                resolve(true);
+                finish(true);
             });
+
         command.run();
 
-        // Kill ffmpeg after timeout reached (if not ended yet)
-        timeout = setTimeout(function () {
-            command.on('error', function () {
-                console.log(`Ffmpeg for ${url} has been killed (timeout of ${TEST_STREAM_REQUEST_TIMEOUT} ms reached)`);
-            });
-
+        timeout = setTimeout(() => {
             command.kill();
-            resolve(false);
+            console.log(`Ffmpeg for ${url} has been killed (timeout of ${TEST_STREAM_REQUEST_TIMEOUT} ms reached)`);
+            finish(false);
         }, TEST_STREAM_REQUEST_TIMEOUT);
     });
 }
