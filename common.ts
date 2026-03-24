@@ -462,7 +462,7 @@ function checkStreamHttp(url: string, userAgent: string): Promise<boolean> {
             .pipe(
                 map(r => {
                     if (r && r.status === 200) {
-                        console.log(chalk.greenBright(`Stream is accessible and playable.`));
+                        console.log(chalk.greenBright(`Stream is accessible and playable [${url}]`));
                         return true;
                     }
 
@@ -539,7 +539,7 @@ function checkStreamFfmpeg(url: string): Promise<boolean> {
                     return;
                 }
 
-                console.log(chalk.greenBright(`Stream is accessible and playable.`));
+                console.log(chalk.greenBright(`Stream is accessible and playable [${url}]`));
                 finish(true);
             });
 
