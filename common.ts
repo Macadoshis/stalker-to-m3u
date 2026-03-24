@@ -630,6 +630,10 @@ export function logConfig<T extends object>(config: T, indent: string = ''): voi
     }
 }
 
+export function playableStream(channelName: String): boolean {
+    return !channelName.startsWith('#');
+}
+
 export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uResult> {
 
     const m3uResult: M3uResult = {
@@ -643,15 +647,16 @@ export function checkM3u(m3uFile: string, cfg: M3uTesterConfig): Observable<M3uR
 
     // Update max values according to number of items (do not test channels separator likely starting with '#')
     cfg = {...cfg};
+    const playableItems = playlist.items.filter(x => playableStream(x.name));
     if (cfg.minSuccess > 0) {
-        cfg.minSuccess = Math.min(cfg.minSuccess, playlist.items.filter(f => !f.name.startsWith('#')).length);
+        cfg.minSuccess = Math.min(cfg.minSuccess, playableItems.length);
     }
     if (cfg.maxFailures > 0) {
-        cfg.maxFailures = Math.min(cfg.maxFailures, playlist.items.filter(f => !f.name.startsWith('#')).length);
+        cfg.maxFailures = Math.min(cfg.maxFailures, playableItems.length);
     }
 
     // Shuffle items randomly to avoid starting the test with the first channel often being a "fake" channel separator
-    playlist.items = shuffleItems(playlist.items);
+    playlist.items = shuffleItems(playableItems);
 
     if (playlist.items.length === 0) {
         return of({...m3uResult, status: false});

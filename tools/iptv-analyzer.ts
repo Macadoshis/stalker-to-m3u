@@ -7,6 +7,7 @@ import {
     fetchData,
     getRGBFromPercentage,
     logConfig,
+    playableStream,
     randomDeviceId,
     randomSerialNumber,
     READ_OPTIONS,
@@ -353,7 +354,7 @@ function fetchAllUrls(urls: string[]): void {
                             map(results => results.flat()),
                             // (do not test channels separator likely starting with '#')
                             map(channels => {
-                                return channels.filter(f => !f.name.startsWith('#')).sort(() => Math.random() - 0.5).slice(0, Math.min(config.channelsToTest ?? 1, channels.length));
+                                return channels.filter(f => playableStream(f.name)).sort(() => Math.random() - 0.5).slice(0, Math.min(config.channelsToTest ?? 1, channels.length));
                             })
                         )
                     ),
