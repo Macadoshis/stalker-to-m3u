@@ -63,7 +63,7 @@ if (!AXIOS_RETRY_COUNT || AXIOS_RETRY_COUNT <= 0) {
     throw new Error("Retry count should be set");
 }
 
-const FFMPEG_TESTER_DURATION_SECONDS: number = 5;
+const FFMPEG_TESTER_DURATION_SECONDS: number = 10;
 
 const TEST_STREAM_REQUEST_TIMEOUT: number = 10_000 * AXIOS_RETRY_COUNT;
 
