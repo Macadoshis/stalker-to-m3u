@@ -17,6 +17,15 @@ export function getConfig(): Readonly<M3uTesterConfig> {
     const configData: string = fs.readFileSync('./tools/m3u-tester-config.json', READ_OPTIONS);
     let config: M3uTesterConfig = JSON.parse(configData) as M3uTesterConfig;
 
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(2));
+    const {_, ...argsWithoutUnderscore} = args;
+    config = {...config, ...argsWithoutUnderscore};
+
+    if (typeof config.renameOnFailure !== "boolean") {
+        config.renameOnFailure = config.renameOnFailure as any === "true";
+    }
+
     // Validate JSON file
     const schema: any = require('./schemas/m3u-tester-config.schema.json');
     const ajv = new Ajv();
@@ -38,14 +47,6 @@ export function getConfig(): Readonly<M3uTesterConfig> {
     config.minSuccess = config.minSuccess ?? 1;
     config.threadsCount = config.threadsCount ?? 1;
     config.renameOnFailure = config.renameOnFailure === undefined ? false : config.renameOnFailure;
-
-    // Override with command line additional arguments
-    const args = yargsParser(process.argv.slice(2));
-    config = {...config, ...args};
-
-    if (typeof config.renameOnFailure !== "boolean") {
-        config.renameOnFailure = config.renameOnFailure as any === "true";
-    }
 
     return config;
 }

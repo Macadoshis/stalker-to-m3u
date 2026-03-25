@@ -143,6 +143,21 @@ function getConfig(): Readonly<AnalyzerConfig> {
     const configData: string = fs.readFileSync('./tools/analyzer-config.json', READ_OPTIONS);
     let config: AnalyzerConfig = JSON.parse(configData) as AnalyzerConfig;
 
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(2));
+    const {_, ...argsWithoutUnderscore} = args;
+    config = {...config, ...argsWithoutUnderscore};
+
+    if (typeof config.cache !== "boolean") {
+        config.cache = config.cache as any === "true";
+    }
+    if (typeof config.retestSuccess !== "boolean") {
+        config.retestSuccess = config.retestSuccess as any === "true";
+    }
+    if (typeof config.retestFailed !== "boolean") {
+        config.retestFailed = config.retestFailed as any === "true";
+    }
+
     // Validate JSON file
     const schema: any = require('./schemas/analyzer-config.schema.json');
     const ajv = new Ajv();
@@ -172,20 +187,6 @@ function getConfig(): Readonly<AnalyzerConfig> {
     }
     config.groupsToTest = config.groupsToTest ?? 1;
     config.channelsToTest = config.channelsToTest ?? 1;
-
-    // Override with command line additional arguments
-    const args = yargsParser(process.argv.slice(2));
-    config = {...config, ...args};
-
-    if (typeof config.cache !== "boolean") {
-        config.cache = config.cache as any === "true";
-    }
-    if (typeof config.retestSuccess !== "boolean") {
-        config.retestSuccess = config.retestSuccess as any === "true";
-    }
-    if (typeof config.retestFailed !== "boolean") {
-        config.retestFailed = config.retestFailed as any === "true";
-    }
 
     return config;
 }

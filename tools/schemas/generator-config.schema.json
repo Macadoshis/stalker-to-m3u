@@ -8,8 +8,11 @@
       "description": "User-Agent for HTTP requests"
     },
     "geminiAiKey": {
-      "type": "string",
-      "description": "Google GEMINI AI key",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of 1 or many Google GEMINI AI key",
       "default": false
     },
     "geminiAiModel": {

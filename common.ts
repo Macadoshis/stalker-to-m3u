@@ -93,6 +93,21 @@ export function getConfig(): Readonly<Config> {
 
     let config: Config = JSON.parse(configData) as Config;
 
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(2));
+    const {_, ...argsWithoutUnderscore} = args;
+    config = {...config, ...argsWithoutUnderscore};
+
+    if (typeof config.computeUrlLink !== "boolean") {
+        config.computeUrlLink = config.computeUrlLink as any === "true";
+    }
+    if (typeof config.testM3uFile !== "boolean") {
+        config.testM3uFile = config.testM3uFile as any === "true";
+    }
+    if (typeof config.seriesResolveTitle !== "boolean") {
+        config.seriesResolveTitle = config.seriesResolveTitle as any === "true";
+    }
+
     // Validate JSON file
     const schema: any = require('./schemas/config.schema.json');
     const ajv = new Ajv();
@@ -135,19 +150,6 @@ export function getConfig(): Readonly<Config> {
     if (!config.serialNumber) {
         config.serialNumber = randomSerialNumber();
         // console.log(`Using serialNumber: ${config.serialNumber}`);
-    }
-    // Override with command line additional arguments
-    const args = yargsParser(process.argv.slice(3));
-    config = {...config, ...args};
-
-    if (typeof config.computeUrlLink !== "boolean") {
-        config.computeUrlLink = config.computeUrlLink as any === "true";
-    }
-    if (typeof config.testM3uFile !== "boolean") {
-        config.testM3uFile = config.testM3uFile as any === "true";
-    }
-    if (typeof config.seriesResolveTitle !== "boolean") {
-        config.seriesResolveTitle = config.seriesResolveTitle as any === "true";
     }
 
     return config;

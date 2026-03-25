@@ -15,7 +15,7 @@ const yargsParser = require('yargs-parser');
 const SUCCEEDED_FILE: string = './tools/succeeded.json';
 
 interface GeneratorConfig extends BaseConfig {
-    geminiAiKey: string;
+    geminiAiKey: string[];
     geminiAiModel: string;
     outputDir?: string;
     languages?: string[];
@@ -50,6 +50,18 @@ const MAX_OUTPUTS_MSG = 'MAX_OUTPUTS';
 function getConfig(): Readonly<GeneratorConfig> {
     const configData: string = fs.readFileSync('./tools/generator-config.json', READ_OPTIONS);
     let config: GeneratorConfig = JSON.parse(configData) as GeneratorConfig;
+
+    // Override with command line additional arguments
+    const args = yargsParser(process.argv.slice(2));
+    const {_, ...argsWithoutUnderscore} = args;
+    config = {...config, ...argsWithoutUnderscore};
+
+    if (typeof config.geminiAiKey === "string") {
+        config.geminiAiKey = (config.geminiAiKey as string).split(/[,;\s]+/)
+            .filter(key => key.length > 0);
+    }
+
+    console.info(`Using ${config.geminiAiKey.length} AI key(s)`);
 
     // Validate JSON file
     const schema: any = require('./schemas/generator-config.schema.json');
@@ -95,10 +107,6 @@ function getConfig(): Readonly<GeneratorConfig> {
             }
             break;
     }
-
-    // Override with command line additional arguments
-    const args = yargsParser(process.argv.slice(2));
-    config = {...config, ...args};
 
     return config;
 }
@@ -340,7 +348,7 @@ Using the rules above, scan every line of the INPUT DATA. Extract the matches no
 
 export async function askGemini(prompt: string): Promise<string[]> {
 
-    const ai = new GoogleGenAI({apiKey: config.geminiAiKey});
+    const ai = new GoogleGenAI({apiKey: config.geminiAiKey[nbProcessed % config.geminiAiKey.length]});
 
     console.info(chalk.gray(`Asking Gemini AI to filter ${path.basename(GROUP_FILE(generationKind))} file...`));
 
