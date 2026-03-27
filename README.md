@@ -276,7 +276,7 @@ The groups are auto-selected from preference criteria by an AI prompt using AI G
 File `tools/succeeded.json` must exist.
 
 An AI Gemini key is needed (https://aistudio.google.com/apikey). A free usage key is enough for
-`gemini-2.5-flash-preview-09-2025` (the model can be updated).
+`gemini-3-flash-preview` (the model can be updated).
 
 ### Script
 

@@ -56,6 +56,10 @@ function getConfig(): Readonly<GeneratorConfig> {
     const {_, ...argsWithoutUnderscore} = args;
     config = {...config, ...argsWithoutUnderscore};
 
+    if (typeof config.shuffle !== "boolean") {
+        config.shuffle = config.shuffle as any === "true";
+    }
+
     if (typeof config.geminiAiKey === "string") {
         config.geminiAiKey = (config.geminiAiKey as string).split(/[,;\s]+/)
             .filter(key => key.length > 0);
