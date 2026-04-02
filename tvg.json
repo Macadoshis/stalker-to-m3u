@@ -3,10 +3,13 @@
     "A la carte",
     "Amazon",
     "DAZN",
+    "canal play",
+    "canalplay",
     "CINEMAX",
     "multi",
     "PPV",
     "LIVE",
+    "LUXPLAY",
     "##",
     "Netflix",
     "Prime"
@@ -223,7 +226,7 @@
   "Cheddar.fr": [
     "Cheddar"
   ],
-  "Cherie25.fr": [
+  "Cherie25(src05).fr": [
     "Cherie 25",
     "Cherie25"
   ],
@@ -274,12 +277,16 @@
   ],
   "CINEplusFamily.fr": [
     "Cineplus Famiz",
+    "Cineplus Family",
     "Cineplus Familly",
     "Cine+ Famiz",
+    "Cine+ Family",
     "Cine+ Familly",
     "Cine + Famiz",
+    "Cine + Family",
     "Cine + Familly",
     "CINE FAMIZ",
+    "CINE Family",
     "CINE Familly"
   ],
   "CineplusFrisson.fr": [
@@ -294,6 +301,9 @@
     "Cine+ Premier",
     "Cine + Premier",
     "CINE PREMIER"
+  ],
+  "CineWestern.fr": [
+    "Cine western"
   ],
   "Classica.fr": [
     "Classica"
@@ -362,7 +372,7 @@
     "Disney Junior"
   ],
   "DjazzTV.fr": [
-    "Djazz TV"
+    "Djazz"
   ],
   "DorcelTV.fr": [
     "Dorcel TV"
@@ -380,6 +390,9 @@
   ],
   "Equidia.fr": [
     "Equidia"
+  ],
+  "LaChaineMeteo.fr": [
+    "Chaine Meteo"
   ],
   "LEquipe.fr": [
     "Equipe 21",
@@ -460,6 +473,10 @@
   "GameOneplus1.fr": [
     "Game One plus1",
     "Game One +1"
+  ],
+  "Gametoon(Polish).fr": [
+    "Gametoon",
+    "Game toon"
   ],
   "GeniusTrend(German).fr": [
     "Genius Trend"
@@ -556,14 +573,17 @@
   "M6Music.fr": [
     "M6 Music"
   ],
-  "MATV(src01).fr": [
-    "MA TV"
+  "MarmitonTV(src01).fr": [
+    "Marmiton"
   ],
   "Mangas.fr": [
     "Mangas"
   ],
   "ManX.fr": [
     "ManX"
+  ],
+  "MATV(src01).fr": [
+    "MA TV"
   ],
   "MCM.fr": [
     "MCM"
@@ -606,12 +626,13 @@
   ],
   "NationalGeographic.fr": [
     "National Geographic",
+    "NATIONAL GEO",
     "NAT GEO"
   ],
   "NauticalChannel.fr": [
     "Nautical Channel"
   ],
-  "Nickelodeon4Teen.fr": [
+  "Nickelodeon4Teen(src01).fr": [
     "Nickelodeon 4Teen",
     "Nickelodeon Teen",
     "Nick4 Teen",
@@ -665,6 +686,9 @@
   ],
   "OCS.fr": [
     "OCS GO"
+  ],
+  "OCS(src05).fr": [
+    "OCS"
   ],
   "OLTV(src01).fr": [
     "OL TV",
@@ -734,11 +758,14 @@
     "RMCWOW"
   ],
   "RMCMecanic(src01).fr": [
+    "RMC Mecanic",
     "RMC Mechanic",
+    "RMCMecanic",
     "RMCMechanic"
   ],
   "RMCMystere(src01).fr": [
-    "RMC Mystere"
+    "RMC Mystere",
+    "Mystère"
   ],
   "RMCSport1.fr": [
     "RMC Sport 1"
@@ -793,10 +820,14 @@
   ],
   "RMCTalkSport(src01).fr": [
     "RMC Talk Sport",
+    "Talk Sport",
     "RMC NEWS SPORT"
   ],
   "RTI1.fr": [
     "RTI 1"
+  ],
+  "RTFrance(src09).fr": [
+    "RT France"
   ],
   "RTL9.fr": [
     "RTL 9",
@@ -921,6 +952,9 @@
   ],
   "TraceTropical(src01).fr": [
     "Trace Tropical"
+  ],
+  "TraceToca(src05).fr": [
+    "Trace Toca"
   ],
   "TraceTV(src01).fr": [
     "Trace TV"
@@ -1376,7 +1410,10 @@
     "Canal Sur (Spanish)"
   ],
   "CanalVie(src01).ca": [
-    "Canal Vie"
+    "Canal Vie",
+    "Canal V",
+    "CAFR Vie",
+    "CAFR-Vie"
   ],
   "CARACOLINTERNATIONAL(Spanish).ca": [
     "CARACOL INTERNATIONAL (Spanish)"
@@ -1877,7 +1914,7 @@
   "CJILDT(English).ca": [
     "CJILDT"
   ],
-  "CJNTCityTVMontreal(English).ca": [
+  "CITYMontrealQC(src09).ca": [
     "CJNT City TV Montreal",
     "City Montreal",
     "City TV Montreal"
@@ -2145,7 +2182,8 @@
     "Discovery Velocity"
   ],
   "DisneyChannel(English).ca": [
-    "Disney Channel"
+    "Disney Channel",
+    "Disney French"
   ],
   "DisneyJunior(English).ca": [
     "Disney Junior"
@@ -2190,7 +2228,12 @@
     "ELLE Fictions"
   ],
   "ELLEFICTIONS(French).ca": [
-    "ELLE FICTIONS"
+    "ELLE FICTIONS",
+    "ELLE FICTONS"
+  ],
+  "EMCITV(src05).ca": [
+    "EMCITV",
+    "EMCI TV"
   ],
   "EPGCricket(PayPerView)(English).ca": [
     "EPG Cricket (PayPerView)"
@@ -2301,7 +2344,10 @@
     "Frissons TV"
   ],
   "FrissonsTV(French).ca": [
-    "Frissons TV"
+    "Frissons TV",
+    "Frisson TV",
+    "CAFR-Frisson",
+    "CAFR Frisson"
   ],
   "FujianTV(FUJTV)ECHOSTAR(English).ca": [
     "Fujian TV (FUJTV) ECHOSTAR"
@@ -2501,23 +2547,20 @@
   "ICIExplora(French).ca": [
     "ICI Explora"
   ],
-  "ICIRadioCanadaPremiereToronto(CJBCAM)(French).ca": [
-    "ICI RadioCanada Premiere Toronto (CJBCAM)"
-  ],
   "ICIRDI(French).ca": [
-    "ICI RDI"
-  ],
-  "ICITele(English-French-Italian-UnknownLocale(tl)).ca": [
-    "ICI Tele (English, French, Italian, Unknown Language (tl))",
-    "ICI Tele"
-  ],
-  "ICITele(English-French-UnknownLanguage(tl)).ca": [
-    "ICI Tele (English, French, Unknown Language (tl))"
+    "ICI RDI",
+    "RDI 4K",
+    "ICI RADIO-CANADA",
+    "ICI RADIO CANADA",
+    "ICI CANADA"
   ],
   "ICITelevision(Montreal)(src01).ca": [
     "ICI Television (Montreal)",
     "ICI Television Montreal",
     "ICI Montreal"
+  ],
+  "ICITele(English-French).ca": [
+    "ICI Tele"
   ],
   "InuitTVNetwork(English).ca": [
     "Inuit TV Network"
@@ -2582,11 +2625,8 @@
   "KTLADT(English).ca": [
     "KTLADT"
   ],
-  "LaChaineDisney(src01).ca": [
+  "LaChaineDisney(src09).ca": [
     "La Chaine Disney"
-  ],
-  "LachaineDisney(French).ca": [
-    "La chaine Disney"
   ],
   "LasEstrellasInternacional(Spanish).ca": [
     "Las Estrellas Internacional (Spanish)"
@@ -3138,11 +3178,9 @@
   "PrimeAsiaTV(English).ca": [
     "Prime Asia TV"
   ],
-  "Prise2(src01).ca": [
-    "Prise 2"
-  ],
   "Prise2(French).ca": [
-    "Prise 2"
+    "Prise 2",
+    "Prise2"
   ],
   "Promo(Static)(English).ca": [
     "Promo (Static)"
@@ -3445,16 +3483,18 @@
   ],
   "SavoirMedia(src01).ca": [
     "Savoir Media",
+    "SavoirMedia",
+    "Savoir.Media",
+    "Savoir. Media",
     "Canal Savoir"
-  ],
-  "Savoirmedia(French-English).ca": [
-    "Savoir media (French, English)"
   ],
   "Schlager(English).ca": [
     "Schlager"
   ],
   "Seriesplus(src01).ca": [
-    "Series plus"
+    "Series plus",
+    "Series+",
+    "CAFR-Seris"
   ],
   "SETAsiaInternational(English).ca": [
     "SET Asia International"
@@ -3576,11 +3616,9 @@
   "STARZonDemand(English).ca": [
     "STARZ onDemand"
   ],
-  "StudioCanal(src01).ca": [
-    "StudioCanal"
-  ],
   "StudioCanal(French).ca": [
-    "StudioCanal"
+    "StudioCanal",
+    "Studio Canal"
   ],
   "SuperChannelFuse(English).ca": [
     "Super Channel Fuse"
@@ -3654,11 +3692,11 @@
   "Teleritmo(Spanish).ca": [
     "Teleritmo (Spanish)"
   ],
-  "TeleTOONfrancais(src01).ca": [
-    "TeleTOON francais"
-  ],
-  "TeletoonFrancais(French).ca": [
-    "Teletoon Francais"
+  "TeletoonFrancais(src05).ca": [
+    "TeleTOON francais",
+    "TeleTOON french",
+    "Tele TOON francais",
+    "Tele TOON french"
   ],
   "TelileTV(CIMCTV)(English).ca": [
     "Telile TV (CIMCTV)"
@@ -4138,6 +4176,18 @@
   "Zoom(English).ca": [
     "Zoom"
   ],
+  "3plus(src01).ch": [
+    "3+"
+  ],
+  "4plus(src01).ch": [
+    "4+"
+  ],
+  "5plus(src01).ch": [
+    "5+"
+  ],
+  "6plus(src01).ch": [
+    "6+"
+  ],
   "blueSports1(src01).ch": [
     "Blue sport 1",
     "Blue sports 1"
@@ -4208,5 +4258,4 @@
   "Voyage(French).ch": [
     "Voyage"
   ]
-
 }
