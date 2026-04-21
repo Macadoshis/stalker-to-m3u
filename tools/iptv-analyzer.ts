@@ -52,7 +52,7 @@ const SUCCEEDED_FILE: string = './tools/succeeded.json';
 const FAILED_FILE: string = './tools/failed.json';
 
 /** Number of items to store in cache before tailing in output files */
-const NB_ITEMS_TO_TAIL = 10;
+const NB_ITEMS_TO_TAIL = 50;
 
 if (!fs.existsSync(SOURCES_FILE)) {
     console.error(chalk.red.bold(`File ${SOURCES_FILE} does not exist. Creating file...`));
@@ -226,6 +226,7 @@ function fetchAllUrls(urls: string[]): void {
         .map(url => fetchUrl(url));
     forkJoin(requests)
         .pipe(
+            defaultIfEmpty([]),
             map((results: FetchContent[]) => {
 
                 const urls: UrlToMacMap = new Map();
